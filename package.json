@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "release": "lerna publish",
+    "test": "jest",
+    "watch": "jest --watch"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "bili": "^3.4.2",
+    "jest": "^23.6.0",
+    "lerna": "^3.4.3",
+    "prettier": "^1.15.2"
+  }
+}
