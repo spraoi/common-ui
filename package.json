@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "clean": "lerna clean",
     "lint": "eslint --fix \"**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "test": "spraoi-test"

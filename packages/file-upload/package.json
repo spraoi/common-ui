@@ -10,17 +10,16 @@
     "access": "public"
   },
   "dependencies": {
+    "@spraoi/api": "^0.0.6",
     "filepond": "^3.3.2",
     "filepond-plugin-file-validate-type": "^1.2.0",
     "react-filepond": "^5.0.0"
   },
   "devDependencies": {
-    "@spraoi/api": "^0.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.6.3"
   },
   "peerDependencies": {
-    "@spraoi/api": "^0.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3"
   }
