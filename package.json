@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
-    "lint": "eslint --fix \"packages/**/*.js\"",
+    "lint": "eslint \"packages/**/*.js\"",
+    "lint:fix": "eslint --fix \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "test": "spraoi-test --coverage"
   },
