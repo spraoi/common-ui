@@ -28,7 +28,7 @@ describe('json validation', () => {
       expect(json(v)).toEqual('Invalid JSON'))
   );
 
-  ['{"foo":"bar"}'].forEach(v =>
+  ['{"foo":"bar"}', ''].forEach(v =>
     it(`"${v}" should return undefined`, () => expect(json(v)).toBeUndefined())
   );
 });

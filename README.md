@@ -20,7 +20,7 @@
 ### General Guidelines
 
 - all packages that contain business logic should have at least 1 test
-- code coverage should always be 100%
+- code coverage should be as close to 100% as possible
 
 #### Package Dependencies
 
