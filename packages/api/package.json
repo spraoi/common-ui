@@ -1,6 +1,12 @@
 {
-  "private": true,
   "name": "@spraoi/api",
   "version": "0.0.5",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
