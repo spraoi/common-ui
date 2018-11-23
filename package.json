@@ -6,8 +6,7 @@
     "lint:fix": "eslint --fix \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
-    "test": "spraoi-test",
-    "test:coverage": "spraoi-test --coverage"
+    "test": "spraoi-test --coverage"
   },
   "workspaces": [
     "packages/*"
