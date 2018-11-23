@@ -1,6 +1,10 @@
 {
   "npmClient": "yarn",
-  "npmClientArgs": ["--no-lockfile", "--no-optional", "--production"],
+  "npmClientArgs": [
+    "--no-lockfile",
+    "--no-optional",
+    "--production"
+  ],
   "useWorkspaces": true,
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
