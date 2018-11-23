@@ -3,7 +3,8 @@
   "version": "0.0.2",
   "license": "MIT",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "scope": "@spraoi"
   },
   "scripts": {
     "test": "spraoi-test"
