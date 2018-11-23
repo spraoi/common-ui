@@ -3,15 +3,18 @@
   "scripts": {
     "lint": "eslint --fix \"**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
-    "test": "lerna run test --stream"
+    "test": "spraoi-test"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/eslint-config": "^0.0.1",
+    "@spraoi/eslint-config": "^0.0.6",
+    "@spraoi/test": "^0.0.6",
     "eslint": "^5.9.0",
     "lerna": "^3.4.3",
-    "prettier": "^1.15.2"
+    "prettier": "^1.15.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   }
 }
