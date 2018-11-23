@@ -1,13 +1,6 @@
 {
-  "command": {
-    "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ]
-    }
-  },
   "npmClient": "yarn",
-  "npmClientArgs": ["--production", "--no-optional"],
+  "npmClientArgs": ["--no-lockfile", "--no-optional", "--production"],
   "useWorkspaces": true,
   "version": "0.0.1"
 }

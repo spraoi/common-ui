@@ -1,17 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "release": "lerna publish",
-    "test": "jest",
-    "watch": "jest --watch"
+    "lint": "eslint --fix \"**/*.js\"",
+    "release": "yarn test && lerna publish",
+    "test": "lerna run test --stream"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "bili": "^3.4.2",
-    "jest": "^23.6.0",
+    "@spraoi/eslint-config": "^0.0.1",
+    "eslint": "^5.9.0",
     "lerna": "^3.4.3",
     "prettier": "^1.15.2"
   }

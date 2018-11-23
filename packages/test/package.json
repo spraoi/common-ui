@@ -1,0 +1,19 @@
+{
+  "name": "@spraoi/test",
+  "version": "0.0.1",
+  "license": "MIT",
+  "bin": {
+    "spraoi-test": "bin/spraoi-test.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "jest": "^23.6.0",
+    "shelljs": "^0.8.3"
+  }
+}

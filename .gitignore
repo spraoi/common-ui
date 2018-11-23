@@ -1,1 +1,4 @@
+.cache/
+lerna-debug.log
 node_modules/
+yarn-error.log
