@@ -2,9 +2,13 @@
   "name": "@spraoi/test",
   "version": "0.0.4",
   "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui#readme",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/spraoi/common-ui.git"
+  },
   "publishConfig": {
-    "access": "public",
-    "scope": "@spraoi"
+    "access": "public"
   },
   "bin": {
     "spraoi-test": "bin/spraoi-test.js"

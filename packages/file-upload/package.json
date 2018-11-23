@@ -2,9 +2,13 @@
   "name": "@spraoi/file-upload",
   "version": "0.0.4",
   "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui#readme",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/spraoi/common-ui.git"
+  },
   "publishConfig": {
-    "access": "public",
-    "scope": "@spraoi"
+    "access": "public"
   },
   "scripts": {
     "test": "spraoi-test"
