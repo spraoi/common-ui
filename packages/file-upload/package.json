@@ -1,11 +1,11 @@
 {
   "name": "@spraoi/file-upload",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui#readme",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/spraoi/common-ui.git"
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
   },
   "publishConfig": {
     "access": "public"
@@ -19,8 +19,8 @@
     "react-filepond": "^5.0.0"
   },
   "devDependencies": {
-    "@spraoi/api": "^0.0.4",
-    "@spraoi/test": "^0.0.4",
+    "@spraoi/api": "^0.0.5",
+    "@spraoi/test": "^0.0.5",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"

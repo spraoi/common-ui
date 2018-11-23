@@ -1,11 +1,11 @@
 {
   "name": "@spraoi/eslint-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui#readme",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/spraoi/common-ui.git"
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
   },
   "publishConfig": {
     "access": "public"
