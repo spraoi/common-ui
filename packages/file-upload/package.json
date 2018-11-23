@@ -1,6 +1,6 @@
 {
   "name": "@spraoi/file-upload",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
@@ -15,8 +15,8 @@
     "react-filepond": "^5.0.0"
   },
   "devDependencies": {
-    "@spraoi/api": "^0.0.2",
-    "@spraoi/test": "^0.0.2",
+    "@spraoi/api": "^0.0.3",
+    "@spraoi/test": "^0.0.3",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
