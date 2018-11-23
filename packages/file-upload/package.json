@@ -15,10 +15,6 @@
     "filepond-plugin-file-validate-type": "^1.2.0",
     "react-filepond": "^5.0.0"
   },
-  "devDependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3"
-  },
   "peerDependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.6.3"
