@@ -13,8 +13,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/eslint-config": "^0.0.7",
-    "@spraoi/test": "^0.0.7",
+    "@spraoi/eslint-config": "^0.0.9",
+    "@spraoi/test": "^0.0.9",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
     "lerna": "^3.4.3",
