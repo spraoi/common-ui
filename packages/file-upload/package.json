@@ -1,6 +1,6 @@
 {
   "name": "@spraoi/file-upload",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@spraoi/api": "^0.0.9",
+    "@spraoi/api": "^0.0.10",
     "filepond": "^3.3.2",
     "filepond-plugin-file-validate-type": "^1.2.0",
     "react-filepond": "^5.0.0"
