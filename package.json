@@ -5,7 +5,9 @@
     "lint": "eslint \"packages/**/*.js\"",
     "lint:fix": "eslint --fix \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
-    "test": "spraoi-test --coverage"
+    "report-coverage": "cat coverage/lcov.info | coveralls",
+    "test": "spraoi-test",
+    "test:coverage": "spraoi-test --coverage"
   },
   "workspaces": [
     "packages/*"
@@ -13,6 +15,7 @@
   "devDependencies": {
     "@spraoi/eslint-config": "^0.0.7",
     "@spraoi/test": "^0.0.7",
+    "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
     "lerna": "^3.4.3",
     "prettier": "^1.15.2",

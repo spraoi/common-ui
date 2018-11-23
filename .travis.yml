@@ -4,8 +4,12 @@ node_js:
 cache: yarn
 git:
   depth: 1
+notifications:
+  email: false
 before_script:
   - yarn
 script:
   - yarn lint
-  - yarn test
+  - yarn test:coverage
+after_success:
+  - yarn report-coverage
