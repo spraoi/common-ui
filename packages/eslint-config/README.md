@@ -1,17 +1,11 @@
 # @spraoi/eslint-config
 
-> An opinionated [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce high-quality javascript.
+> An opinionated, extensible [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce high-quality javascript.
 
 ## Installation
 
 ```bash
-yarn add --dev eslint prettier @spraoi/eslint-config
-```
-
-Optionally, install `husky` and `lint-staged` for git pre-commit hook linting support.
-
-```bash
-yarn add --dev husky lint-staged
+yarn add --dev @spraoi/eslint-config eslint prettier
 ```
 
 ## Usage
@@ -42,16 +36,6 @@ Add the following configuration to the root of you project:
 {
   "scripts": {
     "lint:js": "eslint --fix \"src/**/*.js\""
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "yarn lint:js"
-    ]
   }
 }
 ```

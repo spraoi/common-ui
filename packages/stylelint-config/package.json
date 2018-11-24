@@ -1,6 +1,6 @@
 {
   "name": "@spraoi/stylelint-config",
-  "description": "An opinionated stylelint configuration to enforce high-quality stylesheets.",
+  "description": "An opinionated, extenisble stylelint configuration to enforce high-quality stylesheets.",
   "version": "0.5.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/stylelint-config",
@@ -12,10 +12,11 @@
     "access": "public"
   },
   "dependencies": {
+    "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.5.1"
   },
   "peerDependencies": {
-    "stylelint": "^9.8.0"
+    "stylelint": "*"
   }
 }

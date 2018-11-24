@@ -2,8 +2,9 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
-    "lint": "yarn lint:js",
+    "lint": "yarn lint:js && lint:styles",
     "lint:js": "eslint \"packages/**/*.js\"",
+    "lint:styles": "stylelint \"packages/**/*.(js|scss|css)\"",
     "new-package": "scripts/new-package.sh",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
@@ -13,14 +14,20 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/eslint-config": "^0.3.1",
+    "@spraoi/babel-preset": "^0.5.0",
+    "@spraoi/eslint-config": "^0.5.0",
+    "@spraoi/jest-config": "^0.5.0",
+    "@spraoi/stylelint-config": "^0.5.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
+    "jest": "^23.6.0",
     "lerna": "^3.4.3",
     "prettier": "^1.15.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "styled-components": "^4.1.1",
+    "stylelint": "^9.8.0"
   }
 }

@@ -1,11 +1,11 @@
 # @spraoi/babel-preset
 
-> A reusable babel preset.
+> A preconfigured, extensible babel preset.
 
 ## Installation
 
 ```bash
-yarn add @spraoi/babel-preset
+yarn add --dev @spraoi/babel-preset
 ```
 
 ## Usage

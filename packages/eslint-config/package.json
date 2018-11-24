@@ -1,6 +1,6 @@
 {
   "name": "@spraoi/eslint-config",
-  "description": "An opinionated eslint config to enforce high-quality javascript.",
+  "description": "An opinionated, extensible eslint config to enforce high-quality javascript.",
   "version": "0.5.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/eslint-config",
@@ -22,7 +22,7 @@
     "eslint-plugin-react": "^7.11.1"
   },
   "peerDependencies": {
-    "eslint": "^5.9.0",
-    "prettier": "^1.15.2"
+    "eslint": "*",
+    "prettier": "*"
   }
 }
