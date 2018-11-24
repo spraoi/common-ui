@@ -46,7 +46,7 @@ These should be avoided, as we are moving away from redux:
 
 1. create a new branch: `git checkout -b package/[package-name]`
 2. create the package boilerplate: `yarn new-package`
-3. install necessary dependencies (read: [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
+3. install any necessary dependencies (read: [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
 5. create a PR
 

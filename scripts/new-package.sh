@@ -2,32 +2,41 @@
 
 set -e
 
-read -p "name: " name
+while :; do
+  read -p "name: " name
+
+  [[ -d "packages/${name}" ]] && \
+    echo "package already exists." && \
+    continue
+
+  [[ -z "$(grep -E '^[a-z-]+$' <<< "$name")" ]] && \
+    echo "invalid name. only lowercase letters and hyphens are allowed." && \
+    continue
+
+  break
+done
+
 read -p "description: " description
 
-location="packages/${name}"
 package_name="@spraoi/${name}"
 version="$(grep version lerna.json | cut -d\" -f4)"
 
 echo
 echo "package name: ${package_name}"
-echo "package description: ${description}"
-echo "package version: ${version}"
+echo "description:  ${description}"
+echo "version:      ${version}"
 echo
 
 read -p "is this okay? (y/n) " okay
-
 [[ "$okay" != "y" ]] && echo "okay." && exit
-[[ -d "$location" ]] && echo "package exists. bailing..." && exit 1
 
-mkdir -p "$location"
-cd "$location"
+mkdir -p "packages/${name}" && cd $!
+mkdir __tests__
 
 cat > index.js << EOL
 // TODO: implement
 EOL
 
-mkdir __tests__
 
 cat > __tests__/index.test.js << EOL
 it('exists', () => expect(true).toEqual(true));
@@ -66,4 +75,4 @@ yarn add ${package_name}
 TODO
 EOL
 
-echo "done."
+echo "package created."
