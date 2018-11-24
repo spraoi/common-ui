@@ -34,4 +34,28 @@
 
 ### Publishing to NPM
 
-All packages stay on the same version, as we utilize [Lerna's fixed mode](https://github.com/lerna/lerna#fixedlocked-mode-default) for simplicity. However, only updated packages are release to NPM. When you make a change or add a package, you can create a new release with `yarn release`.
+All packages stay on the same version, as we utilize
+[Lerna's fixed mode](https://github.com/lerna/lerna#fixedlocked-mode-default)
+for simplicity. However, only updated packages are release to NPM. When you make a change or add a package, you can
+create a new release with `yarn release`.
+
+## Reusable React Components
+
+Creating React components that can be reused across projects is hard. Why? Because each project, in general, requires
+its own unique styles. In order to support this flexibility, reusable components should have:
+
+1. sane default styles
+2. fully customizable styles
+3. the ability to utilize a project-wide theme
+
+### Default Styles
+
+TODO
+
+### Full Customization
+
+TODO
+
+### Project-Wide Themes
+
+TODO
