@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/test",
   "description": "A preconfigured testing setup with enzyme and jest.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/test",
   "repository": {
