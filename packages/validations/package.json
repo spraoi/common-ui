@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/validations",
   "description": "Field-level input validation functions for final-form.",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "license": "MIT",
   "repository": {
     "type": "git",

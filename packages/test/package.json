@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/test",
   "description": "A preconfigured testing setup with enzyme and jest.",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "license": "MIT",
   "repository": {
     "type": "git",
