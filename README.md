@@ -43,15 +43,15 @@ requires its own unique styles. In order to support this flexibility, reusable c
 
 These things should be possible without having to modify the component itself.
 
-### Default Styles
-
-TODO
-
-### Full Customization
-
-TODO
-
 ### Project-Wide Themes
+
+TODO
+
+### Fallback Styles
+
+TODO
+
+### One-Off Styles
 
 TODO
 
