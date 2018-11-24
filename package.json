@@ -12,8 +12,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/lint": "^0.1.0",
-    "@spraoi/test": "^0.1.0",
+    "@spraoi/lint": "^0.2.0",
+    "@spraoi/test": "^0.2.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
