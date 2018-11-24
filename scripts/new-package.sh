@@ -37,7 +37,6 @@ cat > index.js << EOL
 // TODO: implement
 EOL
 
-
 cat > __tests__/index.test.js << EOL
 it('exists', () => expect(true).toEqual(true));
 EOL
