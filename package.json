@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
-    "lint": "eslint \"packages/**/*.js\"",
-    "lint:fix": "eslint --fix \"packages/**/*.js\"",
+    "lint": "yarn lint:js",
+    "lint:js": "eslint \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "spraoi-test --coverage"
