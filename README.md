@@ -21,7 +21,7 @@
 
 - all packages that contain business logic should have at least 1 test
 - code coverage should be as close to 100% as possible
-- a readme should exist with at least 1 usage example
+- a readme should exist with installation and usage instructions
 
 #### Package Dependencies
 
