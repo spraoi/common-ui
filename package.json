@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
-    "lint": "yarn lint:js && lint:styles",
+    "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint \"packages/**/*.js\"",
     "lint:styles": "stylelint \"packages/**/*.(js|scss|css)\"",
     "new-package": "scripts/new-package.sh",
