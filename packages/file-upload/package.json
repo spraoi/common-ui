@@ -1,5 +1,6 @@
 {
   "name": "@spraoi/file-upload",
+  "description": "A react-filepond wrapper for simple S3 uploads.",
   "version": "0.3.0",
   "license": "MIT",
   "repository": {
