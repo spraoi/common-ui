@@ -56,5 +56,5 @@ Add the following configuration to the root of you project:
 }
 ```
 
-You can then run `yarn lint` to lint & fix your code. I recommend adding prettier & eslint plugins to your text editor
-of choice for a seamless linting experience.
+You can then run `yarn lint:js`. I recommend adding prettier & eslint plugins to your text editor of choice for a
+seamless linting experience.
