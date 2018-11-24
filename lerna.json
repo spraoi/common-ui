@@ -1,4 +1,13 @@
 {
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "LICENSE",
+        "__tests__/"
+      ]
+    }
+  },
   "npmClient": "yarn",
   "npmClientArgs": [
     "--no-lockfile",
