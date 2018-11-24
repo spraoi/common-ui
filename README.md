@@ -34,12 +34,14 @@
 
 ## Reusable React Components
 
-Creating React components that can be reused across projects is hard. Why? Because each project, in general, requires
-its own unique styles. In order to support this flexibility, reusable components should have:
+Creating React components that can be reused across projects presents an interesting problem. Each project, in general,
+requires its own unique styles. In order to support this flexibility, reusable components need to:
 
-1. sane default styles
-2. fully customizable styles
-3. the ability to utilize a project-wide theme
+1. utilize a project-wide theme
+2. have sane fallback styles
+3. allow for one-off styles to be specified
+
+These things should be possible without having to modify the component itself.
 
 ### Default Styles
 
