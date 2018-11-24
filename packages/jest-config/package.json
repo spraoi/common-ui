@@ -12,7 +12,7 @@
     "access": "public"
   },
   "files": [
-    "enzyme.setup.js",
+    "jest.setup.js",
     "index.js",
     "jest.mock.js",
     "jest.transform.js"
