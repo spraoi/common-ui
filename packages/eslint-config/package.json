@@ -1,5 +1,6 @@
 {
   "name": "@spraoi/eslint-config",
+  "description": "An opinionated eslint config to enforce high-quality javascript.",
   "version": "0.3.1",
   "license": "MIT",
   "repository": {
