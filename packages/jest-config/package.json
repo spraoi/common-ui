@@ -1,6 +1,6 @@
 {
-  "name": "@spraoi/test",
-  "description": "A preconfigured testing setup with enzyme and jest.",
+  "name": "@spraoi/jest-config",
+  "description": "Preconfigured configuration for testing with enzyme and jest.",
   "version": "0.4.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/test",
@@ -11,16 +11,18 @@
   "publishConfig": {
     "access": "public"
   },
-  "bin": {
-    "spraoi-test": "bin/spraoi-test.js"
-  },
-  "dependencies": {
+  "files": [
+    "enzyme.setup.js",
+    "jest.config.js",
+    "jest.mock.js",
+    "jest.transform.js"
+  ],
+  "peerDependencies": {
     "@spraoi/babel-preset": "^0.4.0",
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "jest": "^23.6.0",
-    "shelljs": "^0.8.3"
+    "jest": "^23.6.0"
   }
 }

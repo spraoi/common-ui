@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   bail: true,
-  globalSetup: path.resolve(__dirname, '__helpers__', 'setup.js'),
+  globalSetup: path.resolve(__dirname, '__helpers__', 'enzyme.setup.js'),
   moduleNameMapper: {
     '\\.css$': path.resolve(__dirname, '__mocks__', 'css.js'),
   },

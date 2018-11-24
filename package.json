@@ -7,14 +7,13 @@
     "new-package": "scripts/new-package.sh",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
-    "test": "spraoi-test --coverage"
+    "test": "jest --coverage"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "@spraoi/eslint-config": "^0.3.1",
-    "@spraoi/test": "^0.3.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
