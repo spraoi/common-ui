@@ -1,6 +1,6 @@
 # @spraoi/eslint-config
 
-> An opinionated [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce high-quality code.
+> An opinionated [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce high-quality javascript.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Add the following configuration to the root of you project:
 
 ```json
 {
-  "extends": "@spraoi/lint"
+  "extends": "@spraoi"
 }
 ```
 
