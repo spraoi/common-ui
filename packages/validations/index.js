@@ -4,6 +4,13 @@ export const alpha = value => {
   if (!/^[a-z]*$/i.test(value)) return 'Must contain only letters';
 };
 
+export const compose = (...validators) => value => {
+  return validators.reduce(
+    (error, validator) => error || validator(value),
+    undefined
+  );
+};
+
 export const email = value => {
   if (value && !isEmail(value)) return 'Invalid email';
 };
