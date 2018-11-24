@@ -1,4 +1,30 @@
-import { alpha, email, json, minLength, required, versionNumber } from '..';
+import {
+  alpha,
+  compose,
+  email,
+  json,
+  minLength,
+  required,
+  versionNumber,
+} from '..';
+
+describe('compose function', () => {
+  it('should appropriately return first validation error', () =>
+    expect(
+      compose(
+        required,
+        email
+      )('')
+    ).toEqual('Required'));
+
+  it('should appropriately return second validation error', () =>
+    expect(
+      compose(
+        required,
+        email
+      )('invalid@email')
+    ).toEqual('Invalid email'));
+});
 
 describe('alpha validation', () => {
   ['1', '@foo', 'BAR!', 'foo bar'].forEach(v =>
