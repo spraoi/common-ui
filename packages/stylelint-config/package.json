@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/stylelint-config",
   "description": "An opinionated, extenisble stylelint config to enforce high-quality stylesheets.",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/stylelint-config",
   "repository": {
