@@ -4,6 +4,7 @@
     "clean": "lerna clean && rm -rf node_modules",
     "lint": "yarn lint:js",
     "lint:js": "eslint \"packages/**/*.js\"",
+    "new-package": "scripts/new-package.sh",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "spraoi-test --coverage"
