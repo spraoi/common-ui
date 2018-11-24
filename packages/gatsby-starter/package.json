@@ -1,0 +1,14 @@
+{
+  "name": "@spraoi/gatsby-starter",
+  "description": "A Gatsby starter for new @spraoi UI projects.",
+  "version": "0.6.2",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
