@@ -24,6 +24,14 @@ describe('compose function', () => {
         email
       )('invalid@email')
     ).toEqual('Invalid email'));
+
+  it('should appropriately return undefined', () =>
+    expect(
+      compose(
+        required,
+        email
+      )('valid@email.com')
+    ).toBeUndefined());
 });
 
 describe('alpha validation', () => {
