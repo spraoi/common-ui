@@ -1,0 +1,18 @@
+{
+  "name": "@spraoi/babel-preset",
+  "description": "A reusable babel preset.",
+  "version": "0.3.5",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/babel-preset",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.6",
+    "babel-preset-gatsby": "^0.1.4"
+  }
+}
