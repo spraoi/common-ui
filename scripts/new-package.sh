@@ -30,7 +30,8 @@ echo
 read -p "is this okay? (y/n) " okay
 [[ "$okay" != "y" ]] && echo "okay." && exit
 
-mkdir -p "packages/${name}" && cd $!
+mkdir -p "packages/${name}"
+cd "packages/${name}"
 mkdir __tests__
 
 cat > index.js << EOL
