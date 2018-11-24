@@ -24,9 +24,10 @@ package_name="@spraoi/${name}"
 version="$(grep version lerna.json | cut -d\" -f4)"
 
 echo
-echo "package name: ${package_name}"
-echo "description:  ${description}"
-echo "version:      ${version}"
+echo "name:        ${package_name}"
+echo "description: ${description}"
+echo "location:    ${package_location}"
+echo "version:     ${version}"
 echo
 
 read -p "is this okay? (y/n) " okay
