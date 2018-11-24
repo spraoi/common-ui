@@ -3,7 +3,7 @@
   "description": "A preconfigured, extensible testing configuration with Enzyme and Jest.",
   "version": "0.6.0",
   "license": "MIT",
-  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/test",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/jest-config",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
