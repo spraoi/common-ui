@@ -3,6 +3,7 @@
   "description": "Field-level input validation functions for final-form.",
   "version": "0.3.3",
   "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/validations",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"

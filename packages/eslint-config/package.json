@@ -3,6 +3,7 @@
   "description": "An opinionated eslint config to enforce high-quality javascript.",
   "version": "0.3.2",
   "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/eslint-config",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
