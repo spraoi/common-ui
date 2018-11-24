@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/test",
   "description": "A preconfigured testing setup with enzyme and jest.",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/test",
   "repository": {
@@ -15,7 +15,7 @@
     "spraoi-test": "bin/spraoi-test.js"
   },
   "dependencies": {
-    "@spraoi/babel-preset": "^0.3.4",
+    "@spraoi/babel-preset": "^0.4.0",
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.7.0",
