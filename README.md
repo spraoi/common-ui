@@ -26,6 +26,8 @@
 
 These (if required) should be `peerDependencies`:
 
+- `aws-amplify-react`
+- `aws-amplify`
 - `classnames`
 - `lodash`
 - `moment`

@@ -1213,6 +1213,35 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@spraoi/eslint-config@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.0.9.tgz#331702df9b447637a071206b8a5ed26d71f7239f"
+  integrity sha512-55dTzx0nuFMfSGCRstwYvykhW56E6LEzISecoHuh6nOn3m+L3zpO9t5LlKYlRRbu8ZUiPiBI43jsajoFSOUIWQ==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb "^17.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-jest "^22.0.0"
+    eslint-plugin-jsx-a11y "^6.1.2"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-react "^7.11.1"
+
+"@spraoi/test@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@spraoi/test/-/test-0.0.9.tgz#43021df95306d09640572a6420807e56583f7652"
+  integrity sha512-d56t0ghYgifljLXD+4t0UiwYZ39D3oQvskUA0y9GrPMxLT0w9iy+xU5drC13XXCjgtnk9elQF7YPscqU9a55rg==
+  dependencies:
+    "@babel/core" "^7.0.0-0"
+    "@babel/preset-env" "^7.1.6"
+    "@babel/preset-react" "^7.0.0"
+    babel-core "^7.0.0-bridge"
+    babel-jest "^23.6.0"
+    enzyme "^3.7.0"
+    enzyme-adapter-react-16 "^1.7.0"
+    jest "^23.6.0"
+    shelljs "^0.8.3"
+
 "@types/node@*":
   version "10.12.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
