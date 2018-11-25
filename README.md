@@ -12,6 +12,8 @@
 3. cd into it: `cd common-ui`
 4. install dependencies: `yarn`
 
+*Note:* you can safely ignore `peerDependency` warnings for packages that only define configuration.
+
 ## Working With Packages
 
 - run tests: `yarn test`
