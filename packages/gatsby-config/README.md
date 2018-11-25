@@ -12,7 +12,7 @@ yarn add --dev @spraoi/gatsby-config
 
 Add the following configuration to the root of your project:
 
-**gatsby.config.js**
+**gatsby-config.js**
 
 ```javascript
 const defaults = require('@spraoi/gatsby-config');
