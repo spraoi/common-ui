@@ -10,4 +10,12 @@ yarn add --dev @spraoi/babel-preset
 
 ## Usage
 
-TODO
+Add the following configuration to the root of your project:
+
+**.babelrc**
+
+```json
+{
+  "presets": ["@spraoi/babel-preset"]
+}
+```
