@@ -13,7 +13,7 @@ module.exports.onPreInit = () => {
     process.exit(1);
   }
 
-  const [variation, stage] = process.env.env.split('.');
+  const [variation, stage] = process.env.config.split('.');
 
   const config = [
     'config/default.yml',
