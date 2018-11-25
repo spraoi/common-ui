@@ -25,7 +25,7 @@ Add the following configuration to the root of your project:
 ```json
 {
   "scripts": {
-    "lint:styles": "stylelint --fix \"src/**/*.(js|scss|css)\""
+    "lint:styles": "stylelint \"src/**/*.(js|scss|css)\""
   }
 }
 ```

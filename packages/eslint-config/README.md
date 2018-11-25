@@ -35,7 +35,7 @@ Add the following configuration to the root of you project:
 ```json
 {
   "scripts": {
-    "lint:js": "eslint --fix \"src/**/*.js\""
+    "lint:js": "eslint \"src/**/*.js\""
   }
 }
 ```
