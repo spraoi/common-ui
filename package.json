@@ -14,11 +14,11 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/babel-preset": "^0.9.0",
-    "@spraoi/eslint-config": "^0.9.0",
-    "@spraoi/jest-config": "^0.9.0",
-    "@spraoi/scripts": "^0.9.1",
-    "@spraoi/stylelint-config": "^0.9.0",
+    "@spraoi/babel-preset": "^0.10.0",
+    "@spraoi/eslint-config": "^0.10.0",
+    "@spraoi/jest-config": "^0.10.0",
+    "@spraoi/scripts": "^0.10.4",
+    "@spraoi/stylelint-config": "^0.10.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",

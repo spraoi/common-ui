@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const meow = require('meow');
+const linkPackages = require('../lib/link-packages');
 const newPackage = require('../lib/new-package');
 const newUi = require('../lib/new-ui');
 
@@ -45,7 +46,7 @@ switch (cli.input[0]) {
   }
 
   case 'link': {
-    if (cli.flags.packages) newPackage(cli.flags.packages);
+    if (cli.flags.packages) linkPackages(cli.flags.packages);
     else cli.showHelp(1);
     break;
   }
