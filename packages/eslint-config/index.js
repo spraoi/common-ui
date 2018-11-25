@@ -1,7 +1,6 @@
 module.exports = {
   env: { browser: true, 'jest/globals': true },
   extends: ['airbnb', 'plugin:jest/recommended', 'prettier', 'prettier/react'],
-  globals: { SPRAOI_ENV: true },
   parser: 'babel-eslint',
   plugins: ['jest', 'prettier'],
   rules: {

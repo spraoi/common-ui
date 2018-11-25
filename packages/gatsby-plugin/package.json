@@ -1,0 +1,19 @@
+{
+  "name": "@spraoi/gatsby-plugin",
+  "description": "Spraoi-specific Gatsby functionality.",
+  "version": "0.9.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-plugin",
+  "main": "gatsby-node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "deepmerge": "^2.2.1",
+    "js-yaml": "^3.12.0"
+  }
+}
