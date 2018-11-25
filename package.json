@@ -5,7 +5,7 @@
     "create-package": "new-spraoi-ui-package",
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint \"packages/**/*.js\"",
-    "lint:styles": "stylelint \"packages/**/*.(js|scss|css)\"",
+    "lint:styles": "stylelint \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "jest --coverage"
