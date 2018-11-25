@@ -1360,6 +1360,60 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@spraoi/babel-preset@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.9.0.tgz#1dca16a5031e1def341f84eeb6c7922fec8135c1"
+  integrity sha512-FuMsD8sGJfcnicUJ9pUpOzY6TN8zgIO9y6y/E+ReN1RZOqELjtfiz07B5PWvV7mItZz9UV+vBab2MqiUbpBcvw==
+  dependencies:
+    "@babel/core" "^7.1.6"
+    babel-plugin-styled-components "^1.8.0"
+    babel-preset-gatsby "^0.1.4"
+
+"@spraoi/eslint-config@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.9.0.tgz#a571dfdfc819bc6785e9d95333503ec443d3d763"
+  integrity sha512-eQuQsKEtg4uIcjWQB/wGPxvEsJ1kdzj7dVmrUJhR/r8O1X1r4V1/HHn7APLaMud62CM9wDx9s7D5iykGTGSSHw==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb "^17.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-jest "^22.0.0"
+    eslint-plugin-jsx-a11y "^6.1.2"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-react "^7.11.1"
+
+"@spraoi/jest-config@^0.9.0":
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.9.4.tgz#2f9765797af69632f29688355a1690ccf02cc830"
+  integrity sha512-7jJtTw2FNuuCupea5g2uOB51A/d00xhGQl5WoyG/4FjRlCmdeuKLKQMfC3hb/jq/tfQBzNKdwjir/cklIguJ2w==
+  dependencies:
+    "@babel/core" "^7.0.0-0"
+    "@babel/plugin-transform-runtime" "^7.1.0"
+    "@babel/runtime" "^7.1.5"
+    babel-core "^7.0.0-bridge"
+    babel-jest "^23.6.0"
+    enzyme "^3.7.0"
+    enzyme-adapter-react-16 "^1.7.0"
+    identity-obj-proxy "^3.0.0"
+
+"@spraoi/scripts@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@spraoi/scripts/-/scripts-0.9.1.tgz#67754c7d5b4f7fe283f12a9af209a5d37dd74a54"
+  integrity sha512-v0mOcCRFm4nPdk9lfDpYNNTP5D6RVecojJGMtWG0iQn3XQlwQYaOS/AWsiPIkrj5x7Bj4ocSJQZl7kf+qT0HDA==
+  dependencies:
+    meow "^5.0.0"
+    shelljs "^0.8.3"
+
+"@spraoi/stylelint-config@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.9.0.tgz#a3d3f0920298258a2371354f270b5bad964f5ea5"
+  integrity sha512-7vFLgZB6AgG5sVvwyIDJ3t3a1v51/Gxc711Jt0utn3E0LKkFKZvzbg5GTGpJYfopB1fw4ZnBtpcMCUwdF9EY4w==
+  dependencies:
+    stylelint-config-recommended "^2.1.0"
+    stylelint-config-styled-components "^0.1.1"
+    stylelint-processor-styled-components "^1.5.1"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"

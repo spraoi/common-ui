@@ -182,7 +182,7 @@ function createPackageJson({
   );
 }
 
-module.exports = async function newPackageWizard() {
+module.exports = async function newPackage() {
   const isReactComponent = await askIsReactComponent();
   const componentName = isReactComponent ? await askComponentName() : null;
   const name = await askPackageName();

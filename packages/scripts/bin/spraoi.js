@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const meow = require('meow');
-const newPackageWizard = require('../lib/new-package');
-const newUiWizard = require('../lib/new-ui');
+const newPackage = require('../lib/new-package');
+const newUi = require('../lib/new-ui');
 
 const cli = meow(
   `
@@ -10,27 +10,42 @@ Usage:
   $ spraoi [command] [arguments]
 	 
 Commands:
-  new [--package, --ui]
-    --package  create a new ui package for common-ui
-    --ui       create a new ui project
+  new
+    --package  Create a new UI package for common-ui.
+    --ui       Create a new UI project.
+
+  link
+    --packages path/to/packages
+
+      Symlink packages to local node_modules. Useful for making changes to
+      common-ui packages and testing in a separate project without having to
+      deploy to NPM.
 
 Examples
   $ spraoi new --package
   $ spraoi new --ui
+  $ spraoi link --packages ../common-ui/packages
 `,
   {
     flags: {
       package: { default: false, type: 'boolean' },
+      packages: { default: null, type: 'string' },
       ui: { default: false, type: 'boolean' },
     },
-    input: ['new'],
+    input: ['link', 'new'],
   }
 );
 
 switch (cli.input[0]) {
   case 'new': {
-    if (cli.flags.package) newPackageWizard();
-    else if (cli.flags.ui) newUiWizard();
+    if (cli.flags.package) newPackage();
+    else if (cli.flags.ui) newUi();
+    else cli.showHelp(1);
+    break;
+  }
+
+  case 'link': {
+    if (cli.flags.packages) newPackage(cli.flags.packages);
     else cli.showHelp(1);
     break;
   }
