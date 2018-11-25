@@ -1,6 +1,6 @@
 # @spraoi/gatsby-config
 
-> A sensible concoction of configuration & plugins for [Gatsby](https://www.gatsbyjs.org/docs/).
+> A sensible, extensible concoction of plugins & configuration for [Gatsby](https://www.gatsbyjs.org/docs/).
 
 ## Installation
 
@@ -10,4 +10,17 @@ yarn add --dev @spraoi/gatsby-config
 
 ## Usage
 
-TODO
+Add the following configuration to the root of your project:
+
+**gatsby.config.js**
+
+```javascript
+const defaults = require('@spraoi/gatsby-config');
+
+module.exports = {
+  ...defaults,
+  siteMetadata: {
+    title: 'Spraoi App'
+  },
+};
+```

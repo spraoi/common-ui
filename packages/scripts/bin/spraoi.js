@@ -10,11 +10,13 @@ Usage:
   $ spraoi [command] [arguments]
 	 
 Commands:
-  new [--ui, --package]
+  new [--package, --ui]
+    --package  create a new ui package for common-ui
+    --ui       create a new ui project
 
 Examples
-  $ spraoi new --ui
   $ spraoi new --package
+  $ spraoi new --ui
 `,
   {
     flags: {

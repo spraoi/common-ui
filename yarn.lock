@@ -1464,6 +1464,58 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@spraoi/babel-preset@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.8.0.tgz#35b1638084490d9be0b9ee59b56e0a7c1623a121"
+  integrity sha512-fUjtKO5P/wG+qZ31C90d8FcOBZ6L/YdI8SrvnXoFGNuxeDm4M7cVmN32O5caYBziPP8MluR6tYRdvyZkbSruIw==
+  dependencies:
+    "@babel/core" "^7.1.6"
+    babel-plugin-styled-components "^1.8.0"
+    babel-preset-gatsby "^0.1.4"
+
+"@spraoi/eslint-config@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.8.0.tgz#8bf6da73498a5a125727bf31a943f186074dfed7"
+  integrity sha512-Mhkgrf/2ULmQFqgB6KaxRKf0N14N6lymQe/xokNn5mB7mHALdmJHmUEcnsZ5gU7kUwje+rJor156qjJCvABDAQ==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb "^17.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-jest "^22.0.0"
+    eslint-plugin-jsx-a11y "^6.1.2"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-react "^7.11.1"
+
+"@spraoi/jest-config@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.8.0.tgz#8a5e52972fee784ed6dcae270a20e31cdbed4e41"
+  integrity sha512-ra/QYYt0IIIx5eTYkLRaY14HPMBXd+6mHHKkKeuWGqtDnOUOLiyuvS/GGMVgwEbTfh/eywNBvHcs5W7vFXCQSQ==
+  dependencies:
+    "@babel/core" "^7.0.0-0"
+    "@babel/plugin-transform-runtime" "^7.1.0"
+    "@babel/runtime" "^7.1.5"
+    babel-core "^7.0.0-bridge"
+    babel-jest "^23.6.0"
+    enzyme "^3.7.0"
+    enzyme-adapter-react-16 "^1.7.0"
+
+"@spraoi/scripts@^0.8.0":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@spraoi/scripts/-/scripts-0.8.1.tgz#fa6c9723007cea68e2a413b1675157e806a40221"
+  integrity sha512-JsLOvNQKVjlLjrCwI9MeTcO5k/zehhSCAuutLiXUAd5RTssiaHrKjhZHnxvEvD7jDmTTxk65aD2H6Uptk4qG3g==
+  dependencies:
+    shelljs "^0.8.3"
+
+"@spraoi/stylelint-config@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.8.0.tgz#df8409f1fb70f47658ec1f6c1afc1dd5891c09ab"
+  integrity sha512-QFY9kSLeABNdrUH4kAJdRrNSgfL3JL1IINqruvmNWsARj7bfnaQNufAj6bTym/7BbE6vGWzgc6iVHQ178CReBA==
+  dependencies:
+    stylelint-config-recommended "^2.1.0"
+    stylelint-config-styled-components "^0.1.1"
+    stylelint-processor-styled-components "^1.5.1"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"

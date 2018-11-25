@@ -188,7 +188,7 @@ module.exports = async function newPackageWizard() {
   const name = await askPackageName();
   const packageName = `@spraoi/${name}`;
   const packageDescription = await askPackageDescription();
-  const packageLocation = `${packageDir}/${name}`;
+  const packageLocation = `./${packageDir}/${name}`;
   const packageVersion = packageJson.version;
 
   console.log();

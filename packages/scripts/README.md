@@ -10,4 +10,4 @@ yarn global add @spraoi/scripts
 
 ## Usage
 
-TODO
+The `spraoi` command should now be available. Run it to see the available options.
