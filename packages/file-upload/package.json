@@ -19,6 +19,7 @@
   "peerDependencies": {
     "aws-amplify": "*",
     "prop-types": "*",
-    "react": "*"
+    "react": "*",
+    "react-dom": "*"
   }
 }

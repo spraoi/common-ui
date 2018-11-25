@@ -3,7 +3,15 @@
 set -e
 
 while :; do
-  read -p "name: " name
+  read -p "is this a react component? (y/n): " is_react_component
+  [[ -z "$(grep -E '(y|n)' <<< is_react_component)" ]] && echo "invalid response." && continue
+  [[ "$is_react_component" == "n" ]] && break
+  read -p "component name: " component_name
+  break
+done
+
+while :; do
+  read -p "package name: " name
 
   package_location="packages/${name}"
 
@@ -24,10 +32,11 @@ package_name="@spraoi/${name}"
 version="$(grep version lerna.json | cut -d\" -f4)"
 
 echo
-echo "name:        ${package_name}"
-echo "description: ${description}"
-echo "location:    ${package_location}"
-echo "version:     ${version}"
+[[ "$is_react_component" == "y" ]] && echo "component name: ${component_name}"
+echo "package name:   ${package_name}"
+echo "description:    ${description}"
+echo "location:       ${package_location}"
+echo "version:        ${version}"
 echo
 
 read -p "is this okay? (y/n) " okay
@@ -37,13 +46,51 @@ mkdir -p "$package_location"
 cd "$package_location"
 mkdir __tests__
 
-cat > index.js << EOL
-// TODO: implement
-EOL
+##
+# index.js
+##
 
-cat > __tests__/index.test.js << EOL
-it('exists', () => expect(true).toEqual(true));
+if [[ "$is_react_component" == "y" ]]; then
+  cat > index.js << EOL
+import React from 'react';
+
+const ${component_name} = () => <div>${component_name} component</div>;
+
+export default ${component_name};
 EOL
+else
+  cat > index.js << EOL
+// TODO
+EOL
+fi
+
+##
+# __tests__/index.test.js
+##
+
+if [[ "$is_react_component" == "y" ]]; then
+  cat > __tests__/index.test.js << EOL
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ${component_name} from '..';
+
+describe('FileUpload component', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<${component_name} />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});
+EOL
+else
+  cat > __tests__/index.test.js << EOL
+it('needs tests', () => expect(true).toEqual(true));
+EOL
+fi
+
+##
+# package.json
+##
 
 cat > package.json << EOL
 {
@@ -58,9 +105,26 @@ cat > package.json << EOL
   },
   "publishConfig": {
     "access": "public"
+  }$([[ "$is_react_component" == "y" ]] && echo ,)
+EOL
+
+if [[ "$is_react_component" == "y" ]]; then
+  cat >> package.json << EOL
+  "peerDependencies": {
+    "prop-types": "*",
+    "react": "*",
+    "react-dom": "*"
   }
+EOL
+fi
+
+cat >> package.json << EOL
 }
 EOL
+
+##
+# README.md
+##
 
 cat > README.md << EOL
 # ${package_name}
@@ -77,6 +141,10 @@ yarn add ${package_name}
 
 TODO
 EOL
+
+##
+# LICENSE
+##
 
 cat > LICENSE << EOL
 The MIT License
