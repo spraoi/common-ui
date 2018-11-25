@@ -10,5 +10,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-svgr": "^2.0.1"
+  },
+  "peerDependencies": {
+    "gatsby": "*"
   }
 }
