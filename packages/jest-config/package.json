@@ -11,12 +11,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "jest.setup.js",
-    "index.js",
-    "jest.mock.js",
-    "jest.transform.js"
-  ],
   "dependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-transform-runtime": "^7.1.0",
@@ -24,7 +18,8 @@
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0"
+    "enzyme-adapter-react-16": "^1.7.0",
+    "identity-obj-proxy": "^3.0.0"
   },
   "peerDependencies": {
     "@spraoi/babel-preset": "*",
