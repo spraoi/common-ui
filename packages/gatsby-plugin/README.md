@@ -10,4 +10,10 @@ yarn add --dev @spraoi/gatsby-plugin
 
 ## Usage
 
-TODO
+Add the plugin to you `gatsby-config.js` like so:
+
+```javascript
+module.exports = {
+  plugins: ['@spraoi/gatsby-plugin'],
+};
+```
