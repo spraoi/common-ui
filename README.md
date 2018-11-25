@@ -26,11 +26,12 @@
 
 ### Adding a Package
 
-1. create a new branch: `git checkout -b package/[package-name]`
-2. create the package boilerplate: `yarn new-package`
-3. define any necessary dependencies (see [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
-4. add functionality & tests
-5. create a PR
+1. install helper scripts: `yarn global add @spraoi/scripts`
+2. create a new branch: `git checkout -b package/[package-name]`
+3. run the package wizard: `spraoi-new-ui-package`
+4. define any necessary dependencies (see [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
+5. add functionality & tests
+6. create a PR
 
 ## Reusable React Components
 

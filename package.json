@@ -2,10 +2,10 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
+    "create-package": "new-spraoi-ui-package",
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint \"packages/**/*.js\"",
     "lint:styles": "stylelint \"packages/**/*.(js|scss|css)\"",
-    "new-package": "scripts/new-package.sh",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "jest --coverage"
@@ -17,6 +17,7 @@
     "@spraoi/babel-preset": "^0.6.1",
     "@spraoi/eslint-config": "^0.6.0",
     "@spraoi/jest-config": "^0.6.0",
+    "@spraoi/scripts": "^0.7.2",
     "@spraoi/stylelint-config": "^0.6.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
