@@ -14,20 +14,22 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/babel-preset": "^0.6.1",
-    "@spraoi/eslint-config": "^0.6.0",
-    "@spraoi/jest-config": "^0.6.0",
-    "@spraoi/scripts": "^0.7.2",
-    "@spraoi/stylelint-config": "^0.6.0",
+    "@spraoi/babel-preset": "^0.8.0",
+    "@spraoi/eslint-config": "^0.8.0",
+    "@spraoi/jest-config": "^0.8.0",
+    "@spraoi/scripts": "^0.8.0",
+    "@spraoi/stylelint-config": "^0.8.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
+    "gatsby": "^2.0.55",
     "jest": "^23.6.0",
     "lerna": "^3.4.3",
     "prettier": "^1.15.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
     "styled-components": "^4.1.1",
     "stylelint": "^9.8.0"
   }

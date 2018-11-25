@@ -12,6 +12,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@svgr/webpack": "^2.0.0",
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-svgr": "^2.0.1"
   },

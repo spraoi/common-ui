@@ -1,3 +1,4 @@
+const fs = require('fs');
 const readline = require('readline');
 
 module.exports.ask = question =>
@@ -12,3 +13,7 @@ module.exports.ask = question =>
       rl.close();
     });
   });
+
+module.exports.write = (file, data) => {
+  fs.writeFile(file, data, () => {});
+};
