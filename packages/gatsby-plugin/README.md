@@ -10,7 +10,7 @@ yarn add --dev @spraoi/gatsby-plugin
 
 ## Usage
 
-Add the plugin to you `gatsby-config.js` like so:
+Add the plugin to your Gatsby config file like so:
 
 ```javascript
 module.exports = {
