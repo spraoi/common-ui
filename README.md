@@ -27,7 +27,7 @@
 ### Adding a Package
 
 1. create a new branch: `git checkout -b package/[package-name]`
-2. run the package wizard: `yarn create-package`
+2. run the package wizard: `yarn new-package`
 3. define any necessary dependencies (see [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
 5. create a PR

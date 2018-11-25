@@ -12,10 +12,10 @@
     "access": "public"
   },
   "bin": {
-    "new-spraoi-ui": "bin/new-ui.js",
-    "new-spraoi-ui-package": "bin/new-ui-package.js"
+    "spraoi": "bin/spraoi.js"
   },
   "dependencies": {
+    "meow": "^5.0.0",
     "shelljs": "^0.8.3"
   }
 }

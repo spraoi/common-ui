@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /* eslint no-console: 0 */
+/* eslint sort-keys: 0 */
 
 const sh = require('shelljs');
 const packageJson = require('../package.json');
@@ -51,29 +52,7 @@ async function askPackageDescription() {
   return answer;
 }
 
-(async function run() {
-  const isReactComponent = await askIsReactComponent();
-  const componentName = isReactComponent ? await askComponentName() : null;
-  const name = await askPackageName();
-  const packageName = `@spraoi/${name}`;
-  const packageDescription = await askPackageDescription();
-  const packageLocation = `${packageDir}/${name}`;
-  const packageVersion = packageJson.version;
-
-  console.log();
-  if (isReactComponent) console.log('component name:\t\t', componentName);
-  console.log('package name:\t\t', packageName);
-  console.log('package description:\t', packageDescription);
-  console.log('package location:\t', packageLocation);
-  console.log('package version:\t', packageVersion);
-  console.log();
-
-  if ((await ask('is this okay? (y/n): ')) !== 'y') return;
-
-  sh.mkdir(packageLocation);
-  sh.cd(packageLocation);
-  sh.mkdir(testsDir);
-
+function createReadme({ packageName, packageDescription }) {
   write(
     'README.md',
     `# ${packageName}
@@ -91,7 +70,9 @@ yarn add ${packageName}
 TODO
 `
   );
+}
 
+function createLicense() {
   write(
     'LICENSE',
     `The MIT License
@@ -117,32 +98,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 `
   );
+}
 
-  const packageJsonObject = {
-    name: packageName,
-    // eslint-disable-next-line sort-keys
-    description: packageDescription,
-    version: packageVersion,
-    // eslint-disable-next-line sort-keys
-    license: 'MIT',
-    // eslint-disable-next-line sort-keys
-    homepage: `https://github.com/spraoi/common-ui/tree/master/packages/${name}`,
-    repository: {
-      type: 'git',
-      url: 'https://github.com/spraoi/common-ui.git',
-    },
-    // eslint-disable-next-line sort-keys
-    publishConfig: {
-      access: 'public',
-    },
-    // eslint-disable-next-line sort-keys
-    peerDependencies: {
-      'prop-types': '*',
-      react: '*',
-      'react-dom': '*',
-    },
-  };
-
+function createIndex({ componentName, isReactComponent }) {
   if (isReactComponent) {
     write(
       'index.js',
@@ -153,7 +111,17 @@ const ${componentName} = () => <div>${componentName} component</div>;
 export default ${componentName};
 `
     );
+  } else {
+    write(
+      'index.js',
+      `// TODO
+`
+    );
+  }
+}
 
+function createIndexTest({ componentName, isReactComponent }) {
+  if (isReactComponent) {
     write(
       `${testsDir}/index.test.js`,
       `import React from 'react';
@@ -170,24 +138,83 @@ describe('FileUpload component', () => {
 `
     );
   } else {
-    delete packageJsonObject.peerDependencies;
-
-    write(
-      'index.js',
-      `// TODO
-`
-    );
-
     write(
       `${testsDir}/index.test.js`,
       `it('needs tests', () => expect(true).toEqual(true));
 `
     );
   }
+}
+
+function createPackageJson({
+  isReactComponent,
+  name,
+  packageDescription,
+  packageName,
+  packageVersion,
+}) {
+  const packageJsonObject = {
+    name: packageName,
+    description: packageDescription,
+    version: packageVersion,
+    license: 'MIT',
+    homepage: `https://github.com/spraoi/common-ui/tree/master/packages/${name}`,
+    repository: {
+      type: 'git',
+      url: 'https://github.com/spraoi/common-ui.git',
+    },
+    publishConfig: {
+      access: 'public',
+    },
+    peerDependencies: {
+      'prop-types': '*',
+      react: '*',
+      'react-dom': '*',
+    },
+  };
+
+  if (!isReactComponent) delete packageJsonObject.peerDependencies;
 
   write(
     'package.json',
     `${JSON.stringify(packageJsonObject, null, 2)}
 `
   );
-})();
+}
+
+module.exports = async function newPackageWizard() {
+  const isReactComponent = await askIsReactComponent();
+  const componentName = isReactComponent ? await askComponentName() : null;
+  const name = await askPackageName();
+  const packageName = `@spraoi/${name}`;
+  const packageDescription = await askPackageDescription();
+  const packageLocation = `${packageDir}/${name}`;
+  const packageVersion = packageJson.version;
+
+  console.log();
+  if (isReactComponent) console.log('component name:\t\t', componentName);
+  console.log('package name:\t\t', packageName);
+  console.log('package description:\t', packageDescription);
+  console.log('package location:\t', packageLocation);
+  console.log('package version:\t', packageVersion);
+  console.log();
+
+  if ((await ask('is this okay? (y/n): ')) !== 'y') return;
+
+  sh.mkdir('-p', packageLocation);
+  sh.cd(packageLocation);
+  sh.mkdir(testsDir);
+
+  createReadme({ packageDescription, packageName });
+  createLicense();
+  createIndex({ componentName, isReactComponent });
+  createIndexTest({ componentName, isReactComponent });
+
+  createPackageJson({
+    packageName,
+    isReactComponent,
+    packageDescription,
+    name,
+    packageVersion,
+  });
+};
