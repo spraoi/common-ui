@@ -11,7 +11,7 @@ module.exports = {
   },
   rootDir: process.cwd(),
   setupFiles: [path.resolve(__dirname, 'jest.shim.js')],
-  testPathIgnorePatterns: ['node_modules', '.cache'],
+  testPathIgnorePatterns: ['.cache/', '.idea/', 'node_modules/', 'public/'],
   transform: { '^.+\\.jsx?$': path.resolve(__dirname, 'jest.transform.js') },
   transformIgnorePatterns: ['node_modules/(?!(gatsby|spraoi)/)'],
   verbose: true,
