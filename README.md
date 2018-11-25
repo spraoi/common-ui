@@ -59,7 +59,6 @@ TODO
 
 ## Publishing to NPM
 
-All packages stay on the same version, as we utilize
-[Lerna's fixed mode](https://github.com/lerna/lerna#fixedlocked-mode-default) for simplicity. However, only updated
-packages are release to NPM. When you make a change or add a package, you can create a new release with `yarn release`.
-You'll need to get write access to the [Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don't already have it.
+We use [Lerna](https://github.com/lerna/lerna) for managing package versions and publishing to NPM. When you make a
+change or add a package, you can create a new release with `yarn release`. You'll need to get write access to the
+[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don't already have it.
