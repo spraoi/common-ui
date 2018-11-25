@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/gatsby-config",
   "description": "A sensible, extensible concoction of plugins & configuration for Gatsby.",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-config",
   "repository": {
@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@spraoi/gatsby-plugin": "^0.10.2",
+    "@spraoi/gatsby-plugin": "^0.10.3",
     "@svgr/webpack": "^2.0.0",
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-styled-components": "^3.0.3",
