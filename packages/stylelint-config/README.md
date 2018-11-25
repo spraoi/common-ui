@@ -30,5 +30,4 @@ Add the following configuration to the root of your project:
 }
 ```
 
-You can then run `yarn lint:styles`. I recommend adding a stylelint plugin to your text editor of choice for a seamless
-linting experience.
+You can then run `yarn lint:styles`.

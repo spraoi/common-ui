@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const meow = require('meow');
-const newPackageWizard = require('./new-package');
-const newUiWizard = require('./new-ui');
+const newPackageWizard = require('../lib/new-package');
+const newUiWizard = require('../lib/new-ui');
 
 const cli = meow(
   `
