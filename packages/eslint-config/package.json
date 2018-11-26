@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/eslint-config",
   "description": "An opinionated, extensible eslint config to enforce high-quality javascript.",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/eslint-config",
   "repository": {
