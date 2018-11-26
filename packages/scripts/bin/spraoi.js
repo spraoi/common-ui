@@ -21,8 +21,8 @@ Commands
   version               Print the current version.
 
 Examples
-  $ spraoi new --package
-  $ spraoi new --ui
+  $ spraoi new-package
+  $ spraoi new-ui
   $ spraoi link --packages ../common-ui/packages
 `,
   {
