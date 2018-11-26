@@ -86,7 +86,7 @@ function createIndexTest(data) {
     template = read(resolve(__dirname, templateDir, 'index.js.txt'));
   }
 
-  write('index.js', parseTemplate(template, data));
+  write(`${testsDir}/index.test.js`, parseTemplate(template, data));
 }
 
 function createPackageJson(data) {
