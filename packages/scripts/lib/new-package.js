@@ -3,7 +3,6 @@
 /* eslint sort-keys: 0 */
 
 const sh = require('shelljs');
-const packageJson = require('../package.json');
 const { ask, write } = require('./helpers');
 
 const packageDir = 'packages';
@@ -189,14 +188,12 @@ module.exports = async function newPackage() {
   const packageName = `@spraoi/${name}`;
   const packageDescription = await askPackageDescription();
   const packageLocation = `./${packageDir}/${name}`;
-  const packageVersion = packageJson.version;
 
   console.log();
   if (isReactComponent) console.log('component name:\t\t', componentName);
   console.log('package name:\t\t', packageName);
   console.log('package description:\t', packageDescription);
   console.log('package location:\t', packageLocation);
-  console.log('package version:\t', packageVersion);
   console.log();
 
   if ((await ask('is this okay? (y/n): ')) !== 'y') return;
@@ -215,6 +212,6 @@ module.exports = async function newPackage() {
     isReactComponent,
     packageDescription,
     name,
-    packageVersion,
+    packageVersion: '0.0.1',
   });
 };
