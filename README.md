@@ -34,7 +34,8 @@ _Note:_ you can safely ignore `peerDependency` warnings for packages that only d
 2. run the package wizard: `spraoi new-package`
 3. define any necessary dependencies (you should be familiar with [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
-5. create a PR
+5. update README.md
+6. create a PR
 
 ### Testing In Real Projects
 
