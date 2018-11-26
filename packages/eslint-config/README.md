@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add --dev @spraoi/eslint-config eslint prettier
+yarn add --dev @spraoi/eslint-config @spraoi/prettier-config eslint prettier
 ```
 
 ## Usage
@@ -20,14 +20,10 @@ Add the following configuration to the root of you project:
 }
 ```
 
-**.prettierrc**
+**.prettierrc.js**
 
-```json
-{
-  "printWidth": 80,
-  "singleQuote": true,
-  "trailingComma": "es5"
-}
+```javascript
+module.exports = require('@spraoi/prettier-config');
 ```
 
 **package.json**
