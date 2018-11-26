@@ -16,13 +16,15 @@ Commands:
     --ui       Create a new UI project.
 
   link
-    --packages path/to/packages
+    --packages path/to/common-ui/packages
 
-      Symlink packages to local node_modules. Useful for making changes to
-      common-ui packages and testing in a separate project without having to
-      deploy to NPM.
+      Symlink common-ui packages to local node_modules. Useful for testing
+      without publishing to NPM.
 
-Examples
+  version
+    Print the current version.
+
+Examples:
   $ spraoi new --package
   $ spraoi new --ui
   $ spraoi link --packages ../common-ui/packages
@@ -33,7 +35,7 @@ Examples
       packages: { default: null, type: 'string' },
       ui: { default: false, type: 'boolean' },
     },
-    input: ['link', 'new'],
+    input: ['link', 'new', 'version'],
   }
 );
 
@@ -48,6 +50,11 @@ switch (cli.input[0]) {
   case 'link': {
     if (cli.flags.packages) linkPackages(cli.flags.packages);
     else cli.showHelp(1);
+    break;
+  }
+
+  case 'version': {
+    cli.showVersion();
     break;
   }
 

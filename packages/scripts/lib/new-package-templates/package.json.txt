@@ -1,0 +1,14 @@
+{
+  "name": "{{{packageName}}}",
+  "description": "{{{packageDescription}}}",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/{{{name}}}",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

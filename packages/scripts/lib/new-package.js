@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /* eslint no-console: 0 */
-/* eslint sort-keys: 0 */
 
 const sh = require('shelljs');
-const { ask, write } = require('./helpers');
+const { resolve } = require('path');
+const { ask, parseTemplate, read, write } = require('./helpers');
 
 const packageDir = 'packages';
 const testsDir = '__tests__';
 
-async function askIsReactComponent() {
+async function askisComponent() {
   const answer = await ask('is this a react component? (y/n): ');
   return /^(y|yes)$/.test(answer);
 }
@@ -51,167 +51,81 @@ async function askPackageDescription() {
   return answer;
 }
 
-function createReadme({ packageName, packageDescription }) {
-  write(
-    'README.md',
-    `# ${packageName}
-
-> ${packageDescription}
-
-## Installation
-
-\`\`\`bash
-yarn add ${packageName}
-\`\`\`
-
-## Usage
-
-TODO
-`
-  );
+function createReadme(data) {
+  const template = read(resolve(__dirname, 'templates/README.md.txt'));
+  write('README.md.txt', parseTemplate(template, data));
 }
 
 function createLicense() {
-  write(
-    'LICENSE',
-    `The MIT License
-
-Copyright (c) ${new Date().getFullYear()} Spraoi
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-`
-  );
+  const template = read(resolve(__dirname, 'templates/LICENSE.txt'));
+  const data = { year: new Date().getFullYear() };
+  write('README.md.txt', parseTemplate(template, data));
 }
 
-function createIndex({ componentName, isReactComponent }) {
-  if (isReactComponent) {
-    write(
-      'index.js',
-      `import React from 'react';
+function createIndex(data) {
+  let template;
 
-const ${componentName} = () => <div>${componentName} component</div>;
+  if (data.isComponent) {
+    template = read(resolve(__dirname, 'templates/index.js-component.txt'));
+  } else {
+    template = read(resolve(__dirname, 'templates/index.js.txt'));
+  }
 
-export default ${componentName};
-`
+  write('index.js', parseTemplate(template, data));
+}
+
+function createIndexTest(data) {
+  let template;
+
+  if (data.isComponent) {
+    template = read(
+      resolve(__dirname, 'templates/index.test.js-component.txt')
     );
   } else {
-    write(
-      'index.js',
-      `// TODO
-`
-    );
+    template = read(resolve(__dirname, 'templates/index.js.txt'));
   }
+
+  write('index.js', parseTemplate(template, data));
 }
 
-function createIndexTest({ componentName, isReactComponent }) {
-  if (isReactComponent) {
-    write(
-      `${testsDir}/index.test.js`,
-      `import React from 'react';
-import ReactDOM from 'react-dom';
-import ${componentName} from '..';
+function createPackageJson(data) {
+  let template;
 
-describe('FileUpload component', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<${componentName} />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-});
-`
-    );
+  if (data.isComponent) {
+    template = read(resolve(__dirname, 'templates/package.json-component.txt'));
   } else {
-    write(
-      `${testsDir}/index.test.js`,
-      `it('needs tests', () => expect(true).toEqual(true));
-`
-    );
+    template = read(resolve(__dirname, 'templates/package.json.txt'));
   }
-}
 
-function createPackageJson({
-  isReactComponent,
-  name,
-  packageDescription,
-  packageName,
-  packageVersion,
-}) {
-  const packageJsonObject = {
-    name: packageName,
-    description: packageDescription,
-    version: packageVersion,
-    license: 'MIT',
-    homepage: `https://github.com/spraoi/common-ui/tree/master/packages/${name}`,
-    repository: {
-      type: 'git',
-      url: 'https://github.com/spraoi/common-ui.git',
-    },
-    publishConfig: {
-      access: 'public',
-    },
-    peerDependencies: {
-      'prop-types': '*',
-      react: '*',
-      'react-dom': '*',
-    },
-  };
-
-  if (!isReactComponent) delete packageJsonObject.peerDependencies;
-
-  write(
-    'package.json',
-    `${JSON.stringify(packageJsonObject, null, 2)}
-`
-  );
+  write('package.json', parseTemplate(template, data));
 }
 
 module.exports = async function newPackage() {
-  const isReactComponent = await askIsReactComponent();
-  const componentName = isReactComponent ? await askComponentName() : null;
+  const isComponent = await askisComponent();
+  const componentName = isComponent ? await askComponentName() : null;
   const name = await askPackageName();
   const packageName = `@spraoi/${name}`;
   const packageDescription = await askPackageDescription();
   const packageLocation = `./${packageDir}/${name}`;
 
   console.log();
-  if (isReactComponent) console.log('component name:\t\t', componentName);
+  if (isComponent) console.log('component name:\t\t', componentName);
   console.log('package name:\t\t', packageName);
   console.log('package description:\t', packageDescription);
   console.log('package location:\t', packageLocation);
   console.log();
 
-  if ((await ask('is this okay? (y/n): ')) !== 'y') return;
+  if ((await ask('is this okay? (y/n): ')) !== 'y') return console.log('okay.');
 
   sh.mkdir('-p', packageLocation);
   sh.cd(packageLocation);
   sh.mkdir(testsDir);
 
-  createReadme({ packageDescription, packageName });
+  createIndex({ componentName, isComponent });
+  createIndexTest({ componentName, isComponent });
   createLicense();
-  createIndex({ componentName, isReactComponent });
-  createIndexTest({ componentName, isReactComponent });
+  createPackageJson({ isComponent, name, packageDescription, packageName });
+  createReadme({ packageDescription, packageName });
 
-  createPackageJson({
-    packageName,
-    isReactComponent,
-    packageDescription,
-    name,
-    packageVersion: '0.0.1',
-  });
+  console.log('done!');
 };

@@ -14,6 +14,19 @@ module.exports.ask = question =>
     });
   });
 
-module.exports.write = (file, data) => {
-  fs.writeFile(file, data, () => {});
+module.exports.parseTemplate = (template, data) => {
+  const placeholders = template
+    .split('{{{')
+    .slice(1)
+    .reduce((acc, chunk) => [...acc, chunk.split('}}}')[0]], []);
+
+  return placeholders.reduce(
+    (acc, placeholder) =>
+      acc.replace(`{{{${placeholder}}}}`, data[placeholder]),
+    template
+  );
 };
+
+module.exports.read = file => fs.readFileSync(file, { encoding: 'utf8' });
+
+module.exports.write = (file, data) => fs.writeFileSync(file, data);
