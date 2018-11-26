@@ -90,16 +90,7 @@ function createIndexTest(data) {
 }
 
 function createPackageJson(data) {
-  let template;
-
-  if (data.isComponent) {
-    template = read(
-      resolve(__dirname, templateDir, 'package.json-component.txt')
-    );
-  } else {
-    template = read(resolve(__dirname, templateDir, 'package.json.txt'));
-  }
-
+  const template = read(resolve(__dirname, templateDir, 'package.json.txt'));
   write('package.json', parseTemplate(template, data));
 }
 
@@ -118,7 +109,9 @@ module.exports = async function newPackage() {
   console.log('package location:\t', packageLocation);
   console.log();
 
-  if ((await ask('is this okay? (y/n): ')) !== 'y') return console.log('okay.');
+  if ((await ask('is this okay? (y/n): ')) !== 'y') {
+    return console.log('okay.');
+  }
 
   sh.mkdir('-p', packageLocation);
   sh.cd(packageLocation);
@@ -129,6 +122,10 @@ module.exports = async function newPackage() {
   createLicense();
   createPackageJson({ isComponent, name, packageDescription, packageName });
   createReadme({ packageDescription, packageName });
+
+  if (isComponent) {
+    sh.exec('yarn add --peer prop-types react react-dom styled-components');
+  }
 
   console.log('done!');
 };
