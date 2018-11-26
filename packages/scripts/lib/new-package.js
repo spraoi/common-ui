@@ -3,10 +3,11 @@
 
 const sh = require('shelljs');
 const { resolve } = require('path');
-const { ask, parseTemplate, read, write } = require('./helpers');
+const { ask, parseTemplate, read, write } = require('./utilities/helpers');
 
 const packageDir = 'packages';
 const testsDir = '__tests__';
+const templateDir = 'new-package-templates';
 
 async function askisComponent() {
   const answer = await ask('is this a react component? (y/n): ');
@@ -52,12 +53,12 @@ async function askPackageDescription() {
 }
 
 function createReadme(data) {
-  const template = read(resolve(__dirname, 'templates/README.md.txt'));
+  const template = read(resolve(__dirname, templateDir, 'README.md.txt'));
   write('README.md.txt', parseTemplate(template, data));
 }
 
 function createLicense() {
-  const template = read(resolve(__dirname, 'templates/LICENSE.txt'));
+  const template = read(resolve(__dirname, templateDir, 'LICENSE.txt'));
   const data = { year: new Date().getFullYear() };
   write('README.md.txt', parseTemplate(template, data));
 }
@@ -66,9 +67,9 @@ function createIndex(data) {
   let template;
 
   if (data.isComponent) {
-    template = read(resolve(__dirname, 'templates/index.js-component.txt'));
+    template = read(resolve(__dirname, templateDir, 'index.js-component.txt'));
   } else {
-    template = read(resolve(__dirname, 'templates/index.js.txt'));
+    template = read(resolve(__dirname, templateDir, 'index.js.txt'));
   }
 
   write('index.js', parseTemplate(template, data));
@@ -79,10 +80,10 @@ function createIndexTest(data) {
 
   if (data.isComponent) {
     template = read(
-      resolve(__dirname, 'templates/index.test.js-component.txt')
+      resolve(__dirname, templateDir, 'index.test.js-component.txt')
     );
   } else {
-    template = read(resolve(__dirname, 'templates/index.js.txt'));
+    template = read(resolve(__dirname, templateDir, 'index.js.txt'));
   }
 
   write('index.js', parseTemplate(template, data));
@@ -92,9 +93,11 @@ function createPackageJson(data) {
   let template;
 
   if (data.isComponent) {
-    template = read(resolve(__dirname, 'templates/package.json-component.txt'));
+    template = read(
+      resolve(__dirname, templateDir, 'package.json-component.txt')
+    );
   } else {
-    template = read(resolve(__dirname, 'templates/package.json.txt'));
+    template = read(resolve(__dirname, templateDir, 'package.json.txt'));
   }
 
   write('package.json', parseTemplate(template, data));
