@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
+    "format": "prettier --write \"*.{js,json,md}\" \"packages/**/*.{js,json,css,scss,md}\"",
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint \"packages/**/*.js\"",
     "lint:styles": "stylelint \"packages/**/*.js\"",
@@ -13,10 +14,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@spraoi/babel-preset": "^0.10.0",
-    "@spraoi/eslint-config": "^0.10.0",
-    "@spraoi/jest-config": "^0.10.0",
-    "@spraoi/stylelint-config": "^0.10.0",
+    "@spraoi/babel-preset": "^0.12.0",
+    "@spraoi/eslint-config": "^0.12.0",
+    "@spraoi/jest-config": "^0.12.0",
+    "@spraoi/stylelint-config": "^0.12.0",
     "aws-amplify": "^1.1.10",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",

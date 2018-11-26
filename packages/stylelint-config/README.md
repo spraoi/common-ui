@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add --dev @spraoi/stylelint-config stylelint
+yarn add --dev @spraoi/prettier-config @spraoi/stylelint-config prettier stylelint
 ```
 
 ## Usage
@@ -20,12 +20,18 @@ Add the following configuration to the root of your project:
 }
 ```
 
+**.prettierrc.js**
+
+```javascript
+module.exports = require('@spraoi/prettier-config');
+```
+
 **package.json**
 
 ```json
 {
   "scripts": {
-    "lint:styles": "stylelint \"src/**/*.js\""
+    "lint:styles": "stylelint \"src/**/*.{js,css,scss}\""
   }
 }
 ```

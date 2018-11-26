@@ -1875,11 +1875,12 @@ babel-plugin-macros@^2.4.2:
     resolve "^1.8.1"
 
 "babel-plugin-styled-components@>= 1", babel-plugin-styled-components@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.8.0.tgz#9dd054c8e86825203449a852a5746f29f2dab857"
-  integrity sha512-PcrdbXFO/9Plo9JURIj8G0Dsz+Ct8r+NvjoLh6qPt8Y/3EIAj1gHGW1ocPY1IkQbXZLBEZZSRBAxJem1KFdBXg==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.9.0.tgz#7b814bbe55900d9e0f6ec2c66741a1992c1c4a3d"
+  integrity sha512-DRurNjnndoIAiW0+vYgQyGmnCtKyCEGP9Y19Z9NrSwMEMGBWl2S7Q7F70RyGDae+KKeighhOPI1WttIb3r0xaA==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.0.0"
+    "@babel/plugin-syntax-jsx" "^7.0.0"
     lodash "^4.17.10"
 
 babel-plugin-syntax-object-rest-spread@^6.13.0:
@@ -6858,9 +6859,9 @@ postcss-jsx@^0.35.0:
     postcss-styled ">=0.34.0"
 
 postcss-less@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-less/-/postcss-less-3.0.2.tgz#9cf94e2cc90f8566858939e278fb9f0b713908df"
-  integrity sha512-+JBOampmDnuaf4w8OIEqkCiF+sOm/nWukDsC+1FTrYcIstptOISzGpYZk24Qh+Ewlmzmi53sRyiTbiGvMCDRwA==
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-less/-/postcss-less-3.1.0.tgz#0e14a80206b452f44d3a09d082fa72645e8168cc"
+  integrity sha512-+fDH2A9zV8B4gFu3Idhq8ma09/mMBXXc03T2lL9CHjBQqKrfUit+TrQrnojc6Y4k7N4E+tyE1Uj5U1tcoKtXLQ==
   dependencies:
     postcss "^7.0.3"
 
@@ -8185,6 +8186,11 @@ styled-components@^4.1.1:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+stylelint-config-prettier@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-4.0.0.tgz#8c712977be13bd25191ab8b986b5c07a3342a5dc"
+  integrity sha512-cwh3QbBC2+3zBeMvuxFjT8XsbSdyoyELOY9BZqMuvphUKEQ+srkPWoN60FlvRwLB014TOke4Y12KvTtfKnaHhg==
 
 stylelint-config-recommended@^2.1.0:
   version "2.1.0"

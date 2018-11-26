@@ -12,11 +12,13 @@
     "access": "public"
   },
   "dependencies": {
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.5.1"
   },
   "peerDependencies": {
+    "prettier": "*",
     "stylelint": "*"
   }
 }

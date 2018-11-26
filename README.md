@@ -13,7 +13,7 @@
 4. install dependencies: `yarn`
 5. install helper scripts: `yarn global add @spraoi/scripts`
 
-*Note:* you can safely ignore `peerDependency` warnings for packages that only define configuration.
+_Note:_ you can safely ignore `peerDependency` warnings for packages that only define configuration.
 
 ## Working With Packages
 
@@ -42,6 +42,7 @@ It can be hard to fully test a shared component without using it in a real proje
 to try something out, you can use the `spraoi link` command.
 
 In the UI project root, run (replacing the packages path appropriately):
+
 ```bash
 spraoi link --packages ../path/to/common-ui/packages
 ```

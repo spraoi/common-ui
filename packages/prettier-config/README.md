@@ -23,7 +23,7 @@ module.exports = require('@spraoi/prettier-config');
 ```json
 {
   "scripts": {
-    "format": "prettier --write \"*\" \"src/**/*\""
+    "format": "prettier --write \"*.{js,json,md}\" \"src/**/*.{js,json,css,scss,md\""
   }
 }
 ```
