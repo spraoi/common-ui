@@ -1,6 +1,6 @@
 # @spraoi/gatsby-plugin
 
-> Spraoi-specific Gatsby functionality.
+> A [Gatsby plugin](https://www.gatsbyjs.org/docs/plugin-authoring/) for adding any necessary steps to our build process.
 
 ## Installation
 
