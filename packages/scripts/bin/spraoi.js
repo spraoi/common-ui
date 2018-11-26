@@ -7,58 +7,48 @@ const newUi = require('../lib/new-ui');
 
 const cli = meow(
   `
-Usage:
-  $ spraoi [command] [arguments]
+Usage
+  $ spraoi <command> [arguments]
 	 
-Commands:
-  new
-    --package  Create a new UI package for common-ui.
-    --ui       Create a new UI project.
+Commands
+  new-package           Create a new UI package for common-ui.
 
-  link
-    --packages path/to/common-ui/packages
+  new-ui                Create a new UI project.
 
-      Symlink common-ui packages to local node_modules. Useful for testing
-      without publishing to NPM.
+  link                  Symlink common-ui packages to local node_modules.
+    --packages [path]   Useful for testing without publishing to NPM.
 
-  version
-    Print the current version.
+  version               Print the current version.
 
-Examples:
+Examples
   $ spraoi new --package
   $ spraoi new --ui
   $ spraoi link --packages ../common-ui/packages
 `,
   {
-    flags: {
-      package: { default: false, type: 'boolean' },
-      packages: { default: null, type: 'string' },
-      ui: { default: false, type: 'boolean' },
-    },
-    input: ['link', 'new', 'version'],
+    flags: { packages: { default: null, type: 'string' } },
+    input: ['link', 'new-package', 'new-ui', 'version'],
   }
 );
 
 switch (cli.input[0]) {
-  case 'new': {
-    if (cli.flags.package) newPackage();
-    else if (cli.flags.ui) newUi();
-    else cli.showHelp(1);
+  case 'new-package':
+    newPackage();
     break;
-  }
 
-  case 'link': {
-    if (cli.flags.packages) linkPackages(cli.flags.packages);
-    else cli.showHelp(1);
+  case 'new-ui':
+    newUi();
     break;
-  }
 
-  case 'version': {
+  case 'link':
+    if (!cli.flags.packages) cli.showHelp(1);
+    linkPackages(cli.flags.packages);
+    break;
+
+  case 'version':
     cli.showVersion();
     break;
-  }
 
-  default: {
+  default:
     cli.showHelp(1);
-  }
 }
