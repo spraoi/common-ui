@@ -1,19 +1,11 @@
 {
   "command": {
     "publish": {
-      "ignoreChanges": [
-        "*.md",
-        "LICENSE",
-        "__tests__/"
-      ]
+      "ignoreChanges": ["*.md", "LICENSE", "__tests__/"]
     }
   },
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--no-lockfile",
-    "--no-optional",
-    "--production"
-  ],
+  "npmClientArgs": ["--no-lockfile", "--no-optional", "--production"],
   "useWorkspaces": true,
   "version": "0.12.1"
 }

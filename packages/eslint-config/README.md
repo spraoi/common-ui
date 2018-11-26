@@ -16,7 +16,7 @@ Add the following configuration to the root of you project:
 
 ```json
 {
-  "extends": "@spraoi/eslint-config"
+  "extends": ["@spraoi/eslint-config"]
 }
 ```
 
@@ -31,7 +31,7 @@ module.exports = require('@spraoi/prettier-config');
 ```json
 {
   "scripts": {
-    "lint:js": "eslint \"src/**/*.js\""
+    "lint:js": "eslint --fix \"src/**/*.js\""
   }
 }
 ```

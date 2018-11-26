@@ -31,7 +31,7 @@ module.exports = require('@spraoi/prettier-config');
 ```json
 {
   "scripts": {
-    "lint:styles": "stylelint \"src/**/*.{js,css,scss}\""
+    "lint:styles": "stylelint --fix \"src/**/*.{js,css,scss}\""
   }
 }
 ```
