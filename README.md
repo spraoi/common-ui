@@ -11,6 +11,7 @@
 2. clone the repo: `git clone git@github.com:spraoi/common-ui.git`
 3. cd into it: `cd common-ui`
 4. install dependencies: `yarn`
+5. install helper scripts: `yarn global add @spraoi/scripts`
 
 *Note:* you can safely ignore `peerDependency` warnings for packages that only define configuration.
 
@@ -29,7 +30,7 @@
 ### Adding a Package
 
 1. create a new branch: `git checkout -b package/[package-name]`
-2. run the package wizard: `yarn new-package`
+2. run the package wizard: `spraoi new --package`
 3. define any necessary dependencies (see [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
 5. create a PR
