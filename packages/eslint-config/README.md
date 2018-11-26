@@ -16,7 +16,7 @@ Add the following configuration to the root of you project:
 
 ```json
 {
-  "extends": "@spraoi"
+  "extends": "@spraoi/eslint-config"
 }
 ```
 
