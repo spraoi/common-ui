@@ -83,7 +83,7 @@ function createIndexTest(data) {
       resolve(__dirname, templateDir, 'index.test.js-component.txt')
     );
   } else {
-    template = read(resolve(__dirname, templateDir, 'index.js.txt'));
+    template = read(resolve(__dirname, templateDir, 'index.test.js.txt'));
   }
 
   write(`${testsDir}/index.test.js`, parseTemplate(template, data));
