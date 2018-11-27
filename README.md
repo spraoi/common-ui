@@ -32,7 +32,7 @@
 2. run the package wizard: `spraoi new-package`
 3. define any necessary dependencies (you should be familiar with [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
-5. update README.md
+5. update the package&rsquo;s README.md
 6. create a PR
 
 ### Testing In Real Projects
@@ -47,6 +47,8 @@ spraoi link --packages ../path/to/common-ui/packages
 ```
 
 This symlinks all packages to your local `node_modules` directory—allowing you to import as usual and test with ease.
+Note that `yarn` will throw a (harmless) error if you attempt to install or remove anything after doing this. You can
+remove the symlinks with `spraoi unlink` to avoid it.
 
 ## Reusable React Components
 
@@ -74,5 +76,5 @@ TODO
 ## Publishing to NPM
 
 We use [Lerna](https://github.com/lerna/lerna) for managing package versions and publishing to NPM. When you make a
-change or add a package, you can create a new release with `yarn release`. You'll need to get write access to the
-[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don't already have it.
+change or add a package, you can create a new release with `yarn release`. You&rsquo;ll need to get write access to the
+[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don&rsquo;t already have it.

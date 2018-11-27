@@ -4,6 +4,7 @@ const meow = require('meow');
 const linkPackages = require('../lib/link-packages');
 const newPackage = require('../lib/new-package');
 const newUi = require('../lib/new-ui');
+const unlinkPackages = require('../lib/unlink-packages');
 
 const cli = meow(
   `
@@ -11,23 +12,23 @@ Usage
   $ spraoi <command> [arguments]
 	 
 Commands
-  new-package           Create a new UI package for common-ui.
+  new-package           Create new UI package for common-ui.
 
-  new-ui                Create a new UI project.
+  new-ui                Create new UI project.
 
   link                  Symlink common-ui packages to local node_modules.
     --packages [path]   Useful for testing without publishing to NPM.
 
-  version               Print the current version.
+    Example:
+      $ spraoi link --packages ../common-ui/packages
 
-Examples
-  $ spraoi new-package
-  $ spraoi new-ui
-  $ spraoi link --packages ../common-ui/packages
+  unlink                Remove common-ui package symlinks in node_modules.
+
+  version               Print current version.
 `,
   {
     flags: { packages: { default: null, type: 'string' } },
-    input: ['link', 'new-package', 'new-ui', 'version'],
+    input: ['link', 'new-package', 'new-ui', 'unlink', 'version'],
   }
 );
 
@@ -43,6 +44,10 @@ switch (cli.input[0]) {
   case 'link':
     if (!cli.flags.packages) cli.showHelp(1);
     linkPackages(cli.flags.packages);
+    break;
+
+  case 'unlink':
+    unlinkPackages();
     break;
 
   case 'version':
