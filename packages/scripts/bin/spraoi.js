@@ -12,9 +12,10 @@ Usage
   $ spraoi <command> [arguments]
 	 
 Commands
-  new-package           Create new UI package for common-ui.
+  new-package           Start the new UI package wizard. Run this in the
+                        root of our common-ui repo.
 
-  new-ui                Create new UI project.
+  new-ui                Start the new UI project wizard.
 
   link                  Symlink common-ui packages to local node_modules.
     --packages [path]   Useful for testing without publishing to NPM.
