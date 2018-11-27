@@ -9,28 +9,29 @@ const unlinkPackages = require('../lib/unlink-packages');
 
 const cli = meow(
   `
-Usage
+USAGE
   $ spraoi <command> [arguments]
 	 
-Commands
-  new-package           Start the new UI package wizard.
+COMMANDS
+  new-package              Start new package wizard.
+  new-ui                   Start new project wizard.
+  new-variation            Start new variation wizard.
+  link                     Symlink common-ui packages to local node_modules.
+    --packages, -p [path]
+  unlink                   Remove common-ui package symlinks in node_modules.
+  version                  Print current version.
 
-  new-variation         Start the new UI variation wizard.
-
-  new-ui                Start the new UI project wizard.
-
-  link                  Symlink common-ui packages to local node_modules.
-    --packages [path]   Useful for testing without publishing to NPM.
-
-    Example:
-      $ spraoi link --packages ../common-ui/packages
-
-  unlink                Remove common-ui package symlinks in node_modules.
-
-  version               Print current version.
+EXAMPLES
+  $ spraoi link --packages ../common-ui/packages
 `,
   {
-    flags: { packages: { default: null, type: 'string' } },
+    flags: {
+      packages: {
+        alias: 'p',
+        default: null,
+        type: 'string',
+      },
+    },
     input: [
       'link',
       'new-package',
