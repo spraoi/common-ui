@@ -13,8 +13,6 @@
 4. install dependencies: `yarn`
 5. install helper scripts: `yarn global add @spraoi/scripts`
 
-_Note:_ you can safely ignore `peerDependency` warnings for packages that only define configuration.
-
 ## Working With Packages
 
 - run tests: `yarn test`
