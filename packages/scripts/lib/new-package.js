@@ -54,13 +54,13 @@ async function askPackageDescription() {
 
 function createReadme(data) {
   const template = read(resolve(__dirname, templateDir, 'README.md.txt'));
-  write('README.md.txt', parseTemplate(template, data));
+  write('README.md', parseTemplate(template, data));
 }
 
 function createLicense() {
   const template = read(resolve(__dirname, templateDir, 'LICENSE.txt'));
   const data = { year: new Date().getFullYear() };
-  write('README.md.txt', parseTemplate(template, data));
+  write('LICENSE', parseTemplate(template, data));
 }
 
 function createIndex(data) {
