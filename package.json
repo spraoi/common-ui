@@ -4,8 +4,8 @@
     "clean": "lerna clean && rm -rf node_modules",
     "format": "prettier --write \"*.{js,json,md}\" \"packages/**/*.{js,json,css,scss,md}\"",
     "lint": "yarn lint:js && yarn lint:styles",
-    "lint:js": "eslint \"packages/**/*.js\"",
-    "lint:styles": "stylelint \"packages/**/*.js\"",
+    "lint:js": "eslint --ignore-path .gitignore \"packages/**/*.js\"",
+    "lint:styles": "stylelint --ignore-path .gitignore \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "jest --coverage"

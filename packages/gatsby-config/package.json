@@ -19,6 +19,6 @@
     "gatsby-plugin-svgr": "^2.0.1"
   },
   "peerDependencies": {
-    "gatsby": "*"
+    "gatsby": "^2.0.55"
   }
 }
