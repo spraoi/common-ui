@@ -5,7 +5,11 @@
 ## Installation
 
 ```bash
-yarn add --dev @spraoi/babel-preset
+yarn add --dev \
+  @babel/core \
+  @spraoi/babel-preset \
+  babel-plugin-styled-components \
+  babel-preset-gatsby
 ```
 
 ## Usage

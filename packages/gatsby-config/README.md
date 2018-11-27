@@ -5,6 +5,7 @@
 ## Installation
 
 ```bash
+yarn add gatsby
 yarn add --dev @spraoi/gatsby-config
 ```
 

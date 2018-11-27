@@ -5,7 +5,14 @@
 ## Installation
 
 ```bash
-yarn add --dev @spraoi/babel-preset @spraoi/jest-config jest
+yarn add --dev \
+  @babel/core \
+  @babel/plugin-transform-runtime \
+  @babel/runtime \
+  @spraoi/babel-preset \
+  @spraoi/jest-config \
+  babel-core@^7.0.0-bridge \
+  jest
 ```
 
 ## Usage

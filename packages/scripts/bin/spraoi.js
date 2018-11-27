@@ -7,8 +7,7 @@ const newUi = require('../lib/new-ui');
 const newVariation = require('../lib/new-variation');
 const unlinkPackages = require('../lib/unlink-packages');
 
-const cli = meow(
-  `
+const helpText = `
 USAGE
   $ spraoi <command> [arguments]
 	 
@@ -23,25 +22,25 @@ COMMANDS
 
 EXAMPLES
   $ spraoi link --packages ../common-ui/packages
-`,
-  {
-    flags: {
-      packages: {
-        alias: 'p',
-        default: null,
-        type: 'string',
-      },
+`;
+
+const cli = meow(helpText, {
+  flags: {
+    packages: {
+      alias: 'p',
+      default: null,
+      type: 'string',
     },
-    input: [
-      'link',
-      'new-package',
-      'new-ui',
-      'new-variation',
-      'unlink',
-      'version',
-    ],
-  }
-);
+  },
+  input: [
+    'link',
+    'new-package',
+    'new-ui',
+    'new-variation',
+    'unlink',
+    'version',
+  ],
+});
 
 switch (cli.input[0]) {
   case 'link':
