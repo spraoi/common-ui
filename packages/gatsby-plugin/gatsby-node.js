@@ -1,4 +1,4 @@
-const { readFileSync, writeFile } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
 const merge = require('deepmerge');
 
@@ -18,5 +18,5 @@ module.exports.onPreInit = () => {
     }
   }, {});
 
-  writeFile('src/config.json', JSON.stringify(config, null, 2), () => {});
+  writeFileSync('src/config.json', JSON.stringify(config, null, 2));
 };
