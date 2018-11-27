@@ -15,7 +15,7 @@ if (!process.env.config || !fs.existsSync(`config/${process.env.config}.yml`)) {
       file => !file.includes('default.') && /^([a-z]+\.){2}yml/.test(file)
     )
     .forEach(file =>
-      console.log(`   config=${file.replace('.yml', '')} yarn start`)
+      console.log(`   $ config=${file.replace('.yml', '')} yarn start`)
     );
 
   console.log();
