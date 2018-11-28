@@ -17,10 +17,10 @@
     "react-filepond": "^5.0.0"
   },
   "peerDependencies": {
-    "aws-amplify": "^1.1.10",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "styled-components": "^4.1.1"
+    "aws-amplify": "^1",
+    "prop-types": "^15",
+    "react": "^16",
+    "react-dom": "^16",
+    "styled-components": "^4"
   }
 }

@@ -12,11 +12,11 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@spraoi/base": "^0.13.0",
-    "aws-amplify": "^1.1.10",
-    "gatsby": "^2.0.56",
-    "lodash": "^4.17.11",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3"
+    "@spraoi/base": "*",
+    "aws-amplify": "^1",
+    "gatsby": "^2",
+    "lodash": "^4",
+    "prop-types": "^15",
+    "react": "^16"
   }
 }

@@ -12,8 +12,8 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@babel/core": "^7.1.6",
-    "babel-plugin-styled-components": "^1.8.0",
-    "babel-preset-gatsby": "^0.1.4"
+    "@babel/core": "^7",
+    "babel-plugin-styled-components": "^1",
+    "babel-preset-gatsby": "^0"
   }
 }

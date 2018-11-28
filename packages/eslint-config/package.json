@@ -22,7 +22,7 @@
     "eslint-plugin-react": "^7.11.1"
   },
   "peerDependencies": {
-    "eslint": "^5.9.0",
-    "prettier": "^1.15.2"
+    "eslint": "^5",
+    "prettier": "^1"
   }
 }

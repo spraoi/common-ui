@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@spraoi/gatsby-plugin": "^0.13.4",
+    "@spraoi/gatsby-plugin": "*",
     "@svgr/webpack": "^2.0.0",
     "gatsby-plugin-page-creator": "^2.0.4",
     "gatsby-plugin-react-helmet": "^3.0.0",
@@ -20,6 +20,6 @@
     "gatsby-plugin-svgr": "^2.0.1"
   },
   "peerDependencies": {
-    "gatsby": "^2.0.55"
+    "gatsby": "^2"
   }
 }
