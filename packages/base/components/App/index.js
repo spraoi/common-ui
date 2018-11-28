@@ -1,7 +1,6 @@
-import Amplify from 'aws-amplify';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import resetStyles from 'styled-reset';
 import { AuthHandler } from '@spraoi/auth';
 import { Authenticator } from 'aws-amplify-react/dist/Auth';
@@ -9,31 +8,22 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`${resetStyles}`;
 
-export default class App extends PureComponent {
-  static propTypes = {
-    amplify: PropTypes.shape({}).isRequired,
-    page: PropTypes.node.isRequired,
-    theme: PropTypes.shape({}).isRequired,
-  };
+const App = ({ amplifyConfig, page, theme }) => (
+  <React.Fragment>
+    <Helmet />
+    <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <Authenticator amplifyConfig={amplifyConfig} hideDefault>
+        <AuthHandler page={page} />
+      </Authenticator>
+    </ThemeProvider>
+  </React.Fragment>
+);
 
-  componentWillMount() {
-    const { amplify } = this.props;
-    Amplify.configure(amplify);
-  }
+App.propTypes = {
+  amplifyConfig: PropTypes.shape({}).isRequired,
+  page: PropTypes.node.isRequired,
+  theme: PropTypes.shape({}).isRequired,
+};
 
-  render() {
-    const { page, theme } = this.props;
-
-    return (
-      <React.Fragment>
-        <Helmet />
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <Authenticator hideDefault>
-            <AuthHandler page={page} />
-          </Authenticator>
-        </ThemeProvider>
-      </React.Fragment>
-    );
-  }
-}
+export default App;
