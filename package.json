@@ -23,6 +23,7 @@
     "@spraoi/jest-config": "^0.13.2",
     "@spraoi/stylelint-config": "^0.13.0",
     "aws-amplify": "^1.1.10",
+    "aws-amplify-react": "^2.1.4",
     "babel-core": "^7.0.0-bridge",
     "babel-plugin-styled-components": "^1.9.1",
     "babel-preset-gatsby": "^0.1.4",

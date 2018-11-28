@@ -74,6 +74,11 @@
   dependencies:
     "@aws-amplify/core" "^1.0.18"
 
+"@aws-amplify/ui@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-1.0.9.tgz#57ffd4d7e4c73fcaecbd392ce492f9ce1988b702"
+  integrity sha512-LHWYN8hJnjSGI0ZZl3fCjSDI9CI+elAhSPa6e/qJspbrlnA2f9JescYIJEZu7F6a0pjmrXiitfyyzRZc6Latbg==
+
 "@aws-amplify/xr@^0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@aws-amplify/xr/-/xr-0.1.8.tgz#10af4f255638038845ba5f895b97ff1c6f150681"
@@ -2262,6 +2267,15 @@ autoprefixer@^9.0.0:
     num2fraction "^1.2.2"
     postcss "^7.0.5"
     postcss-value-parser "^3.3.1"
+
+aws-amplify-react@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-2.1.4.tgz#b4293fcb7ae4b6b6883167af90ef525eb59b00bc"
+  integrity sha512-OgZaWiJOioMgBEdelJPsuikxjClxNXHWecattVUbfXNXzLIzIWGfmaCKtmj3gUpaF6HJMMa0Wfa3uYK35PmPow==
+  dependencies:
+    "@aws-amplify/ui" "^1.0.9"
+    qrcode.react "^0.8.0"
+    regenerator-runtime "^0.11.1"
 
 aws-amplify@^1.1.10:
   version "1.1.10"
@@ -10907,7 +10921,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -11006,6 +11020,19 @@ q@^1.1.2, q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
+
+qrcode.react@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-0.8.0.tgz#413b31cc3b62910e39513f7bead945e01c4c34fb"
+  integrity sha512-16wKpuFvLwciIq2YAsfmPUCnSR8GrYPsXRK5KVdcIuX0+W/MKZbBkFhl44ttRx4TWZHqRjfztoWOxdPF0Hb9JA==
+  dependencies:
+    prop-types "^15.6.0"
+    qr.js "0.0.0"
 
 qs@6.5.2, qs@~6.5.2:
   version "6.5.2"
@@ -12712,6 +12739,11 @@ styled-components@^4.1.1:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+styled-reset@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-1.6.1.tgz#80ec719bbcfffa6f7c1bd7781aec2c93145aa47d"
+  integrity sha512-XpEXPrE8HJB1s1s9w1EyZ3ML5zy2dDRhia0M9tvom+NZx+CZ8Z5TDDF/UppHqOd44cwP6CG3cxmTNfc/9bsSgw==
 
 styled-system@^3.1.11:
   version "3.1.11"
