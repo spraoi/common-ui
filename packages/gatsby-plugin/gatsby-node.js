@@ -2,6 +2,25 @@ const { readFileSync, writeFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
 const merge = require('deepmerge');
 
+exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
+  const config = getConfig();
+
+  config.module.rules = [
+    ...config.module.rules.filter(
+      rule => String(rule.test) !== String(/\.jsx?$/)
+    ),
+    {
+      ...loaders.js(),
+      exclude: modulePath =>
+        /node_modules/.test(modulePath) &&
+        !/node_modules\/(@spraoi)/.test(modulePath),
+      test: /\.jsx?$/,
+    },
+  ];
+
+  actions.replaceWebpackConfig(config);
+};
+
 module.exports.onPreInit = () => {
   const [variation, stage] = process.env.config.split('.');
 
