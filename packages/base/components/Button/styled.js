@@ -13,6 +13,7 @@ export const StyledButton = styled.button`
   box-shadow: ${p => p.theme.boxShadows.md};
   transition: background-color ${p => p.theme.transitionSpeeds.normal};
   color: ${p => p.theme.colors.white};
+  font-size: ${p => p.theme.fontSizes.sm};
   font-weight: ${p => p.theme.fontWeights.bold};
   letter-spacing: ${p => p.theme.letterSpacings.sm};
   text-transform: uppercase;

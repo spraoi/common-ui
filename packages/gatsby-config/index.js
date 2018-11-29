@@ -6,6 +6,7 @@ const { resolve } = require('path');
 if (!process.env.config || !fs.existsSync(`config/${process.env.config}.yml`)) {
   const red = '\x1b[31m';
   const reset = '\x1b[0m';
+  const command = process.env.gatsby_executing_command;
 
   console.log(`\n\n💥 ${red}Please specify a valid config!`);
   console.log(`   Try one of these:${reset}\n`);
@@ -15,7 +16,7 @@ if (!process.env.config || !fs.existsSync(`config/${process.env.config}.yml`)) {
       file => !file.includes('default.') && /^([a-z]+\.){2}yml/.test(file)
     )
     .forEach(file =>
-      console.log(`   $ config=${file.replace('.yml', '')} yarn start`)
+      console.log(`   $ config=${file.replace('.yml', '')} yarn ${command}`)
     );
 
   console.log();
@@ -38,10 +39,11 @@ const pageResolution = [
 
 module.exports = {
   plugins: [
+    ...pageResolution,
     '@spraoi/gatsby-plugin',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-svgr',
-    ...pageResolution,
+    'gatsby-plugin-purgecss',
   ],
 };
