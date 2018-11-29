@@ -38,6 +38,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
+    "react-spinners": "^0.4.7",
     "styled-components": "^4.1.1",
     "stylelint": "^9.9.0"
   }
