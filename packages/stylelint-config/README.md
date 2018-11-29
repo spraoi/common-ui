@@ -31,7 +31,7 @@ module.exports = require('@spraoi/prettier-config');
 ```json
 {
   "scripts": {
-    "lint:styles": "stylelint --fix --ignore-path .gitignore \"src/**/*.{js,css,scss}\""
+    "lint:styles": "stylelint --ignore-path .gitignore \"src/**/*.{js,css,scss}\""
   }
 }
 ```

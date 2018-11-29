@@ -1,29 +1,25 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import resetStyles from 'styled-reset';
-import { AuthHandler } from '@spraoi/auth';
-import { Authenticator } from 'aws-amplify-react/dist/Auth';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-
-const GlobalStyle = createGlobalStyle`${resetStyles}`;
+import { Authenticator } from '@spraoi/auth';
+import { ThemeProvider } from 'styled-components';
+import { StyledGlobal } from './styled';
+import { amplifyConfigType, themeType } from './types';
 
 const App = ({ amplifyConfig, page, theme }) => (
-  <React.Fragment>
+  <>
+    <StyledGlobal theme={theme} />
     <Helmet />
-    <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <Authenticator amplifyConfig={amplifyConfig} hideDefault>
-        <AuthHandler page={page} />
-      </Authenticator>
+      <Authenticator amplifyConfig={amplifyConfig} page={page} />
     </ThemeProvider>
-  </React.Fragment>
+  </>
 );
 
 App.propTypes = {
-  amplifyConfig: PropTypes.shape({}).isRequired,
+  amplifyConfig: amplifyConfigType.isRequired,
   page: PropTypes.node.isRequired,
-  theme: PropTypes.shape({}).isRequired,
+  theme: themeType.isRequired,
 };
 
 export default App;

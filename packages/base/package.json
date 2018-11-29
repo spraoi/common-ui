@@ -11,19 +11,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "react-spinners": "^0.4.7",
-    "rebass": "^3.0.0-11",
-    "styled-reset": "^1.6.1"
-  },
   "peerDependencies": {
     "@spraoi/auth": "*",
-    "aws-amplify-react": "^2",
     "gatsby": "^2",
-    "lodash": "^4",
     "prop-types": "^15",
     "react": "^16",
     "react-helmet": "^5",
+    "react-spinners": "^0",
     "styled-components": "^4"
   }
 }

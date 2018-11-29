@@ -1,4 +1,12 @@
 module.exports = () => ({
-  plugins: ['styled-components'],
+  plugins: [
+    [
+      'babel-plugin-styled-components',
+      {
+        pure: true,
+        transpileTemplateLiterals: false,
+      },
+    ],
+  ],
   presets: ['gatsby'],
 });

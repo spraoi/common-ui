@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Auth } from 'aws-amplify';
-import Context from '../Context';
+import Context from '../../context';
 import { AUTH_STATES } from './constants';
 
 export default class AuthHandler extends PureComponent {
