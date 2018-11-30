@@ -1,5 +1,6 @@
 export const AUTH_STATES = {
-  LOADING: 'loading',
-  SIGNED_IN: 'signedIn',
-  SIGNED_OUT: 'signedOut',
+  LOADING: 'LOADING',
+  NEW_PASSWORD_REQUIRED: 'NEW_PASSWORD_REQUIRED',
+  SIGNED_IN: 'SIGNED_IN',
+  SIGNED_OUT: 'SIGNED_OUT',
 };

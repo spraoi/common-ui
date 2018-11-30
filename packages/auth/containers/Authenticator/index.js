@@ -24,25 +24,36 @@ export default class Authenticator extends PureComponent {
 
   async setAuthenticatedUser() {
     try {
-      const { attributes } = await Auth.currentAuthenticatedUser();
+      const user = await Auth.currentAuthenticatedUser();
 
       this.setState({
         authState: AUTH_STATES.SIGNED_IN,
-        authUser: objectMapKeysDeep(attributes, snakeCaseToCamelCase),
+        authUser: objectMapKeysDeep(user.attributes, snakeCaseToCamelCase),
       });
     } catch (e) {
       this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
     }
   }
 
-  signIn = async values => {
-    await Auth.signIn(values.username, values.password);
+  completeNewPasswordChallenge = async ({ password, ...rest }) => {
+    const { authUser } = this.state;
+    await Auth.completeNewPassword(authUser, password, rest);
     await this.setAuthenticatedUser();
+  };
+
+  signIn = async ({ password, username }) => {
+    const authUser = await Auth.signIn(username, password);
+
+    if (authUser.challengeName === AUTH_STATES.NEW_PASSWORD_REQUIRED) {
+      this.setState({ authState: AUTH_STATES.NEW_PASSWORD_REQUIRED, authUser });
+    } else {
+      await this.setAuthenticatedUser();
+    }
   };
 
   signOut = async () => {
     await Auth.signOut();
-    this.setState({ authState: AUTH_STATES.SIGNED_OUT });
+    this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
   };
 
   signUp = async values => {
@@ -57,8 +68,10 @@ export default class Authenticator extends PureComponent {
     return (
       <Context.Provider
         value={{
+          completeNewPasswordChallenge: this.completeNewPasswordChallenge,
           isAuthenticated: authState === AUTH_STATES.SIGNED_IN,
           isLoading: authState === AUTH_STATES.LOADING,
+          newPasswordRequired: authState === AUTH_STATES.NEW_PASSWORD_REQUIRED,
           signIn: this.signIn,
           signOut: this.signOut,
           signUp: this.signUp,
