@@ -17,7 +17,6 @@
 
 - run tests: `yarn test`
 - run linter: `yarn lint`
-- run storybook: `TODO: add storybook`
 
 ### General Guidelines
 
@@ -47,8 +46,8 @@ spraoi link --packages ../path/to/common-ui/packages
 ```
 
 This symlinks all packages to your local `node_modules` directory—allowing you to import as usual and test with ease.
-Note that `yarn` will throw a (harmless) error if you attempt to install or remove anything after doing this. You can
-remove the symlinks with `spraoi unlink` to avoid it.
+Note that `yarn` will throw an error if you attempt to install or remove anything after doing this. You can remove the
+symlinks with `spraoi unlink` to avoid it.
 
 ## Reusable React Components
 
@@ -56,22 +55,18 @@ Creating React components that can be reused across projects presents an interes
 requires its own unique styles. In order to support this flexibility, reusable components need to:
 
 1. utilize a project-wide theme
-2. have sane fallback styles
-3. allow for one-off styles to be specified
-
-These things should be possible without having to modify the component itself.
+2. be easily extensible
 
 ### Project-Wide Themes
 
-TODO
+We use [styled-components' theming](https://www.styled-components.com/docs/advanced) capabilities to pass global styles
+through to common components. The theme structure can be found in our
+[base `App` component](https://github.com/spraoi/common-ui/blob/master/packages/base/components/App/types.js). 
 
-### Fallback Styles
+### Extensibility
 
-TODO
-
-### One-Off Styles
-
-TODO
+It's also very easy to [extend basic components](https://www.styled-components.com/docs/basics#extending-styles) with
+styled-components. However, TODO: figure out how to build more complex shared components.
 
 ## Publishing to NPM
 
