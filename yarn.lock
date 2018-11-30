@@ -1517,6 +1517,50 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@spraoi/babel-preset@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.14.0.tgz#b506971785eadf06003a0323fa4eb4f5e3f850cc"
+  integrity sha512-t1+2www764UaByZyFAxkPH3nLgaz1pxv/LWbUV9UvubqUAcVF/qJ92XQTpFfOok/Gaz5KAWmb099O6UlIzevZw==
+
+"@spraoi/eslint-config@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.14.0.tgz#87bfccdbf26144de2e6248aec7c6ba4375598539"
+  integrity sha512-eYwWo7UgMvD5wR+uHXaKEWTEmCQGgwtp/zscDgPOZQSopwPko4FpzwozCNg32KqEfIU9KmHfzqOcaXeUhuCcAg==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb "^17.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-jest "^22.0.0"
+    eslint-plugin-jsx-a11y "^6.1.2"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-react "^7.11.1"
+
+"@spraoi/helpers@^0.14.0":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@spraoi/helpers/-/helpers-0.14.1.tgz#c0d9cec7d608b19c061e14d6b46395e37d1b0ebd"
+  integrity sha512-TYKeVtrzKpQNMyjyJQkI5DGIh+mC5ZuLJj65zwrk3x+qf1uwvOhAlGSYaspJlKnPQbLFPAuMVE2uCqvxA5P0Ow==
+
+"@spraoi/jest-config@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.14.0.tgz#63a841f1f99078a32f29493b3c172283d298d8e5"
+  integrity sha512-hvbcbR3Os11ymkKG6OidjNioenp4YvQvOi9eh9FQMl9sWCJnzRg/gCuyuv9CIpmxtMADJpDhIRn6sS7fgB9fDg==
+  dependencies:
+    babel-jest "^23.6.0"
+    enzyme "^3.7.0"
+    enzyme-adapter-react-16 "^1.7.0"
+    identity-obj-proxy "^3.0.0"
+
+"@spraoi/stylelint-config@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.14.0.tgz#b75e281e805f9335fa327c04a44ebb5b2afbc153"
+  integrity sha512-+FrOiZp2TTKK/0oPZO2u3dqYkIjYU0BXU31DP3xiO97Ht0n4VmRZQlTyFh1E/qY4X6YfEZ2gCWrTDFOfr2JHWA==
+  dependencies:
+    stylelint-config-prettier "^4.0.0"
+    stylelint-config-recommended "^2.1.0"
+    stylelint-config-styled-components "^0.1.1"
+    stylelint-processor-styled-components "^1.5.1"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"
