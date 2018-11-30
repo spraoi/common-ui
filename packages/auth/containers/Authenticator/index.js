@@ -1,7 +1,7 @@
 import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { objectMapDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
+import { objectMapKeysDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
 import Context from '../../context';
 import { AUTH_STATES } from './constants';
 
@@ -28,7 +28,7 @@ export default class Authenticator extends PureComponent {
 
       this.setState({
         authState: AUTH_STATES.SIGNED_IN,
-        authUser: objectMapDeep(attributes, snakeCaseToCamelCase),
+        authUser: objectMapKeysDeep(attributes, snakeCaseToCamelCase),
       });
     } catch (e) {
       this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
