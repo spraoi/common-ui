@@ -24,8 +24,10 @@ export const objectMapDeep = (obj, callback) => {
 
 /**
  * Convert a snake_case_string to a camelCaseString.
- * @param {string} string
- * @returns {string}
+ * @param {*} string
+ * @returns {*}
  */
-export const snakeCaseToCamelCase = string =>
-  string.replace(/(_\w)/g, match => match[1].toUpperCase());
+export const snakeCaseToCamelCase = string => {
+  if (typeof string !== 'string') return string;
+  return string.replace(/(_\w)/g, match => match[1].toUpperCase());
+};
