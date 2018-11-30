@@ -51,25 +51,6 @@ This symlinks all packages to your local `node_modules` directory—allowing you
 Note that `yarn` will throw an error if you attempt to install or remove anything after doing this. You can remove the
 symlinks with `spraoi unlink` to avoid it.
 
-## Reusable React Components
-
-Creating React components that can be reused across projects presents an interesting problem. Each project, in general,
-requires its own unique styles. In order to support this flexibility, reusable components need to:
-
-1. utilize a project-wide theme
-2. be easily extensible
-
-### Project-Wide Themes
-
-We use [styled-components' theming](https://www.styled-components.com/docs/advanced) capabilities to pass global styles
-through to common components. The theme structure can be found in our
-[base `App` component](https://github.com/spraoi/common-ui/blob/master/packages/base/components/App/types.js).
-
-### Extensibility
-
-It's also very easy to [extend basic components](https://www.styled-components.com/docs/basics#extending-styles) with
-styled-components. However, TODO: figure out how to build more complex shared components.
-
 ## Publishing to NPM
 
 We use [Lerna](https://github.com/lerna/lerna) for managing package versions and publishing to NPM. When you make a
