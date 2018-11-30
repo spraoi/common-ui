@@ -4,11 +4,11 @@ export const StyledGlobal = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  
+
   html {
     height: 100%;
-    background-color: ${p => p.theme.colors.background};
-    color: ${p => p.theme.colors.text};
+    background-color: ${p => p.theme.colors.body};
+    color: ${p => p.theme.colors.textPrimary};
     font-family: ${p => p.theme.fonts.primary};
     font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.xs};
     font-weight: ${p => p.theme.fontWeights.normal};
@@ -32,12 +32,14 @@ export const StyledGlobal = createGlobalStyle`
 
   body {
     position: relative;
+    width: 100%;
     min-height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   a {
-    color: inherit;
-    text-decoration: none;
+    color: ${p => p.theme.colors.textLink};
   }
 
   button,
@@ -78,8 +80,24 @@ export const StyledGlobal = createGlobalStyle`
   h2,
   h3,
   h4 {
-    font-size: inherit;
-    font-weight: inherit;
+    color: ${p => p.theme.colors.textHeading};
+    font-weight: ${p => p.theme.fontWeights.bold};
+  }
+  
+  h1 {
+    font-size: ${p => p.theme.fontSizes.xxl};
+  }
+
+  h2 {
+    font-size: ${p => p.theme.fontSizes.xl};
+  }
+
+  h3 {
+    font-size: ${p => p.theme.fontSizes.md};
+  }
+
+  h4 {
+    font-size: ${p => p.theme.fontSizes.sm};
   }
 
   ul {

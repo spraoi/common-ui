@@ -62,6 +62,6 @@ export default class PageHandler extends PureComponent {
       return renderLoading;
     }
 
-    return typeof children === 'function' ? children() : children;
+    return children;
   }
 }

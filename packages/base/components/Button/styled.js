@@ -8,7 +8,6 @@ export const StyledButton = styled.button`
   width: 100%;
   padding: ${p => p.theme.space.sm} ${p => p.theme.space.md};
   background-color: ${p => p.theme.colors.primary};
-  border: 0;
   border-radius: ${p => p.theme.radii.normal};
   box-shadow: ${p => p.theme.boxShadows.md};
   transition: background-color ${p => p.theme.transitionSpeeds.normal};
@@ -25,7 +24,7 @@ export const StyledButton = styled.button`
 
   @media (min-width: ${p => p.theme.breakpoints.md}) {
     display: inline-block;
-    width: auto;
+    max-width: ${p => p.theme.maxWidths.button};
   }
 
   ${p =>
@@ -48,6 +47,7 @@ export const StyledButton = styled.button`
 
 export const StyledChildren = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   height: ${p => p.theme.lineHeights.md};
 `;

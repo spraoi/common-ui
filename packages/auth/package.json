@@ -12,8 +12,8 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@spraoi/helpers": "*",
     "aws-amplify": "^1",
-    "aws-amplify-react": "^2",
     "prop-types": "^15",
     "react": "^16",
     "react-spinners": "^0"

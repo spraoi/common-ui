@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const pageTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
+  children: PropTypes.node.isRequired,
   isPrivate: PropTypes.bool,
   isPublic: PropTypes.bool,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired })
