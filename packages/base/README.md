@@ -1,6 +1,6 @@
 # @spraoi/base
 
-> React components that will likely be used in most projects.
+> React components that are likely to be used in most projects.
 
 ## Installation
 

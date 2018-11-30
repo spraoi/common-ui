@@ -7,11 +7,12 @@
 
 ## Development Setup
 
-1. install git, node & yarn
+1. install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/download)
+   & [Yarn](https://yarnpkg.com/lang/en/docs/install)
 2. clone the repo: `git clone git@github.com:spraoi/common-ui.git`
 3. cd into it: `cd common-ui`
 4. install dependencies: `yarn`
-5. install helper scripts: `yarn global add @spraoi/scripts`
+5. install our helper scripts: `yarn global add @spraoi/scripts`
 
 ## Working With Packages
 
@@ -29,7 +30,8 @@
 
 1. create a new branch: `git checkout -b package/[package-name]`
 2. run the package wizard: `spraoi new-package`
-3. define any necessary dependencies (you should be familiar with [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
+3. define any necessary dependencies (you should be familiar with
+   [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/))
 4. add functionality & tests
 5. update the package&rsquo;s README.md
 6. create a PR
@@ -61,7 +63,7 @@ requires its own unique styles. In order to support this flexibility, reusable c
 
 We use [styled-components' theming](https://www.styled-components.com/docs/advanced) capabilities to pass global styles
 through to common components. The theme structure can be found in our
-[base `App` component](https://github.com/spraoi/common-ui/blob/master/packages/base/components/App/types.js). 
+[base `App` component](https://github.com/spraoi/common-ui/blob/master/packages/base/components/App/types.js).
 
 ### Extensibility
 

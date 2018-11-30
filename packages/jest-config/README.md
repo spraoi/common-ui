@@ -1,6 +1,7 @@
 # @spraoi/jest-config
 
-> A preconfigured, extensible testing configuration with [Enzyme](https://airbnb.io/enzyme/) and [Jest](https://jestjs.io/en/).
+> A preconfigured, extensible testing configuration with [Enzyme](https://airbnb.io/enzyme/) and
+> [Jest](https://jestjs.io/en/).
 
 ## Installation
 

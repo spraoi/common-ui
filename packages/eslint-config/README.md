@@ -1,6 +1,7 @@
 # @spraoi/eslint-config
 
-> An opinionated, extensible [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce high-quality javascript.
+> An opinionated, extensible [eslint config](https://eslint.org/docs/developer-guide/shareable-configs) to enforce
+> high-quality javascript.
 
 ## Installation
 
