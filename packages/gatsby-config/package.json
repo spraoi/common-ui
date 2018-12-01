@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/gatsby-config",
   "description": "A sensible, extensible concoction of plugins & configuration for Gatsby.",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-config",
   "repository": {
