@@ -5,10 +5,10 @@ import { objectMapKeysDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
 import Context from '../../context';
 import { AUTH_STATES } from './constants';
 
-export default class Authenticator extends PureComponent {
+export default class AuthProvider extends PureComponent {
   static propTypes = {
     amplifyConfig: PropTypes.shape({}).isRequired,
-    page: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
   };
 
   state = {
@@ -62,7 +62,7 @@ export default class Authenticator extends PureComponent {
   };
 
   render() {
-    const { page } = this.props;
+    const { children } = this.props;
     const { authState, authUser } = this.state;
 
     return (
@@ -78,7 +78,7 @@ export default class Authenticator extends PureComponent {
           user: authUser,
         }}
       >
-        {page}
+        {children}
       </Context.Provider>
     );
   }

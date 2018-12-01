@@ -1,5 +1,5 @@
-import Authenticator from './containers/Authenticator';
-import Context from './context';
+import AuthProvider from './containers/AuthProvider';
+import AuthContext from './context';
 import Page from './containers/Page';
 
-export { Authenticator, Context, Page };
+export { AuthProvider, AuthContext, Page };
