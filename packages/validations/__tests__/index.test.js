@@ -1,6 +1,6 @@
 import {
   alpha,
-  compose,
+  composeValidations,
   email,
   json,
   minLength,
@@ -8,29 +8,18 @@ import {
   versionNumber,
 } from '..';
 
-describe('compose function', () => {
+describe('composeValidations function', () => {
   it('should appropriately return first validation error', () =>
-    expect(
-      compose(
-        required,
-        email
-      )('')
-    ).toEqual('Required'));
+    expect(composeValidations(required, email)('')).toEqual('Required'));
 
   it('should appropriately return second validation error', () =>
-    expect(
-      compose(
-        required,
-        email
-      )('invalid@email')
-    ).toEqual('Invalid email'));
+    expect(composeValidations(required, email)('invalid@email')).toEqual(
+      'Invalid email'
+    ));
 
   it('should appropriately return undefined', () =>
     expect(
-      compose(
-        required,
-        email
-      )('valid@email.com')
+      composeValidations(required, email)('valid@email.com')
     ).toBeUndefined());
 });
 
