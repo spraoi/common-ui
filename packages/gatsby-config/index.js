@@ -49,5 +49,9 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-svgr',
+    {
+      options: { component: resolve('src') },
+      resolve: 'gatsby-plugin-layout',
+    },
   ],
 };
