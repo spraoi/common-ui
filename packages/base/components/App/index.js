@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { AuthProvider } from '@spraoi/auth';
 import { ThemeProvider } from 'styled-components';
-import { StyledGlobal } from './styled';
+import StyledGlobal from './StyledGlobal';
 import { amplifyConfigType, themeType } from './types';
 
 const App = ({ amplifyConfig, children, theme }) => (

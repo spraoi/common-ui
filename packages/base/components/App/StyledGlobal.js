@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const StyledGlobal = createGlobalStyle`
+export default createGlobalStyle`
   * {
     box-sizing: border-box;
   }
@@ -80,6 +80,7 @@ export const StyledGlobal = createGlobalStyle`
   h2,
   h3,
   h4 {
+    margin-bottom: ${p => p.theme.space.md};
     color: ${p => p.theme.colors.textHeading};
     font-weight: ${p => p.theme.fontWeights.bold};
   }

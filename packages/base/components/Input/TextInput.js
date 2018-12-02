@@ -11,21 +11,21 @@ const Input = styled.input`
   outline: none;
 `;
 
-const InlineInputs = ({ input, placeholder, type, ...rest }) => (
+const InputText = ({ input, placeholder, type, ...rest }) => (
   <InputWrapper input={input} {...rest}>
     <Input id={input.name} placeholder={placeholder} type={type} {...input} />
   </InputWrapper>
 );
 
-InlineInputs.propTypes = {
+InputText.propTypes = {
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
 };
 
-InlineInputs.defaultProps = {
+InputText.defaultProps = {
   placeholder: '',
   type: 'text',
 };
 
-export default InlineInputs;
+export default InputText;
