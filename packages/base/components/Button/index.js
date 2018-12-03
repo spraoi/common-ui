@@ -5,47 +5,54 @@ import { BarLoader } from 'react-spinners';
 import { Link } from 'gatsby';
 
 const StyledButton = styled.button`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: ${p => p.theme.space.sm} ${p => p.theme.space.md};
-  background-color: ${p => p.theme.colors.primary};
-  border-radius: ${p => p.theme.radii.md};
-  box-shadow: ${p => p.theme.boxShadows.md};
-  transition: background-color ${p => p.theme.transitionSpeeds.normal};
-  color: ${p => p.theme.colors.white};
-  font-size: ${p => p.theme.fontSizes.sm};
-  font-weight: ${p => p.theme.fontWeights.bold};
-  letter-spacing: ${p => p.theme.letterSpacings.sm};
-  text-transform: uppercase;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${p => p.theme.colors.primaryLight};
-  }
-
-  @media (min-width: ${p => p.theme.breakpoints.md}) {
-    display: inline-block;
-    max-width: ${p => p.theme.maxWidths.button};
-  }
+  color: ${p => p.theme.colors.textLink};
+  text-decoration: underline;
 
   ${p =>
-    p.secondary &&
+    !p.simple &&
     css`
-      background-color: ${p => p.theme.colors.secondary};
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: ${p => p.theme.space.sm} ${p => p.theme.space.md};
+      background-color: ${p => p.theme.colors.primary};
+      border-radius: ${p => p.theme.radii.md};
+      box-shadow: ${p => p.theme.boxShadows.md};
+      transition: background-color ${p => p.theme.transitionSpeeds.normal};
+      color: ${p => p.theme.colors.white};
+      font-size: ${p => p.theme.fontSizes.sm};
+      font-weight: ${p => p.theme.fontWeights.bold};
+      letter-spacing: ${p => p.theme.letterSpacings.sm};
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
 
       &:hover {
-        background-color: ${p => p.theme.colors.secondaryLight};
+        background-color: ${p => p.theme.colors.primaryLight};
       }
-    `}
 
-  ${p =>
-    p.disabled &&
-    css`
-      opacity: 0.3;
-      pointer-events: none;
+      @media (min-width: ${p => p.theme.breakpoints.md}) {
+        max-width: ${p => p.theme.maxWidths.button};
+      }
+
+      ${p =>
+        p.secondary &&
+        css`
+          background-color: ${p => p.theme.colors.secondary};
+
+          &:hover {
+            background-color: ${p => p.theme.colors.secondaryLight};
+          }
+        `}
+
+      ${p =>
+        p.disabled &&
+        css`
+          opacity: 0.3;
+          pointer-events: none;
+        `}
     `}
 `;
 
@@ -88,7 +95,6 @@ export default class Button extends PureComponent {
       children,
       disabled,
       renderLoading,
-      simple,
       submitting,
       type,
       ...rest
@@ -96,17 +102,15 @@ export default class Button extends PureComponent {
 
     const buttonProps = { disabled: disabled || submitting, type, ...rest };
 
-    const buttonChildren = simple ? (
-      children
-    ) : (
-      <React.Fragment>
-        {submitting ? (
-          <StyledChildren>{renderLoading}</StyledChildren>
-        ) : (
-          <StyledChildren>{children}</StyledChildren>
-        )}
-      </React.Fragment>
-    );
+    let buttonChildren = children;
+
+    if (!rest.simple) {
+      buttonChildren = submitting ? (
+        <StyledChildren>{renderLoading}</StyledChildren>
+      ) : (
+        <StyledChildren>{children}</StyledChildren>
+      );
+    }
 
     return type === Button.types.button ? (
       <StyledButton type="button" {...buttonProps}>
@@ -123,13 +127,13 @@ export default class Button extends PureComponent {
     const { children, disabled, download, link, ...rest } = this.props;
 
     return download ? (
-      <Button as="a" download href={link} {...rest}>
+      <StyledButton as="a" download href={link} {...rest}>
         {children}
-      </Button>
+      </StyledButton>
     ) : (
-      <Button as={Link} disabled={disabled} to={link} {...rest}>
+      <StyledButton as={Link} disabled={disabled} to={link} {...rest}>
         {children}
-      </Button>
+      </StyledButton>
     );
   }
 

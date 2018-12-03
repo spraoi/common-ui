@@ -31,7 +31,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
     p.borderRadius,
     bp
   )};
-  background: ${themeValue(p.theme.colors, [p.background], p.background, bp)};
+  background: ${themeValue(p.theme.colors, [p.bg], p.bg, bp)};
   box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], p.boxShadow, bp)};
   color: ${themeValue(p.theme.colors, [p.color], p.color, bp)};
   font-family: ${themeValue(p.theme.fonts, [p.fontFamily], p.fontFamily, bp)};
@@ -54,6 +54,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
     p.lineHeight,
     bp
   )};
+  text-align: ${valueAtBp(p.textAlign, bp)};
 `;
 
 const Box = styled.div`
@@ -93,7 +94,7 @@ const styleType = PropTypes.oneOfType([
 
 Box.propTypes = {
   alignItems: styleType,
-  background: styleType,
+  bg: styleType,
   borderRadius: styleType,
   boxShadow: styleType,
   color: styleType,
@@ -118,11 +119,12 @@ Box.propTypes = {
   pt: styleType,
   px: styleType,
   py: styleType,
+  textAlign: styleType,
 };
 
 Box.defaultProps = {
   alignItems: null,
-  background: null,
+  bg: null,
   borderRadius: null,
   boxShadow: null,
   color: null,
@@ -147,6 +149,7 @@ Box.defaultProps = {
   pt: null,
   px: null,
   py: null,
+  textAlign: null,
 };
 
 export default Box;

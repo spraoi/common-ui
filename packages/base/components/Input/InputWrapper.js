@@ -18,7 +18,7 @@ const Subtext = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  margin-top: ${p => p.theme.space.sm};
+  margin-top: ${p => p.theme.space.md};
 
   &:first-of-type {
     margin-top: 0;

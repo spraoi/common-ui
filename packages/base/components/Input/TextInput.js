@@ -5,8 +5,8 @@ import InputWrapper from './InputWrapper';
 
 const Input = styled.input`
   width: 100%;
-  padding: ${p => p.theme.space.xxs} ${p => p.theme.space.xs};
-  border: solid 1px ${p => p.theme.colors.backgroundLighter};
+  padding: ${p => p.theme.space.xs} ${p => p.theme.space.sm};
+  border: solid 1px ${p => p.theme.colors.inputPrimaryBorder};
   border-radius: ${p => p.theme.radii.md};
   outline: none;
 `;
