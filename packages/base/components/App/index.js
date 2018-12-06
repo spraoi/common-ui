@@ -7,7 +7,7 @@ import { AuthProvider } from '@spraoi/auth';
 import { Rehydrated } from 'aws-appsync-react';
 import { ThemeProvider } from 'styled-components';
 import StyledGlobal from './StyledGlobal';
-import { amplifyConfigType, themeType } from './types';
+import { configType, themeType } from './types';
 
 const App = ({ children, config, theme }) => (
   <>
@@ -24,8 +24,8 @@ const App = ({ children, config, theme }) => (
 );
 
 App.propTypes = {
-  amplifyConfig: amplifyConfigType.isRequired,
   children: PropTypes.node.isRequired,
+  config: configType.isRequired,
   theme: themeType.isRequired,
 };
 

@@ -1,6 +1,26 @@
 import PropTypes from 'prop-types';
 
-export const amplifyConfigType = PropTypes.shape({});
+export const configType = PropTypes.shape({
+  amplify: PropTypes.shape({
+    Auth: PropTypes.shape({
+      identityPoolId: PropTypes.string,
+      region: PropTypes.oneOf('us-east-1'),
+      userPoolId: PropTypes.string,
+      userPoolWebClientId: PropTypes.string,
+    }),
+    Storage: PropTypes.shape({
+      bucket: PropTypes.string,
+      region: PropTypes.oneOf('us-east-1'),
+    }),
+  }),
+  apollo: PropTypes.shape({
+    auth: PropTypes.shape({
+      type: PropTypes.oneOf('AWS_IAM'),
+    }),
+    region: PropTypes.oneOf('us-east-1'),
+    url: PropTypes.string,
+  }),
+});
 
 export const themeType = PropTypes.shape({
   baseFontSizeBeforeBreakpoint: PropTypes.shape({
