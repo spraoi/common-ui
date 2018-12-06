@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "aws-appsync": "^1.5.2",
-    "aws-appsync-react": "^1.2.3"
+    "aws-appsync-react": "^1.2.3",
+    "isomorphic-unfetch": "^3.0.0"
   }
 }
