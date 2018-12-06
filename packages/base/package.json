@@ -13,9 +13,12 @@
   },
   "peerDependencies": {
     "@spraoi/auth": "*",
+    "aws-appsync": "^1",
+    "aws-appsync-react": "^1",
     "gatsby": "^2",
     "prop-types": "^15",
     "react": "^16",
+    "react-apollo": "^2",
     "react-helmet": "^5",
     "react-spinners": "^0",
     "styled-components": "^4"
