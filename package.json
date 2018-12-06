@@ -26,8 +26,6 @@
     "@spraoi/stylelint-config": "^0.17.0",
     "apollo-client": "^2.4.7",
     "aws-amplify": "^1.1.12",
-    "aws-appsync": "^1.5.2",
-    "aws-appsync-react": "^1.2.3",
     "babel-core": "^7.0.0-bridge",
     "babel-plugin-styled-components": "^1.9.2",
     "babel-preset-gatsby": "^0.1.6",
