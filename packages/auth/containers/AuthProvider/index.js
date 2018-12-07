@@ -23,14 +23,17 @@ export default class AuthProvider extends PureComponent {
   }
 
   async setAuthenticatedUser() {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
+    const user = await Auth.currentUserInfo();
 
+    if (user) {
       this.setState({
         authState: AUTH_STATES.SIGNED_IN,
-        authUser: objectMapKeysDeep(user.attributes, snakeCaseToCamelCase),
+        authUser: objectMapKeysDeep(
+          { ...user, ...user.attributes },
+          snakeCaseToCamelCase
+        ),
       });
-    } catch (e) {
+    } else {
       this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
     }
   }

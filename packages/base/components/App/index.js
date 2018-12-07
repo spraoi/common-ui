@@ -21,7 +21,7 @@ const App = ({ children, config, credentials, theme }) => (
           })
         }
       >
-        <Rehydrated>
+        <Rehydrated loading={<></>}>
           <Helmet />
           <StyledGlobal theme={theme} />
           {children}

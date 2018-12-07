@@ -12,8 +12,10 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@reach/router": "^1",
     "@spraoi/helpers": "*",
     "aws-amplify": "^1",
+    "gatsby": "^2",
     "prop-types": "^15",
     "react": "^16",
     "react-spinners": "^0"

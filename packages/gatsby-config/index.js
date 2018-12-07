@@ -46,9 +46,12 @@ module.exports = {
   plugins: [
     ...pageResolution,
     '@spraoi/gatsby-plugin',
-    'gatsby-plugin-layout',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-svgr',
+    {
+      options: { component: resolve('src/components/Layout') },
+      resolve: 'gatsby-plugin-layout',
+    },
   ],
 };

@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { BarLoader } from 'react-spinners';
+import { PureComponent } from 'react';
+import { navigate } from 'gatsby';
 import { pageHandlerTypes } from './types';
 
 export default class PageHandler extends PureComponent {
@@ -9,7 +9,7 @@ export default class PageHandler extends PureComponent {
     isPrivate: false,
     isPublic: false,
     redirect: null,
-    renderLoading: <BarLoader />,
+    renderLoading: null,
     waitForAuth: true,
   };
 
@@ -28,7 +28,6 @@ export default class PageHandler extends PureComponent {
       isPrivate,
       isPublic,
       location,
-      navigate,
       redirect,
     } = this.props;
 
