@@ -1,3 +1,4 @@
+import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -38,7 +39,6 @@ export default class FileUploader extends PureComponent {
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
     level: PropTypes.string,
-    onCreateObjectName: PropTypes.func,
     onRemoveComplete: PropTypes.func,
     onUploadComplete: PropTypes.func,
   };
@@ -47,7 +47,6 @@ export default class FileUploader extends PureComponent {
     existingFiles: [],
     identityId: null,
     level: 'public',
-    onCreateObjectName: name => name,
     onRemoveComplete: () => {},
     onUploadComplete: () => {},
   };
@@ -56,6 +55,7 @@ export default class FileUploader extends PureComponent {
     super();
 
     if (typeof registerPlugin === 'function') {
+      registerPlugin(FilePondPluginFileRename);
       registerPlugin(FilePondPluginFileValidateType);
     }
   }
@@ -77,9 +77,9 @@ export default class FileUploader extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { level, onCreateObjectName, onUploadComplete } = this.props;
+    const { level, onUploadComplete } = this.props;
 
-    const fileName = onCreateObjectName(file.name);
+    const fileName = file.name;
     const contentType = file.type;
 
     const progressCallback = ({ lengthComputable, loaded, total }) =>

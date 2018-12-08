@@ -12,8 +12,13 @@
     "access": "public"
   },
   "dependencies": {
+    "aws-amplify": "^1.1.13",
+    "eslint": "^5.10.0",
     "filepond": "^3.3.2",
+    "filepond-plugin-file-rename": "^1.1.0",
     "filepond-plugin-file-validate-type": "^1.2.0",
+    "gatsby": "^2.0.64",
+    "lerna": "^3.6.0",
     "react-filepond": "^5.0.0"
   },
   "peerDependencies": {

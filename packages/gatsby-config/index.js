@@ -13,12 +13,11 @@ if (
   const red = '\x1b[31m';
   const reset = '\x1b[0m';
 
-  console.log(`\n\n💥 ${red}Please specify a valid config!`);
-  console.log(`   Try one of these:${reset}\n`);
+  console.log(`\n\n💥 ${red}Invalid config! Try one of these:${reset}\n`);
 
   fs.readdirSync('configs')
     .filter(
-      file => !file.includes('default.') && /^([a-z]+\.){2}yml/.test(file)
+      file => !file.includes('default.') && /^([a-z-]+\.){2}yml/.test(file)
     )
     .forEach(file =>
       console.log(`   $ config=${file.replace('.yml', '')} yarn ${command}`)

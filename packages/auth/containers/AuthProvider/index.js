@@ -26,22 +26,22 @@ export default class AuthProvider extends PureComponent {
     const user = await Auth.currentUserInfo();
 
     if (user) {
-      this.setState({
-        authState: AUTH_STATES.SIGNED_IN,
-        authUser: objectMapKeysDeep(
-          { ...user, ...user.attributes },
-          snakeCaseToCamelCase
-        ),
-      });
-    } else {
-      this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
+      const authUser = objectMapKeysDeep(
+        { ...user, ...user.attributes },
+        snakeCaseToCamelCase
+      );
+
+      this.setState({ authState: AUTH_STATES.SIGNED_IN, authUser });
+      return authUser;
     }
+
+    this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
   }
 
   completeNewPasswordChallenge = async ({ password, ...rest }) => {
     const { authUser } = this.state;
     await Auth.completeNewPassword(authUser, password, rest);
-    await this.setAuthenticatedUser();
+    return this.setAuthenticatedUser();
   };
 
   signIn = async ({ password, username }) => {
@@ -50,7 +50,7 @@ export default class AuthProvider extends PureComponent {
     if (authUser.challengeName === AUTH_STATES.NEW_PASSWORD_REQUIRED) {
       this.setState({ authState: AUTH_STATES.NEW_PASSWORD_REQUIRED, authUser });
     } else {
-      await this.setAuthenticatedUser();
+      return this.setAuthenticatedUser();
     }
   };
 
@@ -61,7 +61,7 @@ export default class AuthProvider extends PureComponent {
 
   signUp = async values => {
     await Auth.signUp(values);
-    await Auth.signIn(values.username, values.password);
+    return Auth.signIn(values.username, values.password);
   };
 
   render() {
