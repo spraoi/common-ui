@@ -6066,9 +6066,9 @@ filename-regex@^2.0.0:
   integrity sha1-wcS5vuPglyXdsQa3XB4wH+LxiyY=
 
 filepond-plugin-file-rename@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-rename/-/filepond-plugin-file-rename-1.1.0.tgz#7e485e81ccb18818433a2ae75c6fef72a32d1829"
-  integrity sha512-M1HrvOF3/qTIHyPxUNXCGWMk53jOHKtl+iH7yYZvCrDbXCK/QegnsYhbsOcoD9O1xGMxL9s/sNQUIzQs8nVk5Q==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-rename/-/filepond-plugin-file-rename-1.1.1.tgz#c722238397275b1870634095141cfd7ed124b00d"
+  integrity sha512-mbe89ZjS1DM8C9YYirxwMNJ22j/tNsM2W4Kx9IFYYvBmyR0lb4vDHSFXmMz0HCcsWRCqBNKZdTAf98RNEHTVlw==
 
 filepond-plugin-file-validate-type@^1.2.0:
   version "1.2.0"
