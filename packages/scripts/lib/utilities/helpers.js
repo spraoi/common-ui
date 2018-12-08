@@ -1,5 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
+const sh = require('shelljs');
 
 module.exports.ask = question =>
   new Promise(resolve => {
@@ -28,5 +29,10 @@ module.exports.parseTemplate = (template, data) => {
 };
 
 module.exports.read = file => fs.readFileSync(file, { encoding: 'utf8' });
+
+module.exports.tryShell = command => {
+  sh.exec(command);
+  if (sh.error()) process.exit(1);
+};
 
 module.exports.write = (file, data) => fs.writeFileSync(file, data);
