@@ -2,13 +2,29 @@ import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { objectMapKeysDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
-import Context from '../../context';
+import { Provider } from '../../utilities/context';
 import { AUTH_STATES } from './constants';
 
 export default class AuthProvider extends PureComponent {
   static propTypes = {
-    amplifyConfig: PropTypes.shape({}).isRequired,
+    amplifyConfig: PropTypes.shape({
+      Auth: PropTypes.shape({
+        identityPoolId: PropTypes.string.isRequired,
+        userPoolId: PropTypes.string.isRequired,
+        userPoolWebClientId: PropTypes.string.isRequired,
+      }).isRequired,
+      Storage: PropTypes.shape({
+        bucket: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
     children: PropTypes.node.isRequired,
+    homePath: PropTypes.string,
+    loginPath: PropTypes.string,
+  };
+
+  static defaultProps = {
+    homePath: '/',
+    loginPath: '/login',
   };
 
   state = {
@@ -65,15 +81,17 @@ export default class AuthProvider extends PureComponent {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, homePath, loginPath } = this.props;
     const { authState, authUser } = this.state;
 
     return (
-      <Context.Provider
+      <Provider
         value={{
           completeNewPasswordChallenge: this.completeNewPasswordChallenge,
+          homePath,
           isAuthenticated: authState === AUTH_STATES.SIGNED_IN,
           isLoading: authState === AUTH_STATES.LOADING,
+          loginPath,
           newPasswordRequired: authState === AUTH_STATES.NEW_PASSWORD_REQUIRED,
           signIn: this.signIn,
           signOut: this.signOut,
@@ -82,7 +100,7 @@ export default class AuthProvider extends PureComponent {
         }}
       >
         {children}
-      </Context.Provider>
+      </Provider>
     );
   }
 }

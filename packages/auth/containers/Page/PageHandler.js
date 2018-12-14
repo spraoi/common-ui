@@ -23,20 +23,22 @@ export default class PageHandler extends PureComponent {
 
   handleRedirect() {
     const {
+      homePath,
       isAuthenticated,
       isLoading,
       isPrivate,
       isPublic,
       location,
+      loginPath,
       redirect,
     } = this.props;
 
     if (isPublic && !isLoading && isAuthenticated) {
-      return navigate(redirect || '/');
+      return navigate(redirect || homePath);
     }
 
     if (isPrivate && !isLoading && !isAuthenticated) {
-      const defaultRedirect = `/login?redirect=${location.pathname}`;
+      const defaultRedirect = `${loginPath}?redirect=${location.pathname}`;
       return navigate(redirect || defaultRedirect);
     }
   }

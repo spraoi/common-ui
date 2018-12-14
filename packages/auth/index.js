@@ -1,5 +1,5 @@
 import AuthProvider from './containers/AuthProvider';
-import AuthContext from './context';
+import { Consumer as AuthConsumer } from './utilities/context';
 import Page from './containers/Page';
 
-export { AuthProvider, AuthContext, Page };
+export { AuthConsumer, AuthProvider, Page };

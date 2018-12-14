@@ -11,8 +11,10 @@ export const pageTypes = {
 
 export const pageHandlerTypes = {
   ...pageTypes,
+  homePath: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired })
     .isRequired,
+  loginPath: PropTypes.string.isRequired,
 };
