@@ -24,7 +24,7 @@
   "peerDependencies": {
     "aws-amplify": "^1",
     "prop-types": "^15",
-    "react": "^16.7",
+    "react": "^16",
     "react-dom": "^16",
     "styled-components": "^4"
   }

@@ -15,7 +15,7 @@
     "@spraoi/auth": "*",
     "gatsby": "^2",
     "prop-types": "^15",
-    "react": "^16.7",
+    "react": "^16",
     "react-apollo": "^2",
     "react-helmet": "^5",
     "react-spinners": "^0",

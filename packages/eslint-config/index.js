@@ -12,7 +12,6 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     'react/jsx-sort-props': 'error',
     'react/no-array-index-key': 'off',
-    'react/no-deprecated': 'error',
     'react/prefer-stateless-function': 'off',
     'sort-keys': 'error',
   },
