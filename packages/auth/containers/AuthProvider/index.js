@@ -32,7 +32,7 @@ export default class AuthProvider extends PureComponent {
     authUser: {},
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { amplifyConfig } = this.props;
     Amplify.configure(amplifyConfig);
     await this.setAuthenticatedUser();

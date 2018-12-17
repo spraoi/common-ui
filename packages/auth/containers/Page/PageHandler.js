@@ -13,7 +13,7 @@ export default class PageHandler extends PureComponent {
     waitForAuth: true,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleRedirect();
   }
 

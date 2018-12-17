@@ -18,12 +18,12 @@ export default class Redirect extends PureComponent {
     if (when) navigate(to, state);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { state, to, when } = this.props;
     Redirect.handleRedirect(to, state, when);
   }
 
-  componentWillUpdate({ state, to, when }) {
+  componentDidUpdate({ state, to, when }) {
     Redirect.handleRedirect(to, state, when);
   }
 
