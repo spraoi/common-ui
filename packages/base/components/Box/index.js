@@ -6,8 +6,8 @@ const valueAtBp = (value, bp) => {
   return value[bp];
 };
 
-const themeValue = (theme, props, or, bp) => {
-  const value = props.find(p => p) || or;
+const themeValue = (theme, props, bp) => {
+  const value = props.find(p => p);
   return theme[valueAtBp(value, bp)] || valueAtBp(value, bp);
 };
 
@@ -16,66 +16,51 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   display: ${valueAtBp(p.display, bp)};
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
-  max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], p.maxWidth, bp)};
-  margin: ${themeValue(p.theme.space, [p.mt, p.my, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.mr, p.mx, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.mb, p.my, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.ml, p.mx, p.m], 0, bp)};
-  padding: ${themeValue(p.theme.space, [p.pt, p.py, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pr, p.px, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pb, p.py, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pl, p.px, p.p], 0, bp)};
-  border-radius: ${themeValue(
-    p.theme.radii,
-    [p.borderRadius],
-    p.borderRadius,
-    bp
-  )};
+  flex-wrap: ${valueAtBp(p.flexWrap, bp)};
+  grid-template-columns: ${valueAtBp(p.gridTemplateColumns, bp)};
+  grid-gap: ${themeValue(p.theme.space, [p.gridGap], bp)};
+  top: ${themeValue(p.theme.space, [p.top], bp)};
+  right: ${themeValue(p.theme.space, [p.right], bp)};
+  bottom: ${themeValue(p.theme.space, [p.bottom], bp)};
+  left: ${themeValue(p.theme.space, [p.left], bp)};
+  width: ${valueAtBp(p.width, bp)};
+  height: ${valueAtBp(p.height, bp)};
+  max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], bp)};
+  margin-top: ${themeValue(p.theme.space, [p.mt, p.my, p.m], bp)};
+  margin-right: ${themeValue(p.theme.space, [p.mr, p.mx, p.m], bp)};
+  margin-bottom: ${themeValue(p.theme.space, [p.mb, p.my, p.m], bp)};
+  margin-left: ${themeValue(p.theme.space, [p.ml, p.mx, p.m], bp)};
+  padding-top: ${themeValue(p.theme.space, [p.pt, p.py, p.p], bp)};
+  padding-right: ${themeValue(p.theme.space, [p.pr, p.px, p.p], bp)};
+  padding-bottom: ${themeValue(p.theme.space, [p.pb, p.py, p.p], bp)};
+  padding-left: ${themeValue(p.theme.space, [p.pl, p.px, p.p], bp)};
+  border-radius: ${themeValue(p.theme.radii, [p.borderRadius], bp)};
   background: ${themeValue(p.theme.colors, [p.bg], p.bg, bp)};
-  box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], p.boxShadow, bp)};
-  color: ${themeValue(p.theme.colors, [p.color], p.color, bp)};
-  font-family: ${themeValue(p.theme.fonts, [p.fontFamily], p.fontFamily, bp)};
-  font-size: ${themeValue(p.theme.fontSizes, [p.fontSize], p.fontSize, bp)};
-  font-weight: ${themeValue(
-    p.theme.fontWeights,
-    [p.fontWeight],
-    p.fontWeight,
-    bp
-  )};
-  letter-spacing: ${themeValue(
-    p.theme.letterSpacings,
-    [p.letterSpacing],
-    p.letterSpacing,
-    bp
-  )};
-  line-height: ${themeValue(
-    p.theme.lineHeights,
-    [p.lineHeight],
-    p.lineHeight,
-    bp
-  )};
+  box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], bp)};
+  overflow: ${valueAtBp(p.overflow, bp)};
+  color: ${themeValue(p.theme.colors, [p.color], bp)};
+  font-family: ${themeValue(p.theme.fonts, [p.fontFamily], bp)};
+  font-size: ${themeValue(p.theme.fontSizes, [p.fontSize], bp)};
+  font-weight: ${themeValue(p.theme.fontWeights, [p.fontWeight], bp)};
+  letter-spacing: ${themeValue(p.theme.letterSpacings, [p.letterSpacing], bp)};
+  line-height: ${themeValue(p.theme.lineHeights, [p.lineHeight], bp)};
   text-align: ${valueAtBp(p.textAlign, bp)};
 `;
 
 const Box = styled.div`
   ${p => boxStylesAtBreakpoint(p, 'none')};
-
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
     ${p => boxStylesAtBreakpoint(p, 'xs')};
   }
-
   @media (min-width: ${p => p.theme.breakpoints.sm}) {
     ${p => boxStylesAtBreakpoint(p, 'sm')};
   }
-
   @media (min-width: ${p => p.theme.breakpoints.md}) {
     ${p => boxStylesAtBreakpoint(p, 'md')};
   }
-
   @media (min-width: ${p => p.theme.breakpoints.lg}) {
     ${p => boxStylesAtBreakpoint(p, 'lg')};
   }
-
   @media (min-width: ${p => p.theme.breakpoints.xl}) {
     ${p => boxStylesAtBreakpoint(p, 'xl')};
   }
@@ -96,13 +81,19 @@ Box.propTypes = {
   alignItems: styleType,
   bg: styleType,
   borderRadius: styleType,
+  bottom: styleType,
   boxShadow: styleType,
   color: styleType,
   display: styleType,
+  flexWrap: styleType,
   fontFamily: styleType,
   fontSize: styleType,
   fontWeight: styleType,
+  gridGap: styleType,
+  gridTemplateColumns: styleType,
+  height: styleType,
   justifyContent: styleType,
+  left: styleType,
   letterSpacing: styleType,
   lineHeight: styleType,
   maxWidth: styleType,
@@ -112,6 +103,7 @@ Box.propTypes = {
   mt: styleType,
   mx: styleType,
   my: styleType,
+  overflow: styleType,
   pb: styleType,
   pl: styleType,
   position: styleType,
@@ -119,20 +111,29 @@ Box.propTypes = {
   pt: styleType,
   px: styleType,
   py: styleType,
+  right: styleType,
   textAlign: styleType,
+  top: styleType,
+  width: styleType,
 };
 
 Box.defaultProps = {
   alignItems: null,
   bg: null,
   borderRadius: null,
+  bottom: null,
   boxShadow: null,
   color: null,
   display: null,
+  flexWrap: null,
   fontFamily: null,
   fontSize: null,
   fontWeight: null,
+  gridGap: null,
+  gridTemplateColumns: null,
+  height: null,
   justifyContent: null,
+  left: null,
   letterSpacing: null,
   lineHeight: null,
   maxWidth: null,
@@ -142,6 +143,7 @@ Box.defaultProps = {
   mt: null,
   mx: null,
   my: null,
+  overflow: null,
   pb: null,
   pl: null,
   position: null,
@@ -149,7 +151,10 @@ Box.defaultProps = {
   pt: null,
   px: null,
   py: null,
+  right: null,
   textAlign: null,
+  top: null,
+  width: null,
 };
 
 export default Box;
