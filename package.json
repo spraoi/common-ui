@@ -2,22 +2,24 @@
   "private": true,
   "name": "common-ui",
   "scripts": {
-    "clean": "lerna clean && rm -rf node_modules",
+    "clean": "lerna clean && rm -rf node_modules coverage",
     "format": "prettier --write --ignore-path .gitignore \"**/*.{js,json,css,scss,md,yml}\"",
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint --ignore-path .gitignore \"packages/**/*.js\"",
     "lint:styles": "stylelint --ignore-path .gitignore \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
     "report-coverage": "cat coverage/lcov.info | coveralls",
+    "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "jest --coverage"
   },
   "workspaces": [
     "packages/*"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/runtime": "^7.2.0",
+    "@emotion/core": "10.0.5",
     "@reach/router": "^1.2.1",
     "@spraoi/auth": "^0.17.0",
     "@spraoi/babel-preset": "^0.17.0",
@@ -25,25 +27,31 @@
     "@spraoi/helpers": "^0.17.0",
     "@spraoi/jest-config": "^0.17.0",
     "@spraoi/stylelint-config": "^0.17.0",
-    "apollo-client": "^2.4.7",
-    "aws-amplify": "^1.1.17",
+    "@storybook/react": "^4.1.4",
+    "apollo-client": "^2.4.8",
+    "aws-amplify": "^1.1.18",
     "babel-core": "^7.0.0-bridge",
+    "babel-loader": "^8.0.4",
     "babel-plugin-styled-components": "^1.10.0",
     "babel-preset-gatsby": "^0.1.6",
     "coveralls": "^3.0.2",
-    "eslint": "^5.9.0",
-    "gatsby": "^2.0.68",
+    "eslint": "^5.11.1",
+    "gatsby": "^2.0.77",
     "graphql": "^14.0.2",
     "jest": "^23.6.0",
-    "lerna": "^3.5.1",
+    "lerna": "^3.8.0",
     "prettier": "^1.15.3",
     "prop-types": "^15.6.2",
-    "react": "^16.6.3",
+    "react": "^16.7.0",
     "react-apollo": "^2.3.3",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.7.0",
     "react-helmet": "^5.2.0",
-    "react-spinners": "^0.4.7",
+    "react-spinners": "^0.4.8",
     "styled-components": "^4.1.3",
-    "stylelint": "^9.9.0"
+    "stylelint": "^9.9.0",
+    "webpack": "^4.28.2"
+  },
+  "resolutions": {
+    "webpack": "^4.28.0"
   }
 }
