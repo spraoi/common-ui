@@ -1,7 +1,7 @@
-import ExternalSignInLink from './src/components/ExternalSignInLink';
-import PrivateRoute from './src/components/PrivateRoute';
-import PublicRoute from './src/components/PublicRoute';
-import Route from './src/components/Route';
+import ExternalSignInLink from './components/ExternalSignInLink';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import Route from './components/Route';
 import * as actions from './actions';
 import reducer from './reducer';
 import sagas from './sagas';
