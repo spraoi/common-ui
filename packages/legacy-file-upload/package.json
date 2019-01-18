@@ -1,0 +1,26 @@
+{
+  "name": "@spraoi/legacy-file-upload",
+  "description": "Same as @spraoi/file-upload, but compatible with old projects.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-file-upload",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "filepond": "^3.3.2",
+    "filepond-plugin-file-rename": "^1.1.1",
+    "filepond-plugin-file-validate-type": "^1.2.0",
+    "react-filepond": "^5.0.0"
+  },
+  "peerDependencies": {
+    "aws-amplify": "^1",
+    "prop-types": "^15",
+    "react": "^16",
+    "react-dom": "^16"
+  }
+}

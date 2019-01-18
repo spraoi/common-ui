@@ -3,38 +3,10 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { File, FilePond, registerPlugin } from 'react-filepond';
-import { Storage } from 'aws-amplify';
-import { createGlobalStyle } from 'styled-components';
+import Amplify, { Storage } from 'aws-amplify';
 import 'filepond/dist/filepond.min.css';
 
-// https://pqina.nl/filepond/docs/patterns/api/style/
-const StyledGlobal = createGlobalStyle`
-  .filepond--wrapper {
-    .filepond--root {
-      font-family: ${p => p.theme.fonts.primary};
-    }
-
-    .filepond--drop-label {
-      color: ${p => p.theme.colors.inputSecondaryPlaceholderText};
-    }
-
-    .filepond--label-action {
-      text-decoration-color: ${p =>
-        p.theme.colors.inputSecondaryPlaceholderText};
-    }
-
-    .filepond--panel-root {
-      border-radius: ${p => p.theme.radii.lg};
-      background-color: ${p => p.theme.colors.inputSecondaryBg};
-    }
-
-    .filepond--item-panel {
-      border-radius: ${p => p.theme.radii.lg};
-    }
-  }
-`;
-
-export default class FileUpload extends PureComponent {
+export default class LegacyFileUpload extends PureComponent {
   static propTypes = {
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
@@ -51,13 +23,13 @@ export default class FileUpload extends PureComponent {
     onUploadComplete: () => {},
   };
 
-  constructor() {
-    super();
-
+  componentDidMount({ bucket, region }) {
     if (typeof registerPlugin === 'function') {
       registerPlugin(FilePondPluginFileRename);
       registerPlugin(FilePondPluginFileValidateType);
     }
+
+    Amplify.configure({ Storage: { bucket, region } });
   }
 
   serverLoad = (uniqueFileId, load, error, progress, abort) => {
@@ -113,7 +85,6 @@ export default class FileUpload extends PureComponent {
 
     return (
       <>
-        <StyledGlobal />
         <FilePond
           {...this.props}
           onremovefile={this.serverRemove}
