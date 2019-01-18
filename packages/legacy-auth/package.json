@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-auth",
   "description": "Provides authentication actions, reducers, sagas, and some helper components.",
-  "version": "0.17.16",
+  "version": "0.17.17",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-auth",
   "repository": {
