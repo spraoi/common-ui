@@ -1,0 +1,21 @@
+{
+  "name": "@spraoi/legacy-aws",
+  "description": "Adapter for commonly used AWS things.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-aws",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "amazon-cognito-auth-js": "^1.1.1",
+    "amazon-cognito-identity-js": "^3.0.2",
+    "aws-sdk": "2.357.0",
+    "crypto-js": "^3.1.9-1",
+    "js-cookie": "^2.2.0"
+  }
+}

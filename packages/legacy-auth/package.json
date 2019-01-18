@@ -1,0 +1,24 @@
+{
+  "name": "@spraoi/legacy-auth",
+  "description": "Provides authentication actions, reducers, sagas, and some helper components.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-auth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@spraoi/legacy-aws": "0.0.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-ga": "^2.5.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.0"
+  }
+}
