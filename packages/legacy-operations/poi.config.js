@@ -28,9 +28,12 @@ module.exports = {
       '@spraoi/auth',
       '@spraoi/aws',
       '@spraoi/chatbot',
+      '@spraoi/cobrowsing',
+      '@spraoi/legacy-auth',
+      '@spraoi/legacy-aws',
+      '@spraoi/legacy-file-upload',
       '@spraoi/s3-uploader',
       '@spraoi/validations',
-      '@spraoi/cobrowsing',
     ],
   },
 };
