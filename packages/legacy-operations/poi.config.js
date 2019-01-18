@@ -17,6 +17,13 @@ module.exports = {
   configureWebpack(config) {
     config.output.globalObject = 'this';
     config.optimization = { minimizer: [new TerserPlugin()] };
+
+    config.module.rules.push({
+      include: /node_modules/,
+      test: /\.mjs$/,
+      type: 'javascript/auto',
+    });
+
     return config;
   },
   define: { SPRAOI_ENV: JSON.stringify(envVars) },

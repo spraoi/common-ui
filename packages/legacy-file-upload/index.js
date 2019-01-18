@@ -8,6 +8,7 @@ import 'filepond/dist/filepond.min.css';
 
 export default class LegacyFileUpload extends PureComponent {
   static propTypes = {
+    bucket: PropTypes.string.isRequired,
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
     level: PropTypes.string,
@@ -23,13 +24,25 @@ export default class LegacyFileUpload extends PureComponent {
     onUploadComplete: () => {},
   };
 
-  componentDidMount({ bucket, region }) {
+  componentDidMount() {
+    const { bucket } = this.props;
+
     if (typeof registerPlugin === 'function') {
       registerPlugin(FilePondPluginFileRename);
       registerPlugin(FilePondPluginFileValidateType);
     }
 
-    Amplify.configure({ Storage: { bucket, region } });
+    // XXX
+    Amplify.configure({
+      Auth: {
+        identityPoolId: SPRAOI_ENV.COGNITO_CONFIG.identityPoolId,
+        identityPoolRegion: SPRAOI_ENV.COGNITO_CONFIG.region,
+        region: SPRAOI_ENV.COGNITO_CONFIG.region,
+        userPoolId: SPRAOI_ENV.COGNITO_CONFIG.userPoolId,
+        userPoolWebClientId: SPRAOI_ENV.COGNITO_CONFIG.appClientId,
+      },
+      Storage: { bucket, region: SPRAOI_ENV.COGNITO_CONFIG.region },
+    });
   }
 
   serverLoad = (uniqueFileId, load, error, progress, abort) => {
@@ -50,6 +63,7 @@ export default class LegacyFileUpload extends PureComponent {
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
     const { level, onUploadComplete } = this.props;
+    console.log(file)
 
     const fileName = file.name;
     const contentType = file.type;
