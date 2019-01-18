@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import ReactGA from 'react-ga';
-import * as aws from '@spraoi/aws';
+import * as aws from '@spraoi/legacy-aws';
 import * as actions from './actions';
 import * as constants from './constants';
 

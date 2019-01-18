@@ -12,7 +12,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@spraoi/legacy-aws": "0.0.1",
+    "@spraoi/legacy-aws": "^0.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-ga": "^2.5.0",
