@@ -4,7 +4,7 @@ const pkg = require('find-package-json');
 const shell = require('shelljs');
 
 const pkgDeploy = pkg().next().value.deploy;
-const stage = process.env.STAGE = process.argv[2] || 'default';
+const stage = (process.env.STAGE = process.argv[2] || 'default');
 const variation = process.env.VARIATION || 'default';
 
 const config = Object.assign(
@@ -15,9 +15,9 @@ const config = Object.assign(
 );
 
 const tryShell = command => {
-  shell.exec(command)
+  shell.exec(command);
   if (shell.error()) process.exit(1);
-}
+};
 
 // build
 tryShell('ui-build');
@@ -52,4 +52,3 @@ tryShell(`
   aws configure set preview.cloudfront true && aws cloudfront create-invalidation \
     --distribution-id ${config.cloudFrontDistributionId} \
     --paths '/*'`);
-

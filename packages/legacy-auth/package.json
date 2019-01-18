@@ -16,9 +16,21 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-ga": "^2.5.0",
-    "react-redux": "^5.0.6",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.0"
+  },
+  "dependencies": {
+    "apollo-client": "^2.4.9",
+    "aws-amplify": "^1.1.19",
+    "eslint": "^5.12.0",
+    "gatsby": "^2.0.91",
+    "graphql": "^14.1.1",
+    "lerna": "^3.10.5",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-spinners": "^0.5.1",
+    "stylelint": "^9.10.0"
   }
 }

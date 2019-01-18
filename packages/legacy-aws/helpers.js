@@ -10,8 +10,13 @@ export function parseLambdaError(error) {
   const splitString = ' failed with error ';
   const newError = (error.message || error).replace(/\+/g, ' ');
 
-  if ((new RegExp(splitString)).test(newError)) {
-    return JSON.parse(newError.split(splitString)[1].trim().slice(0, -1));
+  if (new RegExp(splitString).test(newError)) {
+    return JSON.parse(
+      newError
+        .split(splitString)[1]
+        .trim()
+        .slice(0, -1)
+    );
   }
 
   return error;

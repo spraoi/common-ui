@@ -119,7 +119,7 @@ requestSigner.newClient = function(config) {
   function buildStringToSign(
     datetime,
     credentialScope,
-    hashedCanonicalRequest,
+    hashedCanonicalRequest
   ) {
     return (
       AWS_SHA_256 +
@@ -142,9 +142,9 @@ requestSigner.newClient = function(config) {
     return hmac(
       hmac(
         hmac(hmac(AWS4 + secretKey, datetime.substr(0, 8)), region),
-        service,
+        service
       ),
-      AWS4_REQUEST,
+      AWS4_REQUEST
     );
   }
 
@@ -156,7 +156,7 @@ requestSigner.newClient = function(config) {
     accessKey,
     credentialScope,
     headers,
-    signature,
+    signature
   ) {
     return (
       AWS_SHA_256 +
@@ -236,31 +236,31 @@ requestSigner.newClient = function(config) {
       path,
       queryParams,
       headers,
-      body,
+      body
     );
     let hashedCanonicalRequest = hashCanonicalRequest(canonicalRequest);
     let credentialScope = buildCredentialScope(
       datetime,
       awsRequestSigner.region,
-      awsRequestSigner.serviceName,
+      awsRequestSigner.serviceName
     );
     let stringToSign = buildStringToSign(
       datetime,
       credentialScope,
-      hashedCanonicalRequest,
+      hashedCanonicalRequest
     );
     let signingKey = calculateSigningKey(
       awsRequestSigner.secretKey,
       datetime,
       awsRequestSigner.region,
-      awsRequestSigner.serviceName,
+      awsRequestSigner.serviceName
     );
     let signature = calculateSignature(signingKey, stringToSign);
     headers[AUTHORIZATION] = buildAuthorizationHeader(
       awsRequestSigner.accessKey,
       credentialScope,
       headers,
-      signature,
+      signature
     );
     if (
       awsRequestSigner.sessionToken !== undefined &&

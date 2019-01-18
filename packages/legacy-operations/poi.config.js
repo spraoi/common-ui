@@ -16,7 +16,7 @@ const envVars = Object.assign(
 module.exports = {
   configureWebpack(config) {
     config.output.globalObject = 'this';
-    config.optimization = { minimizer: [new TerserPlugin()] }
+    config.optimization = { minimizer: [new TerserPlugin()] };
     return config;
   },
   define: { SPRAOI_ENV: JSON.stringify(envVars) },

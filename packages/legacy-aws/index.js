@@ -53,13 +53,15 @@ export async function callApi({
       headers[spraoiConfig.headers.agentId] = attr['custom:agent_id'];
     }
 
-    const signedRequest = requestSigner.newClient({
-      region: awsConfig.apiGateway.region,
-      endpoint: awsConfig.apiGateway.url,
-      accessKey: awsSdkConfig.credentials.accessKeyId,
-      secretKey: awsSdkConfig.credentials.secretAccessKey,
-      sessionToken: awsSdkConfig.credentials.sessionToken,
-    }).signRequest({ method, path, headers, queryParams, body });
+    const signedRequest = requestSigner
+      .newClient({
+        region: awsConfig.apiGateway.region,
+        endpoint: awsConfig.apiGateway.url,
+        accessKey: awsSdkConfig.credentials.accessKeyId,
+        secretKey: awsSdkConfig.credentials.secretAccessKey,
+        sessionToken: awsSdkConfig.credentials.sessionToken,
+      })
+      .signRequest({ method, path, headers, queryParams, body });
 
     headers = signedRequest.headers;
     endpoint = signedRequest.url;
@@ -102,7 +104,9 @@ export function uploadFiles({
       const split = file.name.split('.');
       const extension = split.pop();
       const name = split.join('.');
-      const randomNumber = Math.random().toString(36).substring(2, 12);
+      const randomNumber = Math.random()
+        .toString(36)
+        .substring(2, 12);
       const fileName = `${path}${name}-${randomNumber}.${extension}`;
 
       const upload = s3.upload(
@@ -112,7 +116,8 @@ export function uploadFiles({
           uploadData[i] = data;
           if (err) reject(err);
           else if (!uploadCount) resolve(uploadData);
-        });
+        }
+      );
 
       upload.on('httpUploadProgress', e => {
         uploadProgress[i] = parseInt((e.loaded * 100) / e.total);
@@ -122,29 +127,23 @@ export function uploadFiles({
   });
 }
 
-export function deleteObjects({
-  bucket,
-  path,
-  files = []
-}) {
+export function deleteObjects({ bucket, path, files = [] }) {
   return new Promise((resolve, reject) => {
     let fileNames = [];
     files.map(file => {
-      fileNames.push({Key: path+file});
+      fileNames.push({ Key: path + file });
     });
     const params = {
       Bucket: bucket,
       Delete: {
-        Objects: fileNames
-      }
+        Objects: fileNames,
+      },
     };
-    getS3Bucket(bucket).deleteObjects(
-      params,
-      (err, data) => {
-        if (err) reject(err);
-        else resolve(data);
-      });
-  })
+    getS3Bucket(bucket).deleteObjects(params, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    });
+  });
 }
 
 export function listFiles({ bucket, prefix = '' }) {
@@ -157,8 +156,11 @@ export function listFiles({ bucket, prefix = '' }) {
 }
 
 export function getSignedUrl({ bucket, file, expires = 1800 }) {
-  return getS3Bucket(bucket).getSignedUrl(
-    'getObject', { Bucket: bucket, Key: file, Expires: expires });
+  return getS3Bucket(bucket).getSignedUrl('getObject', {
+    Bucket: bucket,
+    Key: file,
+    Expires: expires,
+  });
 }
 
 /**
@@ -173,8 +175,8 @@ function getFederatedAuthenticationHandler({
   const { appClientId, domainPrefix, region, userPoolId } = awsConfig.cognito;
   const { protocol, hostname, pathname, port } = window.location;
 
-  const redirect = protocol + '//' + hostname +
-    (port ? ':' : '') + port + pathname;
+  const redirect =
+    protocol + '//' + hostname + (port ? ':' : '') + port + pathname;
 
   const auth = new CognitoAuth({
     AppWebDomain: `${domainPrefix}.auth.${region}.amazoncognito.com`,
@@ -201,7 +203,9 @@ function getNewUserPool() {
 function getUserSession(currentUser) {
   return new Promise((resolve, reject) =>
     currentUser.getSession((err, session) =>
-      err ? reject(err) : resolve(session)));
+      err ? reject(err) : resolve(session)
+    )
+  );
 }
 
 function parseUserSession(session) {
@@ -213,7 +217,8 @@ function parseUserSession(session) {
 }
 
 function updateIdentityCredentials(userToken) {
-  const authenticator = `cognito-idp.${awsConfig.cognito.region}.` +
+  const authenticator =
+    `cognito-idp.${awsConfig.cognito.region}.` +
     `amazonaws.com/${awsConfig.cognito.userPoolId}`;
 
   if (
@@ -235,44 +240,49 @@ export function completeSignUp({
   user,
 }) {
   return new Promise((resolve, reject) =>
-    user.completeNewPasswordChallenge(
-      newPassword,
-      newAttributes,
-      {
-        onSuccess: session => {
-          rememberSession(rememberMe);
-          parseUserSession(session);
-          resolve();
-        },
-
-        onFailure: err => reject(parseLambdaError(err)),
+    user.completeNewPasswordChallenge(newPassword, newAttributes, {
+      onSuccess: session => {
+        rememberSession(rememberMe);
+        parseUserSession(session);
+        resolve();
       },
-    ));
+
+      onFailure: err => reject(parseLambdaError(err)),
+    })
+  );
 }
 
 export function getAllUserPool(body) {
   return new Promise((resolve, reject) => {
-    const provider = new CognitoIdentityServiceProvider({ apiVersion: '2016-04-18' });
-    provider.listUserPools(body, (err, data) => err ? reject(err) : resolve(data));
+    const provider = new CognitoIdentityServiceProvider({
+      apiVersion: '2016-04-18',
+    });
+    provider.listUserPools(body, (err, data) =>
+      err ? reject(err) : resolve(data)
+    );
   });
 }
 
 export function getNewUser(username) {
-  return new CognitoUser(
-    { Username: username.toLowerCase(), Pool: getNewUserPool() });
+  return new CognitoUser({
+    Username: username.toLowerCase(),
+    Pool: getNewUserPool(),
+  });
 }
 
 export function getUserAttributes() {
-  return window[spraoiConfig.storageKeys.userAttributes]
-    || JSON.parse(
-      localStorage.getItem(spraoiConfig.storageKeys.userAttributes)) || {};
+  return (
+    window[spraoiConfig.storageKeys.userAttributes] ||
+    JSON.parse(localStorage.getItem(spraoiConfig.storageKeys.userAttributes)) ||
+    {}
+  );
 }
 
 export function getSecretKeyValues(secretName) {
   return new Promise((resolve, reject) => {
     const client = new SecretsManager();
 
-    client.getSecretValue({SecretId: secretName}, (err, data) => {
+    client.getSecretValue({ SecretId: secretName }, (err, data) => {
       if (err) return reject(err);
       resolve(JSON.parse(data.SecretString));
     });
@@ -295,14 +305,16 @@ export async function isAuthenticated() {
 }
 
 export function isRemembered() {
-  return Cookie.get(spraoiConfig.storageKeys.rememberMe) === 'true'
-    || Cookie.get(spraoiConfig.storageKeys.sessionExists) === 'true';
+  return (
+    Cookie.get(spraoiConfig.storageKeys.rememberMe) === 'true' ||
+    Cookie.get(spraoiConfig.storageKeys.sessionExists) === 'true'
+  );
 }
 
 export function rememberSession(rememberMe) {
-  Cookie.set(
-    spraoiConfig.storageKeys.rememberMe, rememberMe,
-    { expires: spraoiConfig.rememberMeDays });
+  Cookie.set(spraoiConfig.storageKeys.rememberMe, rememberMe, {
+    expires: spraoiConfig.rememberMeDays,
+  });
   Cookie.set(spraoiConfig.storageKeys.sessionExists, true);
 }
 
@@ -311,7 +323,8 @@ export function resetPassword({ user, verificationCode, newPassword }) {
     user.confirmPassword(verificationCode, newPassword, {
       onSuccess: data => resolve(data),
       onFailure: err => reject(parseLambdaError(err)),
-    }));
+    })
+  );
 }
 
 export function sendResetPasswordCode(email) {
@@ -321,15 +334,18 @@ export function sendResetPasswordCode(email) {
     user.forgotPassword({
       onSuccess: () => resolve(user),
       onFailure: err => reject(err),
-    }));
+    })
+  );
 }
 
 export function setUserAttributes(attributes) {
-  if (attributes.sub) attributes.user_id = spraoiConfig.userIdPrefix +
-    attributes.sub;
+  if (attributes.sub)
+    attributes.user_id = spraoiConfig.userIdPrefix + attributes.sub;
   window[spraoiConfig.storageKeys.userAttributes] = attributes;
   localStorage.setItem(
-    spraoiConfig.storageKeys.userAttributes, JSON.stringify(attributes));
+    spraoiConfig.storageKeys.userAttributes,
+    JSON.stringify(attributes)
+  );
 }
 
 export function signIn({ email, password, rememberMe = false, user }) {
@@ -347,8 +363,10 @@ export function signIn({ email, password, rememberMe = false, user }) {
     callbacks.newPasswordRequired = () =>
       resolve({ callbacks, user, rememberMe });
 
-    const authenticationDetails = new AuthenticationDetails(
-      { Username: email.toLowerCase(), Password: password });
+    const authenticationDetails = new AuthenticationDetails({
+      Username: email.toLowerCase(),
+      Password: password,
+    });
 
     user.authenticateUser(authenticationDetails, callbacks);
   });
@@ -402,17 +420,17 @@ export function signUp({ email, password, attributes = {} }) {
       password,
       userAttributes,
       null,
-      (err, res) => err ? reject(parseLambdaError(err)) : resolve(res.user),
-    ));
+      (err, res) => (err ? reject(parseLambdaError(err)) : resolve(res.user))
+    )
+  );
 }
 
 export function verifyEmail({ user, verificationCode }) {
   return new Promise((resolve, reject) =>
-    user.confirmRegistration(
-      verificationCode,
-      true,
-      (err, result) => err ? reject(err) : resolve(result),
-    ));
+    user.confirmRegistration(verificationCode, true, (err, result) =>
+      err ? reject(err) : resolve(result)
+    )
+  );
 }
 
 /**
@@ -422,13 +440,15 @@ export function verifyEmail({ user, verificationCode }) {
 export function getBotDetails(body) {
   return new Promise((resolve, reject) => {
     const modelBuilder = new LexModelBuildingService();
-    modelBuilder.getBot(body, (err, data) => err ? reject(err) : resolve(data));
+    modelBuilder.getBot(body, (err, data) =>
+      err ? reject(err) : resolve(data)
+    );
   });
 }
 
 export function postTestMessage(body) {
   return new Promise((resolve, reject) => {
     const lex = new LexRuntime({ apiVersion: '2016-11-28' });
-    lex.postText(body, (err, data) => err ? reject(err) : resolve(data));
+    lex.postText(body, (err, data) => (err ? reject(err) : resolve(data)));
   });
 }
