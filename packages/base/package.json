@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/base",
   "description": "React components that will likely be used in most projects.",
-  "version": "0.17.14",
+  "version": "0.17.15",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/base",
   "repository": {
