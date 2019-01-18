@@ -24,13 +24,17 @@ export default class LegacyFileUpload extends PureComponent {
     onUploadComplete: () => {},
   };
 
-  componentDidMount() {
-    const { bucket } = this.props;
+  constructor() {
+    super();
 
     if (typeof registerPlugin === 'function') {
       registerPlugin(FilePondPluginFileRename);
       registerPlugin(FilePondPluginFileValidateType);
     }
+  }
+
+  componentDidMount() {
+    const { bucket } = this.props;
 
     // XXX
     Amplify.configure({
@@ -63,7 +67,6 @@ export default class LegacyFileUpload extends PureComponent {
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
     const { level, onUploadComplete } = this.props;
-    console.log(file)
 
     const fileName = file.name;
     const contentType = file.type;
@@ -98,21 +101,19 @@ export default class LegacyFileUpload extends PureComponent {
     const { existingFiles } = this.props;
 
     return (
-      <>
-        <FilePond
-          {...this.props}
-          onremovefile={this.serverRemove}
-          server={{
-            load: this.serverLoad,
-            process: this.serverProcess,
-            revert: this.serverRevert,
-          }}
-        >
-          {existingFiles.map(f => (
-            <File key={f} origin="local" src={f} />
-          ))}
-        </FilePond>
-      </>
+      <FilePond
+        {...this.props}
+        onremovefile={this.serverRemove}
+        server={{
+          load: this.serverLoad,
+          process: this.serverProcess,
+          revert: this.serverRevert,
+        }}
+      >
+        {existingFiles.map(f => (
+          <File key={f} origin="local" src={f} />
+        ))}
+      </FilePond>
     );
   }
 }
