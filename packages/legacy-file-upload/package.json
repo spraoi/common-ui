@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "filepond": "^3.3.2",
+    "filepond": "3.5.1",
     "filepond-plugin-file-rename": "^1.1.1",
     "filepond-plugin-file-validate-type": "^1.2.0",
     "react-filepond": "^5.0.0"
