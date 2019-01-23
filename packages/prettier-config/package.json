@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/prettier-config",
   "description": "An opinionated prettier config to enforce consistently formatted code.",
-  "version": "0.17.16",
+  "version": "0.18.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/prettier-config",
   "repository": {
