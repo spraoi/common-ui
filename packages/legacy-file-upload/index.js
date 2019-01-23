@@ -5,10 +5,21 @@ import React, { PureComponent } from 'react';
 import { File, FilePond, registerPlugin } from 'react-filepond';
 import Amplify, { Storage } from 'aws-amplify';
 import 'filepond/dist/filepond.min.css';
+import './index.scss';
+
+if (typeof registerPlugin === 'function') {
+  registerPlugin(FilePondPluginFileRename);
+  registerPlugin(FilePondPluginFileValidateType);
+}
 
 export default class LegacyFileUpload extends PureComponent {
   static propTypes = {
     bucket: PropTypes.string.isRequired,
+    customPrefix: PropTypes.shape({
+      private: PropTypes.string,
+      protected: PropTypes.string,
+      public: PropTypes.string,
+    }),
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
     level: PropTypes.string,
@@ -17,6 +28,11 @@ export default class LegacyFileUpload extends PureComponent {
   };
 
   static defaultProps = {
+    customPrefix: {
+      private: 'private/',
+      protected: 'protected/',
+      public: 'test/',
+    },
     existingFiles: [],
     identityId: null,
     level: 'public',
@@ -24,17 +40,8 @@ export default class LegacyFileUpload extends PureComponent {
     onUploadComplete: () => {},
   };
 
-  constructor() {
-    super();
-
-    if (typeof registerPlugin === 'function') {
-      registerPlugin(FilePondPluginFileRename);
-      registerPlugin(FilePondPluginFileValidateType);
-    }
-  }
-
   componentDidMount() {
-    const { bucket } = this.props;
+    const { bucket, customPrefix } = this.props;
 
     // XXX
     Amplify.configure({
@@ -45,7 +52,11 @@ export default class LegacyFileUpload extends PureComponent {
         userPoolId: SPRAOI_ENV.COGNITO_CONFIG.userPoolId,
         userPoolWebClientId: SPRAOI_ENV.COGNITO_CONFIG.appClientId,
       },
-      Storage: { bucket, region: SPRAOI_ENV.COGNITO_CONFIG.region },
+      Storage: {
+        bucket,
+        customPrefix,
+        region: SPRAOI_ENV.COGNITO_CONFIG.region,
+      },
     });
   }
 
@@ -77,7 +88,7 @@ export default class LegacyFileUpload extends PureComponent {
     Storage.put(fileName, file, { contentType, level, progressCallback })
       .then(() => {
         load(fileName);
-        onUploadComplete();
+        onUploadComplete(fileName);
       })
       .catch(error);
 
@@ -94,7 +105,7 @@ export default class LegacyFileUpload extends PureComponent {
 
   serverRemove = ({ file: { name } }) => {
     const { level, onRemoveComplete } = this.props;
-    Storage.remove(name, { level }).then(onRemoveComplete);
+    Storage.remove(name, { level }).then(() => onRemoveComplete(name));
   };
 
   render() {
