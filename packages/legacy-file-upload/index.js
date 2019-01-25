@@ -25,6 +25,7 @@ export default class LegacyFileUpload extends PureComponent {
     level: PropTypes.string,
     onRemoveComplete: PropTypes.func,
     onUploadComplete: PropTypes.func,
+    onUploadFail: PropTypes.func,
   };
 
   static defaultProps = {
@@ -38,6 +39,7 @@ export default class LegacyFileUpload extends PureComponent {
     level: 'public',
     onRemoveComplete: () => {},
     onUploadComplete: () => {},
+    onUploadFail: () => {},
   };
 
   componentDidMount() {
@@ -77,7 +79,7 @@ export default class LegacyFileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { level, onUploadComplete } = this.props;
+    const { level, onUploadComplete, onUploadFail } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
@@ -86,10 +88,16 @@ export default class LegacyFileUpload extends PureComponent {
       progress(lengthComputable, loaded, total);
 
     Storage.put(fileName, file, { contentType, level, progressCallback })
-      .then(() => {
-        load(fileName);
-        onUploadComplete(fileName);
-      })
+      .then(
+        () => {
+          load(fileName);
+          onUploadComplete(fileName);
+        },
+        () => {
+          onUploadFail(fileName);
+          error();
+        }
+      )
       .catch(error);
 
     return { abort };
