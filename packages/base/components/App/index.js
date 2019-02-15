@@ -10,32 +10,47 @@ import { ThemeProvider } from 'styled-components';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
 
-const App = ({ children, config, credentials, theme }) => (
-  <ThemeProvider theme={theme}>
-    <AuthProvider amplifyConfig={config.amplify}>
-      <ApolloProvider
-        client={
-          new AWSAppSyncClient({
-            ...config.apollo,
-            auth: { ...config.apollo.auth, credentials },
-          })
-        }
-      >
-        <Rehydrated loading={<></>}>
-          <Helmet />
-          <StyledGlobal theme={theme} />
-          {children}
-        </Rehydrated>
-      </ApolloProvider>
-    </AuthProvider>
-  </ThemeProvider>
-);
+const App = ({ children, config, credentials, theme }) => {
+  const contents = (
+    <>
+      <Helmet />
+      <StyledGlobal theme={theme} />
+      {children}
+    </>
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      {credentials ? (
+        <AuthProvider amplifyConfig={config.amplify}>
+          <ApolloProvider
+            client={
+              new AWSAppSyncClient({
+                ...config.apollo,
+                auth: { ...config.apollo.auth, credentials },
+              })
+            }
+          >
+            <Rehydrated loading={<></>} />
+            {contents}
+          </ApolloProvider>
+        </AuthProvider>
+      ) : (
+        contents
+      )}
+    </ThemeProvider>
+  );
+};
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
   config: configType.isRequired,
-  credentials: PropTypes.func.isRequired,
+  credentials: PropTypes.func,
   theme: themeType.isRequired,
+};
+
+App.defaultProps = {
+  credentials: null,
 };
 
 export default App;
