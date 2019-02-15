@@ -23,6 +23,6 @@
     "@babel/runtime": "^7",
     "@spraoi/babel-preset": "*",
     "babel-core": "^7.0.0-bridge",
-    "jest": "^23"
+    "jest": "^24"
   }
 }
