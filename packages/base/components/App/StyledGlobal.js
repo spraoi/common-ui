@@ -84,6 +84,7 @@ export default createGlobalStyle`
   h4 {
     margin-bottom: ${p => p.theme.space.md};
     color: ${p => p.theme.colors.textHeading};
+    font-family: ${p => p.theme.fonts.secondary};
     font-weight: ${p => p.theme.fontWeights.bold};
   }
   
