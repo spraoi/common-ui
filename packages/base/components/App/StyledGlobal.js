@@ -65,13 +65,15 @@ export default createGlobalStyle`
     }
   }
 
+  figure,
   h1,
   h2,
   h3,
   h4,
+  li,
   p,
-  ul,
-  li {
+  pre,
+  ul {
     margin: 0;
     padding: 0;
   }
@@ -103,9 +105,5 @@ export default createGlobalStyle`
 
   ul {
     list-style: none;
-  }
-
-  pre {
-    margin: 0;
   }
 `;
