@@ -12,7 +12,6 @@ export default createGlobalStyle`
     font-family: ${p => p.theme.fonts.primary};
     font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.xs};
     font-weight: ${p => p.theme.fontWeights.normal};
-    overflow-x: hidden;
 
     @media (min-width: ${p => p.theme.breakpoints.xs}) {
       font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.sm};
@@ -37,7 +36,6 @@ export default createGlobalStyle`
     min-height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
   }
 
   a {
