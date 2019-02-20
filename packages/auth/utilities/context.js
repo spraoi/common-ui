@@ -1,4 +1,5 @@
 import { createContext } from 'react';
 
-const { Consumer, Provider } = createContext({});
+const Consumer = createContext({});
+const { Provider } = Consumer;
 export { Consumer, Provider };
