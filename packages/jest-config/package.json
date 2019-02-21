@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/jest-config",
   "description": "A preconfigured, extensible testing configuration with Enzyme and Jest.",
-  "version": "0.18.2",
+  "version": "0.18.14",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/jest-config",
   "repository": {
