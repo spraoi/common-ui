@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Error = styled.span`
   display: block;
@@ -23,6 +23,13 @@ const Wrapper = styled.div`
   &:first-of-type {
     margin-top: 0;
   }
+
+  ${p =>
+    p.disabled &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+    `}
 `;
 
 const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
@@ -31,7 +38,7 @@ const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
   else if (subtext) below = <Subtext>{subtext}</Subtext>;
 
   return (
-    <Wrapper>
+    <Wrapper disabled={rest.disabled}>
       {label && <Label htmlFor={input.name}>{label}</Label>}
       {children(rest)}
       {below}
@@ -41,6 +48,7 @@ const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
 
 InputWrapper.propTypes = {
   children: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   label: PropTypes.string,
   meta: PropTypes.shape({
@@ -51,6 +59,7 @@ InputWrapper.propTypes = {
 };
 
 InputWrapper.defaultProps = {
+  disabled: false,
   label: null,
   subtext: null,
 };
