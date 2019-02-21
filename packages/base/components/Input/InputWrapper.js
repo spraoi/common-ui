@@ -4,15 +4,19 @@ import styled, { css } from 'styled-components';
 
 const Error = styled.span`
   display: block;
+  margin-top: ${p => p.theme.space.xxxs};
   color: ${p => p.theme.colors.error};
   font-size: ${p => p.theme.fontSizes.sm};
 `;
 
 const Label = styled.label`
   display: block;
+  margin-bottom: ${p => p.theme.space.xxxs};
+  color: ${p => p.theme.colors.textSubtle};
 `;
 
 const Subtext = styled.div`
+  margin-top: ${p => p.theme.space.xxxs};
   font-size: ${p => p.theme.fontSizes.sm};
 `;
 
@@ -33,14 +37,15 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
+  const error = meta.error && meta.touched;
   let below = null;
-  if (meta.error && meta.touched) below = <Error>{meta.error}</Error>;
+  if (error) below = <Error>{meta.error}</Error>;
   else if (subtext) below = <Subtext>{subtext}</Subtext>;
 
   return (
     <Wrapper disabled={rest.disabled}>
       {label && <Label htmlFor={input.name}>{label}</Label>}
-      {children(rest)}
+      {children({ error, ...rest })}
       {below}
     </Wrapper>
   );

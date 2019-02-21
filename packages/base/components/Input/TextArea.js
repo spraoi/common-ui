@@ -1,16 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
 const StyledTextArea = styled.textarea`
   display: block;
   width: 100%;
-  padding: ${p => p.theme.space.xs} ${p => p.theme.space.sm};
+  padding: ${p => p.theme.space.xs} ${p => p.theme.space.xs};
   border: solid 1px ${p => p.theme.colors.inputPrimaryBorder};
   border-radius: ${p => p.theme.radii.md};
   outline: none;
+  font-family: ${p => p.theme.fonts.primary};
   font-size: ${p => p.theme.fontSizes.md};
+
+  &:focus {
+    border-color: ${p => p.theme.colors.inputPrimaryBorderFocus};
+  }
+
+  ${p =>
+    p.error &&
+    css`
+      border-color: ${p => p.theme.colors.inputPrimaryBorderError};
+    `}
 `;
 
 const TextArea = ({ input, ...rest }) => (
