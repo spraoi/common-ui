@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import InputWrapper from './InputWrapper';
 
-const Input = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   padding: ${p => p.theme.space.xs} ${p => p.theme.space.sm};
   border: solid 1px ${p => p.theme.colors.inputPrimaryBorder};
@@ -13,7 +13,12 @@ const Input = styled.input`
 
 const Input = ({ input, placeholder, type, ...rest }) => (
   <InputWrapper input={input} {...rest}>
-    <Input id={input.name} placeholder={placeholder} type={type} {...input} />
+    <StyledInput
+      id={input.name}
+      placeholder={placeholder}
+      type={type}
+      {...input}
+    />
   </InputWrapper>
 );
 
