@@ -1,6 +1,7 @@
 # @spraoi/validations
 
-> Field-level input validation functions for [final-form](https://github.com/final-form/final-form).
+> Field-level input validation functions for
+> [final-form](https://github.com/final-form/final-form).
 
 ## Installation
 
@@ -10,4 +11,5 @@ yarn install @spraoi/validations
 
 ## Usage
 
-Here's [a sandbox](https://codesandbox.io/s/2k054qp40) that demonstrates how field level validations can be used.
+Here's [a sandbox](https://codesandbox.io/s/2k054qp40) that demonstrates how
+field level validations can be used.

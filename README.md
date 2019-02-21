@@ -3,12 +3,14 @@
 [![build status](https://travis-ci.org/spraoi/common-ui.svg?branch=master)](https://travis-ci.org/spraoi/common-ui/)
 [![coverage status](https://coveralls.io/repos/github/spraoi/common-ui/badge.svg?branch=master)](https://coveralls.io/github/spraoi/common-ui/)
 
-> Common code & configuration for [@spraoi](https://github.com/spraoi/) UI projects.
+> Common code & configuration for [@spraoi](https://github.com/spraoi/) UI
+> projects.
 
 ## Development Setup
 
-1. install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/download)
-   & [Yarn](https://yarnpkg.com/lang/en/docs/install)
+1. install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git),
+   [Node](https://nodejs.org/en/download) &
+   [Yarn](https://yarnpkg.com/lang/en/docs/install)
 2. clone the repo: `git clone git@github.com:spraoi/common-ui.git`
 3. cd into it: `cd common-ui`
 4. install dependencies: `yarn`
@@ -21,7 +23,8 @@
 
 ### General Guidelines
 
-- every package should contain a `README.md` file with installation and usage instructions
+- every package should contain a `README.md` file with installation and usage
+  instructions
 - define package dependencies as `peerDependencies` when applicable
 - packages that contain business logic should have at least 1 test
 - code coverage should be as close to 100% as possible
@@ -38,8 +41,9 @@
 
 ### Testing In Real Projects
 
-It can be hard to fully test a shared component without using it in a real project. To avoid having to push to NPM just
-to try something out, you can use the `spraoi link` command.
+It can be hard to fully test a shared component without using it in a real
+project. To avoid having to push to NPM just to try something out, you can use
+the `spraoi link` command.
 
 In the UI project root, run (replacing the packages path appropriately):
 
@@ -47,12 +51,15 @@ In the UI project root, run (replacing the packages path appropriately):
 spraoi link --packages ../path/to/common-ui/packages
 ```
 
-This symlinks all packages to your local `node_modules` directory—allowing you to import as usual and test with ease.
-Note that `yarn` will throw an error if you attempt to install or remove anything after doing this. You can remove the
+This symlinks all packages to your local `node_modules` directory—allowing you
+to import as usual and test with ease. Note that `yarn` will throw an error if
+you attempt to install or remove anything after doing this. You can remove the
 symlinks with `spraoi unlink` to avoid it.
 
 ## Publishing to NPM
 
-We use [Lerna](https://github.com/lerna/lerna) for managing package versions and publishing to NPM. When you make a
-change or add a package, you can create a new release with `yarn release`. You&rsquo;ll need to get write access to the
-[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don&rsquo;t already have it.
+We use [Lerna](https://github.com/lerna/lerna) for managing package versions and
+publishing to NPM. When you make a change or add a package, you can create a new
+release with `yarn release`. You&rsquo;ll need to get write access to the
+[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don&rsquo;t already
+have it.

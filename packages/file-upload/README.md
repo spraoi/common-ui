@@ -1,6 +1,7 @@
 # @spraoi/file-upload
 
-> A [react-filepond](https://github.com/pqina/react-filepond) wrapper for simple S3 uploads.
+> A [react-filepond](https://github.com/pqina/react-filepond) wrapper for simple
+> S3 uploads.
 
 ## Installation
 

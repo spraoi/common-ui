@@ -1,6 +1,7 @@
 # @spraoi/prettier-config
 
-> A [prettier config](https://prettier.io/docs/en/configuration.html) to enforce consistently formatted code.
+> A [prettier config](https://prettier.io/docs/en/configuration.html) to enforce
+> consistently formatted code.
 
 ## Installation
 

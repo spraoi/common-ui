@@ -1,6 +1,8 @@
 # @spraoi/legacy-file-upload
 
-> Same as [@spraoi/file-upload](https://github.com/spraoi/common-ui/tree/master/packages/file-upload), but compatible with old projects.
+> Same as
+> [@spraoi/file-upload](https://github.com/spraoi/common-ui/tree/master/packages/file-upload),
+> but compatible with old projects.
 
 ## Installation
 

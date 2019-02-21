@@ -1,6 +1,7 @@
 # @spraoi/babel-preset
 
-> A preconfigured, extensible [babel preset](https://babeljs.io/docs/en/presets).
+> A preconfigured, extensible
+> [babel preset](https://babeljs.io/docs/en/presets).
 
 ## Installation
 

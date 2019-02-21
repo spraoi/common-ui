@@ -1,6 +1,7 @@
 # @spraoi/legacy-aws
 
-> [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) for commonly used AWS things.
+> [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) for commonly used AWS
+> things.
 
 ## Installation
 

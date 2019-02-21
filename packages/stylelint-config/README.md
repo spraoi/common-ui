@@ -1,7 +1,8 @@
 # @spraoi/stylelint-config
 
-> An opinionated, extensible [stylelint config](https://stylelint.io/user-guide/configuration/) to enforce high-quality
-> stylesheets.
+> An opinionated, extensible
+> [stylelint config](https://stylelint.io/user-guide/configuration/) to enforce
+> high-quality stylesheets.
 
 ## Installation
 

@@ -1,6 +1,7 @@
 # @spraoi/gatsby-config
 
-> A sensible, extensible concoction of plugins & configuration for [Gatsby](https://www.gatsbyjs.org/docs/).
+> A sensible, extensible concoction of plugins & configuration for
+> [Gatsby](https://www.gatsbyjs.org/docs/).
 
 ## Installation
 
