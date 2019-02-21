@@ -22,6 +22,6 @@
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
-    "styled-components": "^4"
+    "styled-components": "^4.1.4-alpha.5"
   }
 }

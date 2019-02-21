@@ -17,9 +17,8 @@
     "prop-types": "^15",
     "react": "^16",
     "react-apollo": "^2",
-    "react-helmet": "^5",
     "react-spinners": "^0",
-    "styled-components": "^4"
+    "styled-components": "^4.1.4-alpha.5"
   },
   "dependencies": {
     "aws-appsync": "^1.5.2",

@@ -1,6 +1,5 @@
 import 'isomorphic-unfetch';
 import AWSAppSyncClient from 'aws-appsync';
-import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -13,7 +12,6 @@ import { configType, themeType } from './types';
 const App = ({ children, config, credentials, theme }) => {
   const contents = (
     <>
-      <Helmet />
       <StyledGlobal theme={theme} />
       {children}
     </>
@@ -31,8 +29,7 @@ const App = ({ children, config, credentials, theme }) => {
               })
             }
           >
-            <Rehydrated loading={<></>} />
-            {contents}
+            <Rehydrated loading={<></>}>{contents}</Rehydrated>
           </ApolloProvider>
         </AuthProvider>
       ) : (

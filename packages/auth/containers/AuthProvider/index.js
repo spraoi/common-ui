@@ -2,7 +2,7 @@ import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { objectMapKeysDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
-import { Provider } from '../../utilities/context';
+import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './constants';
 
 export default class AuthProvider extends PureComponent {
@@ -85,7 +85,7 @@ export default class AuthProvider extends PureComponent {
     const { authState, authUser } = this.state;
 
     return (
-      <Provider
+      <AuthContext.Provider
         value={{
           completeNewPasswordChallenge: this.completeNewPasswordChallenge,
           homePath,
@@ -100,7 +100,7 @@ export default class AuthProvider extends PureComponent {
         }}
       >
         {children}
-      </Provider>
+      </AuthContext.Provider>
     );
   }
 }

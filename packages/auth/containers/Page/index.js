@@ -1,15 +1,15 @@
 import React from 'react';
 import { Location } from '@reach/router';
 import PageHandler from './PageHandler';
-import { AuthConsumer } from '../..';
+import { AuthContext } from '../..';
 import { pageTypes } from './types';
 
 const Page = props => (
   <Location>
     {location => (
-      <AuthConsumer>
+      <AuthContext.Consumer>
         {context => <PageHandler {...location} {...context} {...props} />}
-      </AuthConsumer>
+      </AuthContext.Consumer>
     )}
   </Location>
 );
