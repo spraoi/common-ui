@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-yarn add --dev \
+yarn add \
   @babel/core \
   @spraoi/babel-preset \
   babel-plugin-styled-components \
