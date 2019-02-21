@@ -11,26 +11,14 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
-const Input = ({ input, placeholder, type, ...rest }) => (
+const Input = ({ input, ...rest }) => (
   <InputWrapper input={input} {...rest}>
-    <StyledInput
-      id={input.name}
-      placeholder={placeholder}
-      type={type}
-      {...input}
-    />
+    {props => <StyledInput id={input.name} {...props} {...input} />}
   </InputWrapper>
 );
 
 Input.propTypes = {
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-};
-
-Input.defaultProps = {
-  placeholder: '',
-  type: 'text',
 };
 
 export default Input;

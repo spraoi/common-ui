@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const InputWrapper = ({ children, input, label, meta, subtext }) => {
+const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
   let below = null;
   if (meta.error && meta.touched) below = <Error>{meta.error}</Error>;
   else if (subtext) below = <Subtext>{subtext}</Subtext>;
@@ -33,14 +33,14 @@ const InputWrapper = ({ children, input, label, meta, subtext }) => {
   return (
     <Wrapper>
       {label && <Label htmlFor={input.name}>{label}</Label>}
-      {children}
+      {children(rest)}
       {below}
     </Wrapper>
   );
 };
 
 InputWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   label: PropTypes.string,
   meta: PropTypes.shape({
