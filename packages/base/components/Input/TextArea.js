@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import InputWrapper from './InputWrapper';
 
-const Input = styled.input`
+const Input = styled.textarea`
   width: 100%;
   padding: ${p => p.theme.space.xs} ${p => p.theme.space.sm};
   border: solid 1px ${p => p.theme.colors.inputPrimaryBorder};
@@ -11,21 +11,19 @@ const Input = styled.input`
   outline: none;
 `;
 
-const InputText = ({ input, placeholder, type, ...rest }) => (
+const TextArea = ({ input, placeholder, ...rest }) => (
   <InputWrapper input={input} {...rest}>
-    <Input id={input.name} placeholder={placeholder} type={type} {...input} />
+    <Input id={input.name} placeholder={placeholder} {...input} />
   </InputWrapper>
 );
 
-InputText.propTypes = {
+TextArea.propTypes = {
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
 };
 
-InputText.defaultProps = {
+TextArea.defaultProps = {
   placeholder: '',
-  type: 'text',
 };
 
-export default InputText;
+export default TextArea;

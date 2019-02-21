@@ -1,5 +1,4 @@
-import TextInput from './TextInput';
+import Input from './Input';
+import TextArea from './TextArea';
 
-const Input = TextInput;
-
-export default Input;
+export { Input, TextArea };

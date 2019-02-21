@@ -40,10 +40,10 @@ const StyledButton = styled.button`
       ${p =>
         p.secondary &&
         css`
-          background-color: ${p => p.theme.colors.secondary};
+          background-color: ${p => p.theme.colors.accent};
 
           &:hover {
-            background-color: ${p => p.theme.colors.secondaryLight};
+            background-color: ${p => p.theme.colors.accentLight};
           }
         `}
 
