@@ -1,13 +1,27 @@
 #!/usr/bin/env node
 
+const merge = require('deepmerge');
 const { readFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
 const { tryShell } = require('./utilities/helpers');
 
-module.exports = function deploy(config) {
+module.exports = function deploy(configString) {
+  const [variation, stage] = configString.split('.');
+
   const {
     deploy: { bucketUrl, cacheControlMaxAge, cloudFrontDistributionId },
-  } = safeLoad(readFileSync(config, 'utf8'));
+  } = [
+    'configs/default.yml',
+    `configs/default.${stage}.yml`,
+    `configs/${variation}.yml`,
+    `configs/${variation}.${stage}.yml`,
+  ].reduce((acc, file) => {
+    try {
+      return merge(acc, safeLoad(readFileSync(file, 'utf8')));
+    } catch (e) {
+      return acc;
+    }
+  }, {});
 
   // upload
   tryShell(`aws s3 sync --delete public ${bucketUrl}`);

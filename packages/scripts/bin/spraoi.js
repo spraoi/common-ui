@@ -40,7 +40,7 @@ const cli = meow(helpText, {
   flags: {
     config: {
       alias: 'c',
-      default: 'configs/default.yml',
+      default: null,
       type: 'string',
     },
     packages: {
