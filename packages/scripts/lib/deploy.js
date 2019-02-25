@@ -4,7 +4,7 @@ const { readFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
 const { tryShell } = require('./utilities/helpers');
 
-module.exports = function linkPackages(config) {
+module.exports = function deploy(config) {
   const {
     deploy: { bucketUrl, cacheControlMaxAge, cloudFrontDistributionId },
   } = safeLoad(readFileSync(config, 'utf8'));
