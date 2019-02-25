@@ -23,18 +23,30 @@ module.exports = function deploy(configString) {
     }
   }, {});
 
-  // upload
-  tryShell(`aws s3 sync --delete public ${bucketUrl}`);
-
-  // fix content-type
-  tryShell(`
+  const setContentType = (ext, type) =>
+    tryShell(`
     aws s3 cp \
       --exclude '*' \
-      --include '*.js' \
-      --content-type 'application/javascript' \
+      --include '*.${ext}' \
+      --content-type '${type}' \
       --metadata-directive 'REPLACE' \
       --recursive ${bucketUrl} ${bucketUrl}
   `);
+
+  // upload
+  tryShell(`aws s3 sync --delete public ${bucketUrl}`);
+
+  // fix content-types
+  setContentType('css', 'text/css');
+  setContentType('eot', 'font/eot');
+  setContentType('jpeg', 'image/jpeg');
+  setContentType('jpg', 'image/jpeg');
+  setContentType('js', 'application/javascript');
+  setContentType('png', 'image/png');
+  setContentType('svg', 'image/svg+xml');
+  setContentType('ttf', 'font/ttf');
+  setContentType('woff', 'font/woff');
+  setContentType('woff2', 'font/woff2');
 
   // set max-age
   tryShell(`
