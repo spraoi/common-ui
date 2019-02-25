@@ -26,11 +26,16 @@ module.exports = function deploy(config) {
   tryShell(`
     aws s3 cp \
       --exclude '*' \
-      --include '*.js' \
       --include '*.css' \
-      --include '*.svg' \
-      --include '*.png' \
+      --include '*.eot' \
+      --include '*.jpeg' \
       --include '*.jpg' \
+      --include '*.js' \
+      --include '*.png' \
+      --include '*.svg' \
+      --include '*.ttf' \
+      --include '*.woff' \
+      --include '*.woff2' \
       --cache-control max-age=${cacheControlMaxAge} \
       --metadata-directive 'REPLACE' \
       --recursive ${bucketUrl} ${bucketUrl}
