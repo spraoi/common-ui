@@ -48,6 +48,7 @@ module.exports = function deploy(configString) {
       --include '*.png' \
       --include '*.svg' \
       --include '*.ttf' \
+      --include '*.webp' \
       --include '*.woff' \
       --include '*.woff2' \
       --cache-control max-age=${cacheControlMaxAge} \
