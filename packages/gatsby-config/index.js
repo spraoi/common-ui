@@ -47,7 +47,6 @@ module.exports = {
     '@spraoi/gatsby-plugin',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-svgr',
     {
       options: { component: resolve('src/components/Layout') },
       resolve: 'gatsby-plugin-layout',

@@ -17,8 +17,7 @@
     "gatsby-plugin-layout": "^1.0.10",
     "gatsby-plugin-page-creator": "^2.0.4",
     "gatsby-plugin-react-helmet": "^3.0.0",
-    "gatsby-plugin-styled-components": "^3.0.3",
-    "gatsby-plugin-svgr": "^2.0.1"
+    "gatsby-plugin-styled-components": "^3.0.3"
   },
   "peerDependencies": {
     "gatsby": "^2",
