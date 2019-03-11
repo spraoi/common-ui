@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import TextareaAutosize from 'react-autosize-textarea';
 import styled, { css } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
-const StyledTextArea = styled.textarea`
+const StyledTextArea = styled(TextareaAutosize)`
   display: block;
   width: 100%;
   padding: ${p => p.theme.space.xs} ${p => p.theme.space.xs};
@@ -12,6 +13,7 @@ const StyledTextArea = styled.textarea`
   outline: none;
   font-family: ${p => p.theme.fonts.primary};
   font-size: ${p => p.theme.fontSizes.md};
+  resize: vertical;
 
   &:focus {
     border-color: ${p => p.theme.colors.inputPrimaryBorderFocus};
