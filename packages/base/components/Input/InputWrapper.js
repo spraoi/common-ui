@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = ({ children, input, label, meta, subtext, ...rest }) => {
-  const error = meta.error && meta.touched;
+  const error = meta.error && meta.touched ? 1 : 0;
   let below = null;
   if (error) below = <Error>{meta.error}</Error>;
   else if (subtext) below = <Subtext>{subtext}</Subtext>;

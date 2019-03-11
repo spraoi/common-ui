@@ -28,7 +28,7 @@ const StyledTextArea = styled(TextareaAutosize)`
 
 const TextArea = ({ input, ...rest }) => (
   <InputWrapper input={input} {...rest}>
-    {props => <StyledTextArea id={input.name} {...props} {...input} />}
+    {props => <StyledTextArea async id={input.name} {...props} {...input} />}
   </InputWrapper>
 );
 
