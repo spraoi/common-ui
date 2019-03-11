@@ -42,6 +42,7 @@ module.exports = function deploy(configString) {
   setContentType('jpeg', 'image/jpeg');
   setContentType('jpg', 'image/jpeg');
   setContentType('js', 'application/javascript');
+  setContentType('json', 'application/json');
   setContentType('png', 'image/png');
   setContentType('svg', 'image/svg+xml');
   setContentType('ttf', 'font/ttf');
@@ -57,6 +58,7 @@ module.exports = function deploy(configString) {
       --include '*.jpeg' \
       --include '*.jpg' \
       --include '*.js' \
+      --include '*.json' \
       --include '*.png' \
       --include '*.svg' \
       --include '*.ttf' \
