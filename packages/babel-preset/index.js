@@ -8,14 +8,5 @@ module.exports = () => ({
       },
     ],
   ],
-  presets: [
-    'gatsby',
-    [
-      '@babel/preset-env',
-      {
-        corejs: 3,
-        useBuiltIns: 'usage',
-      },
-    ],
-  ],
+  presets: ['gatsby'],
 });
