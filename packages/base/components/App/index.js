@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 import { AuthProvider } from '@spraoi/auth';
 import { Rehydrated } from 'aws-appsync-react';
 import { ThemeProvider } from 'styled-components';
+import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
 
@@ -29,7 +30,9 @@ const App = ({ children, config, credentials, theme }) => {
               })
             }
           >
-            <Rehydrated loading={<></>}>{contents}</Rehydrated>
+            <Rehydrated loading={<></>}>
+              <ErrorBoundary>{contents}</ErrorBoundary>
+            </Rehydrated>
           </ApolloProvider>
         </AuthProvider>
       ) : (

@@ -16,6 +16,8 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   display: ${valueAtBp(p.display, bp)};
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
+  width: ${valueAtBp(p.width, bp)};
+  height: ${valueAtBp(p.height, bp)};
   max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], p.maxWidth, bp)};
   margin: ${themeValue(p.theme.space, [p.mt, p.my, p.m], 0, bp)}
     ${themeValue(p.theme.space, [p.mr, p.mx, p.m], 0, bp)}
@@ -102,6 +104,7 @@ Box.propTypes = {
   fontFamily: styleType,
   fontSize: styleType,
   fontWeight: styleType,
+  height: styleType,
   justifyContent: styleType,
   letterSpacing: styleType,
   lineHeight: styleType,
@@ -120,6 +123,7 @@ Box.propTypes = {
   px: styleType,
   py: styleType,
   textAlign: styleType,
+  width: styleType,
 };
 
 Box.defaultProps = {
@@ -132,6 +136,7 @@ Box.defaultProps = {
   fontFamily: null,
   fontSize: null,
   fontWeight: null,
+  height: null,
   justifyContent: null,
   letterSpacing: null,
   lineHeight: null,
@@ -150,6 +155,7 @@ Box.defaultProps = {
   px: null,
   py: null,
   textAlign: null,
+  width: null,
 };
 
 export default Box;
