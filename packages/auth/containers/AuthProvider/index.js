@@ -15,7 +15,7 @@ export default class AuthProvider extends PureComponent {
       }).isRequired,
       Storage: PropTypes.shape({
         bucket: PropTypes.string.isRequired,
-      }).isRequired,
+      }),
     }).isRequired,
     children: PropTypes.node.isRequired,
     homePath: PropTypes.string,
