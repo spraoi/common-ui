@@ -13,6 +13,7 @@
   },
   "peerDependencies": {
     "@spraoi/auth": "*",
+    "@spraoi/helpers": "*",
     "gatsby": "^2",
     "prop-types": "^15",
     "react": "^16",

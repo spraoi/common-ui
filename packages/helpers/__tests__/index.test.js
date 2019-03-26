@@ -1,4 +1,37 @@
-import { objectMapDeep, objectMapKeysDeep, snakeCaseToCamelCase } from '..';
+import {
+  fixSCProps,
+  objectMapDeep,
+  objectMapKeysDeep,
+  snakeCaseToCamelCase,
+} from '..';
+
+describe('fixSCProps', () => {
+  it('should work', () => {
+    expect(
+      fixSCProps({
+        bar: 1,
+        baz: null,
+        foo: 'bar',
+        fooBar: false,
+        fooBaz: true,
+        fooFoo: undefined,
+        nested: {
+          bar: 1,
+        },
+      })
+    ).toMatchObject({
+      bar: 1,
+      baz: null,
+      foo: 'bar',
+      fooBar: 0,
+      fooBaz: 1,
+      fooFoo: undefined,
+      nested: {
+        bar: 1,
+      },
+    });
+  });
+});
 
 describe('objectMapDeep', () => {
   it('should work', () => {

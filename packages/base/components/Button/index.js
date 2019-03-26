@@ -1,3 +1,4 @@
+import { fixSCProps } from '@spraoi/helpers';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
@@ -100,7 +101,11 @@ export default class Button extends PureComponent {
       ...rest
     } = this.props;
 
-    const buttonProps = { disabled: disabled || submitting, type, ...rest };
+    const fixedProps = fixSCProps({
+      disabled: disabled || submitting,
+      type,
+      ...rest,
+    });
 
     let buttonChildren = children;
 
@@ -113,11 +118,11 @@ export default class Button extends PureComponent {
     }
 
     return type === Button.types.button ? (
-      <StyledButton type="button" {...buttonProps}>
+      <StyledButton type="button" {...fixedProps}>
         {buttonChildren}
       </StyledButton>
     ) : (
-      <StyledButton type="submit" {...buttonProps}>
+      <StyledButton type="submit" {...fixedProps}>
         {buttonChildren}
       </StyledButton>
     );
@@ -125,13 +130,14 @@ export default class Button extends PureComponent {
 
   renderLink() {
     const { children, disabled, download, link, ...rest } = this.props;
+    const fixedProps = fixSCProps(rest);
 
     return download ? (
-      <StyledButton as="a" download href={link} {...rest}>
+      <StyledButton as="a" download href={link} {...fixedProps}>
         {children}
       </StyledButton>
     ) : (
-      <StyledButton as={Link} disabled={disabled} to={link} {...rest}>
+      <StyledButton as={Link} disabled={disabled} to={link} {...fixedProps}>
         {children}
       </StyledButton>
     );
