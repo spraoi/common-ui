@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { PureComponent } from 'react';
+import React from 'react';
 import { navigate } from 'gatsby';
 
-export default class Redirect extends PureComponent {
+export default class Redirect extends React.Component {
   static propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     state: PropTypes.object,
