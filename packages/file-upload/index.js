@@ -11,6 +11,7 @@ import 'filepond/dist/filepond.min.css';
 const StyledGlobal = createGlobalStyle`
   .filepond--wrapper {
     .filepond--root {
+      margin: 0;
       font-family: ${p => p.theme.fonts.primary};
     }
 
