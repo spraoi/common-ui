@@ -130,6 +130,8 @@ export default class Button extends PureComponent {
 
   renderLink() {
     const { children, disabled, download, link, ...rest } = this.props;
+
+    delete rest.renderLoading;
     const fixedProps = fixSCProps(rest);
 
     return download ? (
