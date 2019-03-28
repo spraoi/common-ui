@@ -36,22 +36,22 @@ const AuthenticatedApp = (
 - https://aws-amplify.github.io/docs/js/api#manual-setup
 - https://aws-amplify.github.io/docs/js/storage#manual-setup
 
-### AuthConsumer
+### AuthContext.Consumer
 
-`AuthConsumer` is just the
+`AuthContext.Consumer` is just the
 [context consumer](https://reactjs.org/docs/context.html#contextconsumer) for
 the above `AuthProvider`.
 
 ```javascript
 import React from 'react';
-import { AuthConsumer } from '@spraoi/auth';
+import { AuthContext } from '@spraoi/auth';
 
 const Component = (
-  <AuthConsumer>
+  <AuthContext.Consumer>
     {authContext => {
       // use the context here...
     }}
-  </AuthConsumer>
+  </AuthContext.Consumer>
 );
 ```
 
