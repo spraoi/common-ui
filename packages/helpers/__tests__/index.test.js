@@ -98,7 +98,8 @@ describe('objectMapKeysDeep', () => {
 
 describe('shortenNumber', () => {
   [
-    [-1, '<1'],
+    [-1, '<0'],
+    [0, '0'],
     [0.3, '<1'],
     [10, '10'],
     [1000, '1K'],

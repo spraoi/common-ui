@@ -66,6 +66,8 @@ export const objectMapKeysDeep = (obj, callback) => {
  * @returns {string}
  */
 export const shortenNumber = number => {
+  if (number < 0) return '<0';
+  if (number === 0) return '0';
   if (number < 1) return '<1';
   const base = Math.floor(number);
 
