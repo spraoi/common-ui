@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { AuthProvider } from '@spraoi/auth';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Rehydrated } from 'aws-appsync-react';
 import { ThemeProvider } from 'styled-components';
 import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
+
+const cache = new InMemoryCache();
 
 const App = ({ children, config, credentials, theme }) => {
   const contents = (
@@ -24,10 +27,15 @@ const App = ({ children, config, credentials, theme }) => {
         <AuthProvider amplifyConfig={config.amplify}>
           <ApolloProvider
             client={
-              new AWSAppSyncClient({
-                ...config.apollo,
-                auth: { ...config.apollo.auth, credentials },
-              })
+              new AWSAppSyncClient(
+                {
+                  ...config.apollo,
+                  auth: { ...config.apollo.auth, credentials },
+                },
+                {
+                  cache,
+                }
+              )
             }
           >
             <Rehydrated loading={<></>}>
