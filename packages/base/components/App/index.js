@@ -27,7 +27,6 @@ const App = ({ children, config, credentials, theme }) => {
               new AWSAppSyncClient({
                 ...config.apollo,
                 auth: { ...config.apollo.auth, credentials },
-                disableOffline: true,
               })
             }
           >
