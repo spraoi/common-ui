@@ -10,7 +10,6 @@ const Dropdown = ({ input, ...rest }) => (
     {({
       backspaceRemoves = false,
       loadOptions,
-      onChange,
       placeholder = '',
       value,
       ...inputRest
@@ -21,15 +20,20 @@ const Dropdown = ({ input, ...rest }) => (
             theme.lineHeights.md
           })`;
 
+          const getBorderColor = ({ isFocused }) => {
+            if (isFocused) return theme.colors.inputPrimaryBorderFocus;
+            if (inputRest.error) return theme.colors.error;
+            return theme.colors.inputPrimaryBorder;
+          };
+
           const styles = {
-            control: base => ({
+            control: (base, { isFocused }) => ({
               ...base,
+              '&:hover': {
+                border: `solid 1px ${getBorderColor({ isFocused })}`,
+              },
               backgroundColor: theme.colors.inputPrimaryBg,
-              border: `solid 1px ${
-                inputRest.error
-                  ? theme.colors.error
-                  : theme.colors.inputPrimaryBorder
-              }`,
+              border: `solid 1px ${getBorderColor({ isFocused })}`,
               borderRadius: theme.radii.md,
               boxShadow: 0,
               height,
@@ -46,26 +50,41 @@ const Dropdown = ({ input, ...rest }) => (
             }),
           };
 
+          const onChange = (value, meta) =>
+            input.onChange(
+              Array.isArray(value) ? value.map(o => o.value) : value.value,
+              meta
+            );
+
+          const optionByValue = value =>
+            inputRest.options.find(o => o.value === value);
+
+          const value = Array.isArray(input.value)
+            ? input.value.map(optionByValue)
+            : optionByValue(value);
+
           return loadOptions ? (
             <AsyncSelect
+              {...input}
               backspaceRemoves={backspaceRemoves}
               cacheOptions
               defaultOptions
               loadOptions={loadOptions}
-              onChange={choice => onChange(choice.value)}
+              onChange={onChange}
               placeholder={placeholder}
               styles={styles}
-              {...input}
+              value={value}
               {...inputRest}
             />
           ) : (
             <Select
+              {...input}
               backspaceRemoves={backspaceRemoves}
               defaultValue={value}
-              onChange={choice => onChange(choice.value)}
+              onChange={onChange}
               placeholder={placeholder}
               styles={styles}
-              {...input}
+              value={value}
               {...inputRest}
             />
           );

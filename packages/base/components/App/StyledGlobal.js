@@ -63,6 +63,11 @@ export default createGlobalStyle`
     &:active {
       outline: none;
     }
+
+    &[type="radio"] {
+      margin: 0;
+      transform: scale(1.4);
+    }
   }
 
   figure,
@@ -87,7 +92,7 @@ export default createGlobalStyle`
     font-family: ${p => p.theme.fonts.secondary};
     font-weight: ${p => p.theme.fontWeights.bold};
   }
-  
+
   h1 {
     font-size: ${p => p.theme.fontSizes.xxl};
   }
@@ -106,5 +111,12 @@ export default createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+
+  hr {
+    height: 1px;
+    margin-top: ${p => p.theme.space.lg};
+    border: 0;
+    background-color: ${p => p.theme.colors.border};
   }
 `;
