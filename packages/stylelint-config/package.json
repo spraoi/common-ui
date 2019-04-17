@@ -19,6 +19,6 @@
   },
   "peerDependencies": {
     "prettier": "^1",
-    "stylelint": "^10"
+    "stylelint": "^9"
   }
 }
