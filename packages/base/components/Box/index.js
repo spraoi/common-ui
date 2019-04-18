@@ -1,9 +1,54 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
+const BP = {
+  lg: 'lg',
+  md: 'md',
+  none: 'none',
+  sm: 'sm',
+  xl: 'xl',
+  xs: 'xs',
+};
+
 const valueAtBp = (value, bp) => {
   if (value === null || typeof value !== 'object') return value;
-  return value[bp];
+
+  if (bp === BP.none) {
+    return value[bp];
+  }
+
+  if (bp === BP.xs) {
+    return value[bp] || value[BP.none];
+  }
+
+  if (bp === BP.sm) {
+    return value[bp] || value[BP.xs] || value[BP.none];
+  }
+
+  if (bp === BP.md) {
+    return value[bp] || value[BP.sm] || value[BP.xs] || value[BP.none];
+  }
+
+  if (bp === BP.lg) {
+    return (
+      value[bp] ||
+      value[BP.md] ||
+      value[BP.sm] ||
+      value[BP.xs] ||
+      value[BP.none]
+    );
+  }
+
+  if (bp === 'xl') {
+    return (
+      value[bp] ||
+      value[BP.lg] ||
+      value[BP.md] ||
+      value[BP.sm] ||
+      value[BP.xs] ||
+      value[BP.none]
+    );
+  }
 };
 
 const themeValue = (theme, props, or, bp) => {
@@ -60,36 +105,37 @@ const boxStylesAtBreakpoint = (p, bp) => css`
 `;
 
 const Box = styled.div`
-  ${p => boxStylesAtBreakpoint(p, 'none')};
+  ${p => boxStylesAtBreakpoint(p, BP.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
-    ${p => boxStylesAtBreakpoint(p, 'xs')};
+    ${p => boxStylesAtBreakpoint(p, BP.xs)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.sm}) {
-    ${p => boxStylesAtBreakpoint(p, 'sm')};
+    ${p => boxStylesAtBreakpoint(p, BP.sm)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.md}) {
-    ${p => boxStylesAtBreakpoint(p, 'md')};
+    ${p => boxStylesAtBreakpoint(p, BP.md)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.lg}) {
-    ${p => boxStylesAtBreakpoint(p, 'lg')};
+    ${p => boxStylesAtBreakpoint(p, BP.lg)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.xl}) {
-    ${p => boxStylesAtBreakpoint(p, 'xl')};
+    ${p => boxStylesAtBreakpoint(p, BP.xl)};
   }
 `;
 
 const styleType = PropTypes.oneOfType([
   PropTypes.shape({
-    lg: PropTypes.string,
-    md: PropTypes.string,
-    sm: PropTypes.string,
-    xl: PropTypes.string,
-    xs: PropTypes.string,
+    [BP.lg]: PropTypes.string,
+    [BP.md]: PropTypes.string,
+    [BP.none]: PropTypes.string,
+    [BP.sm]: PropTypes.string,
+    [BP.xl]: PropTypes.string,
+    [BP.xs]: PropTypes.string,
   }),
   PropTypes.string,
 ]);
