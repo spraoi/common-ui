@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const BP = {
@@ -104,7 +105,40 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   text-align: ${valueAtBp(p.textAlign, bp)};
 `;
 
-const Box = styled.div`
+const Box = styled(
+  ({
+    alignItems,
+    bg,
+    borderRadius,
+    boxShadow,
+    color,
+    display,
+    fontFamily,
+    fontSize,
+    fontWeight,
+    height,
+    justifyContent,
+    letterSpacing,
+    lineHeight,
+    maxWidth,
+    mb,
+    ml,
+    mr,
+    mt,
+    mx,
+    my,
+    pb,
+    pl,
+    position,
+    pr,
+    pt,
+    px,
+    py,
+    textAlign,
+    width,
+    ...rest
+  }) => <div {...rest} />
+)`
   ${p => boxStylesAtBreakpoint(p, BP.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
