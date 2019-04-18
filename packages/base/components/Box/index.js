@@ -62,6 +62,10 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   display: ${valueAtBp(p.display, bp)};
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
+  top: ${valueAtBp(p.top, bp)};
+  right: ${valueAtBp(p.right, bp)};
+  bottom: ${valueAtBp(p.bottom, bp)};
+  left: ${valueAtBp(p.left, bp)};
   width: ${valueAtBp(p.width, bp)};
   height: ${valueAtBp(p.height, bp)};
   max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], p.maxWidth, bp)};
@@ -110,6 +114,7 @@ const Box = styled(
     alignItems,
     bg,
     borderRadius,
+    bottom,
     boxShadow,
     color,
     display,
@@ -118,6 +123,7 @@ const Box = styled(
     fontWeight,
     height,
     justifyContent,
+    left,
     letterSpacing,
     lineHeight,
     maxWidth,
@@ -134,7 +140,9 @@ const Box = styled(
     pt,
     px,
     py,
+    right,
     textAlign,
+    top,
     width,
     ...rest
   }) => <div {...rest} />
@@ -178,6 +186,7 @@ Box.propTypes = {
   alignItems: styleType,
   bg: styleType,
   borderRadius: styleType,
+  bottom: styleType,
   boxShadow: styleType,
   color: styleType,
   display: styleType,
@@ -186,6 +195,7 @@ Box.propTypes = {
   fontWeight: styleType,
   height: styleType,
   justifyContent: styleType,
+  left: styleType,
   letterSpacing: styleType,
   lineHeight: styleType,
   maxWidth: styleType,
@@ -202,7 +212,9 @@ Box.propTypes = {
   pt: styleType,
   px: styleType,
   py: styleType,
+  right: styleType,
   textAlign: styleType,
+  top: styleType,
   width: styleType,
 };
 
@@ -210,6 +222,7 @@ Box.defaultProps = {
   alignItems: null,
   bg: null,
   borderRadius: null,
+  bottom: null,
   boxShadow: null,
   color: null,
   display: null,
@@ -218,6 +231,7 @@ Box.defaultProps = {
   fontWeight: null,
   height: null,
   justifyContent: null,
+  left: null,
   letterSpacing: null,
   lineHeight: null,
   maxWidth: null,
@@ -234,7 +248,9 @@ Box.defaultProps = {
   pt: null,
   px: null,
   py: null,
+  right: null,
   textAlign: null,
+  top: null,
   width: null,
 };
 
