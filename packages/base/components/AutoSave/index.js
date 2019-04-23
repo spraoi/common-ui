@@ -12,7 +12,7 @@ class AutoSaveComponent extends React.Component {
   };
 
   static defaultProps = {
-    children: () => {},
+    children: () => null,
     debounce: 200,
   };
 
