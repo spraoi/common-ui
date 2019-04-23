@@ -10,6 +10,7 @@ import {
   TextArea,
 } from './components/Input';
 import Redirect from './components/Redirect';
+import Spinner from './components/Spinner';
 
 export {
   App,
@@ -21,5 +22,6 @@ export {
   Radio,
   RadioGroup,
   Redirect,
+  Spinner,
   TextArea,
 };
