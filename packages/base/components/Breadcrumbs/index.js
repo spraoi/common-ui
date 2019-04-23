@@ -23,8 +23,8 @@ const Crumb = styled(Button)`
   }
 `;
 
-const Breadcrumbs = ({ crumbs }) => (
-  <Box display="flex" py="md">
+const Breadcrumbs = ({ crumbs, ...rest }) => (
+  <Box display="flex" {...rest}>
     {crumbs.map((crumb, i) => (
       <Crumb key={i} link={crumb.path} simple>
         {crumb.name}
