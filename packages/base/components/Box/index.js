@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { validHtmlAttributes } from '../../utility/constants';
 
 const BP = {
   lg: 'lg',
@@ -109,44 +110,20 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   text-align: ${valueAtBp(p.textAlign, bp)};
 `;
 
-const Box = styled(
-  ({
-    alignItems,
-    bg,
-    borderRadius,
-    bottom,
-    boxShadow,
-    color,
-    display,
-    fontFamily,
-    fontSize,
-    fontWeight,
-    height,
-    justifyContent,
-    left,
-    letterSpacing,
-    lineHeight,
-    maxWidth,
-    mb,
-    ml,
-    mr,
-    mt,
-    mx,
-    my,
-    pb,
-    pl,
-    position,
-    pr,
-    pt,
-    px,
-    py,
-    right,
-    textAlign,
-    top,
-    width,
-    ...rest
-  }) => <div {...rest} />
-)`
+const generateSafeComponent = ({
+  as,
+  whitelist = validHtmlAttributes,
+}) => props => {
+  const safeProps = {};
+
+  whitelist.forEach(item => {
+    safeProps[item] = props[item];
+  });
+
+  return React.createElement(as || 'div', safeProps);
+};
+
+const Box = styled(generateSafeComponent())`
   ${p => boxStylesAtBreakpoint(p, BP.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
@@ -198,6 +175,7 @@ Box.propTypes = {
   left: styleType,
   letterSpacing: styleType,
   lineHeight: styleType,
+  m: styleType,
   maxWidth: styleType,
   mb: styleType,
   ml: styleType,
@@ -205,6 +183,7 @@ Box.propTypes = {
   mt: styleType,
   mx: styleType,
   my: styleType,
+  p: styleType,
   pb: styleType,
   pl: styleType,
   position: styleType,
@@ -234,6 +213,7 @@ Box.defaultProps = {
   left: null,
   letterSpacing: null,
   lineHeight: null,
+  m: null,
   maxWidth: null,
   mb: null,
   ml: null,
@@ -241,6 +221,7 @@ Box.defaultProps = {
   mt: null,
   mx: null,
   my: null,
+  p: null,
   pb: null,
   pl: null,
   position: null,
@@ -255,3 +236,4 @@ Box.defaultProps = {
 };
 
 export default Box;
+export { generateSafeComponent };

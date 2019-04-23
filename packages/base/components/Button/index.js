@@ -4,8 +4,9 @@ import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { BarLoader } from 'react-spinners';
 import { Link } from 'gatsby';
+import Box, { generateSafeComponent } from '../Box';
 
-const StyledButton = styled.button`
+const buttonStyles = css`
   color: ${p => p.theme.colors.textLink};
   text-decoration: underline;
 
@@ -17,7 +18,6 @@ const StyledButton = styled.button`
       justify-content: center;
       align-items: center;
       width: 100%;
-      padding: ${p => p.theme.space.sm} ${p => p.theme.space.md};
       background-color: ${p => p.theme.colors.primary};
       border-radius: ${p => p.theme.radii.md};
       box-shadow: ${p => p.theme.boxShadows.md};
@@ -55,6 +55,14 @@ const StyledButton = styled.button`
           pointer-events: none;
         `}
     `}
+`;
+
+const StyledButton = styled(generateSafeComponent({ as: 'button' }))`
+  ${buttonStyles};
+`;
+
+const StyledLink = styled(generateSafeComponent({ as: Link }))`
+  ${buttonStyles};
 `;
 
 const StyledChildren = styled.div`
@@ -118,13 +126,25 @@ export default class Button extends PureComponent {
     }
 
     return type === Button.types.button ? (
-      <StyledButton type="button" {...fixedProps}>
+      <Box
+        as={StyledButton}
+        px={rest.simple ? '0' : 'md'}
+        py={rest.simple ? '0' : 'sm'}
+        type="button"
+        {...fixedProps}
+      >
         {buttonChildren}
-      </StyledButton>
+      </Box>
     ) : (
-      <StyledButton type="submit" {...fixedProps}>
+      <Box
+        as={StyledButton}
+        px={rest.simple ? '0' : 'md'}
+        py={rest.simple ? '0' : 'sm'}
+        type="submit"
+        {...fixedProps}
+      >
         {buttonChildren}
-      </StyledButton>
+      </Box>
     );
   }
 
@@ -135,13 +155,27 @@ export default class Button extends PureComponent {
     const fixedProps = fixSCProps(rest);
 
     return download ? (
-      <StyledButton as="a" download href={link} {...fixedProps}>
+      <Box
+        as={StyledLink}
+        download
+        href={link}
+        px={rest.simple ? '0' : 'md'}
+        py={rest.simple ? '0' : 'sm'}
+        {...fixedProps}
+      >
         {children}
-      </StyledButton>
+      </Box>
     ) : (
-      <StyledButton as={Link} disabled={disabled} to={link} {...fixedProps}>
+      <Box
+        as={StyledLink}
+        disabled={disabled}
+        px={rest.simple ? '0' : 'md'}
+        py={rest.simple ? '0' : 'sm'}
+        to={link}
+        {...fixedProps}
+      >
         {children}
-      </StyledButton>
+      </Box>
     );
   }
 
