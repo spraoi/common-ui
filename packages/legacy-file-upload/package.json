@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-file-upload",
   "description": "Same as @spraoi/file-upload, but compatible with old projects.",
-  "version": "0.19.0",
+  "version": "0.19.42",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-file-upload",
   "repository": {
