@@ -28,6 +28,7 @@
     "aws-appsync-react": "^1.2.3",
     "isomorphic-unfetch": "^3.0.0",
     "react-autosize-textarea": "^6.0.0",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.2",
+    "react-super-responsive-table": "^4.3.9"
   }
 }

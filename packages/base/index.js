@@ -11,6 +11,7 @@ import {
 } from './components/Input';
 import Redirect from './components/Redirect';
 import Spinner from './components/Spinner';
+import Table from './components/Table';
 
 export {
   App,
@@ -23,5 +24,6 @@ export {
   RadioGroup,
   Redirect,
   Spinner,
+  Table,
   TextArea,
 };
