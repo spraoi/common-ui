@@ -48,7 +48,12 @@ const StyledTr = styled(Tr)`
 `;
 
 const StyledTd = styled(Td)`
-  padding: ${p => p.theme.space.sm} 0;
+  padding: ${p => p.theme.space.sm} ${p => p.theme.space.md}
+    ${p => p.theme.space.sm} 0;
+
+  &:last-of-type {
+    padding-right: 0;
+  }
 `;
 
 const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
