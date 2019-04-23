@@ -11,16 +11,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "@spraoi/legacy-aws": "^0",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-ga": "^2.5.0",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^4.2.2",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.0"
-  },
   "dependencies": {
     "apollo-client": "^2.4.9",
     "aws-amplify": "^1.1.19",
