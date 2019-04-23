@@ -1,9 +1,46 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { validHtmlAttributes } from '../../utility/constants';
 
-const BP = {
+const boxProps = [
+  'alignItems',
+  'bg',
+  'borderRadius',
+  'bottom',
+  'boxShadow',
+  'color',
+  'display',
+  'fontFamily',
+  'fontSize',
+  'fontWeight',
+  'height',
+  'justifyContent',
+  'left',
+  'letterSpacing',
+  'lineHeight',
+  'm',
+  'maxWidth',
+  'mb',
+  'ml',
+  'mr',
+  'mt',
+  'mx',
+  'my',
+  'p',
+  'pb',
+  'pl',
+  'position',
+  'pr',
+  'pt',
+  'px',
+  'py',
+  'right',
+  'textAlign',
+  'top',
+  'width',
+];
+
+const boxBreakpoints = {
   lg: 'lg',
   md: 'md',
   none: 'none',
@@ -15,46 +52,51 @@ const BP = {
 const valueAtBp = (value, bp) => {
   if (value === null || typeof value !== 'object') return value;
 
-  if (bp === BP.none) {
+  if (bp === boxBreakpoints.none) {
     return value[bp];
   }
 
-  if (bp === BP.xs) {
-    return value[bp] || value[BP.none];
+  if (bp === boxBreakpoints.xs) {
+    return value[bp] || value[boxBreakpoints.none];
   }
 
-  if (bp === BP.sm) {
-    return value[bp] || value[BP.xs] || value[BP.none];
+  if (bp === boxBreakpoints.sm) {
+    return value[bp] || value[boxBreakpoints.xs] || value[boxBreakpoints.none];
   }
 
-  if (bp === BP.md) {
-    return value[bp] || value[BP.sm] || value[BP.xs] || value[BP.none];
-  }
-
-  if (bp === BP.lg) {
+  if (bp === boxBreakpoints.md) {
     return (
       value[bp] ||
-      value[BP.md] ||
-      value[BP.sm] ||
-      value[BP.xs] ||
-      value[BP.none]
+      value[boxBreakpoints.sm] ||
+      value[boxBreakpoints.xs] ||
+      value[boxBreakpoints.none]
+    );
+  }
+
+  if (bp === boxBreakpoints.lg) {
+    return (
+      value[bp] ||
+      value[boxBreakpoints.md] ||
+      value[boxBreakpoints.sm] ||
+      value[boxBreakpoints.xs] ||
+      value[boxBreakpoints.none]
     );
   }
 
   if (bp === 'xl') {
     return (
       value[bp] ||
-      value[BP.lg] ||
-      value[BP.md] ||
-      value[BP.sm] ||
-      value[BP.xs] ||
-      value[BP.none]
+      value[boxBreakpoints.lg] ||
+      value[boxBreakpoints.md] ||
+      value[boxBreakpoints.sm] ||
+      value[boxBreakpoints.xs] ||
+      value[boxBreakpoints.none]
     );
   }
 };
 
-const themeValue = (theme, props, or, bp) => {
-  const value = props.find(p => p) || or;
+const themeValue = (theme, props, fallback, bp) => {
+  const value = props.find(p => p) || fallback;
   return theme[valueAtBp(value, bp)] || valueAtBp(value, bp);
 };
 
@@ -69,15 +111,17 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   left: ${valueAtBp(p.left, bp)};
   width: ${valueAtBp(p.width, bp)};
   height: ${valueAtBp(p.height, bp)};
-  max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], p.maxWidth, bp)};
-  margin: ${themeValue(p.theme.space, [p.mt, p.my, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.mr, p.mx, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.mb, p.my, p.m], 0, bp)}
-    ${themeValue(p.theme.space, [p.ml, p.mx, p.m], 0, bp)};
-  padding: ${themeValue(p.theme.space, [p.pt, p.py, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pr, p.px, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pb, p.py, p.p], 0, bp)}
-    ${themeValue(p.theme.space, [p.pl, p.px, p.p], 0, bp)};
+  max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], null, bp)};
+  margin: ${themeValue(p.theme.space, [p.m], null, bp)};
+  margin-top: ${themeValue(p.theme.space, [p.mt, p.my], null, bp)};
+  margin-right: ${themeValue(p.theme.space, [p.mr, p.mx], null, bp)};
+  margin-bottom: ${themeValue(p.theme.space, [p.mb, p.my], null, bp)};
+  margin-left: ${themeValue(p.theme.space, [p.ml, p.mx], null, bp)};
+  padding: ${themeValue(p.theme.space, [p.p], null, bp)};
+  padding-top: ${themeValue(p.theme.space, [p.pt, p.py], null, bp)};
+  padding-right: ${themeValue(p.theme.space, [p.pr, p.px], null, bp)};
+  padding-bottom: ${themeValue(p.theme.space, [p.pb, p.py], null, bp)};
+  padding-left: ${themeValue(p.theme.space, [p.pl, p.px], null, bp)};
   border-radius: ${themeValue(
     p.theme.radii,
     [p.borderRadius],
@@ -85,155 +129,75 @@ const boxStylesAtBreakpoint = (p, bp) => css`
     bp
   )};
   background: ${themeValue(p.theme.colors, [p.bg], p.bg, bp)};
-  box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], p.boxShadow, bp)};
-  color: ${themeValue(p.theme.colors, [p.color], p.color, bp)};
-  font-family: ${themeValue(p.theme.fonts, [p.fontFamily], p.fontFamily, bp)};
-  font-size: ${themeValue(p.theme.fontSizes, [p.fontSize], p.fontSize, bp)};
-  font-weight: ${themeValue(
-    p.theme.fontWeights,
-    [p.fontWeight],
-    p.fontWeight,
-    bp
-  )};
+  box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], null, bp)};
+  color: ${themeValue(p.theme.colors, [p.color], null, bp)};
+  font-family: ${themeValue(p.theme.fonts, [p.fontFamily], null, bp)};
+  font-size: ${themeValue(p.theme.fontSizes, [p.fontSize], null, bp)};
+  font-weight: ${themeValue(p.theme.fontWeights, [p.fontWeight], null, bp)};
   letter-spacing: ${themeValue(
     p.theme.letterSpacings,
     [p.letterSpacing],
-    p.letterSpacing,
+    null,
     bp
   )};
-  line-height: ${themeValue(
-    p.theme.lineHeights,
-    [p.lineHeight],
-    p.lineHeight,
-    bp
-  )};
+  line-height: ${themeValue(p.theme.lineHeights, [p.lineHeight], null, bp)};
   text-align: ${valueAtBp(p.textAlign, bp)};
 `;
 
 const generateSafeComponent = ({
-  as,
-  whitelist = validHtmlAttributes,
-}) => props => {
-  const safeProps = {};
-
-  whitelist.forEach(item => {
-    safeProps[item] = props[item];
-  });
-
-  return React.createElement(as || 'div', safeProps);
+  as = 'div',
+  blacklist = [],
+} = {}) => props => {
+  const safeProps = { ...props };
+  [...boxProps, ...blacklist].forEach(item => delete safeProps[item]);
+  return React.createElement(as, safeProps);
 };
 
 const Box = styled(generateSafeComponent())`
-  ${p => boxStylesAtBreakpoint(p, BP.none)};
+  ${p => boxStylesAtBreakpoint(p, boxBreakpoints.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
-    ${p => boxStylesAtBreakpoint(p, BP.xs)};
+    ${p => boxStylesAtBreakpoint(p, boxBreakpoints.xs)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.sm}) {
-    ${p => boxStylesAtBreakpoint(p, BP.sm)};
+    ${p => boxStylesAtBreakpoint(p, boxBreakpoints.sm)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.md}) {
-    ${p => boxStylesAtBreakpoint(p, BP.md)};
+    ${p => boxStylesAtBreakpoint(p, boxBreakpoints.md)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.lg}) {
-    ${p => boxStylesAtBreakpoint(p, BP.lg)};
+    ${p => boxStylesAtBreakpoint(p, boxBreakpoints.lg)};
   }
 
   @media (min-width: ${p => p.theme.breakpoints.xl}) {
-    ${p => boxStylesAtBreakpoint(p, BP.xl)};
+    ${p => boxStylesAtBreakpoint(p, boxBreakpoints.xl)};
   }
 `;
 
 const styleType = PropTypes.oneOfType([
   PropTypes.shape({
-    [BP.lg]: PropTypes.string,
-    [BP.md]: PropTypes.string,
-    [BP.none]: PropTypes.string,
-    [BP.sm]: PropTypes.string,
-    [BP.xl]: PropTypes.string,
-    [BP.xs]: PropTypes.string,
+    [boxBreakpoints.lg]: PropTypes.string,
+    [boxBreakpoints.md]: PropTypes.string,
+    [boxBreakpoints.none]: PropTypes.string,
+    [boxBreakpoints.sm]: PropTypes.string,
+    [boxBreakpoints.xl]: PropTypes.string,
+    [boxBreakpoints.xs]: PropTypes.string,
   }),
   PropTypes.string,
 ]);
 
-Box.propTypes = {
-  alignItems: styleType,
-  bg: styleType,
-  borderRadius: styleType,
-  bottom: styleType,
-  boxShadow: styleType,
-  color: styleType,
-  display: styleType,
-  fontFamily: styleType,
-  fontSize: styleType,
-  fontWeight: styleType,
-  height: styleType,
-  justifyContent: styleType,
-  left: styleType,
-  letterSpacing: styleType,
-  lineHeight: styleType,
-  m: styleType,
-  maxWidth: styleType,
-  mb: styleType,
-  ml: styleType,
-  mr: styleType,
-  mt: styleType,
-  mx: styleType,
-  my: styleType,
-  p: styleType,
-  pb: styleType,
-  pl: styleType,
-  position: styleType,
-  pr: styleType,
-  pt: styleType,
-  px: styleType,
-  py: styleType,
-  right: styleType,
-  textAlign: styleType,
-  top: styleType,
-  width: styleType,
-};
+Box.propTypes = boxProps.reduce(
+  (sum, prop) => ({ ...sum, [prop]: styleType }),
+  {}
+);
 
-Box.defaultProps = {
-  alignItems: null,
-  bg: null,
-  borderRadius: null,
-  bottom: null,
-  boxShadow: null,
-  color: null,
-  display: null,
-  fontFamily: null,
-  fontSize: null,
-  fontWeight: null,
-  height: null,
-  justifyContent: null,
-  left: null,
-  letterSpacing: null,
-  lineHeight: null,
-  m: null,
-  maxWidth: null,
-  mb: null,
-  ml: null,
-  mr: null,
-  mt: null,
-  mx: null,
-  my: null,
-  p: null,
-  pb: null,
-  pl: null,
-  position: null,
-  pr: null,
-  pt: null,
-  px: null,
-  py: null,
-  right: null,
-  textAlign: null,
-  top: null,
-  width: null,
-};
+Box.defaultProps = boxProps.reduce(
+  (sum, prop) => ({ ...sum, [prop]: null }),
+  {}
+);
 
 export default Box;
 export { generateSafeComponent };
