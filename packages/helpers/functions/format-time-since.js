@@ -5,6 +5,6 @@ import moment from 'moment';
  * @param time
  * @returns {string}
  */
-const formatTimeSince = time => moment.duration(time, 'seconds').humanize();
+const formatTimeSince = time => moment(time).fromNow();
 
 export default formatTimeSince;
