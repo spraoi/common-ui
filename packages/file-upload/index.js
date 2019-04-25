@@ -25,6 +25,8 @@ const StyledGlobal = createGlobalStyle`
     }
 
     .filepond--panel-root {
+      border: solid 1px ${p =>
+        p.error ? p.theme.colors.error : 'transparent'};
       border-radius: ${p => p.theme.radii.lg};
       background-color: ${p => p.theme.colors.inputSecondaryBg};
     }
@@ -38,6 +40,7 @@ const StyledGlobal = createGlobalStyle`
 export default class FileUpload extends PureComponent {
   static propTypes = {
     bucket: PropTypes.string,
+    error: PropTypes.oneOf([0, 1]),
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
     level: PropTypes.string,
@@ -47,6 +50,7 @@ export default class FileUpload extends PureComponent {
 
   static defaultProps = {
     bucket: null,
+    error: 0,
     existingFiles: [],
     identityId: null,
     level: 'public',
@@ -117,11 +121,11 @@ export default class FileUpload extends PureComponent {
   };
 
   render() {
-    const { existingFiles } = this.props;
+    const { error, existingFiles } = this.props;
 
     return (
       <>
-        <StyledGlobal />
+        <StyledGlobal error={error} />
         <FilePond
           {...this.props}
           onremovefile={this.serverRemove}
