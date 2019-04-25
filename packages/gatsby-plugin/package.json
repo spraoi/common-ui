@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/gatsby-plugin",
   "description": "A Gatsby plugin for adding any necessary steps to our build process.",
-  "version": "0.19.51",
+  "version": "0.19.52",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-plugin",
   "repository": {
