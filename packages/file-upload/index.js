@@ -37,6 +37,7 @@ const StyledGlobal = createGlobalStyle`
 
 export default class FileUpload extends PureComponent {
   static propTypes = {
+    bucket: PropTypes.string,
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
     level: PropTypes.string,
@@ -45,6 +46,7 @@ export default class FileUpload extends PureComponent {
   };
 
   static defaultProps = {
+    bucket: null,
     existingFiles: [],
     identityId: null,
     level: 'public',
@@ -62,13 +64,13 @@ export default class FileUpload extends PureComponent {
   }
 
   serverLoad = (uniqueFileId, load, error, progress, abort) => {
-    const { identityId, level } = this.props;
+    const { bucket, identityId, level } = this.props;
 
     // TODO: update when Storage supports progress events
     // (endlessMode, loadedSize, totalSize)
     // progress(true, 2000, 2000);
 
-    Storage.get(uniqueFileId, { identityId, level })
+    Storage.get(uniqueFileId, { bucket, identityId, level })
       .then(fetch)
       .then(r => r.blob())
       .then(load)
@@ -78,7 +80,7 @@ export default class FileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { level, onUploadComplete } = this.props;
+    const { bucket, level, onUploadComplete } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
@@ -86,7 +88,12 @@ export default class FileUpload extends PureComponent {
     const progressCallback = ({ lengthComputable, loaded, total }) =>
       progress(lengthComputable, loaded, total);
 
-    Storage.put(fileName, file, { contentType, level, progressCallback })
+    Storage.put(fileName, file, {
+      bucket,
+      contentType,
+      level,
+      progressCallback,
+    })
       .then(() => {
         load(fileName);
         onUploadComplete();
@@ -97,16 +104,16 @@ export default class FileUpload extends PureComponent {
   };
 
   serverRevert = (uniqueFileId, load, error) => {
-    const { level } = this.props;
+    const { bucket, level } = this.props;
 
-    Storage.remove(uniqueFileId, { level })
+    Storage.remove(uniqueFileId, { bucket, level })
       .then(load)
       .catch(error);
   };
 
   serverRemove = ({ file: { name } }) => {
-    const { level, onRemoveComplete } = this.props;
-    Storage.remove(name, { level }).then(onRemoveComplete);
+    const { bucket, level, onRemoveComplete } = this.props;
+    Storage.remove(name, { bucket, level }).then(onRemoveComplete);
   };
 
   render() {
