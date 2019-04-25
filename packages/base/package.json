@@ -23,6 +23,7 @@
     "styled-components": "^4.1.2"
   },
   "dependencies": {
+    "@spraoi/file-upload": "^0.19.50",
     "apollo-cache-inmemory": "^1.5.1",
     "aws-appsync": "^1.5.2",
     "aws-appsync-react": "^1.2.3",

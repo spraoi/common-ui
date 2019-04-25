@@ -5,6 +5,7 @@ import Button from './components/Button';
 import Breadcrumbs from './components/Breadcrumbs';
 import {
   Dropdown,
+  FileUpload,
   Input,
   Radio,
   RadioGroup,
@@ -21,6 +22,7 @@ export {
   Breadcrumbs,
   Button,
   Dropdown,
+  FileUpload,
   Input,
   Radio,
   RadioGroup,
