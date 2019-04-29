@@ -43,7 +43,7 @@ const StyledTr = styled(Tr)`
 
   @media (min-width: 641px) {
     border: none !important;
-    border-bottom: solid 1px ${p => p.theme.colors.gray1} !important;
+    border-bottom: solid 1px ${p => p.theme.colors.border} !important;
   }
 `;
 
