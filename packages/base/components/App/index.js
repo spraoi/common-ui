@@ -1,12 +1,15 @@
 import 'isomorphic-unfetch';
-import AWSAppSyncClient from 'aws-appsync';
+import AWSAppSyncClient, { createAppSyncLink } from 'aws-appsync';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
 import { AuthProvider } from '@spraoi/auth';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Rehydrated } from 'aws-appsync-react';
 import { ThemeProvider } from 'styled-components';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
@@ -30,10 +33,24 @@ const App = ({ children, config, credentials, theme }) => {
               new AWSAppSyncClient(
                 {
                   ...config.apollo,
-                  auth: { ...config.apollo.auth, credentials },
+                  auth: {
+                    ...config.apollo.auth,
+                    credentials,
+                  },
                 },
                 {
                   cache,
+                  link: createAppSyncLink({
+                    resultsFetcherLink: ApolloLink.from([
+                      createHttpLink({ uri: config.apollo.url }),
+                      setContext((request, previousContext) => ({
+                        headers: {
+                          ...previousContext.headers,
+                          JWT: null,
+                        },
+                      })),
+                    ]),
+                  }),
                 }
               )
             }

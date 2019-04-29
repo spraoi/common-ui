@@ -25,6 +25,9 @@
   "dependencies": {
     "@spraoi/file-upload": "^0.19.54",
     "apollo-cache-inmemory": "^1.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-http": "^1.5.14",
     "aws-appsync": "^1.5.2",
     "aws-appsync-react": "^1.2.3",
     "isomorphic-unfetch": "^3.0.0",

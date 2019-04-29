@@ -39,19 +39,17 @@ export default class AuthProvider extends PureComponent {
   }
 
   async setAuthenticatedUser() {
-    const user = await Auth.currentUserInfo();
-
-    if (user) {
-      const authUser = objectMapKeysDeep(
-        { ...user, ...user.attributes },
-        snakeCaseToCamelCase
-      );
-
+    try {
+      const session = await Auth.currentSession();
+      const { jwtToken, payload } = session.getIdToken();
+      const authUser = objectMapKeysDeep(payload, snakeCaseToCamelCase);
+      delete authUser.attributes;
+      authUser.jwtToken = jwtToken;
       this.setState({ authState: AUTH_STATES.SIGNED_IN, authUser });
       return authUser;
+    } catch (e) {
+      this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
     }
-
-    this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
   }
 
   completeNewPasswordChallenge = async ({ password, ...rest }) => {
