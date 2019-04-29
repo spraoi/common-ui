@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/auth",
   "description": "Container components for making authentication a breeze.",
-  "version": "0.19.58",
+  "version": "0.19.59",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/auth",
   "repository": {
