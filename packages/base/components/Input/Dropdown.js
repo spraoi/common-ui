@@ -11,7 +11,6 @@ const Dropdown = ({ input, ...rest }) => (
       backspaceRemoves = false,
       loadOptions,
       placeholder = '',
-      value,
       ...inputRest
     }) => (
       <ThemeConsumer>
@@ -61,7 +60,7 @@ const Dropdown = ({ input, ...rest }) => (
 
           const value = Array.isArray(input.value)
             ? input.value.map(optionByValue)
-            : optionByValue(value);
+            : optionByValue(input.value);
 
           return loadOptions ? (
             <AsyncSelect
