@@ -30,6 +30,7 @@ export default class AuthProvider extends PureComponent {
   state = {
     authState: AUTH_STATES.LOADING,
     authUser: {},
+    jwt: null,
   };
 
   async componentDidMount() {
@@ -41,14 +42,17 @@ export default class AuthProvider extends PureComponent {
   async setAuthenticatedUser() {
     try {
       const session = await Auth.currentSession();
-      const { jwtToken, payload } = session.getIdToken();
+      const { jwtToken: jwt, payload } = session.getIdToken();
       const authUser = objectMapKeysDeep(payload, snakeCaseToCamelCase);
       delete authUser.attributes;
-      authUser.jwtToken = jwtToken;
-      this.setState({ authState: AUTH_STATES.SIGNED_IN, authUser });
+      this.setState({ authState: AUTH_STATES.SIGNED_IN, authUser, jwt });
       return authUser;
     } catch (e) {
-      this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
+      this.setState({
+        authState: AUTH_STATES.SIGNED_OUT,
+        authUser: {},
+        jwt: null,
+      });
     }
   }
 
@@ -70,7 +74,12 @@ export default class AuthProvider extends PureComponent {
 
   signOut = async () => {
     await Auth.signOut();
-    this.setState({ authState: AUTH_STATES.SIGNED_OUT, authUser: {} });
+
+    this.setState({
+      authState: AUTH_STATES.SIGNED_OUT,
+      authUser: {},
+      jwt: null,
+    });
   };
 
   signUp = async values => {
@@ -80,7 +89,7 @@ export default class AuthProvider extends PureComponent {
 
   render() {
     const { children, homePath, loginPath } = this.props;
-    const { authState, authUser } = this.state;
+    const { authState, authUser, jwt } = this.state;
 
     return (
       <AuthContext.Provider
@@ -89,6 +98,7 @@ export default class AuthProvider extends PureComponent {
           homePath,
           isAuthenticated: authState === AUTH_STATES.SIGNED_IN,
           isLoading: authState === AUTH_STATES.LOADING,
+          jwt,
           loginPath,
           newPasswordRequired: authState === AUTH_STATES.NEW_PASSWORD_REQUIRED,
           signIn: this.signIn,

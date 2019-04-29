@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
-import { AuthProvider } from '@spraoi/auth';
+import { AuthContext, AuthProvider } from '@spraoi/auth';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Rehydrated } from 'aws-appsync-react';
 import { ThemeProvider } from 'styled-components';
@@ -14,8 +14,6 @@ import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
 
-const cache = new InMemoryCache();
-
 const App = ({ children, config, credentials, theme }) => {
   const contents = (
     <>
@@ -24,41 +22,42 @@ const App = ({ children, config, credentials, theme }) => {
     </>
   );
 
+  const appSyncConfig = {
+    ...config.apollo,
+    auth: {
+      ...config.apollo.auth,
+      credentials,
+    },
+  };
+
   return (
     <ThemeProvider theme={theme}>
       {credentials ? (
         <AuthProvider amplifyConfig={config.amplify}>
-          <ApolloProvider
-            client={
-              new AWSAppSyncClient(
-                {
-                  ...config.apollo,
-                  auth: {
-                    ...config.apollo.auth,
-                    credentials,
-                  },
-                },
-                {
-                  cache,
-                  link: createAppSyncLink({
-                    resultsFetcherLink: ApolloLink.from([
-                      createHttpLink({ uri: config.apollo.url }),
-                      setContext((request, previousContext) => ({
-                        headers: {
-                          ...previousContext.headers,
-                          JWT: null,
-                        },
-                      })),
-                    ]),
-                  }),
+          <AuthContext.Consumer>
+            {({ jwt }) => (
+              <ApolloProvider
+                client={
+                  new AWSAppSyncClient(appSyncConfig, {
+                    cache: new InMemoryCache(),
+                    link: createAppSyncLink({
+                      ...appSyncConfig,
+                      resultsFetcherLink: ApolloLink.from([
+                        setContext((request, previousContext) => ({
+                          headers: { ...previousContext.headers, jwt },
+                        })),
+                        createHttpLink({ uri: config.apollo.url }),
+                      ]),
+                    }),
+                  })
                 }
-              )
-            }
-          >
-            <Rehydrated loading={<></>}>
-              <ErrorBoundary>{contents}</ErrorBoundary>
-            </Rehydrated>
-          </ApolloProvider>
+              >
+                <Rehydrated loading={<></>}>
+                  <ErrorBoundary>{contents}</ErrorBoundary>
+                </Rehydrated>
+              </ApolloProvider>
+            )}
+          </AuthContext.Consumer>
         </AuthProvider>
       ) : (
         contents
