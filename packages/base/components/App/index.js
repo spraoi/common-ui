@@ -14,6 +14,8 @@ import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
 import { configType, themeType } from './types';
 
+const cache = new InMemoryCache();
+
 const App = ({ children, config, credentials, theme }) => {
   const contents = (
     <>
@@ -39,7 +41,7 @@ const App = ({ children, config, credentials, theme }) => {
               <ApolloProvider
                 client={
                   new AWSAppSyncClient(appSyncConfig, {
-                    cache: new InMemoryCache(),
+                    cache,
                     link: createAppSyncLink({
                       ...appSyncConfig,
                       resultsFetcherLink: ApolloLink.from([
