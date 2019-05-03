@@ -10,6 +10,7 @@ const boxProps = [
   'boxShadow',
   'color',
   'display',
+  'flexWrap',
   'fontFamily',
   'fontSize',
   'fontWeight',
@@ -105,6 +106,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   display: ${valueAtBp(p.display, bp)};
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
+  flex-wrap: ${valueAtBp(p.flexWrap, bp)};
   top: ${valueAtBp(p.top, bp)};
   right: ${valueAtBp(p.right, bp)};
   bottom: ${valueAtBp(p.bottom, bp)};
