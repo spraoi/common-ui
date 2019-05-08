@@ -17,12 +17,16 @@ import { configType, themeType } from './types';
 const cache = new InMemoryCache();
 
 const App = ({ children, config, credentials, theme }) => {
-  const contents = (
-    <>
-      <StyledGlobal theme={theme} />
-      {children}
-    </>
+  const baseContent = (
+    <ThemeProvider theme={theme}>
+      <ErrorBoundary>
+        <StyledGlobal theme={theme} />
+        {children}
+      </ErrorBoundary>
+    </ThemeProvider>
   );
+
+  if (!credentials) return baseContent;
 
   const appSyncConfig = {
     ...config.apollo,
@@ -33,38 +37,30 @@ const App = ({ children, config, credentials, theme }) => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      {credentials ? (
-        <AuthProvider amplifyConfig={config.amplify}>
-          <AuthContext.Consumer>
-            {({ jwt }) => (
-              <ApolloProvider
-                client={
-                  new AWSAppSyncClient(appSyncConfig, {
-                    cache,
-                    link: createAppSyncLink({
-                      ...appSyncConfig,
-                      resultsFetcherLink: ApolloLink.from([
-                        setContext((request, previousContext) => ({
-                          headers: { ...previousContext.headers, jwt },
-                        })),
-                        createHttpLink({ uri: config.apollo.url }),
-                      ]),
-                    }),
-                  })
-                }
-              >
-                <Rehydrated loading={<></>}>
-                  <ErrorBoundary>{contents}</ErrorBoundary>
-                </Rehydrated>
-              </ApolloProvider>
-            )}
-          </AuthContext.Consumer>
-        </AuthProvider>
-      ) : (
-        contents
-      )}
-    </ThemeProvider>
+    <AuthProvider amplifyConfig={config.amplify}>
+      <AuthContext.Consumer>
+        {({ jwt }) => (
+          <ApolloProvider
+            client={
+              new AWSAppSyncClient(appSyncConfig, {
+                cache,
+                link: createAppSyncLink({
+                  ...appSyncConfig,
+                  resultsFetcherLink: ApolloLink.from([
+                    setContext((request, previousContext) => ({
+                      headers: { ...previousContext.headers, jwt },
+                    })),
+                    createHttpLink({ uri: config.apollo.url }),
+                  ]),
+                }),
+              })
+            }
+          >
+            <Rehydrated loading={<></>}>{baseContent}</Rehydrated>
+          </ApolloProvider>
+        )}
+      </AuthContext.Consumer>
+    </AuthProvider>
   );
 };
 
