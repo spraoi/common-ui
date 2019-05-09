@@ -31,7 +31,6 @@ const Subtext = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  margin-top: ${p => p.theme.space.lg};
 
   &:first-of-type {
     ${p =>
@@ -40,6 +39,12 @@ const Wrapper = styled.div`
         margin-top: 0;
       `}
   }
+
+  ${p =>
+    !p.noTopMargin &&
+    css`
+      margin-top: ${p => p.theme.space.lg};
+    `}
 
   ${p =>
     p.disabled &&
@@ -68,6 +73,7 @@ const InputWrapper = ({
   input,
   label,
   meta,
+  noTopMargin,
   subtext,
   ...rest
 }) => {
@@ -81,6 +87,7 @@ const InputWrapper = ({
       disabled={rest.disabled}
       forceTopMargin={forceTopMargin}
       inline={inline}
+      noTopMargin={noTopMargin}
     >
       {label && (
         <Label htmlFor={htmlFor || input.name} inline={inline}>
@@ -105,6 +112,7 @@ InputWrapper.propTypes = {
     error: PropTypes.string,
     touched: PropTypes.bool.isRequired,
   }).isRequired,
+  noTopMargin: PropTypes.bool,
   subtext: PropTypes.node,
 };
 
@@ -114,6 +122,7 @@ InputWrapper.defaultProps = {
   htmlFor: null,
   inline: false,
   label: null,
+  noTopMargin: false,
   subtext: null,
 };
 
