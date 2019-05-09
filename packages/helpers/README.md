@@ -10,4 +10,4 @@ yarn add @spraoi/helpers
 
 ## Usage
 
-See the `index.js` file for all available functions.
+See the `AutoSave.js` file for all available functions.

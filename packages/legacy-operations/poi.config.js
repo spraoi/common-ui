@@ -27,7 +27,7 @@ module.exports = {
     return config;
   },
   define: { SPRAOI_ENV: JSON.stringify(envVars) },
-  entry: 'src/index.js',
+  entry: 'src/AutoSave.js',
   html: { template: 'src/index.html' },
   babel: {
     jsx: 'react',
