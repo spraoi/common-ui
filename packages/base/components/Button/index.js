@@ -7,9 +7,6 @@ import { Link } from 'gatsby';
 import Box, { generateSafeComponent } from '../Box';
 
 const buttonStyles = css`
-  color: ${p => p.theme.colors.textLink};
-  text-decoration: underline;
-
   ${p =>
     !p.simple &&
     css`
@@ -128,8 +125,10 @@ export default class Button extends PureComponent {
     return type === Button.types.button ? (
       <Box
         as={StyledButton}
+        color={rest.simple ? 'accent' : 'inherit'}
         px={rest.simple ? '0' : 'md'}
         py={rest.simple ? '0' : 'sm'}
+        textDecoration={rest.simple ? 'underline' : 'none'}
         type="button"
         {...fixedProps}
       >

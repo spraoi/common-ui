@@ -37,6 +37,7 @@ const boxProps = [
   'py',
   'right',
   'textAlign',
+  'textDecoration',
   'top',
   'width',
 ];
@@ -107,10 +108,10 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
   flex-wrap: ${valueAtBp(p.flexWrap, bp)};
-  top: ${valueAtBp(p.top, bp)};
-  right: ${valueAtBp(p.right, bp)};
-  bottom: ${valueAtBp(p.bottom, bp)};
-  left: ${valueAtBp(p.left, bp)};
+  top: ${themeValue(p.theme.space, [p.top], null, bp)};
+  right: ${themeValue(p.theme.space, [p.right], null, bp)};
+  bottom: ${themeValue(p.theme.space, [p.bottom], null, bp)};
+  left: ${themeValue(p.theme.space, [p.left], null, bp)};
   width: ${valueAtBp(p.width, bp)};
   height: ${valueAtBp(p.height, bp)};
   max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], null, bp)};
@@ -144,6 +145,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   )};
   line-height: ${themeValue(p.theme.lineHeights, [p.lineHeight], null, bp)};
   text-align: ${valueAtBp(p.textAlign, bp)};
+  text-decoration: ${valueAtBp(p.textDecoration, bp)};
 `;
 
 const generateSafeComponent = ({
