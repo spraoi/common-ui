@@ -45,14 +45,18 @@ export default class AuthProvider extends PureComponent {
       const { jwtToken: jwt, payload } = session.getIdToken();
       const authUser = objectMapKeysDeep(payload, snakeCaseToCamelCase);
       delete authUser.attributes;
-      this.setState({ authState: AUTH_STATES.SIGNED_IN, authUser, jwt });
-      return authUser;
+      const newState = { authState: AUTH_STATES.SIGNED_IN, authUser, jwt };
+      this.setState(newState);
+      return newState;
     } catch (e) {
-      this.setState({
+      const newState = {
         authState: AUTH_STATES.SIGNED_OUT,
         authUser: {},
         jwt: null,
-      });
+      };
+
+      this.setState(newState);
+      return newState;
     }
   }
 
