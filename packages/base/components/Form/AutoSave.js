@@ -22,11 +22,7 @@ class AutoSaveComponent extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { debounce, values } = this.props;
-
-    const valuesDiff = {
-      ...diff(prevProps.values, values),
-      ...diff(values, prevProps.values),
-    };
+    const valuesDiff = diff(prevProps.values, values);
 
     if (Object.keys(valuesDiff).length) {
       if (this.timeout) clearTimeout(this.timeout);
