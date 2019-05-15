@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import diff from 'object-diff';
 import { FormSpy } from 'react-final-form';
+import { addedDiff, deletedDiff, updatedDiff } from 'deep-object-diff';
 
 class AutoSaveComponent extends React.Component {
   static propTypes = {
@@ -22,19 +22,24 @@ class AutoSaveComponent extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { debounce, values } = this.props;
-    const valuesDiff = diff(prevProps.values, values);
+    const added = addedDiff(prevProps.values, values);
+    const deleted = deletedDiff(prevProps.values, values);
+    const updated = updatedDiff(prevProps.values, values);
 
-    if (Object.keys(valuesDiff).length) {
+    if (Object.keys({ ...added, ...deleted, ...updated }).length) {
       if (this.timeout) clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => this.save(valuesDiff), debounce);
+      this.timeout = setTimeout(
+        () => this.save(added, deleted, updated),
+        debounce
+      );
     }
   }
 
-  save = async valuesDiff => {
+  save = async (added, deleted, updated) => {
     const { save } = this.props;
     if (this.promise) await this.promise;
     this.setState({ saving: true });
-    this.promise = save(valuesDiff);
+    this.promise = save(added, deleted, updated);
     await this.promise;
     delete this.promise;
     this.setState({ saving: false });

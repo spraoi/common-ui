@@ -31,8 +31,8 @@
     "apollo-link-http": "^1.5.14",
     "aws-appsync": "^1.5.2",
     "aws-appsync-react": "^1.2.3",
+    "deep-object-diff": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",
-    "object-diff": "^0.0.4",
     "react-autosize-textarea": "^6.0.0",
     "react-select": "^2.4.2",
     "react-super-responsive-table": "^4.3.9"
