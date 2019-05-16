@@ -27,6 +27,7 @@ const boxProps = [
   'mt',
   'mx',
   'my',
+  'overflow',
   'p',
   'pb',
   'pl',
@@ -133,6 +134,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   )};
   background: ${themeValue(p.theme.colors, [p.bg], p.bg, bp)};
   box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], null, bp)};
+  overflow: ${valueAtBp(p.overflow, bp)};
   color: ${themeValue(p.theme.colors, [p.color], null, bp)};
   font-family: ${themeValue(p.theme.fonts, [p.fontFamily], null, bp)};
   font-size: ${themeValue(p.theme.fontSizes, [p.fontSize], null, bp)};
