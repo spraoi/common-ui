@@ -100,7 +100,7 @@ export default class FileUpload extends PureComponent {
     })
       .then(() => {
         load(fileName);
-        onUploadComplete();
+        onUploadComplete({ contentType, fileName });
       })
       .catch(error);
 
