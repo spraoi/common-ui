@@ -5,7 +5,6 @@ import formatTimeSince from './functions/format-time-since';
 import objectMapDeep from './functions/object-map-deep';
 import objectMapKeysDeep from './functions/object-map-keys-deep';
 import shortenNumber from './functions/shorten-number';
-import snakeCaseToCamelCase from './functions/snake-case-to-camel-case';
 
 export {
   fixSCProps,
@@ -15,5 +14,4 @@ export {
   objectMapDeep,
   objectMapKeysDeep,
   shortenNumber,
-  snakeCaseToCamelCase,
 };
