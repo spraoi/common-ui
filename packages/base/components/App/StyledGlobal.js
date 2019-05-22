@@ -68,6 +68,10 @@ export default createGlobalStyle`
       margin: 0;
       transform: scale(1.4);
     }
+
+    &::placeholder {
+      color: ${p => p.theme.colors.inputPrimaryPlaceholderText};
+    }
   }
 
   figure,

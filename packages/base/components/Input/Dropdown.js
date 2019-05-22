@@ -41,6 +41,10 @@ const Dropdown = ({ input, ...rest }) => (
               ...base,
               // TODO: customize
             }),
+            placeholder: base => ({
+              ...base,
+              color: theme.colors.inputPrimaryPlaceholderText,
+            }),
             valueContainer: base => ({
               ...base,
               border: 0,
