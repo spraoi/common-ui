@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/scripts",
   "description": "Helpful scripts for managing @spraoi UI projects & packages.",
-  "version": "0.19.10",
+  "version": "0.20.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/scripts",
   "repository": {
