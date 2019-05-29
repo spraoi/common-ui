@@ -1,7 +1,8 @@
 import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { objectMapKeysDeep, snakeCaseToCamelCase } from '@spraoi/helpers';
+import { camelCase } from 'change-case';
+import { objectMapKeysDeep } from '@spraoi/helpers';
 import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './constants';
 
@@ -43,7 +44,7 @@ export default class AuthProvider extends PureComponent {
     try {
       const session = await Auth.currentSession();
       const { jwtToken: jwt, payload } = session.getIdToken();
-      const authUser = objectMapKeysDeep(payload, snakeCaseToCamelCase);
+      const authUser = objectMapKeysDeep(payload, camelCase);
       delete authUser.attributes;
       const newState = { authState: AUTH_STATES.SIGNED_IN, authUser, jwt };
       this.setState(newState);

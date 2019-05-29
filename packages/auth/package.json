@@ -15,6 +15,7 @@
     "@reach/router": "^1",
     "@spraoi/helpers": "*",
     "aws-amplify": "^1",
+    "change-case": "^3",
     "gatsby": "^2",
     "prop-types": "^15",
     "react": "^16",
