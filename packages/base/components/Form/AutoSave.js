@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import cloneDeep from 'lodash/cloneDeep';
 import { FormSpy } from 'react-final-form';
 import { addedDiff, diff, deletedDiff, updatedDiff } from 'deep-object-diff';
 
@@ -41,7 +40,7 @@ class AutoSaveComponent extends React.Component {
     const { save } = this.props;
     if (this.promise) await this.promise;
     this.setState({ saving: true });
-    this.promise = save(cloneDeep(all), added, deleted, updated);
+    this.promise = save(all, added, deleted, updated);
     await this.promise;
     delete this.promise;
     this.setState({ saving: false });

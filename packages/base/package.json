@@ -15,7 +15,6 @@
     "@spraoi/auth": "*",
     "@spraoi/helpers": "*",
     "gatsby": "^2",
-    "lodash": "^4",
     "prop-types": "^15",
     "react": "^16",
     "react-apollo": "^2",
