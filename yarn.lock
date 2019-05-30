@@ -2044,6 +2044,55 @@
   dependencies:
     execa "^0.2.2"
 
+"@spraoi/auth@^0.19.0":
+  version "0.19.67"
+  resolved "https://registry.yarnpkg.com/@spraoi/auth/-/auth-0.19.67.tgz#efba4ebcf915b9712ad928fdc8fd18483335dbce"
+  integrity sha512-VOoVBwb5V3sXqgnLL5Sa+KiqlwvyE74EW9odrN5w1K3yADJlBNeYj04CK+tNxT/5Iy7OGxkjly8PGn4XLRRnTA==
+
+"@spraoi/babel-preset@^0.19.0":
+  version "0.19.15"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.19.15.tgz#659933c2ddb0d4e13c14cfea944260eae9a93090"
+  integrity sha512-63TSxI4U1CfhgdyfblD8a0N8QAmXbcq/YEUeJWqlqFmLFlWs2WXbfhlazgKT8EAapn8QZMzw05rxElZZ955JIQ==
+
+"@spraoi/eslint-config@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.19.0.tgz#c3e7638abe8d397b51682570dffcd0d2bd99478f"
+  integrity sha512-sU+udGcgxQu0+DBMjtsp+WNjfHgX+qfaJaBDEK/xnxhpifXkP4VBil9nv44CzcB4SAVwWU8ZFBnETRFbtuGDIQ==
+  dependencies:
+    babel-eslint "^10.0.1"
+    eslint-config-airbnb "^17.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-jest "^22.0.0"
+    eslint-plugin-jsx-a11y "^6.1.2"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-react "^7.11.1"
+
+"@spraoi/helpers@^0.19.0":
+  version "0.19.72"
+  resolved "https://registry.yarnpkg.com/@spraoi/helpers/-/helpers-0.19.72.tgz#fdf68930577c6ecaca2cebfeb736dbe370f09de8"
+  integrity sha512-QuAn6tEyI4QaymM+qBN/Hkz8XkPjcd15UmJtgU+io0aKP3ZECrJmMFxtqpIRwmiCdj1a8WJ7dPNV4hvOG5gdcg==
+
+"@spraoi/jest-config@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.19.0.tgz#0c42b87663b69ce07474143c4e4b48eae4abc334"
+  integrity sha512-A774ATZtnUr+9HYtslsm8ce8zUcPwLNRTeL5s8mqZRlKmVa+uIZamQyTcGAhbeR93wvfMHPspW7lsE5A7BLZmw==
+  dependencies:
+    babel-jest "^23.6.0"
+    enzyme "^3.7.0"
+    enzyme-adapter-react-16 "^1.7.0"
+    identity-obj-proxy "^3.0.0"
+
+"@spraoi/stylelint-config@^0.19.30":
+  version "0.19.33"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.19.33.tgz#1cecbe6b2cb72fa323951428d966fc3f8f3b2491"
+  integrity sha512-eA1VpvS+rS4+abWJ7rJnZmx14Fz2xKM/V4Ypn7NuVRYJPa1LCPHenoKlC1x/1ZXcfRcmM2+chnnQD51DTyMZyA==
+  dependencies:
+    stylelint-config-prettier "^4.0.0"
+    stylelint-config-recommended "^2.1.0"
+    stylelint-config-styled-components "^0.1.1"
+    stylelint-processor-styled-components "^1.5.1"
+
 "@stefanprobst/lokijs@^1.5.6-b":
   version "1.5.6-b"
   resolved "https://registry.yarnpkg.com/@stefanprobst/lokijs/-/lokijs-1.5.6-b.tgz#6a36a86dbe132e702e6b15ffd3ce4139aebfe942"
