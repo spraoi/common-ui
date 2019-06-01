@@ -7,6 +7,7 @@ import Spinner from './components/Spinner';
 import Table from './components/Table';
 import { AutoSave, WhenFieldChanges } from './components/Form';
 import {
+  Autocomplete,
   Dropdown,
   FileUpload,
   Input,
@@ -18,6 +19,7 @@ import {
 export {
   App,
   AutoSave,
+  Autocomplete,
   Box,
   Breadcrumbs,
   Button,
