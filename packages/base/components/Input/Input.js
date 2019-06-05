@@ -32,3 +32,4 @@ Input.propTypes = {
 };
 
 export default Input;
+export { StyledInput };
