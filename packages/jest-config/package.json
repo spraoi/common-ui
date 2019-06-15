@@ -12,9 +12,9 @@
     "access": "public"
   },
   "dependencies": {
-    "babel-jest": "^23.6.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "identity-obj-proxy": "^3.0.0"
   },
   "peerDependencies": {

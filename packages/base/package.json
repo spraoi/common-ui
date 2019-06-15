@@ -25,17 +25,17 @@
   },
   "dependencies": {
     "@spraoi/file-upload": "^0.20.0",
-    "apollo-cache-inmemory": "^1.5.1",
-    "apollo-link": "^1.2.11",
-    "apollo-link-context": "^1.0.17",
-    "apollo-link-http": "^1.5.14",
-    "aws-appsync": "^1.5.2",
-    "aws-appsync-react": "^1.2.3",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-link": "^1.2.12",
+    "apollo-link-context": "^1.0.18",
+    "apollo-link-http": "^1.5.15",
+    "aws-appsync": "^1.8.0",
+    "aws-appsync-react": "^1.2.8",
     "deep-object-diff": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",
     "react-autocomplete": "^1.8.1",
-    "react-autosize-textarea": "^6.0.0",
-    "react-select": "^2.4.2",
-    "react-super-responsive-table": "^4.3.9"
+    "react-autosize-textarea": "^7.0.0",
+    "react-select": "^3.0.4",
+    "react-super-responsive-table": "^4.3.12"
   }
 }

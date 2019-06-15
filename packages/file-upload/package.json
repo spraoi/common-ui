@@ -12,16 +12,16 @@
     "access": "public"
   },
   "dependencies": {
-    "filepond": "^3.3.2",
-    "filepond-plugin-file-rename": "^1.1.1",
-    "filepond-plugin-file-validate-type": "^1.2.0",
-    "react-filepond": "^5.0.0"
+    "filepond": "^4.4.9",
+    "filepond-plugin-file-rename": "^1.1.4",
+    "filepond-plugin-file-validate-type": "^1.2.4",
+    "react-filepond": "^7.0.1"
   },
   "peerDependencies": {
     "aws-amplify": "^1",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
-    "styled-components": "^4.1.2"
+    "styled-components": "^4.3.1"
   }
 }

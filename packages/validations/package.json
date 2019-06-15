@@ -12,6 +12,6 @@
     "access": "public"
   },
   "dependencies": {
-    "validator": "^10.9.0"
+    "validator": "^11.0.0"
   }
 }

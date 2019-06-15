@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/lib/Async';
+import AsyncSelect from 'react-select/async';
 import { ThemeConsumer } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
@@ -18,9 +18,7 @@ const Dropdown = ({ input, ...rest }) => {
       }) => (
         <ThemeConsumer>
           {theme => {
-            const height = `calc(${theme.space.xs} * 2 + ${
-              theme.lineHeights.md
-            })`;
+            const height = `calc(${theme.space.xs} * 2 + ${theme.lineHeights.md})`;
 
             const getBorderColor = ({ isFocused }) => {
               if (isFocused) return theme.colors.inputPrimaryBorderFocus;
