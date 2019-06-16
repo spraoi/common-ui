@@ -64,7 +64,7 @@ export default createGlobalStyle`
       outline: none;
     }
 
-    &[type="radio"] {
+    &[type='radio'] {
       margin: 0;
       transform: scale(1.4);
     }

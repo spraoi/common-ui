@@ -5,4 +5,9 @@ module.exports = {
     'stylelint-config-prettier',
   ],
   processors: ['stylelint-processor-styled-components'],
+  rules: {
+    indentation: 2,
+    'no-eol-whitespace': true,
+    'string-quotes': 'single',
+  },
 };
