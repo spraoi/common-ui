@@ -150,7 +150,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   text-decoration: ${valueAtBp(p.textDecoration, bp)};
 `;
 
-const Box = styled(blacklistProps())`
+const Box = styled(blacklistProps({ blacklist: boxProps }))`
   ${p => boxStylesAtBreakpoint(p, boxBreakpoints.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
