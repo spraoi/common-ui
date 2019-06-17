@@ -12,6 +12,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "moment": "^2"
+    "moment": "^2",
+    "react": "^16"
   }
 }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import styled, { css } from 'styled-components';
+import { blacklistProps } from '@spraoi/helpers';
 
 const boxProps = [
   'alignItems',
@@ -150,16 +150,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   text-decoration: ${valueAtBp(p.textDecoration, bp)};
 `;
 
-const generateSafeComponent = ({
-  as = 'div',
-  blacklist = [],
-} = {}) => props => {
-  const safeProps = { ...props };
-  [...boxProps, ...blacklist].forEach(item => delete safeProps[item]);
-  return React.createElement(as, safeProps);
-};
-
-const Box = styled(generateSafeComponent())`
+const Box = styled(blacklistProps())`
   ${p => boxStylesAtBreakpoint(p, boxBreakpoints.none)};
 
   @media (min-width: ${p => p.theme.breakpoints.xs}) {
@@ -206,4 +197,3 @@ Box.defaultProps = boxProps.reduce(
 );
 
 export default Box;
-export { generateSafeComponent };

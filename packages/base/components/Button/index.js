@@ -1,10 +1,10 @@
-import { fixSCProps } from '@spraoi/helpers';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { BarLoader } from 'react-spinners';
 import { Link } from 'gatsby';
-import Box, { generateSafeComponent } from '../Box';
+import { blacklistProps } from '@spraoi/helpers';
+import Box from '../Box';
 
 const buttonStyles = css`
   ${p =>
@@ -54,11 +54,11 @@ const buttonStyles = css`
     `}
 `;
 
-const StyledButton = styled(generateSafeComponent({ as: 'button' }))`
+const StyledButton = styled(blacklistProps({ as: 'button' }))`
   ${buttonStyles};
 `;
 
-const StyledLink = styled(generateSafeComponent({ as: Link }))`
+const StyledLink = styled(blacklistProps({ as: Link }))`
   ${buttonStyles};
 `;
 
@@ -106,11 +106,11 @@ export default class Button extends PureComponent {
       ...rest
     } = this.props;
 
-    const fixedProps = fixSCProps({
+    const fixedProps = {
       disabled: disabled || submitting,
       type,
       ...rest,
-    });
+    };
 
     let buttonChildren = children;
 
@@ -151,7 +151,6 @@ export default class Button extends PureComponent {
     const { children, disabled, download, link, ...rest } = this.props;
 
     delete rest.renderLoading;
-    const fixedProps = fixSCProps(rest);
 
     return download ? (
       <Box
@@ -160,7 +159,7 @@ export default class Button extends PureComponent {
         href={link}
         px={rest.simple ? '0' : 'md'}
         py={rest.simple ? '0' : 'sm'}
-        {...fixedProps}
+        {...rest}
       >
         {children}
       </Box>
@@ -171,7 +170,7 @@ export default class Button extends PureComponent {
         px={rest.simple ? '0' : 'md'}
         py={rest.simple ? '0' : 'sm'}
         to={link}
-        {...fixedProps}
+        {...rest}
       >
         {children}
       </Box>
