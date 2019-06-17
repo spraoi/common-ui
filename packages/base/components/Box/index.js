@@ -197,3 +197,4 @@ Box.defaultProps = boxProps.reduce(
 );
 
 export default Box;
+export { boxProps };

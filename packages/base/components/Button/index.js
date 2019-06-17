@@ -4,7 +4,15 @@ import styled, { css } from 'styled-components';
 import { BarLoader } from 'react-spinners';
 import { Link } from 'gatsby';
 import { blacklistProps } from '@spraoi/helpers';
-import Box from '../Box';
+import Box, { boxProps } from '../Box';
+
+const blacklist = [
+  ...boxProps,
+  'disabled',
+  'secondary',
+  'simple',
+  'submitting',
+];
 
 const buttonStyles = css`
   ${p =>
@@ -54,11 +62,11 @@ const buttonStyles = css`
     `}
 `;
 
-const StyledButton = styled(blacklistProps({ as: 'button' }))`
+const StyledButton = styled(blacklistProps({ as: 'button', blacklist }))`
   ${buttonStyles};
 `;
 
-const StyledLink = styled(blacklistProps({ as: Link }))`
+const StyledLink = styled(blacklistProps({ as: Link, blacklist }))`
   ${buttonStyles};
 `;
 
