@@ -148,8 +148,8 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   )};
   line-height: ${themeValue(p.theme.lineHeights, [p.lineHeight], null, bp)};
   text-align: ${valueAtBp(p.textAlign, bp)};
-  text-decoration: ${valueAtBp(p.textDecoration, bp)};
   word-wrap: ${valueAtBp(p.wordWrap, bp)};
+  text-decoration: ${valueAtBp(p.textDecoration, bp)};
 `;
 
 const Box = styled(blacklistProps({ blacklist: boxProps }))`
