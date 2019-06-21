@@ -18,9 +18,7 @@ const Dropdown = ({ input, ...rest }) => {
       }) => (
         <ThemeConsumer>
           {theme => {
-            const height = `calc(${theme.space.xs} * 2 + ${
-              theme.lineHeights.md
-            })`;
+            const height = `calc(${theme.space.xs} * 2 + ${theme.lineHeights.md})`;
 
             const getBorderColor = ({ isFocused }) => {
               if (isFocused) return theme.colors.inputPrimaryBorderFocus;
