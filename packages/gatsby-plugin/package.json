@@ -14,5 +14,8 @@
   "dependencies": {
     "deepmerge": "^3.2.1",
     "js-yaml": "^3.13.1"
+  },
+  "peerDependencies": {
+    "prettier": "^1"
   }
 }
