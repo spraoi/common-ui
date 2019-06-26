@@ -3073,7 +3073,7 @@ array-filter@~0.0.0:
   resolved "https://registry.yarnpkg.com/array-filter/-/array-filter-0.0.1.tgz#7da8cf2e26628ed732803581fd21f67cacd2eeec"
   integrity sha1-fajPLiZijtcygDWB/SH2fKzS7uw=
 
-array-find-index@^1.0.1:
+array-find-index@1.0.2, array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
   integrity sha1-3wEKoSh+Fku9pvlyOwqWoexBh6E=
@@ -5056,6 +5056,15 @@ constants-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
 
+contain-by-screen@^1.0.4:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/contain-by-screen/-/contain-by-screen-1.3.0.tgz#990fe49d01088b24dca4e237cfb03d52ecf83af6"
+  integrity sha512-s7xejuwIARvBM8cDSFft4xclXFhmnzao/b0dDXL1i5C0GWi4BGyxaYQBtUJI/EZrVCtD8sM8nLeSaJYJlj/1gw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    envify "^4.1.0"
+    lodash "^4.6.1"
+
 contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
@@ -6353,6 +6362,14 @@ entities@^1.1.1, entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
+envify@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/envify/-/envify-4.1.0.tgz#f39ad3db9d6801b4e6b478b61028d3f0b6819f7e"
+  integrity sha512-IKRVVoAYr4pIx4yIWNsz9mOsboxlNXiu7TNBnem/K/uTHdkyzXWDzHCK7UTolqBbgaBz0tQHsD3YNls0uIIjiw==
+  dependencies:
+    esprima "^4.0.0"
+    through "~2.3.4"
+
 envinfo@^5.8.1:
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/envinfo/-/envinfo-5.12.1.tgz#83068c33e0972eb657d6bc69a6df30badefb46ef"
@@ -6762,6 +6779,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+event-listener-with-options@^1.0.2:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/event-listener-with-options/-/event-listener-with-options-1.1.0.tgz#ba12b38c15f0d6426bed297d163eeb3322fb79b1"
+  integrity sha512-5CBIXSXRgo3Sf5/jW4BujZgDLkLvg93Vx3JefQs0UKOQoyKnp1pg6VoKYm4eQxi6KW3B3ghvN+gWSvIGT5tXbg==
 
 event-source-polyfill@^1.0.5:
   version "1.0.5"
@@ -10585,6 +10607,23 @@ jsx-ast-utils@^2.0.1, jsx-ast-utils@^2.1.0:
   dependencies:
     array-includes "^3.0.3"
 
+kefir-bus@^2.2.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/kefir-bus/-/kefir-bus-2.3.1.tgz#c41473196331bd5d0b4ca13baade319224ddc7a0"
+  integrity sha512-wLCQfEw8PddSNeyjDCH2WNgNg3Rb/c+OaG5WEPfEwod+LQfGX4isHcHRWsYNLmdFEw3/KyA+9qDSy+VC4NsifA==
+
+kefir-stopper@^2.1.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/kefir-stopper/-/kefir-stopper-2.2.0.tgz#2003af1175cdec9b91a152b96c90a5b5daf5740e"
+  integrity sha512-hznNQGCFBEHU5sSkQefXZzVccBQ0Z3ZFsdAgd9EVt+bC7ogD1Ns1us+pR1frHfjKxN8fgqgKXUxDR8/gf5W6zw==
+
+kefir@^3.5.1:
+  version "3.8.6"
+  resolved "https://registry.yarnpkg.com/kefir/-/kefir-3.8.6.tgz#046f0dabd870ff7cbfe039995c9bca2c1e68ac36"
+  integrity sha512-H/8ZTjmEEme2YL388rgy5fFlz2NM4ZImNI2rJrTsR8og454kpY3lPVv53W9lfevNELfNeYD33gMdIKHL25z7WA==
+  dependencies:
+    symbol-observable "1.0.4"
+
 keyv@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.0.0.tgz#44923ba39e68b12a7cec7df6c3268c031f2ef373"
@@ -10951,7 +10990,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.11.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0:
+lodash@^4.11.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -13994,6 +14033,19 @@ react-final-form@^6.0.0:
     "@babel/runtime" "^7.4.5"
     ts-essentials "^2.0.8"
 
+react-float-anchor@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-float-anchor/-/react-float-anchor-3.1.0.tgz#f320d9fbd58330b2d9ba51a2cb13b39d0881b166"
+  integrity sha512-srm1l87JYzkEqxfRbeacsYEYeMrC2i/+6c1H+454MF5amJanvSd5EWbwNFUOshQJSPZSEjLQ3+Hn2ee8xcFdSg==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    contain-by-screen "^1.0.4"
+    event-listener-with-options "^1.0.2"
+    kefir "^3.5.1"
+    kefir-bus "^2.2.0"
+    lodash "^4.6.1"
+    prop-types "^15.6.0"
+
 react-ga@^2.5.7:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.7.tgz#1c80a289004bf84f84c26d46f3a6a6513081bf2e"
@@ -14040,6 +14092,19 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-menu-list@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/react-menu-list/-/react-menu-list-6.0.4.tgz#83993c9fff05253e43aae23f3f369d9b6118f5d8"
+  integrity sha512-ia6esU1IjSmCtg/ne6SyjvIo3Q4GnetrjrCMUq28XBRW58TQ/s8YCvYYRCUK6utFhbMiyL7PtJ8gHqSupPbLYw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    array-find-index "1.0.2"
+    kefir "^3.5.1"
+    kefir-bus "^2.2.0"
+    kefir-stopper "^2.1.0"
+    prop-types "^15.6.0"
+    react-float-anchor "^3.0.0"
 
 react-reconciler@^0.20.0:
   version "0.20.4"
@@ -16021,6 +16086,11 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
+symbol-observable@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
+  integrity sha1-Kb9hXUqnEhvdiYsi1LP5vE4qoD0=
+
 symbol-observable@^1.0.2, symbol-observable@^1.0.3, symbol-observable@^1.0.4, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
@@ -16171,7 +16241,7 @@ through2@^3.0.0:
   dependencies:
     readable-stream "2 || 3"
 
-through@2, "through@>=2.2.7 <3", through@^2.3.4, through@^2.3.6:
+through@2, "through@>=2.2.7 <3", through@^2.3.4, through@^2.3.6, through@~2.3.4:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=

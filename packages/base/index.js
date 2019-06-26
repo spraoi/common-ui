@@ -2,6 +2,7 @@ import App from './components/App';
 import Box from './components/Box';
 import Breadcrumbs from './components/Breadcrumbs';
 import Button from './components/Button';
+import Menu from './components/Menu';
 import Redirect from './components/Redirect';
 import Spinner from './components/Spinner';
 import Table from './components/Table';
@@ -26,6 +27,7 @@ export {
   Dropdown,
   FileUpload,
   Input,
+  Menu,
   Radio,
   RadioGroup,
   Redirect,
