@@ -51,6 +51,8 @@ function createIconComponent() {
   const iconComponentDir = 'src/components/Icon';
   const iconComponent = `${iconComponentDir}/index.js`;
 
+  if (!fs.existsSync(iconDir)) return;
+
   const files = fs
     .readdirSync(iconDir)
     .map(file => ({
