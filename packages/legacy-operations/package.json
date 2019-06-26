@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-operations",
   "description": "Build & deployment setup for legacy UI projects.",
-  "version": "0.20.0",
+  "version": "0.20.18",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-operations",
   "repository": {

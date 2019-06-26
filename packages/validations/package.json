@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/validations",
   "description": "Field-level input validation functions for final-form.",
-  "version": "0.20.7",
+  "version": "0.20.18",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/validations",
   "repository": {
