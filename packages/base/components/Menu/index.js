@@ -77,7 +77,7 @@ const Menu = ({
         >
           <MenuList>
             {heading && (
-              <Box bg="body" color="textSubtle" fontSize="sm" mb="sm" p="md">
+              <Box bg="gray1" color="textSubtle" fontSize="sm" mb="sm" p="md">
                 {heading}
               </Box>
             )}
