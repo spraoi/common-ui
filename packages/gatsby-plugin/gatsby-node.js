@@ -68,7 +68,7 @@ function createIconComponent() {
 
     const formatted = prettier.format(
       `
-        // NOTE: this file is generated automatically, any changes will be overridden.
+        // NOTE: this file is generated automatically, any changes will be overwritten.
 
         import PropTypes from 'prop-types';
         import React from 'react';
