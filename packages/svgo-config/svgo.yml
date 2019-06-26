@@ -1,0 +1,4 @@
+plugins:
+  - removeAttrs: { attrs: (class) }
+  - removeDimensions: true
+  - sortAttrs: true

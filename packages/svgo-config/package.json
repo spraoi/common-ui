@@ -1,0 +1,17 @@
+{
+  "name": "@spraoi/svgo-config",
+  "description": "An svgo config to keep svg files clean.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/svgo-config",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "svgo": "^1"
+  }
+}
