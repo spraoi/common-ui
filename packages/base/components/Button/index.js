@@ -33,6 +33,7 @@ const buttonStyles = css`
       letter-spacing: ${p => p.theme.letterSpacings.sm};
       text-transform: uppercase;
       text-decoration: none;
+      white-space: nowrap;
       cursor: pointer;
 
       &:hover {
@@ -40,7 +41,7 @@ const buttonStyles = css`
       }
 
       @media (min-width: ${p => p.theme.breakpoints.md}) {
-        max-width: ${p => p.theme.maxWidths.button};
+        width: auto;
       }
 
       ${p =>
@@ -104,6 +105,19 @@ export default class Button extends PureComponent {
     type: Button.types.button,
   };
 
+  static getCommonButtonProps(props, disabled) {
+    return {
+      color: props.simple ? 'accent' : 'inherit',
+      disabled,
+      maxWidth: 'button',
+      px: props.simple ? '0' : 'md',
+      py: props.simple ? '0' : 'sm',
+      textDecoration: props.simple ? 'underline' : 'none',
+      width: { md: 'auto', none: '100%' },
+      ...props,
+    };
+  }
+
   renderButton() {
     const {
       children,
@@ -113,12 +127,6 @@ export default class Button extends PureComponent {
       type,
       ...rest
     } = this.props;
-
-    const fixedProps = {
-      disabled: disabled || submitting,
-      type,
-      ...rest,
-    };
 
     let buttonChildren = children;
 
@@ -130,26 +138,17 @@ export default class Button extends PureComponent {
       );
     }
 
+    const commonProps = Button.getCommonButtonProps(
+      rest,
+      disabled || submitting
+    );
+
     return type === Button.types.button ? (
-      <Box
-        as={StyledButton}
-        color={rest.simple ? 'accent' : 'inherit'}
-        px={rest.simple ? '0' : 'md'}
-        py={rest.simple ? '0' : 'sm'}
-        textDecoration={rest.simple ? 'underline' : 'none'}
-        type="button"
-        {...fixedProps}
-      >
+      <Box as={StyledButton} type="button" {...commonProps}>
         {buttonChildren}
       </Box>
     ) : (
-      <Box
-        as={StyledButton}
-        px={rest.simple ? '0' : 'md'}
-        py={rest.simple ? '0' : 'sm'}
-        type="submit"
-        {...fixedProps}
-      >
+      <Box as={StyledButton} type="submit" {...commonProps}>
         {buttonChildren}
       </Box>
     );
@@ -157,29 +156,15 @@ export default class Button extends PureComponent {
 
   renderLink() {
     const { children, disabled, download, link, ...rest } = this.props;
-
     delete rest.renderLoading;
+    const commonProps = Button.getCommonButtonProps(rest, disabled);
 
     return download ? (
-      <Box
-        as={StyledLink}
-        download
-        href={link}
-        px={rest.simple ? '0' : 'md'}
-        py={rest.simple ? '0' : 'sm'}
-        {...rest}
-      >
+      <Box as={StyledLink} download href={link} {...commonProps}>
         {children}
       </Box>
     ) : (
-      <Box
-        as={StyledLink}
-        disabled={disabled}
-        px={rest.simple ? '0' : 'md'}
-        py={rest.simple ? '0' : 'sm'}
-        to={link}
-        {...rest}
-      >
+      <Box as={StyledLink} disabled={disabled} to={link} {...commonProps}>
         {children}
       </Box>
     );
