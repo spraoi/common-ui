@@ -22,7 +22,6 @@ const buttonStyles = css`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
       background-color: ${p => p.theme.colors.primary};
       border-radius: ${p => p.theme.radii.md};
       box-shadow: ${p => p.theme.boxShadows.md};
@@ -38,10 +37,6 @@ const buttonStyles = css`
 
       &:hover {
         background-color: ${p => p.theme.colors.primaryLight};
-      }
-
-      @media (min-width: ${p => p.theme.breakpoints.md}) {
-        width: auto;
       }
 
       ${p =>
@@ -109,11 +104,10 @@ export default class Button extends PureComponent {
     return {
       color: props.simple ? 'accent' : 'inherit',
       disabled,
-      maxWidth: 'button',
       px: props.simple ? '0' : 'md',
       py: props.simple ? '0' : 'sm',
       textDecoration: props.simple ? 'underline' : 'none',
-      width: { md: 'auto', none: '100%' },
+      width: 'inherit',
       ...props,
     };
   }
