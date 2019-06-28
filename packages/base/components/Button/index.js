@@ -107,7 +107,7 @@ export default class Button extends PureComponent {
       px: props.simple ? '0' : 'md',
       py: props.simple ? '0' : 'sm',
       textDecoration: props.simple ? 'underline' : 'none',
-      width: 'inherit',
+      width: props.simple ? 'auto' : 'inherit',
       ...props,
     };
   }
