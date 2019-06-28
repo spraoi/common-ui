@@ -114,9 +114,6 @@ export const themeType = PropTypes.shape({
     md: PropTypes.string.isRequired,
     sm: PropTypes.string.isRequired,
   }),
-  maxWidths: PropTypes.shape({
-    button: PropTypes.string.isRequired,
-  }),
   radii: PropTypes.shape({
     lg: PropTypes.string.isRequired,
     md: PropTypes.string.isRequired,

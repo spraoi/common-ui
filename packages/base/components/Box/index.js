@@ -102,9 +102,9 @@ const valueAtBp = (value, bp) => {
 
 const themeValue = (theme, props, fallback, bp) => {
   const value = props.find(p => p) || fallback;
-  const valueAtBp = valueAtBp(value, bp);
-  if (!theme) return valueAtBp;
-  return theme[valueAtBp] || valueAtBp;
+  const v = valueAtBp(value, bp);
+  if (!theme) return v;
+  return theme[v] || v;
 };
 
 const boxStylesAtBreakpoint = (p, bp) => css`
