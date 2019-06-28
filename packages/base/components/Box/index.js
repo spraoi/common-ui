@@ -102,7 +102,9 @@ const valueAtBp = (value, bp) => {
 
 const themeValue = (theme, props, fallback, bp) => {
   const value = props.find(p => p) || fallback;
-  return theme[valueAtBp(value, bp)] || valueAtBp(value, bp);
+  const valueAtBp = valueAtBp(value, bp);
+  if (!theme) return valueAtBp;
+  return theme[valueAtBp] || valueAtBp;
 };
 
 const boxStylesAtBreakpoint = (p, bp) => css`
@@ -115,8 +117,8 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   right: ${themeValue(p.theme.space, [p.right], null, bp)};
   bottom: ${themeValue(p.theme.space, [p.bottom], null, bp)};
   left: ${themeValue(p.theme.space, [p.left], null, bp)};
-  width: ${valueAtBp(p.width, bp)};
-  height: ${valueAtBp(p.height, bp)};
+  width: ${themeValue(p.theme.widths, [p.width], null, bp)};
+  height: ${themeValue(p.theme.heights, [p.height], null, bp)};
   max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], null, bp)};
   margin: ${themeValue(p.theme.space, [p.m], null, bp)};
   margin-top: ${themeValue(p.theme.space, [p.mt, p.my], null, bp)};
