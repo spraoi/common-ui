@@ -56,6 +56,18 @@ const StyledTd = styled(Td)`
   }
 `;
 
+const formatCell = cell => {
+  if (React.isValidElement(cell)) {
+    return cell;
+  }
+
+  if (Array.isArray(cell) || (typeof cell === 'object' && cell !== null)) {
+    return <pre>{JSON.stringify(cell, null, 2)}</pre>;
+  }
+
+  return String(cell);
+};
+
 const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
   <StyledTable>
     {!!rows.length && (
@@ -72,7 +84,9 @@ const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
         rows.map((row, rowIndex) => (
           <StyledTr key={keyPrefix + rowIndex}>
             {row.map((cell, cellIndex) => (
-              <StyledTd key={keyPrefix + cellIndex}>{cell}</StyledTd>
+              <StyledTd key={keyPrefix + cellIndex}>
+                {formatCell(cell)}
+              </StyledTd>
             ))}
           </StyledTr>
         ))
