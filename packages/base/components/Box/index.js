@@ -11,6 +11,7 @@ const boxProps = [
   'color',
   'cursor',
   'display',
+  'flexDirection',
   'flexWrap',
   'fontFamily',
   'fontSize',
@@ -28,6 +29,7 @@ const boxProps = [
   'mt',
   'mx',
   'my',
+  'order',
   'overflow',
   'p',
   'pb',
@@ -114,6 +116,8 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   justify-content: ${valueAtBp(p.justifyContent, bp)};
   align-items: ${valueAtBp(p.alignItems, bp)};
   flex-wrap: ${valueAtBp(p.flexWrap, bp)};
+  flex-direction: ${valueAtBp(p.flexDirection, bp)};
+  order: ${valueAtBp(p.order, bp)};
   top: ${themeValue(p.theme.space, [p.top], null, bp)};
   right: ${themeValue(p.theme.space, [p.right], null, bp)};
   bottom: ${themeValue(p.theme.space, [p.bottom], null, bp)};
