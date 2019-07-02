@@ -41,6 +41,7 @@ const boxProps = [
   'textAlign',
   'textDecoration',
   'top',
+  'transform',
   'width',
   'wordWrap',
 ];
@@ -136,6 +137,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
     p.borderRadius,
     bp
   )};
+  transform: ${valueAtBp(p.transform, bp)};
   background: ${themeValue(p.theme.colors, [p.bg], p.bg, bp)};
   box-shadow: ${themeValue(p.theme.boxShadows, [p.boxShadow], null, bp)};
   overflow: ${valueAtBp(p.overflow, bp)};
