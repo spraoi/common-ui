@@ -16,11 +16,11 @@ const Label = styled.label`
   cursor: pointer;
 
   ${p =>
-    p.inline &&
+    (p.labelPosition === 'left' || p.labelPosition === 'right') &&
     css`
       margin-bottom: 0;
-      padding-left: ${p => p.theme.space.sm};
-      color: ${p => p.theme.colors.textPrimary};
+      padding-right: ${p.labelPosition === 'left' ? p.theme.space.sm : '0'};
+      padding-left: ${p.labelPosition === 'right' ? p.theme.space.sm : '0'};
     `}
 `;
 
@@ -54,14 +54,13 @@ const Wrapper = styled.div`
     `}
 
   ${p =>
-    p.inline &&
+    (p.labelPosition === 'left' || p.labelPosition === 'right') &&
     css`
       display: flex;
-      flex-direction: row-reverse;
+      flex-direction: ${p.labelPosition === 'left' ? 'row' : 'row-reverse'};
       justify-content: flex-end;
       align-items: center;
       margin-top: 0;
-      margin-right: ${p => p.theme.space.lg};
     `}
 `;
 
@@ -69,9 +68,9 @@ const InputWrapper = ({
   children,
   forceTopMargin,
   htmlFor,
-  inline,
   input,
   label,
+  labelPosition,
   meta,
   noTopMargin,
   subtext,
@@ -86,11 +85,11 @@ const InputWrapper = ({
     <Wrapper
       disabled={rest.disabled}
       forceTopMargin={forceTopMargin}
-      inline={inline}
+      labelPosition={labelPosition}
       noTopMargin={noTopMargin}
     >
       {label && (
-        <Label htmlFor={htmlFor || input.name} inline={inline}>
+        <Label htmlFor={htmlFor || input.name} labelPosition={labelPosition}>
           {label}
         </Label>
       )}
@@ -105,9 +104,9 @@ InputWrapper.propTypes = {
   disabled: PropTypes.bool,
   forceTopMargin: PropTypes.bool,
   htmlFor: PropTypes.string,
-  inline: PropTypes.bool,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   label: PropTypes.string,
+  labelPosition: PropTypes.oneOf(['left', 'right', 'top']),
   meta: PropTypes.shape({
     error: PropTypes.string,
     touched: PropTypes.bool.isRequired,
@@ -120,8 +119,8 @@ InputWrapper.defaultProps = {
   disabled: false,
   forceTopMargin: false,
   htmlFor: null,
-  inline: false,
   label: null,
+  labelPosition: 'top',
   noTopMargin: false,
   subtext: null,
 };

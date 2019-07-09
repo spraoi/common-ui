@@ -27,6 +27,10 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const styles = {
+              container: base => ({
+                ...base,
+                flex: 1,
+              }),
               control: (base, { isFocused }) => ({
                 ...base,
                 '&:hover': {
