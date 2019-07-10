@@ -22,6 +22,7 @@ const boxProps = [
   'letterSpacing',
   'lineHeight',
   'm',
+  'maxHeight',
   'maxWidth',
   'mb',
   'ml',
@@ -125,6 +126,7 @@ const boxStylesAtBreakpoint = (p, bp) => css`
   width: ${themeValue(p.theme.widths, [p.width], null, bp)};
   height: ${themeValue(p.theme.heights, [p.height], null, bp)};
   max-width: ${themeValue(p.theme.maxWidths, [p.maxWidth], null, bp)};
+  max-height: ${valueAtBp(p.maxHeight, bp)};
   margin: ${themeValue(p.theme.space, [p.m], null, bp)};
   margin-top: ${themeValue(p.theme.space, [p.mt, p.my], null, bp)};
   margin-right: ${themeValue(p.theme.space, [p.mr, p.mx], null, bp)};
