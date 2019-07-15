@@ -68,7 +68,14 @@ const formatCell = cell => {
   return String(cell);
 };
 
-const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
+const Table = ({
+  expandLastColumn,
+  header,
+  isLoading,
+  keyPrefix,
+  renderEmpty,
+  rows,
+}) => (
   <StyledTable>
     {!!rows.length && (
       <StyledThead>
@@ -84,7 +91,14 @@ const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
         rows.map((row, rowIndex) => (
           <StyledTr key={keyPrefix + rowIndex}>
             {row.map((cell, cellIndex) => (
-              <StyledTd key={keyPrefix + cellIndex}>
+              <StyledTd
+                key={keyPrefix + cellIndex}
+                colSpan={
+                  expandLastColumn &&
+                  cellIndex === row.length - 1 &&
+                  header.length - row.length + 1
+                }
+              >
                 {formatCell(cell)}
               </StyledTd>
             ))}
@@ -102,6 +116,7 @@ const Table = ({ header, isLoading, keyPrefix, renderEmpty, rows }) => (
 );
 
 Table.propTypes = {
+  expandLastColumn: PropTypes.bool,
   header: PropTypes.arrayOf(PropTypes.node).isRequired,
   isLoading: PropTypes.bool,
   keyPrefix: PropTypes.string,
@@ -110,6 +125,7 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
+  expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
   renderEmpty: 'No results.',
