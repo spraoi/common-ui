@@ -69,7 +69,7 @@ const formatCell = cell => {
 };
 
 const Table = ({
-  colSpanEnable,
+  expandLastColumn,
   header,
   isLoading,
   keyPrefix,
@@ -94,7 +94,7 @@ const Table = ({
               <StyledTd
                 key={keyPrefix + cellIndex}
                 colSpan={
-                  colSpanEnable &&
+                  expandLastColumn &&
                   cellIndex === row.length - 1 &&
                   header.length - row.length + 1
                 }
@@ -116,7 +116,7 @@ const Table = ({
 );
 
 Table.propTypes = {
-  colSpanEnable: PropTypes.bool,
+  expandLastColumn: PropTypes.bool,
   header: PropTypes.arrayOf(PropTypes.node).isRequired,
   isLoading: PropTypes.bool,
   keyPrefix: PropTypes.string,
@@ -125,7 +125,7 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
-  colSpanEnable: false,
+  expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
   renderEmpty: 'No results.',
