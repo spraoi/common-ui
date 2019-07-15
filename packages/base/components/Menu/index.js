@@ -99,11 +99,13 @@ const Menu = ({
                     {dividerPositions.includes(i) && <Box as="hr" my="sm" />}
                     <StyledMenuItem
                       onItemChosen={e => {
-                        if (typeof itemActions[i] !== 'string') return () => {};
+                        if (typeof itemActions[i] === 'string') {
+                          return e.byKeyboard
+                            ? linkRef.current.click()
+                            : () => {};
+                        }
 
-                        return e.byKeyboard
-                          ? linkRef.current.click()
-                          : itemActions[i](e);
+                        return itemActions[i](e);
                       }}
                     >
                       {typeof itemActions[i] === 'string' ? (
