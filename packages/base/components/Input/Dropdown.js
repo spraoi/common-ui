@@ -7,6 +7,7 @@ import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
+  const [value, setValue] = useState('');
 
   return (
     <InputWrapper input={input} {...rest}>
@@ -27,10 +28,6 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const styles = {
-              container: base => ({
-                ...base,
-                flex: 1,
-              }),
               control: (base, { isFocused }) => ({
                 ...base,
                 '&:hover': {
@@ -58,20 +55,28 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const onChange = (value, meta) => {
-              const parsedValue = Array.isArray(value)
-                ? value.map(o => o.value)
-                : value.value;
+              if (value) {
+                const parsedValue = Array.isArray(value)
+                  ? value.map(o => o.value)
+                  : value.value;
 
-              if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
-              input.onChange(parsedValue, meta);
+                if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
+                input.onChange(parsedValue, meta);
+              } else {
+                input.onChange('', meta);
+              }
             };
 
             const optionByValue = value =>
               (inputRest.options || asyncOptions).find(o => o.value === value);
 
-            const value = Array.isArray(input.value)
-              ? input.value.map(optionByValue)
-              : optionByValue(input.value);
+            setValue(
+              input.value !== ''
+                ? Array.isArray(input.value)
+                  ? input.value.map(optionByValue)
+                  : optionByValue(input.value)
+                : ''
+            );
 
             return loadOptions ? (
               <AsyncSelect
@@ -110,11 +115,7 @@ const Dropdown = ({ input, ...rest }) => {
 };
 
 Dropdown.propTypes = {
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  }).isRequired,
+  input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
 };
 
 export default Dropdown;
