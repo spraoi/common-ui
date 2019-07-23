@@ -6,7 +6,6 @@ import { ThemeConsumer } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
-  console.log(input);
   const [asyncOptions, setAsyncOptions] = useState([]);
 
   return (
@@ -55,17 +54,14 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const onChange = (value, meta) => {
+              let parsedValue = '';
               if (value) {
-                const parsedValue = Array.isArray(value)
+                parsedValue = Array.isArray(value)
                   ? value.map(o => o.value)
                   : value.value;
-
-                if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
-                input.onChange(parsedValue, meta);
-              } else {
-                if (inputRest.onChange) inputRest.onChange('', meta);
-                input.onChange('', meta);
               }
+              if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
+              input.onChange(parsedValue, meta);
             };
 
             const optionByValue = value =>
