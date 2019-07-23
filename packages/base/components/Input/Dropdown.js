@@ -27,10 +27,6 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const styles = {
-              container: base => ({
-                ...base,
-                flex: 1,
-              }),
               control: (base, { isFocused }) => ({
                 ...base,
                 '&:hover': {
@@ -58,10 +54,12 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const onChange = (value, meta) => {
-              const parsedValue = Array.isArray(value)
-                ? value.map(o => o.value)
-                : value.value;
-
+              let parsedValue = '';
+              if (value) {
+                parsedValue = Array.isArray(value)
+                  ? value.map(o => o.value)
+                  : value.value;
+              }
               if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
               input.onChange(parsedValue, meta);
             };
@@ -71,7 +69,7 @@ const Dropdown = ({ input, ...rest }) => {
 
             const value = Array.isArray(input.value)
               ? input.value.map(optionByValue)
-              : optionByValue(input.value);
+              : optionByValue(input.value) || '';
 
             return loadOptions ? (
               <AsyncSelect
