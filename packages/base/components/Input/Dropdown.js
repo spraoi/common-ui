@@ -6,8 +6,8 @@ import { ThemeConsumer } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
+  console.log(input);
   const [asyncOptions, setAsyncOptions] = useState([]);
-  const [value, setValue] = useState('');
 
   return (
     <InputWrapper input={input} {...rest}>
@@ -63,6 +63,7 @@ const Dropdown = ({ input, ...rest }) => {
                 if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
                 input.onChange(parsedValue, meta);
               } else {
+                if (inputRest.onChange) inputRest.onChange('', meta);
                 input.onChange('', meta);
               }
             };
@@ -70,13 +71,9 @@ const Dropdown = ({ input, ...rest }) => {
             const optionByValue = value =>
               (inputRest.options || asyncOptions).find(o => o.value === value);
 
-            setValue(
-              input.value !== ''
-                ? Array.isArray(input.value)
-                  ? input.value.map(optionByValue)
-                  : optionByValue(input.value)
-                : ''
-            );
+            const value = Array.isArray(input.value)
+              ? input.value.map(optionByValue)
+              : optionByValue(input.value) || '';
 
             return loadOptions ? (
               <AsyncSelect
@@ -115,7 +112,11 @@ const Dropdown = ({ input, ...rest }) => {
 };
 
 Dropdown.propTypes = {
-  input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  }).isRequired,
 };
 
 export default Dropdown;
