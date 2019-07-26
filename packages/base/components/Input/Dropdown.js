@@ -3,32 +3,19 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { ThemeConsumer } from 'styled-components';
+import uniqBy from 'lodash/uniqBy';
 import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
-  /* This function will remove duplicate objects from array */
-  const uniqueArray = array => {
-    const result = [];
-    const map = new Map();
-    array.forEach(item => {
-      if (!map.has(item.value)) {
-        map.set(item.value, true);
-        result.push({
-          label: item.label,
-          value: item.value,
-        });
-      }
-    });
-    return result;
-  };
   return (
     <InputWrapper input={input} {...rest}>
       {({
+        asyncPrimaryOptions = null,
         backspaceRemoves = false,
-        cacheOptions = false,
         loadOptions,
         placeholder = '',
+        setAsyncPrimaryOptions,
         ...inputRest
       }) => (
         <ThemeConsumer>
@@ -85,7 +72,7 @@ const Dropdown = ({ input, ...rest }) => {
 
             const optionByValue = value => {
               // After search add new options in state
-              const newAsyncOptions = rest.asyncPrimaryOptions || asyncOptions;
+              const newAsyncOptions = asyncPrimaryOptions || asyncOptions;
               return [...(inputRest.options || []), ...newAsyncOptions].find(
                 o => o.value === value
               );
@@ -100,14 +87,13 @@ const Dropdown = ({ input, ...rest }) => {
                 {...inputRest}
                 {...input}
                 backspaceRemoves={backspaceRemoves}
-                cacheOptions={cacheOptions}
                 defaultOptions
                 loadOptions={async query => {
                   const options = await loadOptions(query);
-                  if (inputRest.asyncPrimaryOptions) {
+                  if (asyncPrimaryOptions) {
                     /* After search add new options in state & remove duplicate options from state */
-                    inputRest.setAsyncPrimaryOptions(prevOptions =>
-                      uniqueArray([...prevOptions, ...options])
+                    setAsyncPrimaryOptions(prevOptions =>
+                      uniqBy([...prevOptions, ...options], 'value')
                     );
                   } else {
                     setAsyncOptions(options);
