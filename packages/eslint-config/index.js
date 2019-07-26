@@ -5,6 +5,7 @@ module.exports = {
   plugins: ['jest', 'prettier'],
   rules: {
     'consistent-return': 'off',
+    curly: ['error', 'multi-line'],
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
     'no-use-before-define': 'off',
