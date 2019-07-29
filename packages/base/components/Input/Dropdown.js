@@ -1,13 +1,14 @@
+import AsyncSelect from 'react-select/async';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
-import { ThemeConsumer } from 'styled-components';
 import uniqBy from 'lodash/uniqBy';
+import { ThemeConsumer } from 'styled-components';
 import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
+
   return (
     <InputWrapper input={input} {...rest}>
       {({
@@ -61,18 +62,21 @@ const Dropdown = ({ input, ...rest }) => {
 
             const onChange = (value, meta) => {
               let parsedValue = '';
+
               if (value) {
                 parsedValue = Array.isArray(value)
                   ? value.map(o => o.value)
                   : value.value;
               }
+
               if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
               input.onChange(parsedValue, meta);
             };
 
             const optionByValue = value => {
-              // After search add new options in state
+              // after search add new options in state
               const newAsyncOptions = externalAsyncOptions || asyncOptions;
+
               return [...(inputRest.options || []), ...newAsyncOptions].find(
                 o => o.value === value
               );
@@ -90,14 +94,17 @@ const Dropdown = ({ input, ...rest }) => {
                 defaultOptions
                 loadOptions={async query => {
                   const options = await loadOptions(query);
+
                   if (externalAsyncOptions) {
-                    /* After search add new options in state & remove duplicate options from state */
+                    // after search add new options in state & remove duplicate
+                    // options from state.
                     setExternalAsyncOptions(prevOptions =>
                       uniqBy([...prevOptions, ...options], 'value')
                     );
                   } else {
                     setAsyncOptions(options);
                   }
+
                   return options;
                 }}
                 onChange={onChange}
