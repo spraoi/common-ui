@@ -43,18 +43,7 @@
 
 It can be hard to fully test a shared component without using it in a real
 project. To avoid having to push to NPM just to try something out, you can use
-the `spraoi link` command.
-
-In the UI project root, run (replacing the packages path appropriately):
-
-```bash
-spraoi link --packages ../path/to/common-ui/packages
-```
-
-This symlinks all packages to your local `node_modules` directory—allowing you
-to import as usual and test with ease. Note that `yarn` will throw an error if
-you attempt to install or remove anything after doing this. You can remove the
-symlinks with `spraoi unlink` to avoid it.
+[Yalc](https://github.com/whitecolor/yalc).
 
 ## Publishing to NPM
 
