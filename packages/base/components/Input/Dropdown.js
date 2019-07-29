@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { ThemeConsumer } from 'styled-components';
+import uniqBy from 'lodash/uniqBy';
 import InputWrapper from './InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
-
   return (
     <InputWrapper input={input} {...rest}>
       {({
+        externalAsyncOptions = null,
         backspaceRemoves = false,
         loadOptions,
         placeholder = '',
+        setExternalAsyncOptions,
         ...inputRest
       }) => (
         <ThemeConsumer>
@@ -27,6 +29,10 @@ const Dropdown = ({ input, ...rest }) => {
             };
 
             const styles = {
+              container: base => ({
+                ...base,
+                flex: 1,
+              }),
               control: (base, { isFocused }) => ({
                 ...base,
                 '&:hover': {
@@ -64,8 +70,13 @@ const Dropdown = ({ input, ...rest }) => {
               input.onChange(parsedValue, meta);
             };
 
-            const optionByValue = value =>
-              (inputRest.options || asyncOptions).find(o => o.value === value);
+            const optionByValue = value => {
+              // After search add new options in state
+              const newAsyncOptions = externalAsyncOptions || asyncOptions;
+              return [...(inputRest.options || []), ...newAsyncOptions].find(
+                o => o.value === value
+              );
+            };
 
             const value = Array.isArray(input.value)
               ? input.value.map(optionByValue)
@@ -76,11 +87,17 @@ const Dropdown = ({ input, ...rest }) => {
                 {...inputRest}
                 {...input}
                 backspaceRemoves={backspaceRemoves}
-                cacheOptions
                 defaultOptions
                 loadOptions={async query => {
                   const options = await loadOptions(query);
-                  setAsyncOptions(options);
+                  if (externalAsyncOptions) {
+                    /* After search add new options in state & remove duplicate options from state */
+                    setExternalAsyncOptions(prevOptions =>
+                      uniqBy([...prevOptions, ...options], 'value')
+                    );
+                  } else {
+                    setAsyncOptions(options);
+                  }
                   return options;
                 }}
                 onChange={onChange}
