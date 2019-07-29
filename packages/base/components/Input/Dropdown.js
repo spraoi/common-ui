@@ -11,11 +11,11 @@ const Dropdown = ({ input, ...rest }) => {
   return (
     <InputWrapper input={input} {...rest}>
       {({
-        asyncPrimaryOptions = null,
+        externalAsyncOptions = null,
         backspaceRemoves = false,
         loadOptions,
         placeholder = '',
-        setAsyncPrimaryOptions,
+        setExternalAsyncOptions,
         ...inputRest
       }) => (
         <ThemeConsumer>
@@ -72,7 +72,7 @@ const Dropdown = ({ input, ...rest }) => {
 
             const optionByValue = value => {
               // After search add new options in state
-              const newAsyncOptions = asyncPrimaryOptions || asyncOptions;
+              const newAsyncOptions = externalAsyncOptions || asyncOptions;
               return [...(inputRest.options || []), ...newAsyncOptions].find(
                 o => o.value === value
               );
@@ -90,9 +90,9 @@ const Dropdown = ({ input, ...rest }) => {
                 defaultOptions
                 loadOptions={async query => {
                   const options = await loadOptions(query);
-                  if (asyncPrimaryOptions) {
+                  if (externalAsyncOptions) {
                     /* After search add new options in state & remove duplicate options from state */
-                    setAsyncPrimaryOptions(prevOptions =>
+                    setExternalAsyncOptions(prevOptions =>
                       uniqBy([...prevOptions, ...options], 'value')
                     );
                   } else {
