@@ -56,7 +56,7 @@ function createIconComponent() {
   const files = fs
     .readdirSync(iconDir)
     .map(file => ({
-      componentName: file.split('.')[0].replace(/[^a-z]/, ''),
+      componentName: file.split('.')[0].replace(/[^a-z]/gi, ''),
       file,
       name: file.split('.')[0],
       type: file.split('.').pop(),
