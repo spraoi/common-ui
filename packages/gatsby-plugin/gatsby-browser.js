@@ -7,7 +7,9 @@ exports.shouldUpdateScroll = ({
     routerProps.location.pathname === prevRouterProps.location.pathname &&
     routerProps.location.search !== prevRouterProps.location.search
   ) {
-    window.scrollTo(...getSavedScrollPosition(prevRouterProps.location));
+    window.scrollTo(
+      ...(getSavedScrollPosition(prevRouterProps.location) || [0, 0])
+    );
     return false;
   }
 
