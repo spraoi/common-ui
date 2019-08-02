@@ -10,7 +10,7 @@ exports.shouldUpdateScroll = ({
     return true;
   }
 
-  // if a query param changes we want to maintain our previous scroll position
+  // if a query param changes, we want to maintain our previous scroll position
   if (location.search !== prevLocation.search) {
     const position = getSavedScrollPosition(prevLocation);
     if (position) return position;
