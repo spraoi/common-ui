@@ -135,7 +135,11 @@ Dropdown.propTypes = {
   input: PropTypes.shape({
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.string,
+    ]),
   }).isRequired,
 };
 
