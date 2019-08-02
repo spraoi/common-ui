@@ -1,17 +1,21 @@
 exports.shouldUpdateScroll = ({
   getSavedScrollPosition,
-  prevRouterProps,
-  routerProps,
+  prevRouterProps: { location: prevLocation },
+  routerProps: { location },
 }) => {
-  if (
-    routerProps.location.pathname === prevRouterProps.location.pathname &&
-    routerProps.location.search !== prevRouterProps.location.search
-  ) {
-    window.scrollTo(
-      ...(getSavedScrollPosition(prevRouterProps.location) || [0, 0])
-    );
-    return false;
+  const stripPath = path => path.replace(/[^a-z0-9]/gi, '');
+
+  // if the path changes, we let the browser do its thing
+  if (stripPath(location.pathname) !== stripPath(prevLocation.pathname)) {
+    return true;
   }
 
-  return true;
+  // if a query param changes we want to maintain our previous scroll position
+  if (location.search !== prevLocation.search) {
+    const position = getSavedScrollPosition(prevLocation);
+    if (position) return position;
+  }
+
+  // if nothing changed, nothing needs to be done
+  return false;
 };
