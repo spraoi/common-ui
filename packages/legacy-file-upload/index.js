@@ -43,7 +43,7 @@ export default class LegacyFileUpload extends PureComponent {
   };
 
   componentDidMount() {
-    const { bucket, customPrefix } = this.props;
+    const { bucket } = this.props;
 
     // XXX
     Amplify.configure({
@@ -56,7 +56,6 @@ export default class LegacyFileUpload extends PureComponent {
       },
       Storage: {
         bucket,
-        customPrefix,
         region: SPRAOI_ENV.COGNITO_CONFIG.region,
       },
     });
@@ -79,7 +78,7 @@ export default class LegacyFileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { level, onUploadComplete, onUploadFail } = this.props;
+    const { customPrefix, level, onUploadComplete, onUploadFail } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
@@ -87,7 +86,12 @@ export default class LegacyFileUpload extends PureComponent {
     const progressCallback = ({ lengthComputable, loaded, total }) =>
       progress(lengthComputable, loaded, total);
 
-    Storage.put(fileName, file, { contentType, level, progressCallback })
+    Storage.put(fileName, file, {
+      contentType,
+      customPrefix,
+      level,
+      progressCallback,
+    })
       .then(
         () => {
           load(fileName);
