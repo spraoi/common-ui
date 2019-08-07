@@ -62,13 +62,13 @@ export default class LegacyFileUpload extends PureComponent {
   }
 
   serverLoad = (uniqueFileId, load, error, progress, abort) => {
-    const { identityId, level } = this.props;
+    const { customPrefix, identityId, level } = this.props;
 
     // TODO: update when Storage supports progress events
     // (endlessMode, loadedSize, totalSize)
     // progress(true, 2000, 2000);
 
-    Storage.get(uniqueFileId, { identityId, level })
+    Storage.get(uniqueFileId, { customPrefix, identityId, level })
       .then(fetch)
       .then(r => r.blob())
       .then(load)
@@ -108,16 +108,19 @@ export default class LegacyFileUpload extends PureComponent {
   };
 
   serverRevert = (uniqueFileId, load, error) => {
-    const { level } = this.props;
+    const { customPrefix, level } = this.props;
 
-    Storage.remove(uniqueFileId, { level })
+    Storage.remove(uniqueFileId, { customPrefix, level })
       .then(load)
       .catch(error);
   };
 
   serverRemove = ({ file: { name } }) => {
-    const { level, onRemoveComplete } = this.props;
-    Storage.remove(name, { level }).then(() => onRemoveComplete(name));
+    const { customPrefix, level, onRemoveComplete } = this.props;
+
+    Storage.remove(name, { customPrefix, level }).then(() =>
+      onRemoveComplete(name)
+    );
   };
 
   render() {
