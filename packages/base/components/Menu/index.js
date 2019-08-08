@@ -82,6 +82,7 @@ const Menu = ({
             boxShadow="lg"
             display="flex"
             mt="xs"
+            overflow="hidden"
             pb="sm"
             pt={heading ? '0' : 'sm'}
           >
