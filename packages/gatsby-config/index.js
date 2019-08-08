@@ -45,6 +45,7 @@ module.exports = {
   plugins: [
     ...pageResolution,
     '@spraoi/gatsby-plugin',
+    'gatsby-plugin-react-svg',
     'gatsby-plugin-styled-components',
     {
       options: { component: resolve('src/components/Layout') },
