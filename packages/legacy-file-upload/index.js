@@ -2,8 +2,8 @@ import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import Storage from '@aws-amplify/storage';
 import { File, FilePond, registerPlugin } from 'react-filepond';
-import Amplify, { Storage } from 'aws-amplify';
 import 'filepond/dist/filepond.min.css';
 import './index.scss';
 
@@ -46,7 +46,7 @@ export default class LegacyFileUpload extends PureComponent {
     const { bucket } = this.props;
 
     // XXX
-    Amplify.configure({
+    Storage.configure({
       Auth: {
         identityPoolId: SPRAOI_ENV.COGNITO_CONFIG.identityPoolId,
         identityPoolRegion: SPRAOI_ENV.COGNITO_CONFIG.region,

@@ -3,7 +3,7 @@ import AWSAppSyncClient, { createAppSyncLink } from 'aws-appsync';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { ApolloLink } from 'apollo-link';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { AuthContext, AuthProvider } from '@spraoi/auth';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Rehydrated } from 'aws-appsync-react';

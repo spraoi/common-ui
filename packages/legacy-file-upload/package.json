@@ -16,5 +16,12 @@
     "filepond-plugin-file-rename": "^1.1.1",
     "filepond-plugin-file-validate-type": "^1.2.0",
     "react-filepond": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@aws-amplify/storage": "^1",
+    "prop-types": "^15",
+    "react": "^16",
+    "react-dom": "^16",
+    "styled-components": "^4.3.1"
   }
 }

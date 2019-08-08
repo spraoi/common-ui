@@ -2,8 +2,8 @@ import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import Storage from '@aws-amplify/storage';
 import { File, FilePond, registerPlugin } from 'react-filepond';
-import { Storage } from 'aws-amplify';
 import { createGlobalStyle } from 'styled-components';
 import 'filepond/dist/filepond.min.css';
 
