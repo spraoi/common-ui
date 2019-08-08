@@ -50,5 +50,17 @@ module.exports = {
       options: { component: resolve('src/components/Layout') },
       resolve: 'gatsby-plugin-layout',
     },
+    {
+      options: {
+        modules: [
+          '@spraoi/auth',
+          '@spraoi/base',
+          '@spraoi/file-upload',
+          '@spraoi/helpers',
+          '@spraoi/validations',
+        ],
+      },
+      resolve: 'gatsby-plugin-compile-es6-packages',
+    },
   ],
 };

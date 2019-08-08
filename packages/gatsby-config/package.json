@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@spraoi/gatsby-plugin": "^0.20.40",
+    "gatsby-plugin-compile-es6-packages": "^2.1.0",
     "gatsby-plugin-layout": "^1.0.15",
     "gatsby-plugin-page-creator": "^2.0.13",
     "gatsby-plugin-styled-components": "^3.0.7"
