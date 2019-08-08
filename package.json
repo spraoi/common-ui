@@ -8,7 +8,6 @@
     "lint:js": "eslint --ignore-path .gitignore --ignore-pattern \"packages/legacy-*\" \"packages/**/*.js\"",
     "lint:styles": "stylelint --ignore-path .gitignore \"packages/**/*.js\"",
     "release": "yarn lint && yarn test && lerna publish",
-    "report-coverage": "cat coverage/lcov.info | coveralls",
     "test": "jest --coverage"
   },
   "workspaces": [
@@ -55,7 +54,6 @@
     "@spraoi/eslint-config": "^0.21.0",
     "@spraoi/jest-config": "^0.21.0",
     "@spraoi/stylelint-config": "^0.21.0",
-    "coveralls": "^3.0.6",
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
     "jest-haste-map": "^24.8.0",

@@ -1,6 +1,4 @@
-# Common UI
-
-[![coverage status](https://coveralls.io/repos/github/spraoi/common-ui/badge.svg?branch=master)](https://coveralls.io/github/spraoi/common-ui/)
+# Common UI [![build status](https://circleci.com/gh/spraoi/common-ui/tree/master.svg?style=svg&circle-token=1661d8b9279c17d96feac567a37282771929f481)](https://circleci.com/gh/spraoi/common-ui/tree/master)
 
 > Common code & configuration for [@spraoi](https://github.com/spraoi/) UI
 > projects.
