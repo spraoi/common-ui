@@ -46,6 +46,5 @@ project. To avoid having to push to NPM just to try something out, you can use
 
 We use [Lerna](https://github.com/lerna/lerna) for managing package versions and
 publishing to NPM. When you make a change or add a package, you can create a new
-release with `yarn release`. You&rsquo;ll need to get write access to the
-[Spraoi NPM org](https://www.npmjs.com/org/spraoi) if you don&rsquo;t already
-have it.
+release with `yarn release`. Write access to the
+[Spraoi NPM org](https://www.npmjs.com/org/spraoi) is necessary.
