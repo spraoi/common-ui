@@ -12,13 +12,13 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@apollo/react-hooks": "^3",
     "@spraoi/auth": "*",
     "@spraoi/helpers": "*",
     "gatsby": "^2",
     "lodash": "^4",
     "prop-types": "^15",
     "react": "^16",
+    "react-apollo": "^2",
     "react-final-form": "^6",
     "react-final-form-listeners": "^1",
     "react-spinners": "^0",
@@ -35,7 +35,6 @@
     "aws-appsync-react": "^1.2.8",
     "deep-object-diff": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",
-    "react-apollo": "^2.5.8",
     "react-autocomplete": "^1.8.1",
     "react-autosize-textarea": "^7.0.0",
     "react-menu-list": "^6.0.4",

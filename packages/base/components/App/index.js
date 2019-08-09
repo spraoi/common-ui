@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
 import { AuthContext, AuthProvider } from '@spraoi/auth';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Rehydrated } from 'aws-appsync-react';
@@ -40,28 +39,26 @@ const App = ({ children, config, credentials, theme }) => {
   return (
     <AuthProvider amplifyConfig={config.amplify}>
       <AuthContext.Consumer>
-        {({ jwt }) => {
-          const client = new AWSAppSyncClient(appSyncConfig, {
-            cache,
-            link: createAppSyncLink({
-              ...appSyncConfig,
-              resultsFetcherLink: ApolloLink.from([
-                setContext((request, previousContext) => ({
-                  headers: { ...previousContext.headers, jwt },
-                })),
-                createHttpLink({ uri: config.apollo.url }),
-              ]),
-            }),
-          });
-
-          return (
-            <ApolloProvider client={client}>
-              <ApolloHooksProvider client={client}>
-                <Rehydrated loading={<></>}>{baseContent}</Rehydrated>
-              </ApolloHooksProvider>
-            </ApolloProvider>
-          );
-        }}
+        {({ jwt }) => (
+          <ApolloProvider
+            client={
+              new AWSAppSyncClient(appSyncConfig, {
+                cache,
+                link: createAppSyncLink({
+                  ...appSyncConfig,
+                  resultsFetcherLink: ApolloLink.from([
+                    setContext((request, previousContext) => ({
+                      headers: { ...previousContext.headers, jwt },
+                    })),
+                    createHttpLink({ uri: config.apollo.url }),
+                  ]),
+                }),
+              })
+            }
+          >
+            <Rehydrated loading={<></>}>{baseContent}</Rehydrated>
+          </ApolloProvider>
+        )}
       </AuthContext.Consumer>
     </AuthProvider>
   );
