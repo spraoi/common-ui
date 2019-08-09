@@ -1,6 +1,7 @@
 .cache/
+.idea/
 coverage/
 lerna-debug.log
 node_modules/
+reports/
 yarn-error.log
-.idea/
