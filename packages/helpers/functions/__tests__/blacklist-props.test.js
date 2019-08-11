@@ -1,7 +1,7 @@
 import blacklistProps from '../blacklist-props';
 
-describe('blacklistProps helper', () => {
-  it('should work', () => {
+describe('blacklistProps', () => {
+  it('should blacklist props', () => {
     expect(
       blacklistProps({ blacklist: ['hide'] })({
         hide: 'foo',
@@ -13,7 +13,7 @@ describe('blacklistProps helper', () => {
     });
   });
 
-  it('should work as a different element', () => {
+  it('should blacklist props as a different element', () => {
     expect(
       blacklistProps({ as: 'span', blacklist: ['hide'] })({
         hide: 'foo',

@@ -1,7 +1,7 @@
 import objectMapDeep from '../object-map-deep';
 
-describe('objectMapDeep helper', () => {
-  it('should work', () => {
+describe('objectMapDeep', () => {
+  it('should map the values of an object', () => {
     expect(
       objectMapDeep(
         {

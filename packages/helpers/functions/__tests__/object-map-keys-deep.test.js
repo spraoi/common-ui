@@ -1,7 +1,7 @@
 import objectMapKeysDeep from '../object-map-keys-deep';
 
-describe('objectMapKeysDeep helper', () => {
-  it('should work', () => {
+describe('objectMapKeysDeep', () => {
+  it('should map the keys of an object', () => {
     expect(
       objectMapKeysDeep(
         {

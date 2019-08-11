@@ -5,6 +5,7 @@ import formatTimeSince from './functions/format-time-since';
 import objectMapDeep from './functions/object-map-deep';
 import objectMapKeysDeep from './functions/object-map-keys-deep';
 import shortenNumber from './functions/shorten-number';
+import stripTypename from './functions/strip-typename';
 
 export {
   blacklistProps,
@@ -14,4 +15,5 @@ export {
   objectMapDeep,
   objectMapKeysDeep,
   shortenNumber,
+  stripTypename,
 };

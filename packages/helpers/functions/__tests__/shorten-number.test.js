@@ -1,6 +1,6 @@
 import shortenNumber from '../shorten-number';
 
-describe('shortenNumber helper', () => {
+describe('shortenNumber', () => {
   [
     [-1, '<0'],
     [0, '0'],
