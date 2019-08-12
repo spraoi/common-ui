@@ -2,8 +2,8 @@ import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import Storage from '@aws-amplify/storage';
 import { File, FilePond, registerPlugin } from 'react-filepond';
+import { Storage } from 'aws-amplify';
 import { createGlobalStyle } from 'styled-components';
 import 'filepond/dist/filepond.min.css';
 
@@ -40,6 +40,11 @@ const StyledGlobal = createGlobalStyle`
 export default class FileUpload extends PureComponent {
   static propTypes = {
     bucket: PropTypes.string,
+    customPrefix: PropTypes.shape({
+      private: PropTypes.string,
+      protected: PropTypes.string,
+      public: PropTypes.string,
+    }),
     error: PropTypes.oneOf([0, 1]),
     existingFiles: PropTypes.arrayOf(PropTypes.string),
     identityId: PropTypes.string,
@@ -50,6 +55,7 @@ export default class FileUpload extends PureComponent {
 
   static defaultProps = {
     bucket: null,
+    customPrefix: { private: '', protected: '', public: '' },
     error: 0,
     existingFiles: [],
     identityId: null,
@@ -68,13 +74,13 @@ export default class FileUpload extends PureComponent {
   }
 
   serverLoad = (uniqueFileId, load, error, progress, abort) => {
-    const { bucket, identityId, level } = this.props;
+    const { bucket, customPrefix, identityId, level } = this.props;
 
     // TODO: update when Storage supports progress events
     // (endlessMode, loadedSize, totalSize)
     // progress(true, 2000, 2000);
 
-    Storage.get(uniqueFileId, { bucket, identityId, level })
+    Storage.get(uniqueFileId, { bucket, customPrefix, identityId, level })
       .then(fetch)
       .then(r => r.blob())
       .then(load)
@@ -84,7 +90,7 @@ export default class FileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { bucket, level, onUploadComplete } = this.props;
+    const { bucket, customPrefix, level, onUploadComplete } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
@@ -95,6 +101,7 @@ export default class FileUpload extends PureComponent {
     Storage.put(fileName, file, {
       bucket,
       contentType,
+      customPrefix,
       level,
       progressCallback,
     })
@@ -108,16 +115,19 @@ export default class FileUpload extends PureComponent {
   };
 
   serverRevert = (uniqueFileId, load, error) => {
-    const { bucket, level } = this.props;
+    const { bucket, customPrefix, level } = this.props;
 
-    Storage.remove(uniqueFileId, { bucket, level })
+    Storage.remove(uniqueFileId, { bucket, customPrefix, level })
       .then(load)
       .catch(error);
   };
 
   serverRemove = ({ file: { name } }) => {
-    const { bucket, level, onRemoveComplete } = this.props;
-    Storage.remove(name, { bucket, level }).then(onRemoveComplete);
+    const { bucket, customPrefix, level, onRemoveComplete } = this.props;
+
+    Storage.remove(name, { bucket, customPrefix, level }).then(
+      onRemoveComplete
+    );
   };
 
   render() {

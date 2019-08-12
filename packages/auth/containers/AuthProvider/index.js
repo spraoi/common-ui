@@ -1,4 +1,4 @@
-import Auth from '@aws-amplify/auth';
+import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { camelCase } from 'change-case';
@@ -36,7 +36,7 @@ export default class AuthProvider extends PureComponent {
 
   async componentDidMount() {
     const { amplifyConfig } = this.props;
-    Auth.configure(amplifyConfig);
+    Amplify.configure(amplifyConfig);
     await this.setAuthenticatedUser();
   }
 
