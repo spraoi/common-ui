@@ -26,7 +26,7 @@ Radio.propTypes = {
     value: PropTypes.string.isRequired,
   }).isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
 Radio.defaultProps = {

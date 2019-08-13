@@ -38,7 +38,7 @@ RadioGroup.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
 RadioGroup.defaultProps = {
