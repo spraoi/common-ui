@@ -4,11 +4,13 @@ import { Field } from 'react-final-form';
 import Box from '../Box';
 import Radio from './Radio';
 
-const RadioGroup = ({ inline, label, name, options, ...rest }) => (
+const RadioGroup = ({ inline, label, name, options, type, ...rest }) => (
   <>
-    <Box color="textSubtle" mr="lg" mt="lg">
-      {label}
-    </Box>
+    {label && (
+      <Box color="textSubtle" mr="lg" mt="lg">
+        {label}
+      </Box>
+    )}
     <Box display={inline ? 'flex' : 'block'}>
       {options.map(({ label, value }) => (
         <Box key={value} mt="sm">
@@ -16,7 +18,7 @@ const RadioGroup = ({ inline, label, name, options, ...rest }) => (
             component={Radio}
             label={label}
             name={name}
-            type="radio"
+            type={type}
             value={value}
             {...rest}
           />
@@ -28,7 +30,7 @@ const RadioGroup = ({ inline, label, name, options, ...rest }) => (
 
 RadioGroup.propTypes = {
   inline: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -36,10 +38,13 @@ RadioGroup.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
 RadioGroup.defaultProps = {
   inline: false,
+  label: null,
+  type: 'radio',
 };
 
 export default RadioGroup;
