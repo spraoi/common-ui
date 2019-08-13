@@ -6,8 +6,8 @@ export default createGlobalStyle`
   }
 
   html {
-    overflow-x:hidden;
     height: 100%;
+    overflow-x:hidden;
     background-color: ${p => p.theme.colors.body};
     color: ${p => p.theme.colors.textPrimary};
     font-family: ${p => p.theme.fonts.primary};
