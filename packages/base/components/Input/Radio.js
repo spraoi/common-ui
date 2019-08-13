@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import InputWrapper from './InputWrapper';
 
-const Radio = ({ input, label, ...rest }) => (
+const Radio = ({ input, label, type, ...rest }) => (
   <InputWrapper
     htmlFor={`${input.name}${input.value}`}
-    inline
     input={input}
     label={label}
     {...rest}
@@ -13,7 +12,7 @@ const Radio = ({ input, label, ...rest }) => (
     {props => (
       <input
         id={`${input.name}${input.value}`}
-        type="radio"
+        type={type}
         {...props}
         {...input}
       />
@@ -27,6 +26,11 @@ Radio.propTypes = {
     value: PropTypes.string.isRequired,
   }).isRequired,
   label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+Radio.defaultProps = {
+  type: 'radio',
 };
 
 export default Radio;
