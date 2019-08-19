@@ -1,3 +1,4 @@
+import 'filepond-polyfill';
 import FilePondPluginFileRename from 'filepond-plugin-file-rename';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
