@@ -12,10 +12,10 @@
     "access": "public"
   },
   "dependencies": {
-    "amazon-cognito-auth-js": "^1.1.1",
-    "amazon-cognito-identity-js": "^3.0.2",
-    "aws-sdk": "2.357.0",
-    "crypto-js": "^3.1.9-1",
-    "js-cookie": "^2.2.0"
+    "amazon-cognito-auth-js": "^1",
+    "amazon-cognito-identity-js": "^3",
+    "aws-sdk": "2",
+    "crypto-js": "^3",
+    "js-cookie": "^2"
   }
 }

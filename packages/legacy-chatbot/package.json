@@ -1,0 +1,23 @@
+{
+  "name": "@spraoi/legacy-chatbot",
+  "description": "Amazon Lex chatbot prototype.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-chatbot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@spraoi/legacy-aws": "^0",
+    "aws-sdk": "2",
+    "braintree-web": "^3",
+    "moment": "^2",
+    "react": "^16",
+    "react-dom": "^16",
+    "react-redux": "^7"
+  }
+}

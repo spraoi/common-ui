@@ -1,0 +1,250 @@
+.chatbot-chatButton {
+  background-color: #06bce3;
+  color: #fff;
+  padding: 15px;
+  position: fixed;
+  font-size: 16px;
+  bottom: 10px;
+  right: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chatbot-container {
+  text-align: center;
+  background-color: #fff;
+  overflow: hidden;
+  border-left: 1px solid #e2e9f1;
+  width: 37%;
+  min-width: 320px;
+  max-width: 100vw;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 10px 0 #ddd;
+  height: 100vh;
+  min-height: 200px;
+  max-height: 100vh;
+  z-index: 9999;
+}
+
+.chatbot-header {
+  text-align: left;
+  padding: 15px;
+  background-color: #f7f8f9;
+  color: #78919e;
+  box-shadow: 0 0 10px 0 #bbb;
+}
+
+.chatbot-header > h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.chatbot-header > p {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 10px 0 0;
+}
+
+.chatbot-header > span {
+  font-size: 23px;
+  cursor: pointer;
+  float: right;
+  margin-top: -27px;
+}
+
+.chatbot-chatbox {
+  padding: 10px 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 121px);
+}
+
+.chatbot-chat-div {
+  width: 100%;
+  float: right;
+}
+
+.chatbot-message {
+  border: 1px solid #eff3f7;
+  max-width: 80%;
+  float: right;
+  font-size: 16px;
+  text-align: left;
+  padding: 10px 15px;
+  color: #fff;
+  margin: 5px 10px;
+  background-color: #06bce3;
+  border-radius: 20px;
+}
+
+.chatbot-reply {
+  border: 1px solid #eff3f7;
+  margin: 5px 10px;
+  max-width: 80%;
+  float: left;
+  font-size: 16px;
+  text-align: left;
+  padding: 10px 15px;
+  color: #fff;
+  background-color: #78919e;
+  border-radius: 20px;
+}
+
+.chat-image-attachment {
+  padding: 10px;
+  width: 100%;
+  display: inline-block;
+  max-height: 150px;
+}
+
+.chatbot-header-icons {
+  float: right;
+  margin: -25px 0 0 0;
+}
+
+.chat-image-clear {
+  float: right;
+  margin: -5px 0 0 5px;
+  cursor: pointer;
+}
+
+.chat-image {
+  max-height: 110px;
+  max-width: 95%;
+  float: right;
+  margin-bottom: 3px;
+}
+
+.file-attachment {
+  width: 15px;
+  margin: 0 -20px -30px;
+}
+
+.fileInput {
+  height: 30px;
+  position: absolute;
+  top: 12px;
+  overflow: hidden;
+  right: 146px;
+  font-size: 150px;
+  opacity: 0;
+  width: 15px;
+  margin: 0;
+}
+
+.chatbot-container .chatbot-input-div {
+  bottom: 0;
+  border-top: 1px solid #06bce3;
+  position: fixed;
+  width: 100%;
+}
+
+.chatbot-container .chatbot-input-div > input {
+  padding: 10px;
+  font-size: 15px;
+  width: 100%;
+  color: #78919e;
+  border: none;
+}
+
+.chatbot-container .chatbot-input-div > input:focus,
+.chatbot-button:focus {
+  outline: none;
+}
+
+.chatbot-error {
+  border: 1px solid red !important;
+  background-color: #f9e6e6;
+}
+
+.chatbot-error > input {
+  background-color: #f9e6e6;
+}
+
+.chatbot-response-card {
+  border: 1px solid #ddd;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  min-width: 150px;
+}
+
+.chatbot-button {
+  background-color: #78919e;
+  color: #fff;
+  padding: 8px 15px;
+  border: 1px solid #eff3f7;
+  margin: 5px;
+  border-radius: 5px;
+  width: 75%;
+  cursor: pointer;
+}
+
+.chatbot-button :hover {
+  background-color: #eff3f7;
+  color: #78919e;
+}
+
+.chatbot-title {
+  color: #627e8c;
+  margin-bottom: 2px;
+}
+
+.chatbot-subtitle {
+  color: #9a9a9a;
+}
+
+.chatbot-clear {
+  color: #9a9a9a;
+  cursor: pointer;
+  font-size: 14px;
+  padding-top: 2px;
+  -webkit-box-shadow: 0 0 15px 0 #f3eded;
+  box-shadow: 0 0 10px 0 #efeeee;
+  bottom: 40px;
+  position: absolute;
+  width: 100%;
+}
+
+.selected-button {
+  background-color: #06bce3;
+}
+
+.disable-chatbot-button {
+  cursor: not-allowed;
+}
+
+.chatbot-message-time {
+  width: 90%;
+  display: block;
+  font-size: 12px;
+  float: right;
+  text-align: right;
+  color: #9a9a9a;
+  margin: -3px 15px 0 0;
+}
+
+.chatbot-reply-time {
+  width: 90%;
+  display: block;
+  font-size: 12px;
+  float: left;
+  text-align: left;
+  color: #9a9a9a;
+  margin: -3px 0 0 15px;
+}
+
+.errorMsg {
+  background-color: red;
+}
+
+.chatbot-clear-btn {
+  font-size: 14px !important;
+  background-color: rgba(157, 183, 193, 0.1);
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: -25px 10px 0 0;
+}
