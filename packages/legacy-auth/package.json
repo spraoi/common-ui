@@ -12,12 +12,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "apollo-client": "^2",
-    "aws-amplify": "^1",
+    "@spraoi/legacy-aws": "^0",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
-    "react-redux": "^7",
-    "react-spinners": "^0"
+    "react-redux": "^7"
   }
 }
