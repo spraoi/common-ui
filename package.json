@@ -37,6 +37,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-apollo": "^2.5.8",
+    "react-beforeunload": "^2.1.0",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
     "react-final-form-listeners": "^1.0.2",
