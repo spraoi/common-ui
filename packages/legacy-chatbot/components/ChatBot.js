@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import createStore from '../store';
-import reducer from '../reducer';
-import saga from '../sagas';
 import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
 import { fork } from 'redux-saga/effects';
-import Container from './component/Container';
+import Container from './Container';
+import createStore from '../store';
+import reducer from '../reducer';
+import saga from '../sagas';
 import { MESSAGES } from '../constants';
 
 export default class ChatBot extends Component {
