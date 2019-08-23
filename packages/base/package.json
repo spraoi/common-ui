@@ -14,9 +14,13 @@
   "peerDependencies": {
     "@spraoi/auth": "*",
     "@spraoi/helpers": "*",
+    "@reach/router": "^1",
+    "@wojtekmaj/react-daterange-picker": "^2",
     "gatsby": "^2",
     "lodash": "^4",
+    "moment": "^2",
     "prop-types": "^15",
+    "query-string": "^6",
     "react": "^16",
     "react-apollo": "^2",
     "react-final-form": "^6",
