@@ -39,6 +39,7 @@ module.exports = {
       '@spraoi/legacy-auth',
       '@spraoi/legacy-aws',
       '@spraoi/legacy-chatbot',
+      '@spraoi/legacy-cobrowsing',
       '@spraoi/legacy-file-upload',
       '@spraoi/s3-uploader',
       '@spraoi/validations',
