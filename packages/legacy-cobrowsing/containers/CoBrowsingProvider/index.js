@@ -1,6 +1,6 @@
-import Beforeunload from 'react-beforeunload';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Beforeunload } from 'react-beforeunload';
 import { getSecretKeyValues } from '@spraoi/legacy-aws';
 import '../SurflyLibrary/index';
 import {
@@ -11,14 +11,14 @@ import {
 } from './constants';
 import { Provider } from '../../context';
 import {
-  getAllSessions,
-  getSessionInformation,
-} from '../SurflyLibrary/SurflyServices';
-import {
   controlEvent,
   initSessionEvent,
   sessionStartEvent,
 } from '../SurflyLibrary/SurflyEvents';
+import {
+  getAllSessions,
+  getSessionInformation,
+} from '../SurflyLibrary/SurflyServices';
 
 export default class CoBrowsingProvider extends Component {
   constructor(props) {
