@@ -19,6 +19,6 @@
     "moment": "^2",
     "react": "^16",
     "react-dom": "^16",
-    "react-redux": "^7"
+    "react-redux": "^5"
   }
 }
