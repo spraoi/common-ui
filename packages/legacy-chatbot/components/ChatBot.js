@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import { fork } from 'redux-saga/effects';
 import Container from './Container';
 import createStore from '../store';
@@ -16,7 +16,6 @@ export default class ChatBot extends Component {
     };
   }
 
-  // close chat box
   closeChatBox(messageArray) {
     this.setState({ messageArray: messageArray });
     this.props.closeChatBox();
@@ -25,7 +24,8 @@ export default class ChatBot extends Component {
   render() {
     const reducers = { lex: reducer };
     const sagas = [fork(saga)];
-    const history = createHistory();
+    const history = createBrowserHistory();
+
     if (this.state.messageArray.length == 0) {
       this.state.messageArray = [
         {
