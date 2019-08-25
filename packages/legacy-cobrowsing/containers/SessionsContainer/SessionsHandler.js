@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 export default class SessionsHandler extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.startPollingSessions({ interval: this.props.refreshRate });
   }
 
