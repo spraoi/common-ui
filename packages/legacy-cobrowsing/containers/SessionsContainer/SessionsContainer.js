@@ -1,10 +1,9 @@
-import { CoBrowsingConsumer } from '@spraoi/cobrowsing';
+import React from 'react';
 import SessionsHandler from './SessionsHandler';
+import { Consumer } from '../../context';
 
 const SessionsContainer = props => (
-  <CoBrowsingConsumer>
-    {context => <SessionsHandler {...context} {...props} />}
-  </CoBrowsingConsumer>
+  <Consumer>{context => <SessionsHandler {...context} {...props} />}</Consumer>
 );
 
 export default SessionsContainer;
