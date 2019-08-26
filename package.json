@@ -21,7 +21,6 @@
     "@spraoi/auth": "^0.21.0",
     "@spraoi/babel-preset": "^0.21.0",
     "@spraoi/helpers": "^0.21.0",
-    "@wojtekmaj/react-daterange-picker": "^2.3.0",
     "apollo-client": "^2.6.3",
     "aws-amplify": "^1.1.36",
     "aws-sdk": "^2.515.0",
