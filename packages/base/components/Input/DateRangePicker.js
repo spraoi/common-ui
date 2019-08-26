@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DateRange from '@wojtekmaj/react-daterange-picker';
-import moment from 'moment';
-import Box from '../Box';
+import InputWrapper from './InputWrapper';
 
-const DatePickerWrapper = styled(Box)`
+const DatePickerWrapper = styled(InputWrapper)`
   border: 1px solid ${p => p.theme.colors.border};
   &:focus-within {
     border-color: ${p => p.theme.colors.primary};
@@ -57,9 +57,12 @@ const DatePickerWrapper = styled(Box)`
       }
     }
   }
-  .react-daterange-picker {
+  &.react-daterange-picker {
     width: 100%;
     padding: ${p => p.theme.space.xxs} ${p => p.theme.space.sm};
+    border-radius: ${p => p.theme.radii.md};
+  }
+  .react-daterange-picker {
     &__wrapper {
       border: 0;
       width: 100%;
@@ -95,19 +98,30 @@ const DatePickerWrapper = styled(Box)`
   }
 `;
 
-const DateRangePicker = ({ ...rest }) => {
+const DateRangePicker = ({ input, ...rest }) => {
   const onChange = (date, meta) => {
-    rest.input.onChange(date, meta);
+    input.onChange(date, meta);
   };
-  let newValue = rest.input.value;
-  if (Array.isArray(rest.input.value)) {
-    newValue = rest.input.value.map(i => moment(i).toDate());
-  }
   return (
-    <DatePickerWrapper borderRadius="md">
-      <DateRange onChange={onChange} value={newValue} {...rest} />
+    <DatePickerWrapper input={input} {...rest}>
+      {props => (
+        <DateRange
+          format="MM/dd/y"
+          onChange={onChange}
+          value={input.value}
+          {...props}
+        />
+      )}
     </DatePickerWrapper>
   );
+};
+
+DateRangePicker.propTypes = {
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+  }).isRequired,
 };
 
 export default DateRangePicker;

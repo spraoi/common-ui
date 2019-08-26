@@ -5,7 +5,6 @@ import Table from '../Table';
 import SortableHeader from './SortableHeader';
 import { FILTER_PARAMS, ORDER_BY } from './constant';
 
-// TODO : move to common-ui
 const setSortableHeader = (sortableHeader, updateLink) =>
   sortableHeader.map(item => {
     const updatedHeader = {
