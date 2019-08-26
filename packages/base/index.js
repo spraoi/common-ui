@@ -6,9 +6,11 @@ import Menu from './components/Menu';
 import Redirect from './components/Redirect';
 import Spinner from './components/Spinner';
 import Table from './components/Table';
+import TableSortable from './components/TableSortable';
 import { AutoSave, WhenFieldChanges } from './components/Form';
 import {
   Autocomplete,
+  DateRangePicker,
   Dropdown,
   FileUpload,
   Input,
@@ -24,6 +26,7 @@ export {
   Box,
   Breadcrumbs,
   Button,
+  DateRangePicker,
   Dropdown,
   FileUpload,
   Input,
@@ -33,6 +36,7 @@ export {
   Redirect,
   Spinner,
   Table,
+  TableSortable,
   TextArea,
   WhenFieldChanges,
 };
