@@ -36,6 +36,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.8.2",
     "react": "^16.9.0",
     "react-apollo": "^2.5.8",
     "react-beforeunload": "^2.1.0",
