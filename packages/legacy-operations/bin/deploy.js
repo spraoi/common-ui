@@ -7,6 +7,25 @@ const pkgDeploy = pkg().next().value.deploy;
 const stage = (process.env.STAGE = process.argv[2] || 'default');
 const variation = process.env.VARIATION || 'default';
 
+const uppercaseVariation = variation.toUpperCase();
+const uppercaseStage = stage.toUpperCase();
+const envVarPrefix = `${uppercaseVariation}_${uppercaseStage}_`;
+const AWS_ACCOUNT_ID = 'AWS_ACCOUNT_ID';
+const AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY_ID';
+const AWS_SECRET_ACCESS_KEY = 'AWS_SECRET_ACCESS_KEY';
+
+process.env[AWS_ACCOUNT_ID] =
+  process.env[`${envVarPrefix}${AWS_ACCOUNT_ID}`] ||
+  process.env[AWS_ACCOUNT_ID];
+
+process.env[AWS_ACCESS_KEY_ID] =
+  process.env[`${envVarPrefix}${AWS_ACCESS_KEY_ID}`] ||
+  process.env[AWS_ACCESS_KEY_ID];
+
+process.env[AWS_SECRET_ACCESS_KEY] =
+  process.env[`${envVarPrefix}${AWS_SECRET_ACCESS_KEY}`] ||
+  process.env[AWS_SECRET_ACCESS_KEY];
+
 const config = Object.assign(
   (pkgDeploy['common'] || {})['common'] || {},
   (pkgDeploy['common'] || {})[variation] || {},

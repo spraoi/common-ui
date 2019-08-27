@@ -23,6 +23,25 @@ module.exports = function deploy(configString) {
     }
   }, {});
 
+  const uppercaseVariation = variation.toUpperCase();
+  const uppercaseStage = stage.toUpperCase();
+  const envVarPrefix = `${uppercaseVariation}_${uppercaseStage}_`;
+  const AWS_ACCOUNT_ID = 'AWS_ACCOUNT_ID';
+  const AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY_ID';
+  const AWS_SECRET_ACCESS_KEY = 'AWS_SECRET_ACCESS_KEY';
+
+  process.env[AWS_ACCOUNT_ID] =
+    process.env[`${envVarPrefix}${AWS_ACCOUNT_ID}`] ||
+    process.env[AWS_ACCOUNT_ID];
+
+  process.env[AWS_ACCESS_KEY_ID] =
+    process.env[`${envVarPrefix}${AWS_ACCESS_KEY_ID}`] ||
+    process.env[AWS_ACCESS_KEY_ID];
+
+  process.env[AWS_SECRET_ACCESS_KEY] =
+    process.env[`${envVarPrefix}${AWS_SECRET_ACCESS_KEY}`] ||
+    process.env[AWS_SECRET_ACCESS_KEY];
+
   const setContentType = (ext, type) =>
     tryShell(`
     aws s3 cp \
