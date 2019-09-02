@@ -64,9 +64,11 @@ const Dropdown = ({ input, ...rest }) => {
               let parsedValue = '';
 
               if (value) {
-                parsedValue = Array.isArray(value)
-                  ? value.map(o => o.value)
-                  : value.value;
+                if (Array.isArray(value)) {
+                  parsedValue = value.length ? value.map(o => o.value) : '';
+                } else {
+                  parsedValue = value.value;
+                }
               }
 
               if (inputRest.onChange) inputRest.onChange(parsedValue, meta);
