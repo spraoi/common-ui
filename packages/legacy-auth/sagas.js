@@ -18,15 +18,24 @@ const defaultState = {
 
 const cache = {};
 
-function* completeSignUp({ payload }) {
+function* completeSignUp({ payload, meta }) {
   try {
     yield put(actions.setState({ isLoading: true }));
+    const createDbUser = meta && meta.createDbUser ? meta.createDbUser : false;
     yield call(aws.completeSignUp, { ...payload, ...cache.signInResponse });
 
     const userAttributes = {
       ...aws.getUserAttributes(),
       ...payload.newAttributes,
     };
+
+    if (!createDbUser) {
+      yield call(aws.callApi, {
+        body: { userAttributes },
+        method: 'POST',
+        path: '/user',
+      });
+    }
 
     yield call(aws.callApi, {
       body: { userAttributes },
@@ -58,7 +67,7 @@ function* initSaga() {
     yield put(
       actions.setState({
         ...defaultState,
-        isAuthenticated: isAuthenticated,
+        isAuthenticated,
         userAttributes: aws.getUserAttributes(),
       })
     );
@@ -83,9 +92,9 @@ function* resetPasswordSaga({ payload }) {
     }
 
     yield call(aws.resetPassword, {
-      newPassword: newPassword,
+      newPassword,
       user: cache.user,
-      verificationCode: verificationCode,
+      verificationCode,
     });
 
     yield put(
@@ -110,8 +119,8 @@ function* sendResetPasswordCodeSaga({ payload }) {
     yield put(
       actions.setState({
         ...defaultState,
-        userAttributes: { email },
         resetPasswordCodeSent: true,
+        userAttributes: { email },
       })
     );
   } catch (e) {
@@ -119,7 +128,7 @@ function* sendResetPasswordCodeSaga({ payload }) {
   }
 }
 
-function* signInSaga({ payload }) {
+function* signInSaga({ payload, meta }) {
   try {
     yield put(actions.setState({ isLoading: true }));
     payload.user = yield call(aws.getNewUser, payload.email);
@@ -134,6 +143,7 @@ function* signInSaga({ payload }) {
           completeSignUpRequired: true,
         })
       );
+      if (meta) meta.resolve({ completeSignUpRequired: true });
     } else {
       yield put(
         actions.setState({
@@ -142,6 +152,7 @@ function* signInSaga({ payload }) {
           userAttributes: aws.getUserAttributes(),
         })
       );
+      if (meta) meta.resolve({ completeSignUpRequired: false });
     }
   } catch (e) {
     yield put(
@@ -152,6 +163,7 @@ function* signInSaga({ payload }) {
         verificationRequired: e.code === 'UserNotConfirmedException',
       })
     );
+    if (meta) meta.reject();
   }
 }
 
@@ -204,6 +216,49 @@ function* verifyEmailSaga({ payload }) {
   }
 }
 
+function* changePasswordSaga({ payload }) {
+  try {
+    const { newPassword, oldPassword, onSuccess } = payload;
+    yield put(actions.setState({ isLoading: true }));
+
+    yield call(aws.changePassword, {
+      newPassword,
+      oldPassword,
+    });
+
+    yield put(
+      actions.setState({
+        error: null,
+        isLoading: false,
+      })
+    );
+
+    if (onSuccess) onSuccess();
+  } catch (e) {
+    yield put(actions.setState({ error: e, isLoading: false }));
+  }
+}
+
+function* updateUserAttributesSaga({ payload }) {
+  try {
+    const { attributeList, onSuccess } = payload;
+    yield put(actions.setState({ isLoading: true }));
+    yield call(aws.updateUserAttributes, attributeList);
+    yield put(
+      actions.setState({
+        ...defaultState,
+        error: null,
+        isAuthenticated: true,
+        isLoading: false,
+        userAttributes: aws.getUserAttributes(),
+      })
+    );
+    if (onSuccess) onSuccess();
+  } catch (e) {
+    yield put(actions.setState({ error: e, isLoading: false }));
+  }
+}
+
 export default function* sagas() {
   yield takeLatest(constants.AUTH_COMPLETE_SIGN_UP, completeSignUp);
   yield takeLatest(constants.AUTH_INIT, initSaga);
@@ -217,4 +272,9 @@ export default function* sagas() {
   yield takeLatest(constants.AUTH_SIGN_OUT, signOutSaga);
   yield takeLatest(constants.AUTH_SIGN_UP, signUpSaga);
   yield takeLatest(constants.AUTH_VERIFY_EMAIL, verifyEmailSaga);
+  yield takeLatest(constants.AUTH_CHANGE_PASSWORD, changePasswordSaga);
+  yield takeLatest(
+    constants.AUTH_UPDATE_USER_ATTRIBUTES,
+    updateUserAttributesSaga
+  );
 }

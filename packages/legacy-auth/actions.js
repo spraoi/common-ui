@@ -1,7 +1,8 @@
 import * as constants from './constants';
 
-export const completeSignUp = payload => ({
+export const completeSignUp = (payload, meta) => ({
   type: constants.AUTH_COMPLETE_SIGN_UP,
+  meta,
   payload,
 });
 
@@ -24,8 +25,9 @@ export const setState = payload => ({
   payload,
 });
 
-export const signIn = payload => ({
+export const signIn = (payload, meta) => ({
   type: constants.AUTH_SIGN_IN,
+  meta,
   payload,
 });
 
@@ -45,5 +47,15 @@ export const signUp = payload => ({
 
 export const verifyEmail = payload => ({
   type: constants.AUTH_VERIFY_EMAIL,
+  payload,
+});
+
+export const changePassword = payload => ({
+  type: constants.AUTH_CHANGE_PASSWORD,
+  payload,
+});
+
+export const updateUserAttributes = payload => ({
+  type: constants.AUTH_UPDATE_USER_ATTRIBUTES,
   payload,
 });
