@@ -96,8 +96,8 @@ export function uploadFiles({
   return new Promise((resolve, reject) => {
     const s3 = getS3Bucket(bucket);
     let uploadCount = 0;
-    let uploadProgress = [];
-    let uploadData = [];
+    const uploadProgress = [];
+    const uploadData = [];
 
     Array.from(files).forEach((file, i) => {
       uploadCount++;
@@ -129,7 +129,7 @@ export function uploadFiles({
 
 export function deleteObjects({ bucket, path, files = [] }) {
   return new Promise((resolve, reject) => {
-    let fileNames = [];
+    const fileNames = [];
     files.map(file => {
       fileNames.push({ Key: path + file });
     });
@@ -175,8 +175,9 @@ function getFederatedAuthenticationHandler({
   const { appClientId, domainPrefix, region, userPoolId } = awsConfig.cognito;
   const { protocol, hostname, pathname, port } = window.location;
 
-  const redirect =
-    protocol + '//' + hostname + (port ? ':' : '') + port + pathname;
+  const redirect = `${protocol}//${hostname}${
+    port ? ':' : ''
+  }${port}${pathname}`;
 
   const auth = new CognitoAuth({
     AppWebDomain: `${domainPrefix}.auth.${region}.amazoncognito.com`,
@@ -327,6 +328,18 @@ export function resetPassword({ user, verificationCode, newPassword }) {
   );
 }
 
+export async function changePassword({ newPassword, oldPassword }) {
+  const currentUser = getNewUserPool().getCurrentUser();
+  parseUserSession(await getUserSession(currentUser));
+
+  return new Promise((resolve, reject) =>
+    currentUser.changePassword(oldPassword, newPassword, (err, data) => {
+      if (err) reject(parseLambdaError(err));
+      else resolve(data);
+    })
+  );
+}
+
 export function sendResetPasswordCode(email) {
   const user = getNewUser(email);
 
@@ -338,9 +351,33 @@ export function sendResetPasswordCode(email) {
   );
 }
 
+export async function updateUserAttributes(payload) {
+  const currentUser = getNewUserPool().getCurrentUser();
+  if (currentUser !== null) {
+    parseUserSession(await getUserSession(currentUser));
+    return new Promise((resolve, reject) =>
+      currentUser.updateAttributes(payload, (err, result) => {
+        if (err) reject(parseLambdaError(err));
+        else {
+          const newUserAttributes = {};
+          payload.forEach((data, index) => {
+            newUserAttributes[data.Name] = data.Value;
+          });
+          setUserAttributes({
+            ...getUserAttributes(),
+            ...newUserAttributes,
+          });
+          resolve(result);
+        }
+      })
+    );
+  }
+}
+
 export function setUserAttributes(attributes) {
-  if (attributes.sub)
+  if (attributes.sub) {
     attributes.user_id = spraoiConfig.userIdPrefix + attributes.sub;
+  }
   window[spraoiConfig.storageKeys.userAttributes] = attributes;
   localStorage.setItem(
     spraoiConfig.storageKeys.userAttributes,
