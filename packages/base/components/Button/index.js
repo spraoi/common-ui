@@ -6,13 +6,7 @@ import { Link } from 'gatsby';
 import { blacklistProps } from '@spraoi/helpers';
 import Box, { boxProps } from '../Box';
 
-const blacklist = [
-  ...boxProps,
-  'disabled',
-  'secondary',
-  'simple',
-  'submitting',
-];
+const blacklist = [...boxProps, 'secondary', 'simple', 'submitting'];
 
 const buttonStyles = css`
   ${p =>

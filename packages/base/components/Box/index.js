@@ -92,7 +92,7 @@ const valueAtBp = (value, bp) => {
     );
   }
 
-  if (bp === 'xl') {
+  if (bp === boxBreakpoints.xl) {
     return (
       value[bp] ||
       value[boxBreakpoints.lg] ||
