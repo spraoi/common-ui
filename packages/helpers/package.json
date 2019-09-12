@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/helpers",
   "description": "Simple, pure helper functions.",
-  "version": "0.21.16",
+  "version": "0.22.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/helpers",
   "repository": {
