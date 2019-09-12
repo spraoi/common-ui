@@ -1,18 +1,15 @@
 {
   "name": "@spraoi/file-upload",
   "description": "A react-filepond wrapper for simple S3 uploads.",
-  "version": "0.21.16",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/file-upload",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "0.21.16",
   "dependencies": {
-    "filepond": "^4.4.9",
+    "filepond": "^4.7.0",
     "filepond-plugin-file-rename": "^1.1.4",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "react-filepond": "^7.0.1"
@@ -23,5 +20,8 @@
     "react": "^16",
     "react-dom": "^16",
     "styled-components": "^4.3.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

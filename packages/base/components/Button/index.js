@@ -67,31 +67,10 @@ const StyledChildren = styled.div`
   height: ${p => p.theme.lineHeights.md};
 `;
 
-export default class Button extends PureComponent {
+class Button extends PureComponent {
   static types = {
     button: 'button',
     submit: 'submit',
-  };
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    disabled: PropTypes.bool,
-    download: PropTypes.bool,
-    link: PropTypes.string,
-    renderLoading: PropTypes.node,
-    simple: PropTypes.bool,
-    submitting: PropTypes.bool,
-    type: PropTypes.oneOf([Button.types.button, Button.types.submit]),
-  };
-
-  static defaultProps = {
-    disabled: false,
-    download: false,
-    link: null,
-    renderLoading: <BarLoader color="white" />,
-    simple: false,
-    submitting: false,
-    type: Button.types.button,
   };
 
   static getCommonButtonProps(props, disabled) {
@@ -164,3 +143,26 @@ export default class Button extends PureComponent {
     return this.renderButton();
   }
 }
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
+  download: PropTypes.bool,
+  link: PropTypes.string,
+  renderLoading: PropTypes.node,
+  simple: PropTypes.bool,
+  submitting: PropTypes.bool,
+  type: PropTypes.oneOf([Button.types.button, Button.types.submit]),
+};
+
+Button.defaultProps = {
+  disabled: false,
+  download: false,
+  link: null,
+  renderLoading: <BarLoader color="white" />,
+  simple: false,
+  submitting: false,
+  type: Button.types.button,
+};
+
+export default Button;

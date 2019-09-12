@@ -37,35 +37,9 @@ const StyledGlobal = createGlobalStyle`
   }
 `;
 
-export default class FileUpload extends PureComponent {
-  static propTypes = {
-    bucket: PropTypes.string,
-    customPrefix: PropTypes.shape({
-      private: PropTypes.string,
-      protected: PropTypes.string,
-      public: PropTypes.string,
-    }),
-    error: PropTypes.oneOf([0, 1]),
-    existingFiles: PropTypes.arrayOf(PropTypes.string),
-    identityId: PropTypes.string,
-    level: PropTypes.string,
-    onRemoveComplete: PropTypes.func,
-    onUploadComplete: PropTypes.func,
-  };
-
-  static defaultProps = {
-    bucket: null,
-    customPrefix: { private: '', protected: '', public: '' },
-    error: 0,
-    existingFiles: [],
-    identityId: null,
-    level: 'public',
-    onRemoveComplete: () => {},
-    onUploadComplete: () => {},
-  };
-
-  constructor() {
-    super();
+class FileUpload extends PureComponent {
+  constructor(props) {
+    super(props);
 
     if (typeof registerPlugin === 'function') {
       registerPlugin(FilePondPluginFileRename);
@@ -153,3 +127,31 @@ export default class FileUpload extends PureComponent {
     );
   }
 }
+
+FileUpload.propTypes = {
+  bucket: PropTypes.string,
+  customPrefix: PropTypes.shape({
+    private: PropTypes.string,
+    protected: PropTypes.string,
+    public: PropTypes.string,
+  }),
+  error: PropTypes.oneOf([0, 1]),
+  existingFiles: PropTypes.arrayOf(PropTypes.string),
+  identityId: PropTypes.string,
+  level: PropTypes.string,
+  onRemoveComplete: PropTypes.func,
+  onUploadComplete: PropTypes.func,
+};
+
+FileUpload.defaultProps = {
+  bucket: null,
+  customPrefix: { private: '', protected: '', public: '' },
+  error: 0,
+  existingFiles: [],
+  identityId: null,
+  level: 'public',
+  onRemoveComplete: () => {},
+  onUploadComplete: () => {},
+};
+
+export default FileUpload;

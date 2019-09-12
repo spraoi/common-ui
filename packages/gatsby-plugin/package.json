@@ -1,21 +1,21 @@
 {
   "name": "@spraoi/gatsby-plugin",
   "description": "A Gatsby plugin for adding any necessary steps to our build process.",
-  "version": "0.21.16",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-plugin",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "0.21.16",
   "dependencies": {
-    "deepmerge": "^3.2.1",
+    "deepmerge": "^4.0.0",
     "js-yaml": "^3.13.1"
   },
   "peerDependencies": {
     "prettier": "^1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

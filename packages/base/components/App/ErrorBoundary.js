@@ -3,11 +3,10 @@ import React from 'react';
 import Box from '../Box';
 
 class ErrorBoundary extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-
-  state = { error: null, errorInfo: null };
+  constructor(props) {
+    super(props);
+    this.state = { error: null, errorInfo: null };
+  }
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error, errorInfo });
@@ -34,5 +33,9 @@ class ErrorBoundary extends React.Component {
     return children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default ErrorBoundary;

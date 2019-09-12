@@ -1,26 +1,26 @@
 {
   "name": "@spraoi/gatsby-config",
   "description": "A sensible, extensible concoction of plugins & configuration for Gatsby.",
-  "version": "0.21.16",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/gatsby-config",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "0.21.16",
   "dependencies": {
     "@spraoi/gatsby-plugin": "^0.21.16",
     "gatsby-plugin-compile-es6-packages": "^2.1.0",
-    "gatsby-plugin-layout": "^1.0.15",
-    "gatsby-plugin-page-creator": "^2.0.13",
+    "gatsby-plugin-layout": "^1.1.7",
+    "gatsby-plugin-page-creator": "^2.1.17",
     "gatsby-plugin-react-svg": "^2.1.2",
-    "gatsby-plugin-styled-components": "^3.0.7"
+    "gatsby-plugin-styled-components": "^3.1.5"
   },
   "peerDependencies": {
     "gatsby": "^2",
     "react-helmet": "^5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

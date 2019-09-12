@@ -4,21 +4,10 @@ import { FormSpy } from 'react-final-form';
 import { addedDiff, diff, deletedDiff, updatedDiff } from 'deep-object-diff';
 
 class AutoSaveComponent extends React.Component {
-  static propTypes = {
-    children: PropTypes.func,
-    debounce: PropTypes.number,
-    save: PropTypes.func.isRequired,
-    values: PropTypes.shape({}).isRequired,
-  };
-
-  static defaultProps = {
-    children: () => null,
-    debounce: 200,
-  };
-
-  state = {
-    saving: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = { saving: false };
+  }
 
   componentDidUpdate(prevProps) {
     const { debounce, values } = this.props;
@@ -52,6 +41,18 @@ class AutoSaveComponent extends React.Component {
     return children({ saving });
   }
 }
+
+AutoSaveComponent.propTypes = {
+  children: PropTypes.func,
+  debounce: PropTypes.number,
+  save: PropTypes.func.isRequired,
+  values: PropTypes.shape({}).isRequired,
+};
+
+AutoSaveComponent.defaultProps = {
+  children: () => null,
+  debounce: 200,
+};
 
 const AutoSave = props => (
   <FormSpy

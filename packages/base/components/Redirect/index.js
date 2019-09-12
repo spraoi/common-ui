@@ -2,18 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { navigate } from 'gatsby';
 
-export default class Redirect extends React.Component {
-  static propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    state: PropTypes.object,
-    to: PropTypes.string.isRequired,
-    when: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    state: {},
-  };
-
+class Redirect extends React.Component {
   static handleRedirect(to, state, when) {
     if (when) navigate(to, state);
   }
@@ -31,3 +20,15 @@ export default class Redirect extends React.Component {
     return null;
   }
 }
+
+Redirect.propTypes = {
+  state: PropTypes.shape({}),
+  to: PropTypes.string.isRequired,
+  when: PropTypes.bool.isRequired,
+};
+
+Redirect.defaultProps = {
+  state: {},
+};
+
+export default Redirect;

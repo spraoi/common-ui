@@ -11,6 +11,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'prettier/prettier': ['error'],
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
+    'react/jsx-props-no-spreading': 'off',
     'react/jsx-sort-props': 'error',
     'react/no-array-index-key': 'off',
     'react/prefer-stateless-function': 'off',

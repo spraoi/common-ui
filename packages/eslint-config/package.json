@@ -1,28 +1,29 @@
 {
   "name": "@spraoi/eslint-config",
   "description": "An opinionated, extensible eslint config to enforce high-quality javascript.",
-  "version": "0.21.16",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/eslint-config",
   "repository": {
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "0.21.16",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^5.0.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-jest": "^22.6.4",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "babel-eslint": "^10.0.3",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.13.0"
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0"
   },
   "peerDependencies": {
     "eslint": "^6",
     "prettier": "^1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

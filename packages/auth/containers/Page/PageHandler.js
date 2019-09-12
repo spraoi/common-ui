@@ -2,17 +2,7 @@ import { PureComponent } from 'react';
 import { navigate } from 'gatsby';
 import { pageHandlerTypes } from './types';
 
-export default class PageHandler extends PureComponent {
-  static propTypes = pageHandlerTypes;
-
-  static defaultProps = {
-    isPrivate: false,
-    isPublic: false,
-    redirect: null,
-    renderLoading: null,
-    waitForAuth: true,
-  };
-
+class PageHandler extends PureComponent {
   componentDidMount() {
     this.handleRedirect();
   }
@@ -66,3 +56,15 @@ export default class PageHandler extends PureComponent {
     return children;
   }
 }
+
+PageHandler.propTypes = pageHandlerTypes;
+
+PageHandler.defaultProps = {
+  isPrivate: false,
+  isPublic: false,
+  redirect: null,
+  renderLoading: null,
+  waitForAuth: true,
+};
+
+export default PageHandler;

@@ -6,33 +6,16 @@ import { objectMapKeysDeep } from '@spraoi/helpers';
 import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './constants';
 
-export default class AuthProvider extends PureComponent {
-  static propTypes = {
-    amplifyConfig: PropTypes.shape({
-      Auth: PropTypes.shape({
-        identityPoolId: PropTypes.string.isRequired,
-        userPoolId: PropTypes.string.isRequired,
-        userPoolWebClientId: PropTypes.string.isRequired,
-      }).isRequired,
-      Storage: PropTypes.shape({
-        bucket: PropTypes.string,
-      }),
-    }).isRequired,
-    children: PropTypes.node.isRequired,
-    homePath: PropTypes.string,
-    loginPath: PropTypes.string,
-  };
+class AuthProvider extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    homePath: '/',
-    loginPath: '/login',
-  };
-
-  state = {
-    authState: AUTH_STATES.LOADING,
-    authUser: {},
-    jwt: null,
-  };
+    this.state = {
+      authState: AUTH_STATES.LOADING,
+      authUser: {},
+      jwt: null,
+    };
+  }
 
   async componentDidMount() {
     const { amplifyConfig } = this.props;
@@ -117,3 +100,26 @@ export default class AuthProvider extends PureComponent {
     );
   }
 }
+
+AuthProvider.propTypes = {
+  amplifyConfig: PropTypes.shape({
+    Auth: PropTypes.shape({
+      identityPoolId: PropTypes.string.isRequired,
+      userPoolId: PropTypes.string.isRequired,
+      userPoolWebClientId: PropTypes.string.isRequired,
+    }).isRequired,
+    Storage: PropTypes.shape({
+      bucket: PropTypes.string,
+    }),
+  }).isRequired,
+  children: PropTypes.node.isRequired,
+  homePath: PropTypes.string,
+  loginPath: PropTypes.string,
+};
+
+AuthProvider.defaultProps = {
+  homePath: '/',
+  loginPath: '/login',
+};
+
+export default AuthProvider;
