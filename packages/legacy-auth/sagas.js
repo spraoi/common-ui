@@ -37,12 +37,6 @@ function* completeSignUp({ payload, meta }) {
       });
     }
 
-    yield call(aws.callApi, {
-      body: { userAttributes },
-      method: 'POST',
-      path: '/user',
-    });
-
     yield put(
       actions.setState({
         ...defaultState,
