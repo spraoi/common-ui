@@ -21,3 +21,19 @@ export function parseLambdaError(error) {
 
   return error;
 }
+
+export function trimObject(o) {
+  if (typeof o === 'object') {
+    return Array.isArray(o)
+      ? _.map(o, item => trimObject(item))
+      : _.reduce(
+          Object.keys(o),
+          (result, key) => {
+            result[key] = trimObject(o[key]);
+            return result;
+          },
+          {}
+        );
+  }
+  return typeof o === 'string' ? _.trim(o) : o;
+}
