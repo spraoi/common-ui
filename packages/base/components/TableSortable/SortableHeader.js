@@ -7,9 +7,6 @@ import Box from '../Box';
 import { FILTER_PARAMS, ORDER_BY } from './constant';
 
 const SortableTitle = styled(Box)`
-  span {
-    margin-right: ${p => p.theme.space.xxxs};
-  }
   &:after {
     content: '';
     flex: none;
@@ -17,12 +14,15 @@ const SortableTitle = styled(Box)`
     border-left-color: transparent;
     border-right-color: transparent;
     opacity: 0.4;
+    margin: 0 ${p => p.theme.space.xs} 0 ${p => p.theme.space.xxxs};
   }
+
   &:hover {
     &:after {
       color: ${p => p.theme.colors.primary};
     }
   }
+
   &.asc,
   &.desc {
     &:after {
@@ -30,12 +30,14 @@ const SortableTitle = styled(Box)`
       color: ${p => p.theme.colors.black};
     }
   }
+
   &:not(.asc):after {
-    margin-top: 6px;
+    margin-top: 4px;
     border-bottom-color: transparent;
   }
+
   &.asc :after {
-    margin-bottom: 6px;
+    margin-top: -6px;
     border-top-color: transparent;
   }
 `;
@@ -46,17 +48,16 @@ const SortableHeader = ({ header, location, updateLink }) => {
   const queryParam = parse(location.search);
   const queryOrderBy = get(queryParam, FILTER_PARAMS.ORDER_BY);
   const querySortBy = get(queryParam, FILTER_PARAMS.SORT_BY);
+
   const toggleOrder = () => {
-    if (sortBy !== querySortBy) {
-      return orderBy;
-    }
-    if (queryOrderBy !== ORDER_BY.ASC) {
-      return ORDER_BY.ASC;
-    }
+    if (sortBy !== querySortBy) return orderBy;
+    if (queryOrderBy !== ORDER_BY.ASC) return ORDER_BY.ASC;
     return ORDER_BY.DESC;
   };
 
-  return sortBy ? (
+  if (!sortBy) return header.label;
+
+  return (
     <SortableTitle
       alignItems="center"
       className={sortBy === querySortBy ? queryOrderBy : ''}
@@ -66,8 +67,6 @@ const SortableHeader = ({ header, location, updateLink }) => {
     >
       <span>{header.label}</span>
     </SortableTitle>
-  ) : (
-    header.label
   );
 };
 

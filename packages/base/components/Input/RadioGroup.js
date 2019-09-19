@@ -13,7 +13,7 @@ const RadioGroup = ({ inline, label, name, options, type, ...rest }) => (
     )}
     <Box display={inline ? 'flex' : 'block'}>
       {options.map(({ label, value }) => (
-        <Box key={value} mt="sm">
+        <Box key={value} mr={inline ? 'xl' : '0'} mt={inline ? '0' : 'sm'}>
           <Field
             component={Radio}
             label={label}

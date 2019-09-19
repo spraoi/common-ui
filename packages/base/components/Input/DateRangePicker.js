@@ -1,14 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import DateRange from '@wojtekmaj/react-daterange-picker';
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
 import InputWrapper from './InputWrapper';
 
 const DatePickerWrapper = styled(InputWrapper)`
   border: 1px solid ${p => p.theme.colors.border};
+
   &:focus-within {
     border-color: ${p => p.theme.colors.primary};
   }
+
   .react-calendar {
     font-family: inherit;
     border-color: ${p => p.theme.colors.border};
@@ -18,12 +20,14 @@ const DatePickerWrapper = styled(InputWrapper)`
       &:disabled {
         background-color: ${p => p.theme.colors.gray1};
       }
+
       &:enabled {
         &:focus,
         &:hover {
           background-color: ${p => p.theme.colors.border};
         }
       }
+
       &--active {
         background: ${p => p.theme.colors.accent};
         &:enabled {
@@ -34,9 +38,11 @@ const DatePickerWrapper = styled(InputWrapper)`
         }
       }
     }
+
     &--selectRange &__tile--hover {
       background-color: ${p => p.theme.colors.border};
     }
+
     &__navigation {
       button:enabled {
         &:hover,
@@ -44,36 +50,45 @@ const DatePickerWrapper = styled(InputWrapper)`
           background-color: ${p => p.theme.colors.header};
         }
       }
+
       button[disabled] {
         background-color: ${p => p.theme.colors.gray1};
       }
     }
+
     &__month-view__days__day {
       &--weekend {
         color: ${p => p.theme.colors.red};
       }
+
       &--neighboringMonth {
         color: ${p => p.theme.colors.gray5};
       }
     }
   }
+
   &.react-daterange-picker {
     width: 100%;
     padding: ${p => p.theme.space.xxs} ${p => p.theme.space.sm};
     border-radius: ${p => p.theme.radii.md};
+    background-color: ${p => p.theme.colors.inputPrimaryBg};
   }
+
   .react-daterange-picker {
     &__wrapper {
       border: 0;
       width: 100%;
     }
+
     &__inputGroup {
       flex-grow: unset;
       min-width: 0;
     }
+
     &__clear-button {
       margin-left: auto;
     }
+
     &__calendar {
       box-shadow: ${p => p.theme.boxShadows.sm};
       bottom: calc(100% + 1px) !important;
@@ -83,13 +98,16 @@ const DatePickerWrapper = styled(InputWrapper)`
       transform: translateX(-50%);
       width: calc(100% + ${p => p.theme.space.md}) !important;
     }
+
     &__button {
       color: ${p => p.theme.colors.border};
+
       &:enabled {
         &:focus,
         &:hover {
           color: hsl(0, 0%, 60%);
         }
+
         svg {
           stroke: currentColor !important;
         }

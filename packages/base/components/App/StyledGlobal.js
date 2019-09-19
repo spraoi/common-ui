@@ -65,9 +65,10 @@ export default createGlobalStyle`
       outline: none;
     }
 
-    &[type='radio'] {
+    &[type='radio'],
+    &[type='checkbox'] {
       margin: 0;
-      transform: scale(1.4);
+      transform: scale(1.1);
     }
 
     &::placeholder {
