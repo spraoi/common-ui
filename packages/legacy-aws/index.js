@@ -19,7 +19,7 @@ import {
 
 import Cookie from 'js-cookie';
 import { awsConfig, spraoiConfig } from './config';
-import { parseHashParams, parseLambdaError } from './helpers';
+import { parseHashParams, parseLambdaError, trimObject } from './helpers';
 import requestSigner, { buildCanonicalQueryString } from './requestSigner';
 
 awsSdkConfig.update({ region: awsConfig.cognito.region });
@@ -70,7 +70,7 @@ export async function callApi({
     endpoint = `${awsConfig.apiGateway.url}${path}?${queryString}`;
   }
 
-  body = body ? JSON.stringify(body) : body;
+  body = body ? JSON.stringify(trimObject(body)) : body;
 
   let results = await fetch(endpoint, { method, headers, body });
   results = await results.json();
