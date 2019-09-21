@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-cobrowsing",
   "description": "Legacy container components for co-browsing with Surfly.",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-cobrowsing",
   "repository": {
