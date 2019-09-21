@@ -55,9 +55,15 @@ const StyledGlobal = createGlobalStyle`
     outline: none;
   }
 
+  textarea {
+    display: block;
+    resize: vertical;
+  }
+
   a,
   input,
-  button {
+  button,
+  textarea {
     font: inherit;
     outline: none;
 

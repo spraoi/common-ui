@@ -106,7 +106,7 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__button {
-      color: ${p => p.theme.colors.gray[1]};
+      color: ${p => p.theme.colors.grays[1]};
 
       &:enabled {
         &:focus,

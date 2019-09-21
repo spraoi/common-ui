@@ -15,11 +15,11 @@ import Spinner from '../Spinner';
 const StyledTable = styled(ReactTable)`
   font-size: ${p => p.theme.fontSizes[2]};
   line-height: 1.4em;
-  border-bottom: solid 1px ${p => p.theme.colors.gray[1]};
+  border-bottom: solid 1px ${p => p.theme.colors.grays[1]};
   border-collapse: collapse;
 
   @media (min-width: 641px) {
-    border-bottom: solid 1px ${p => p.theme.colors.gray[1]};
+    border-bottom: solid 1px ${p => p.theme.colors.grays[1]};
   }
 `;
 
@@ -38,12 +38,12 @@ const StyledTh = styled(Th)`
 
 const StyledTr = styled(Tr)`
   /* !important to override react-super-responsive-table */
-  border: solid 1px ${p => p.theme.colors.gray[1]} !important;
+  border: solid 1px ${p => p.theme.colors.grays[1]} !important;
   border-bottom-style: none !important;
 
   @media (min-width: 641px) {
     border: none !important;
-    border-bottom: solid 1px ${p => p.theme.colors.gray[1]} !important;
+    border-bottom: solid 1px ${p => p.theme.colors.grays[1]} !important;
   }
 `;
 
