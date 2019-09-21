@@ -13,43 +13,43 @@ import {
 import Spinner from '../Spinner';
 
 const StyledTable = styled(ReactTable)`
-  font-size: ${p => p.theme.fontSizes.sm};
+  font-size: ${p => p.theme.fontSizes[2]};
   line-height: 1.4em;
-  border-bottom: solid 1px ${p => p.theme.colors.border};
+  border-bottom: solid 1px ${p => p.theme.colors.gray[1]};
   border-collapse: collapse;
 
   @media (min-width: 641px) {
-    border-bottom: solid 1px ${p => p.theme.colors.gray1};
+    border-bottom: solid 1px ${p => p.theme.colors.gray[1]};
   }
 `;
 
 const StyledThead = styled(Thead)`
-  color: ${p => p.theme.colors.textSubtle};
+  color: ${p => p.theme.colors.text.subtle};
   text-transform: uppercase;
   letter-spacing: ${p => p.theme.letterSpacings.md};
 `;
 
 const StyledTh = styled(Th)`
-  padding-bottom: ${p => p.theme.space.sm};
-  font-size: ${p => p.theme.fontSizes.xs};
+  padding-bottom: ${p => p.theme.space[3]};
+  font-size: ${p => p.theme.fontSizes[1]};
   font-weight: ${p => p.theme.fontWeights.normal};
   text-align: left;
 `;
 
 const StyledTr = styled(Tr)`
   /* !important to override react-super-responsive-table */
-  border: solid 1px ${p => p.theme.colors.border} !important;
+  border: solid 1px ${p => p.theme.colors.gray[1]} !important;
   border-bottom-style: none !important;
 
   @media (min-width: 641px) {
     border: none !important;
-    border-bottom: solid 1px ${p => p.theme.colors.gray1} !important;
+    border-bottom: solid 1px ${p => p.theme.colors.gray[1]} !important;
   }
 `;
 
 const StyledTd = styled(Td)`
-  padding: ${p => p.theme.space.sm} ${p => p.theme.space.md}
-    ${p => p.theme.space.sm} 0;
+  padding: ${p => p.theme.space[3]} ${p => p.theme.space[4]}
+    ${p => p.theme.space[3]} 0;
 
   &:last-of-type {
     padding-right: 0;

@@ -2,27 +2,30 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 import styled, { css } from 'styled-components';
-import InputWrapper from './InputWrapper';
+import InputWrapper from '../InputWrapper';
 
 const StyledTextArea = styled(TextareaAutosize)`
   display: block;
   width: 100%;
-  padding: ${p => p.theme.space.xs} ${p => p.theme.space.xs};
-  border: solid 1px ${p => p.theme.colors.inputPrimaryBorder};
-  border-radius: ${p => p.theme.radii.md};
+  padding: ${p => p.theme.space[2]} ${p => p.theme.space[2]};
+  border: ${p => p.theme.variants.inputs.primary.borderStyle}
+    ${p => p.theme.variants.inputs.primary.borderWidth}
+    ${p => p.theme.variants.inputs.primary.borderColor};
+  border-radius: ${p => p.theme.radii[1]};
   outline: none;
   font-family: ${p => p.theme.fonts.primary};
-  font-size: ${p => p.theme.fontSizes.md};
+  font-size: ${p => p.theme.fontSizes[3]};
   resize: vertical;
 
   &:focus {
-    border-color: ${p => p.theme.colors.inputPrimaryBorderFocus};
+    border-color: ${p =>
+      p.theme.variants.inputs.primary['&:focus'].borderColor};
   }
 
   ${p =>
     p.error &&
     css`
-      border-color: ${p => p.theme.colors.inputPrimaryBorderError};
+      border-color: ${p => p.theme.colors.error};
     `}
 `;
 

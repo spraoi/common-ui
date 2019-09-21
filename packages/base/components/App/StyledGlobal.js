@@ -1,33 +1,33 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+const StyledGlobal = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
 
   html {
     height: 100%;
-    overflow-x:hidden;
+    overflow-x: hidden;
     background-color: ${p => p.theme.colors.body};
-    color: ${p => p.theme.colors.textPrimary};
+    color: ${p => p.theme.colors.text.primary};
     font-family: ${p => p.theme.fonts.primary};
-    font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.xs};
+    font-size: ${p => p.theme.baseFontSizesForBreakpoint[0]};
     font-weight: ${p => p.theme.fontWeights.normal};
 
-    @media (min-width: ${p => p.theme.breakpoints.xs}) {
-      font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.sm};
+    @media (min-width: ${p => p.theme.breakpoints[0]}) {
+      font-size: ${p => p.theme.baseFontSizesForBreakpoint[1]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints.sm}) {
-      font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.md};
+    @media (min-width: ${p => p.theme.breakpoints[1]}) {
+      font-size: ${p => p.theme.baseFontSizesForBreakpoint[2]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints.md}) {
-      font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.lg};
+    @media (min-width: ${p => p.theme.breakpoints[2]}) {
+      font-size: ${p => p.theme.baseFontSizesForBreakpoint[3]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints.lg}) {
-      font-size: ${p => p.theme.baseFontSizeBeforeBreakpoint.xl};
+    @media (min-width: ${p => p.theme.breakpoints[3]}) {
+      font-size: ${p => p.theme.baseFontSizesForBreakpoint[4]};
     }
   }
 
@@ -40,7 +40,7 @@ export default createGlobalStyle`
   }
 
   a {
-    color: ${p => p.theme.colors.textLink};
+    color: ${p => p.theme.colors.text.link};
   }
 
   button,
@@ -59,6 +59,7 @@ export default createGlobalStyle`
   input,
   button {
     font: inherit;
+    outline: none;
 
     &:focus,
     &:active {
@@ -68,11 +69,6 @@ export default createGlobalStyle`
     &[type='radio'],
     &[type='checkbox'] {
       margin: 0;
-      transform: scale(1.1);
-    }
-
-    &::placeholder {
-      color: ${p => p.theme.colors.inputPrimaryPlaceholderText};
     }
   }
 
@@ -93,26 +89,25 @@ export default createGlobalStyle`
   h2,
   h3,
   h4 {
-    margin-bottom: ${p => p.theme.space.md};
-    color: ${p => p.theme.colors.textHeading};
+    color: ${p => p.theme.colors.text.heading};
     font-family: ${p => p.theme.fonts.secondary};
     font-weight: ${p => p.theme.fontWeights.bold};
   }
 
   h1 {
-    font-size: ${p => p.theme.fontSizes.xxl};
+    font-size: ${p => p.theme.fontSizes[6]};
   }
 
   h2 {
-    font-size: ${p => p.theme.fontSizes.xl};
+    font-size: ${p => p.theme.fontSizes[5]};
   }
 
   h3 {
-    font-size: ${p => p.theme.fontSizes.md};
+    font-size: ${p => p.theme.fontSizes[4]};
   }
 
   h4 {
-    font-size: ${p => p.theme.fontSizes.sm};
+    font-size: ${p => p.theme.fontSizes[3]};
   }
 
   ul {
@@ -121,8 +116,9 @@ export default createGlobalStyle`
 
   hr {
     height: 1px;
-    margin-top: ${p => p.theme.space.lg};
     border: 0;
     background-color: ${p => p.theme.colors.border};
   }
 `;
+
+export default StyledGlobal;

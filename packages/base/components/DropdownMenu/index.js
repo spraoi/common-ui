@@ -58,10 +58,10 @@ const StyledMenuItem = styled(MenuItem).attrs({
 `;
 
 const StyledMenuItemChild = styled.div`
-  padding: ${p => p.theme.space.xxs} ${p => p.theme.space.md};
+  padding: ${p => p.theme.space[1]} ${p => p.theme.space[4]};
 `;
 
-const Menu = ({
+const DropdownMenu = ({
   button,
   chevron,
   dividerPositions,
@@ -78,17 +78,17 @@ const Menu = ({
           <Box
             alignItems="center"
             bg="white"
-            borderRadius="md"
-            boxShadow="lg"
+            borderRadius={1}
+            boxShadow={2}
             display="flex"
-            mt="xs"
-            overflow="hidden"
-            pb="sm"
-            pt={heading ? '0' : 'sm'}
+            mt={2}
+            pb={3}
+            pt={heading ? null : 3}
+            sx={{ overflow: 'hidden' }}
           >
             <MenuList>
               {heading && (
-                <Box bg="gray1" color="textSubtle" fontSize="sm" mb="sm" p="md">
+                <Box bg="gray.1" color="text.subtle" fontSize={2} mb={3} p={4}>
                   {heading}
                 </Box>
               )}
@@ -97,7 +97,7 @@ const Menu = ({
 
                 return (
                   <div key={i}>
-                    {dividerPositions.includes(i) && <Box as="hr" my="sm" />}
+                    {dividerPositions.includes(i) && <Box as="hr" my={3} />}
                     <StyledMenuItem
                       onItemChosen={e => {
                         if (typeof itemActions[i] === 'string') {
@@ -134,7 +134,7 @@ const Menu = ({
   );
 };
 
-Menu.propTypes = {
+DropdownMenu.propTypes = {
   button: PropTypes.node.isRequired,
   chevron: PropTypes.bool,
   dividerPositions: PropTypes.arrayOf(PropTypes.number),
@@ -145,10 +145,10 @@ Menu.propTypes = {
   items: PropTypes.arrayOf(PropTypes.node).isRequired,
 };
 
-Menu.defaultProps = {
+DropdownMenu.defaultProps = {
   chevron: false,
   dividerPositions: [],
   heading: null,
 };
 
-export default Menu;
+export default DropdownMenu;

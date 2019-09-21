@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import InputWrapper from './InputWrapper';
+import InputWrapper from '../InputWrapper';
 
-const Radio = ({ input, label, type, ...rest }) => (
+const Checkbox = ({ input, label, type, ...rest }) => (
   <InputWrapper
     htmlFor={`${input.name}${input.value}`}
     input={input}
@@ -20,7 +20,7 @@ const Radio = ({ input, label, type, ...rest }) => (
   </InputWrapper>
 );
 
-Radio.propTypes = {
+Checkbox.propTypes = {
   input: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -29,8 +29,8 @@ Radio.propTypes = {
   type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
-Radio.defaultProps = {
-  type: 'radio',
+Checkbox.defaultProps = {
+  type: 'checkbox',
 };
 
-export default Radio;
+export default Checkbox;

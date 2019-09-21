@@ -2,11 +2,11 @@ import ReactAutocomplete from 'react-autocomplete';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled, { ThemeConsumer, css } from 'styled-components';
-import InputWrapper from './InputWrapper';
-import { StyledInput } from './Input';
+import Box from '../../../Box';
+import InputWrapper from '../InputWrapper';
 
 const Suggestion = styled.div`
-  padding: ${p => p.theme.space.xs};
+  padding: ${p => p.theme.space[2]};
   cursor: pointer;
 
   ${p =>
@@ -35,21 +35,32 @@ const Autocomplete = ({ input, items, ...rest }) => {
               items={items}
               menuStyle={{
                 backgroundColor: theme.colors.white,
-                border: `solid 1px ${theme.colors.border}`,
-                borderRadius: theme.radii.md,
-                boxShadow: theme.boxShadows.md,
+                border: theme.variants.inputs.primary.border,
+                borderRadius: theme.radii[1],
+                boxShadow: theme.shadows[1],
                 left: '0',
                 maxHeight: '50vh',
                 overflow: 'auto',
-                padding: `${theme.space.xxxs} 0`,
+                padding: `${theme.space[0]} 0`,
                 position: 'absolute',
-                top: `calc(100% + ${theme.space.xxs})`,
+                top: `calc(100% + ${theme.space[1]})`,
                 zIndex: '1',
               }}
               onMenuVisibilityChange={setIsOpen}
               onSelect={input.onChange}
               open={!!items.length && isOpen}
-              renderInput={inputProps => <StyledInput {...inputProps} />}
+              renderInput={inputProps => (
+                <Box
+                  as="input"
+                  borderColor={input.error ? 'error' : null}
+                  borderRadius={1}
+                  px={3}
+                  py={2}
+                  variant="inputs.primary"
+                  width="100%"
+                  {...inputProps}
+                />
+              )}
               renderItem={(item, isHighlighted) => (
                 <Suggestion key={item} isHighlighted={isHighlighted}>
                   {item}
@@ -70,8 +81,9 @@ const Autocomplete = ({ input, items, ...rest }) => {
 
 Autocomplete.propTypes = {
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    error: PropTypes.bool,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
   }).isRequired,
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

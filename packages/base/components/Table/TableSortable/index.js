@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Location } from '@reach/router';
-import Table from '../Table';
+import Table from '../index';
 import SortableHeader from './SortableHeader';
-import { FILTER_PARAMS, ORDER_BY } from './constant';
+import { FILTER_PARAMS, ORDER_BY } from './constants';
 
 const setSortableHeader = (sortableHeader, updateLink) =>
   sortableHeader.map(item => {
-    const updatedHeader = {
-      label: item.label || '',
-    };
+    const updatedHeader = { label: item.label || '' };
+
     updatedHeader[FILTER_PARAMS.ORDER_BY] =
       item[FILTER_PARAMS.ORDER_BY] || ORDER_BY.DESC;
+
     updatedHeader[FILTER_PARAMS.SORT_BY] = item.value || '';
+
     return (
       <Location>
         {location => (

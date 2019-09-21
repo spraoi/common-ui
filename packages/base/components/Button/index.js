@@ -1,148 +1,92 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
 import { BarLoader } from 'react-spinners';
 import { Link } from 'gatsby';
-import { blacklistProps } from '@spraoi/helpers';
-import Box, { boxProps } from '../Box';
+import Box from '../Box';
 
-const blacklist = [...boxProps, 'secondary', 'simple', 'submitting'];
+const types = {
+  button: 'button',
+  submit: 'submit',
+};
 
-const buttonStyles = css`
-  ${p =>
-    !p.simple &&
-    css`
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: ${p => p.theme.colors.primary};
-      border-radius: ${p => p.theme.radii.md};
-      box-shadow: ${p => p.theme.boxShadows.md};
-      transition: background-color ${p => p.theme.transitionSpeeds.normal};
-      color: ${p => p.theme.colors.white};
-      font-size: ${p => p.theme.fontSizes.sm};
-      font-weight: ${p => p.theme.fontWeights.bold};
-      letter-spacing: ${p => p.theme.letterSpacings.sm};
-      text-transform: uppercase;
-      text-decoration: none;
-      white-space: nowrap;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${p => p.theme.colors.primaryLight};
-      }
-
-      ${p =>
-        p.secondary &&
-        css`
-          background-color: ${p => p.theme.colors.accent};
-
-          &:hover {
-            background-color: ${p => p.theme.colors.accentLight};
-          }
-        `}
-
-      ${p =>
-        p.disabled &&
-        css`
-          opacity: 0.3;
-          pointer-events: none;
-        `}
-    `}
-`;
-
-const StyledButton = styled(blacklistProps({ as: 'button', blacklist }))`
-  ${buttonStyles};
-`;
-
-const StyledLink = styled(blacklistProps({ as: Link, blacklist }))`
-  ${buttonStyles};
-`;
-
-const StyledChildren = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: ${p => p.theme.lineHeights.md};
-`;
-
-class Button extends PureComponent {
-  static types = {
-    button: 'button',
-    submit: 'submit',
+const Button = ({
+  children,
+  disabled,
+  download,
+  link,
+  renderLoading,
+  simple,
+  submitting,
+  sx,
+  type,
+  ...rest
+}) => {
+  const simpleSx = {
+    color: 'accent',
   };
 
-  static getCommonButtonProps(props, disabled) {
-    return {
-      color: props.simple ? 'accent' : 'inherit',
-      disabled,
-      px: props.simple ? '0' : 'md',
-      py: props.simple ? '0' : 'sm',
-      textDecoration: props.simple ? 'underline' : 'none',
-      width: props.simple ? 'auto' : 'inherit',
-      ...props,
-    };
-  }
+  const buttonSx = {
+    alignItems: 'center',
+    borderRadius: 1,
+    boxShadow: 1,
+    cursor: 'pointer',
+    display: 'flex',
+    fontSize: 2,
+    fontWeight: 2,
+    justifyContent: 'center',
+    letterSpacing: 0,
+    opacity: disabled ? 0.3 : 1,
+    pointerEvents: disabled ? 'none' : 'auto',
+    position: 'relative',
+    px: 6,
+    py: 3,
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    whiteSpace: 'nowrap',
+  };
 
-  renderButton() {
-    const {
-      children,
-      disabled,
-      renderLoading,
-      submitting,
-      type,
-      ...rest
-    } = this.props;
+  const commonProps = {
+    disabled: disabled || submitting,
+    sx: { ...(simple ? simpleSx : buttonSx), ...sx },
+    variant: simple ? null : 'buttons.primary',
+    ...rest,
+  };
 
-    let buttonChildren = children;
-
-    if (!rest.simple) {
-      buttonChildren = submitting ? (
-        <StyledChildren>{renderLoading}</StyledChildren>
-      ) : (
-        <StyledChildren>{children}</StyledChildren>
-      );
-    }
-
-    const commonProps = Button.getCommonButtonProps(
-      rest,
-      disabled || submitting
-    );
-
-    return type === Button.types.button ? (
-      <Box as={StyledButton} type="button" {...commonProps}>
-        {buttonChildren}
-      </Box>
-    ) : (
-      <Box as={StyledButton} type="submit" {...commonProps}>
-        {buttonChildren}
-      </Box>
-    );
-  }
-
-  renderLink() {
-    const { children, disabled, download, link, ...rest } = this.props;
-    delete rest.renderLoading;
-    const commonProps = Button.getCommonButtonProps(rest, disabled);
-
+  if (link) {
     return download ? (
-      <Box as={StyledLink} download href={link} {...commonProps}>
+      <Box as={Link} download href={link} {...commonProps}>
         {children}
       </Box>
     ) : (
-      <Box as={StyledLink} disabled={disabled} to={link} {...commonProps}>
+      <Box as={Link} disabled={disabled} to={link} {...commonProps}>
         {children}
       </Box>
     );
   }
 
-  render() {
-    const { link } = this.props;
-    if (link) return this.renderLink();
-    return this.renderButton();
-  }
-}
+  const innerButton = simple ? (
+    children
+  ) : (
+    <Box
+      alignItems="center"
+      display="flex"
+      height="1em"
+      justifyContent="center"
+    >
+      {submitting ? renderLoading : children}
+    </Box>
+  );
+
+  return type === types.button ? (
+    <Box as="button" type="button" {...commonProps}>
+      {innerButton}
+    </Box>
+  ) : (
+    <Box as="button" type="submit" {...commonProps}>
+      {innerButton}
+    </Box>
+  );
+};
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
@@ -152,7 +96,8 @@ Button.propTypes = {
   renderLoading: PropTypes.node,
   simple: PropTypes.bool,
   submitting: PropTypes.bool,
-  type: PropTypes.oneOf([Button.types.button, Button.types.submit]),
+  sx: PropTypes.shape({}),
+  type: PropTypes.oneOf([types.button, types.submit]),
 };
 
 Button.defaultProps = {
@@ -162,7 +107,8 @@ Button.defaultProps = {
   renderLoading: <BarLoader color="white" />,
   simple: false,
   submitting: false,
-  type: Button.types.button,
+  sx: {},
+  type: types.button,
 };
 
 export default Button;

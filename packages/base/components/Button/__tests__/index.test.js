@@ -71,12 +71,4 @@ describe('Button component', () => {
       `background-color: ${theme.colors.primary}`
     );
   });
-
-  it('renders a secondary button correctly', () => {
-    const { getByText } = render(<Button secondary>foo</Button>);
-
-    expect(getByText('foo').closest('button')).toHaveStyle(
-      `background-color: ${theme.colors.accent}`
-    );
-  });
 });

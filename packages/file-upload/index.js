@@ -16,23 +16,22 @@ const StyledGlobal = createGlobalStyle`
     }
 
     .filepond--drop-label {
-      color: ${p => p.theme.colors.inputSecondaryPlaceholderText};
+      color: ${p => p.theme.colors.grays[4]};
     }
 
     .filepond--label-action {
-      text-decoration-color: ${p =>
-        p.theme.colors.inputSecondaryPlaceholderText};
+      text-decoration-color: ${p => p.theme.colors.grays[4]};
     }
 
     .filepond--panel-root {
       border: solid 1px ${p =>
         p.error ? p.theme.colors.error : 'transparent'};
-      border-radius: ${p => p.theme.radii.lg};
-      background-color: ${p => p.theme.colors.inputSecondaryBg};
+      border-radius: ${p => p.theme.radii[2]};
+      background-color: ${p => p.theme.colors.grays[1]};
     }
 
     .filepond--item-panel {
-      border-radius: ${p => p.theme.radii.lg};
+      border-radius: ${p => p.theme.radii[2]};
     }
   }
 `;

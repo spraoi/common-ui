@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field } from 'react-final-form';
-import Box from '../Box';
-import Radio from './Radio';
+import Box from '../../../Box';
+import Radio from '../Checkbox';
 
-const RadioGroup = ({ inline, label, name, options, type, ...rest }) => (
+const CheckboxGroup = ({ inline, label, name, options, type, ...rest }) => (
   <>
     {label && (
-      <Box color="textSubtle" mr="lg" mt="lg">
+      <Box color="textSubtle" mr={4} mt={4}>
         {label}
       </Box>
     )}
     <Box display={inline ? 'flex' : 'block'}>
       {options.map(({ label, value }) => (
-        <Box key={value} mr={inline ? 'xl' : '0'} mt={inline ? '0' : 'sm'}>
+        <Box key={value} mr={inline ? 5 : null} mt={inline ? null : 2}>
           <Field
             component={Radio}
             label={label}
@@ -28,7 +28,7 @@ const RadioGroup = ({ inline, label, name, options, type, ...rest }) => (
   </>
 );
 
-RadioGroup.propTypes = {
+CheckboxGroup.propTypes = {
   inline: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -41,10 +41,10 @@ RadioGroup.propTypes = {
   type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
-RadioGroup.defaultProps = {
+CheckboxGroup.defaultProps = {
   inline: false,
   label: null,
   type: 'radio',
 };
 
-export default RadioGroup;
+export default CheckboxGroup;

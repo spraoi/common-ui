@@ -1,6 +1,6 @@
 import SpraoiFileUpload from '@spraoi/file-upload';
 import React from 'react';
-import InputWrapper from './InputWrapper';
+import InputWrapper from '../InputWrapper';
 
 const FileUpload = props => (
   <InputWrapper {...props}>

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import get from 'lodash/get';
 import { parse } from 'query-string';
-import Box from '../Box';
-import { FILTER_PARAMS, ORDER_BY } from './constant';
+import { FILTER_PARAMS, ORDER_BY } from '../constants';
 
-const SortableTitle = styled(Box)`
+const SortableTitle = styled.div`
   &:after {
     content: '';
     flex: none;
@@ -14,7 +13,7 @@ const SortableTitle = styled(Box)`
     border-left-color: transparent;
     border-right-color: transparent;
     opacity: 0.4;
-    margin: 0 ${p => p.theme.space.xs} 0 ${p => p.theme.space.xxxs};
+    margin: 0 ${p => p.theme.space[2]} 0 ${p => p.theme.space[0]};
   }
 
   &:hover {

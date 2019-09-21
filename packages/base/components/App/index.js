@@ -12,7 +12,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import ErrorBoundary from './ErrorBoundary';
 import StyledGlobal from './StyledGlobal';
-import { configType, themeType } from './types';
 
 const cache = new InMemoryCache();
 
@@ -66,9 +65,29 @@ const App = ({ children, config, credentials, theme }) => {
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
-  config: configType.isRequired,
+  config: PropTypes.shape({
+    amplify: PropTypes.shape({
+      Auth: PropTypes.shape({
+        identityPoolId: PropTypes.string,
+        region: PropTypes.oneOf(['us-east-1']),
+        userPoolId: PropTypes.string,
+        userPoolWebClientId: PropTypes.string,
+      }),
+      Storage: PropTypes.shape({
+        bucket: PropTypes.string,
+        region: PropTypes.oneOf(['us-east-1']),
+      }),
+    }),
+    apollo: PropTypes.shape({
+      auth: PropTypes.shape({
+        type: PropTypes.oneOf(['AWS_IAM']),
+      }),
+      region: PropTypes.oneOf(['us-east-1']),
+      url: PropTypes.string,
+    }),
+  }).isRequired,
   credentials: PropTypes.func,
-  theme: themeType.isRequired,
+  theme: PropTypes.shape({}).isRequired,
 };
 
 App.defaultProps = {

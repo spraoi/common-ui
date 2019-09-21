@@ -1,35 +1,41 @@
+// TODO: support more than just date ranges!
+
 import DateRange from '@wojtekmaj/react-daterange-picker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import InputWrapper from './InputWrapper';
+import InputWrapper from '../InputWrapper';
 
 const DatePickerWrapper = styled(InputWrapper)`
-  border: 1px solid ${p => p.theme.colors.border};
+  border: ${p => p.theme.variants.inputs.primary.borderStyle}
+    ${p => p.theme.variants.inputs.primary.borderWidth}
+    ${p => p.theme.variants.inputs.primary.borderColor};
 
   &:focus-within {
-    border-color: ${p => p.theme.colors.primary};
+    border-color: ${p =>
+      p.theme.variants.inputs.primary['&:focus'].borderColor};
   }
 
   .react-calendar {
     font-family: inherit;
-    border-color: ${p => p.theme.colors.border};
-    border-radius: ${p => p.theme.radii.md};
+    border-color: ${p => p.theme.variants.inputs.primary.borderColor};
+    border-radius: ${p => p.theme.radii[1]};
 
     &__tile {
       &:disabled {
-        background-color: ${p => p.theme.colors.gray1};
+        background-color: ${p => p.theme.colors.grays[0]};
       }
 
       &:enabled {
         &:focus,
         &:hover {
-          background-color: ${p => p.theme.colors.border};
+          background-color: ${p => p.theme.grays[0]};
         }
       }
 
       &--active {
         background: ${p => p.theme.colors.accent};
+
         &:enabled {
           &:focus,
           &:hover {
@@ -40,38 +46,38 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &--selectRange &__tile--hover {
-      background-color: ${p => p.theme.colors.border};
+      background-color: ${p => p.theme.colors.grays[0]};
     }
 
     &__navigation {
       button:enabled {
         &:hover,
         &:focus {
-          background-color: ${p => p.theme.colors.header};
+          background-color: ${p => p.theme.colors.grays[0]};
         }
       }
 
       button[disabled] {
-        background-color: ${p => p.theme.colors.gray1};
+        background-color: ${p => p.theme.colors.grays[0]};
       }
     }
 
     &__month-view__days__day {
       &--weekend {
-        color: ${p => p.theme.colors.red};
+        color: ${p => p.theme.colors.error};
       }
 
       &--neighboringMonth {
-        color: ${p => p.theme.colors.gray5};
+        color: ${p => p.theme.colors.grays[4]};
       }
     }
   }
 
   &.react-daterange-picker {
     width: 100%;
-    padding: ${p => p.theme.space.xxs} ${p => p.theme.space.sm};
-    border-radius: ${p => p.theme.radii.md};
-    background-color: ${p => p.theme.colors.inputPrimaryBg};
+    padding: ${p => p.theme.space[1]} ${p => p.theme.space[3]};
+    border-radius: ${p => p.theme.radii[1]};
+    background-color: ${p => p.theme.variants.inputs.primary.bg};
   }
 
   .react-daterange-picker {
@@ -90,17 +96,17 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__calendar {
-      box-shadow: ${p => p.theme.boxShadows.sm};
+      width: calc(100% + ${p => p.theme.space[4]}) !important;
+      top: unset !important;
+      right: unset !important;
       bottom: calc(100% + 1px) !important;
       left: 50% !important;
-      right: unset !important;
-      top: unset !important;
       transform: translateX(-50%);
-      width: calc(100% + ${p => p.theme.space.md}) !important;
+      box-shadow: ${p => p.theme.shadows[0]};
     }
 
     &__button {
-      color: ${p => p.theme.colors.border};
+      color: ${p => p.theme.colors.gray[1]};
 
       &:enabled {
         &:focus,
@@ -116,10 +122,11 @@ const DatePickerWrapper = styled(InputWrapper)`
   }
 `;
 
-const DateRangePicker = ({ input, ...rest }) => {
+const DatePicker = ({ input, ...rest }) => {
   const onChange = (date, meta) => {
     input.onChange(date, meta);
   };
+
   return (
     <DatePickerWrapper input={input} {...rest}>
       {props => (
@@ -134,7 +141,7 @@ const DateRangePicker = ({ input, ...rest }) => {
   );
 };
 
-DateRangePicker.propTypes = {
+DatePicker.propTypes = {
   input: PropTypes.shape({
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -142,4 +149,4 @@ DateRangePicker.propTypes = {
   }).isRequired,
 };
 
-export default DateRangePicker;
+export default DatePicker;

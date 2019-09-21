@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import uniqBy from 'lodash/uniqBy';
 import { ThemeConsumer } from 'styled-components';
-import InputWrapper from './InputWrapper';
+import InputWrapper from '../InputWrapper';
 
 const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
@@ -21,12 +21,17 @@ const Dropdown = ({ input, ...rest }) => {
       }) => (
         <ThemeConsumer>
           {theme => {
-            const height = `calc(${theme.space.xs} * 2 + ${theme.lineHeights.md})`;
+            const height = `calc(${theme.space[2]} * 2 + ${
+              theme.lineHeights[1]
+            })`;
 
             const getBorderColor = ({ isFocused }) => {
-              if (isFocused) return theme.colors.inputPrimaryBorderFocus;
+              if (isFocused) {
+                return theme.variants.inputs.primary['&:focused'].borderColor;
+              }
+
               if (inputRest.error) return theme.colors.error;
-              return theme.colors.inputPrimaryBorder;
+              return theme.variants.inputs.primary.borderColor;
             };
 
             const styles = {
@@ -39,24 +44,23 @@ const Dropdown = ({ input, ...rest }) => {
                 '&:hover': {
                   border: `solid 1px ${getBorderColor({ isFocused })}`,
                 },
-                backgroundColor: theme.colors.inputPrimaryBg,
+                backgroundColor: theme.variants.inputs.primary.bg,
                 border: `solid 1px ${getBorderColor({ isFocused })}`,
-                borderRadius: theme.radii.md,
+                borderRadius: theme.radii[1],
                 boxShadow: 0,
                 minHeight: height,
               }),
               option: base => ({
                 ...base,
-                // TODO: customize
               }),
               placeholder: base => ({
                 ...base,
-                color: theme.colors.inputPrimaryPlaceholderText,
+                color: theme.variants.inputs.primary['&::placeholder'].color,
               }),
               valueContainer: base => ({
                 ...base,
                 border: 0,
-                borderRadius: theme.radii.md,
+                borderRadius: theme.radii[1],
               }),
             };
 
