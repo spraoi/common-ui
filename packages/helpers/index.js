@@ -6,6 +6,7 @@ import objectMapDeep from './functions/object-map-deep';
 import objectMapKeysDeep from './functions/object-map-keys-deep';
 import shortenNumber from './functions/shorten-number';
 import stripTypename from './functions/strip-typename';
+import themeVariantToValue from './functions/theme-variant-to-value';
 
 export {
   blacklistProps,
@@ -16,4 +17,5 @@ export {
   objectMapKeysDeep,
   shortenNumber,
   stripTypename,
+  themeVariantToValue,
 };
