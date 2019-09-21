@@ -4,22 +4,29 @@ import DateRange from '@wojtekmaj/react-daterange-picker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
 
 const DatePickerWrapper = styled(InputWrapper)`
   border: ${p => p.theme.variants.inputs.primary.borderStyle}
-    ${p => p.theme.variants.inputs.primary.borderWidth}
-    ${p => p.theme.variants.inputs.primary.borderColor};
+    ${p => themeVariantToValue(p.theme, 'sizes', 'inputs.primary.borderWidth')}
+    ${p => themeVariantToValue(p.theme, 'colors', 'inputs.primary.borderColor')};
 
   &:focus-within {
     border-color: ${p =>
-      p.theme.variants.inputs.primary['&:focus'].borderColor};
+      themeVariantToValue(
+        p.theme,
+        'colors',
+        'inputs.primary.&:focus.borderColor'
+      )};
   }
 
   .react-calendar {
     font-family: inherit;
-    border-color: ${p => p.theme.variants.inputs.primary.borderColor};
-    border-radius: ${p => p.theme.radii[1]};
+    border-color: ${p =>
+      themeVariantToValue(p.theme, 'colors', 'inputs.primary.borderColor')};
+    border-radius: ${p =>
+      themeVariantToValue(p.theme, 'radii', 'inputs.primary.borderRadius')};
 
     &__tile {
       &:disabled {
@@ -29,7 +36,7 @@ const DatePickerWrapper = styled(InputWrapper)`
       &:enabled {
         &:focus,
         &:hover {
-          background-color: ${p => p.theme.grays[0]};
+          background-color: ${p => p.theme.colors.grays[0]};
         }
       }
 
@@ -63,10 +70,6 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__month-view__days__day {
-      &--weekend {
-        color: ${p => p.theme.colors.error};
-      }
-
       &--neighboringMonth {
         color: ${p => p.theme.colors.grays[4]};
       }
@@ -75,9 +78,12 @@ const DatePickerWrapper = styled(InputWrapper)`
 
   &.react-daterange-picker {
     width: 100%;
-    padding: ${p => p.theme.space[1]} ${p => p.theme.space[3]};
-    border-radius: ${p => p.theme.radii[1]};
-    background-color: ${p => p.theme.variants.inputs.primary.bg};
+    padding: ${p => themeVariantToValue(p.theme, 'space', 'inputs.primary.py')}
+      ${p => themeVariantToValue(p.theme, 'space', 'inputs.primary.px')};
+    border-radius: ${p =>
+      themeVariantToValue(p.theme, 'radii', 'inputs.primary.borderRadius')};
+    background-color: ${p =>
+      themeVariantToValue(p.theme, 'colors', 'inputs.primary.bg')};
   }
 
   .react-daterange-picker {

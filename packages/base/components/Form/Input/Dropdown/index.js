@@ -4,55 +4,68 @@ import React, { useContext, useState } from 'react';
 import Select from 'react-select';
 import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
+import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
 
-const getOverrideStyles = ({
-  error,
-  theme: {
-    colors,
-    space,
-    radii,
-    lineHeights,
-    variants: {
-      inputs: { primary },
-    },
-  },
-}) => {
+const getOverrideStyles = ({ error, theme }) => {
   const getBorder = ({ isFocused }) => {
     const getBorderColor = ({ isFocused }) => {
-      if (isFocused) return colors[primary['&:focus'].borderColor];
-      if (error) return colors.error;
-      return colors[primary.borderColor];
+      if (isFocused) {
+        return themeVariantToValue(
+          theme,
+          'colors',
+          'inputs.primary.&:focus.borderColor'
+        );
+      }
+
+      if (error) return theme.colors.error;
+      return themeVariantToValue(theme, 'colors', 'inputs.primary.borderColor');
     };
 
+    const borderWidth = themeVariantToValue(
+      theme,
+      'sizes',
+      'inputs.primary.borderWidth'
+    );
+
     const borderColor = getBorderColor({ isFocused });
-    return `${primary.borderStyle} ${primary.borderWidth} ${borderColor}`;
+    return `${theme.inputs.primary.borderStyle} ${borderWidth} ${borderColor}`;
   };
 
+  const borderRadius = themeVariantToValue(
+    theme,
+    'radii',
+    'inputs.primary.borderRadius'
+  );
+
+  const backgroundColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.bg'
+  );
+
+  const placeholderColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.&::placeholder.color'
+  );
+
+  const paddingY = themeVariantToValue(theme, 'space', 'inputs.primary.py');
+
   return {
-    container: base => ({
-      ...base,
-      flex: 1,
-    }),
+    container: base => ({ ...base, flex: 1 }),
     control: (base, { isFocused }) => ({
       ...base,
       '&:hover': { border: getBorder({ isFocused }) },
-      backgroundColor: colors[primary.bg],
+      backgroundColor,
       border: getBorder({ isFocused }),
-      borderRadius: radii[primary.borderRadius],
+      borderRadius,
       boxShadow: 0,
-      minHeight: `calc(${space[primary.py]} * 2 + ${lineHeights[1]})`,
+      minHeight: `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`,
     }),
     option: base => ({ ...base }),
-    placeholder: base => ({
-      ...base,
-      color: colors[primary['&::placeholder'].color],
-    }),
-    valueContainer: base => ({
-      ...base,
-      border: 0,
-      borderRadius: radii[primary.borderRadius],
-    }),
+    placeholder: base => ({ ...base, color: placeholderColor }),
+    valueContainer: base => ({ ...base, border: 0, borderRadius }),
   };
 };
 

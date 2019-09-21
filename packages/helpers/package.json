@@ -12,6 +12,7 @@
     "access": "public"
   },
   "peerDependencies": {
+    "lodash": "^4",
     "moment": "^2",
     "react": "^16"
   }
