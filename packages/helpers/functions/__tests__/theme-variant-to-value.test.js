@@ -14,6 +14,19 @@ describe('themeVariantToValue', () => {
     ).toEqual('red');
   });
 
+  it('should work with arrays', () => {
+    expect(
+      themeVariantToValue(
+        {
+          radii: ['5px'],
+          variants: { button: { borderRadius: 0 } },
+        },
+        'radii',
+        'button.borderRadius'
+      )
+    ).toEqual('5px');
+  });
+
   it('should default to the variant value', () => {
     expect(
       themeVariantToValue(

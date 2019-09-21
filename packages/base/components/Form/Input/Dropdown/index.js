@@ -29,7 +29,7 @@ const getOverrideStyles = ({ error, theme }) => {
     );
 
     const borderColor = getBorderColor({ isFocused });
-    return `${theme.inputs.primary.borderStyle} ${borderWidth} ${borderColor}`;
+    return `${theme.variants.inputs.primary.borderStyle} ${borderWidth} ${borderColor}`;
   };
 
   const borderRadius = themeVariantToValue(
