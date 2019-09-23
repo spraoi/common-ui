@@ -36,6 +36,7 @@ export async function callApi({
   queryParams = {},
 }) {
   let endpoint = '';
+  const newBody = body ? trimObject(body) : body;
   headers[spraoiConfig.headers.userPoolId] = awsConfig.cognito.userPoolId;
 
   if (await isAuthenticated()) {
@@ -61,7 +62,7 @@ export async function callApi({
         secretKey: awsSdkConfig.credentials.secretAccessKey,
         sessionToken: awsSdkConfig.credentials.sessionToken,
       })
-      .signRequest({ method, path, headers, queryParams, body });
+      .signRequest({ method, path, headers, queryParams, body: newBody });
 
     headers = signedRequest.headers;
     endpoint = signedRequest.url;
@@ -69,10 +70,11 @@ export async function callApi({
     const queryString = buildCanonicalQueryString(queryParams);
     endpoint = `${awsConfig.apiGateway.url}${path}?${queryString}`;
   }
-
-  body = body ? JSON.stringify(trimObject(body)) : body;
-
-  let results = await fetch(endpoint, { method, headers, body });
+  let results = await fetch(endpoint, {
+    method,
+    headers,
+    body: JSON.stringify(newBody),
+  });
   results = await results.json();
   if (results.errorMessage) throw JSON.parse(results.errorMessage);
   return Promise.resolve(results);
