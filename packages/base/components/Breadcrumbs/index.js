@@ -5,7 +5,7 @@ import Box from '../Box';
 import Button from '../Button';
 
 const Crumb = styled(Button)`
-  margin-right: ${p => p.theme.space[3]};
+  margin-right: ${p => p.theme.space[4]};
   color: ${p => p.theme.colors.text.subtle};
   font-size: ${p => p.theme.fontSizes[2]};
   letter-spacing: ${p => p.theme.letterSpacings[0]};
@@ -14,7 +14,7 @@ const Crumb = styled(Button)`
 
   &::before {
     content: '/';
-    margin-right: ${p => p.theme.space[3]};
+    margin-right: ${p => p.theme.space[4]};
     color: ${p => p.theme.colors.text.primary};
   }
 

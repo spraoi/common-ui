@@ -7,7 +7,7 @@ const Spinner = props => {
   const theme = useContext(ThemeContext);
 
   return (
-    <Box display="flex" justifyContent="center" py={6} width="100%" {...props}>
+    <Box display="flex" justifyContent="center" py={7} width="100%" {...props}>
       <BarLoader color={theme.colors.text.primary} />
     </Box>
   );

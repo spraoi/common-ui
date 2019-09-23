@@ -4,14 +4,14 @@ import styled, { css } from 'styled-components';
 
 const Error = styled.span`
   display: block;
-  margin-top: ${p => p.theme.space[0]};
+  margin-top: ${p => p.theme.space[1]};
   color: ${p => p.theme.colors.error};
   font-size: ${p => p.theme.fontSizes[2]};
 `;
 
 const Label = styled.label`
   display: block;
-  margin-bottom: ${p => p.theme.space[0]};
+  margin-bottom: ${p => p.theme.space[1]};
   color: ${p => p.theme.colors.text.subtle};
   cursor: pointer;
 
@@ -19,13 +19,13 @@ const Label = styled.label`
     (p.labelPosition === 'left' || p.labelPosition === 'right') &&
     css`
       margin-bottom: 0;
-      padding-right: ${p.labelPosition === 'left' ? p.theme.space[3] : '0'};
-      padding-left: ${p.labelPosition === 'right' ? p.theme.space[3] : '0'};
+      padding-right: ${p.labelPosition === 'left' ? p.theme.space[4] : '0'};
+      padding-left: ${p.labelPosition === 'right' ? p.theme.space[4] : '0'};
     `}
 `;
 
 const Subtext = styled.div`
-  margin-top: ${p => p.theme.space[0]};
+  margin-top: ${p => p.theme.space[1]};
   font-size: ${p => p.theme.fontSizes[2]};
 `;
 
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   ${p =>
     !p.noTopMargin &&
     css`
-      margin-top: ${p => p.theme.space[5]};
+      margin-top: ${p => p.theme.space[6]};
     `}
 
   ${p =>

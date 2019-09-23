@@ -18,10 +18,10 @@ class ErrorBoundary extends React.Component {
 
     if (errorInfo) {
       return (
-        <Box p="lg">
+        <Box p={6}>
           <h1>Something went wrong.</h1>
           <details>
-            <Box as="pre" color="error" pt="md">
+            <Box as="pre" color="error" pt={5}>
               {error && error.toString()}
               {errorInfo.componentStack}
             </Box>

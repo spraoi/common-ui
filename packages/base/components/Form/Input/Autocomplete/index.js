@@ -39,9 +39,9 @@ const Autocomplete = ({ input, items, ...rest }) => {
             left: '0',
             maxHeight: '50vh',
             overflow: 'auto',
-            padding: `${theme.space[0]} 0`,
+            padding: `${theme.space[1]} 0`,
             position: 'absolute',
-            top: `calc(100% + ${theme.space[1]})`,
+            top: `calc(100% + ${theme.space[2]})`,
             zIndex: '1',
           }}
           onMenuVisibilityChange={setIsOpen}

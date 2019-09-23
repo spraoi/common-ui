@@ -58,79 +58,71 @@ const StyledMenuItem = styled(MenuItem).attrs({
 `;
 
 const StyledMenuItemChild = styled.div`
-  padding: ${p => p.theme.space[1]} ${p => p.theme.space[4]};
+  padding: ${p => p.theme.space[2]} ${p => p.theme.space[5]};
 `;
 
 const DropdownMenu = ({
   button,
   chevron,
   dividerPositions,
-  heading,
   itemActions,
   items,
+  sx,
   ...rest
 }) => {
   return (
-    <Box {...rest}>
-      <StyledMenuButton
-        chevron={chevron}
-        menu={
-          <Box
-            alignItems="center"
-            bg="white"
-            borderRadius={1}
-            boxShadow={2}
-            display="flex"
-            mt={2}
-            pb={3}
-            pt={heading ? null : 3}
-            sx={{ overflow: 'hidden' }}
-          >
-            <MenuList>
-              {heading && (
-                <Box bg="gray.1" color="text.subtle" fontSize={2} mb={3} p={4}>
-                  {heading}
-                </Box>
-              )}
-              {items.map((item, i) => {
-                const linkRef = React.createRef();
+    <StyledMenuButton
+      chevron={chevron}
+      menu={
+        <Box
+          alignItems="center"
+          bg="white"
+          display="flex"
+          mt={3}
+          pb={4}
+          pt={4}
+          sx={{ borderRadius: 1, boxShadow: 2, overflow: 'hidden', ...sx }}
+          {...rest}
+        >
+          <MenuList>
+            {items.map((item, i) => {
+              const linkRef = React.createRef();
 
-                return (
-                  <div key={i}>
-                    {dividerPositions.includes(i) && <Box as="hr" my={3} />}
-                    <StyledMenuItem
-                      onItemChosen={e => {
-                        if (typeof itemActions[i] === 'string') {
-                          return e.byKeyboard
-                            ? linkRef.current.click()
-                            : () => {};
-                        }
+              return (
+                <div key={i}>
+                  {dividerPositions.includes(i) && <Box as="hr" my={4} />}
+                  <StyledMenuItem
+                    onItemChosen={e => {
+                      if (typeof itemActions[i] === 'string') {
+                        return e.byKeyboard
+                          ? linkRef.current.click()
+                          : () => {};
+                      }
 
-                        return itemActions[i](e);
-                      }}
-                    >
-                      {typeof itemActions[i] === 'string' ? (
-                        <StyledMenuItemChild
-                          ref={linkRef}
-                          as={Link}
-                          to={itemActions[i]}
-                        >
-                          {item}
-                        </StyledMenuItemChild>
-                      ) : (
-                        <StyledMenuItemChild>{item}</StyledMenuItemChild>
-                      )}
-                    </StyledMenuItem>
-                  </div>
-                );
-              })}
-            </MenuList>
-          </Box>
-        }
-      >
-        {button}
-      </StyledMenuButton>
-    </Box>
+                      return itemActions[i](e);
+                    }}
+                  >
+                    {typeof itemActions[i] === 'string' ? (
+                      <StyledMenuItemChild
+                        ref={linkRef}
+                        as={Link}
+                        to={itemActions[i]}
+                      >
+                        {item}
+                      </StyledMenuItemChild>
+                    ) : (
+                      <StyledMenuItemChild>{item}</StyledMenuItemChild>
+                    )}
+                  </StyledMenuItem>
+                </div>
+              );
+            })}
+          </MenuList>
+        </Box>
+      }
+    >
+      {button}
+    </StyledMenuButton>
   );
 };
 
@@ -138,17 +130,17 @@ DropdownMenu.propTypes = {
   button: PropTypes.node.isRequired,
   chevron: PropTypes.bool,
   dividerPositions: PropTypes.arrayOf(PropTypes.number),
-  heading: PropTypes.string,
   itemActions: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.func, PropTypes.string])
   ).isRequired,
   items: PropTypes.arrayOf(PropTypes.node).isRequired,
+  sx: PropTypes.shape({}),
 };
 
 DropdownMenu.defaultProps = {
   chevron: false,
   dividerPositions: [],
-  heading: null,
+  sx: {},
 };
 
 export default DropdownMenu;

@@ -30,7 +30,7 @@ const StyledThead = styled(Thead)`
 `;
 
 const StyledTh = styled(Th)`
-  padding-bottom: ${p => p.theme.space[3]};
+  padding-bottom: ${p => p.theme.space[4]};
   font-size: ${p => p.theme.fontSizes[1]};
   font-weight: ${p => p.theme.fontWeights.normal};
   text-align: left;
@@ -48,8 +48,8 @@ const StyledTr = styled(Tr)`
 `;
 
 const StyledTd = styled(Td)`
-  padding: ${p => p.theme.space[3]} ${p => p.theme.space[4]}
-    ${p => p.theme.space[3]} 0;
+  padding: ${p => p.theme.space[4]} ${p => p.theme.space[5]}
+    ${p => p.theme.space[4]} 0;
 
   &:last-of-type {
     padding-right: 0;

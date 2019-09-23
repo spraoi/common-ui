@@ -7,13 +7,13 @@ import Radio from '../Checkbox';
 const CheckboxGroup = ({ inline, label, name, options, type, ...rest }) => (
   <>
     {label && (
-      <Box color="textSubtle" mr={4} mt={4}>
+      <Box color="textSubtle" mr={5} mt={5}>
         {label}
       </Box>
     )}
     <Box display={inline ? 'flex' : 'block'}>
       {options.map(({ label, value }) => (
-        <Box key={value} mr={inline ? 5 : null} mt={inline ? null : 2}>
+        <Box key={value} mr={inline ? 6 : null} mt={inline ? null : 3}>
           <Field
             component={Radio}
             label={label}

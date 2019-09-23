@@ -44,7 +44,7 @@ const theme = {
     },
     inputs: {
       primary: {
-        '&::placeholder': { color: 'gray.1' },
+        '&::placeholder': { color: 'grays.1' },
         '&:focus': { borderColor: 'primary' },
         bg: 'white',
         borderColor: 'gray.1',

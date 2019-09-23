@@ -27,21 +27,12 @@ const Button = ({
 
   const buttonSx = {
     alignItems: 'center',
-    borderRadius: 1,
-    boxShadow: 1,
     cursor: 'pointer',
     display: 'flex',
-    fontSize: 2,
-    fontWeight: 2,
     justifyContent: 'center',
-    letterSpacing: 0,
     opacity: disabled ? 0.3 : 1,
     pointerEvents: disabled ? 'none' : 'auto',
-    position: 'relative',
-    px: 6,
-    py: 3,
     textDecoration: 'none',
-    textTransform: 'uppercase',
     whiteSpace: 'nowrap',
   };
 

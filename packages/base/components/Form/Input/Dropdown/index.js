@@ -8,20 +8,20 @@ import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
 
 const getOverrideStyles = ({ error, theme }) => {
-  const getBorder = ({ isFocused }) => {
-    const getBorderColor = ({ isFocused }) => {
-      if (isFocused) {
-        return themeVariantToValue(
-          theme,
-          'colors',
-          'inputs.primary.&:focus.borderColor'
-        );
-      }
+  const getBorderColor = ({ isFocused } = {}) => {
+    if (isFocused) {
+      return themeVariantToValue(
+        theme,
+        'colors',
+        'inputs.primary.&:focus.borderColor'
+      );
+    }
 
-      if (error) return theme.colors.error;
-      return themeVariantToValue(theme, 'colors', 'inputs.primary.borderColor');
-    };
+    if (error) return theme.colors.error;
+    return themeVariantToValue(theme, 'colors', 'inputs.primary.borderColor');
+  };
 
+  const getBorder = ({ isFocused } = {}) => {
     const borderWidth = themeVariantToValue(
       theme,
       'sizes',
@@ -50,7 +50,9 @@ const getOverrideStyles = ({ error, theme }) => {
     'inputs.primary.&::placeholder.color'
   );
 
+  const paddingX = themeVariantToValue(theme, 'space', 'inputs.primary.px');
   const paddingY = themeVariantToValue(theme, 'space', 'inputs.primary.py');
+  const height = `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`;
 
   return {
     container: base => ({ ...base, flex: 1 }),
@@ -61,11 +63,23 @@ const getOverrideStyles = ({ error, theme }) => {
       border: getBorder({ isFocused }),
       borderRadius,
       boxShadow: 0,
-      minHeight: `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`,
+      height,
+      minHeight: height,
+      padding: 0,
     }),
-    option: base => ({ ...base }),
-    placeholder: base => ({ ...base, color: placeholderColor }),
-    valueContainer: base => ({ ...base, border: 0, borderRadius }),
+    dropdownIndicator: base => ({ ...base, padding: `0 ${paddingX}` }),
+    indicatorSeparator: base => ({
+      ...base,
+      backgroundColor: getBorderColor(),
+    }),
+    placeholder: () => ({ color: placeholderColor }),
+    singleValue: () => ({}),
+    valueContainer: base => ({
+      ...base,
+      border: 0,
+      borderRadius,
+      padding: `0 ${paddingX}`,
+    }),
   };
 };
 

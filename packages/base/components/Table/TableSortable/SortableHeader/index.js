@@ -13,7 +13,7 @@ const SortableTitle = styled.div`
     border-left-color: transparent;
     border-right-color: transparent;
     opacity: 0.4;
-    margin: 0 ${p => p.theme.space[2]} 0 ${p => p.theme.space[0]};
+    margin: 0 ${p => p.theme.space[3]} 0 ${p => p.theme.space[1]};
   }
 
   &:hover {

@@ -78,7 +78,13 @@ const DatePickerWrapper = styled(InputWrapper)`
 
   &.react-daterange-picker {
     width: 100%;
-    padding: ${p => themeVariantToValue(p.theme, 'space', 'inputs.primary.py')}
+    height: ${p =>
+      `calc(${themeVariantToValue(
+        p.theme,
+        'space',
+        'inputs.primary.py'
+      )} * 2 + ${p.theme.lineHeights[1]})`};
+    padding: 0
       ${p => themeVariantToValue(p.theme, 'space', 'inputs.primary.px')};
     border-radius: ${p =>
       themeVariantToValue(p.theme, 'radii', 'inputs.primary.borderRadius')};
@@ -90,6 +96,7 @@ const DatePickerWrapper = styled(InputWrapper)`
     &__wrapper {
       border: 0;
       width: 100%;
+      align-items: center;
     }
 
     &__inputGroup {
@@ -102,7 +109,7 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__calendar {
-      width: calc(100% + ${p => p.theme.space[4]}) !important;
+      width: calc(100% + ${p => p.theme.space[5]}) !important;
       top: unset !important;
       right: unset !important;
       bottom: calc(100% + 1px) !important;
