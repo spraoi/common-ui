@@ -23,7 +23,7 @@ export function parseLambdaError(error) {
 }
 
 export function trimObject(o) {
-  if (typeof o === 'object') {
+  if (o !== null && o !== undefined && typeof o === 'object') {
     return Array.isArray(o)
       ? o.map(item => trimObject(item))
       : Object.keys(o).reduce((result, key) => {
