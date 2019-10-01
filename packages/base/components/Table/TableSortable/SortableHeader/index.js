@@ -6,6 +6,10 @@ import { parse } from 'query-string';
 import { FILTER_PARAMS, ORDER_BY } from '../constants';
 
 const SortableTitle = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
   &:after {
     content: '';
     flex: none;
@@ -58,13 +62,10 @@ const SortableHeader = ({ header, location, updateLink }) => {
 
   return (
     <SortableTitle
-      alignItems="center"
       className={sortBy === querySortBy ? queryOrderBy : ''}
-      cursor="pointer"
-      display="flex"
       onClick={() => updateLink(sortBy, toggleOrder())}
     >
-      <span>{header.label}</span>
+      {header.label}
     </SortableTitle>
   );
 };
