@@ -46,14 +46,22 @@ const StyledMenuItem = styled(MenuItem).attrs({
   cursor: pointer;
   user-select: none;
 
-  &.highlighted {
-    background: ${p => p.theme.colors.accent};
-    color: ${p => p.theme.colors.white};
-  }
-
   a {
     color: inherit;
     text-decoration: inherit;
+  }
+
+  svg {
+    color: ${p => p.theme.colors.accent};
+  }
+
+  &.highlighted {
+    background: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+
+    svg {
+      color: ${p => p.theme.colors.white};
+    }
   }
 `;
 
