@@ -24,6 +24,18 @@ module.exports = {
       type: 'javascript/auto',
     });
 
+    config.module.rules.push({
+      test: /\.s[ac]ss$/i,
+      use: [
+        {
+          loader: 'sass-loader',
+          options: {
+            data: '$env: ' + variation + ';',
+          },
+        },
+      ],
+    });
+
     return config;
   },
   define: { SPRAOI_ENV: JSON.stringify(envVars) },
