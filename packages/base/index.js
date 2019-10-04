@@ -11,6 +11,7 @@ import Dropdown from './components/Form/Input/Dropdown';
 import DropdownMenu from './components/DropdownMenu';
 import FileUpload from './components/Form/Input/FileUpload';
 import Input from './components/Form/Input/Input';
+import Modal from './components/Modal';
 import Redirect from './components/Redirect';
 import Spinner from './components/Spinner';
 import Table from './components/Table';
@@ -32,6 +33,7 @@ export {
   DropdownMenu,
   FileUpload,
   Input,
+  Modal,
   Redirect,
   Spinner,
   Table,

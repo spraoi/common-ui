@@ -32,7 +32,11 @@ const theme = {
   lineHeights: [],
   radii: [],
   shadows: [],
-  sizes: [],
+  sizes: {
+    maxWidths: {
+      form: '500px',
+    },
+  },
   space: [],
   variants: {
     buttons: {

@@ -24,6 +24,7 @@
     "react-autocomplete": "^1.8.1",
     "react-autosize-textarea": "^7.0.0",
     "react-menu-list": "^6.0.5",
+    "react-modal": "^3.10.1",
     "react-select": "^3.0.4",
     "react-super-responsive-table": "^5.0.0",
     "reflexbox": "^4.0.5"
