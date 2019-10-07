@@ -1,128 +1,91 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css } from 'styled-components';
-
-const Error = styled.span`
-  display: block;
-  margin-top: ${p => p.theme.space[1]};
-  color: ${p => p.theme.colors.error};
-  font-size: ${p => p.theme.fontSizes[2]};
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: ${p => p.theme.space[1]};
-  color: ${p => p.theme.colors.text.subtle};
-  cursor: pointer;
-
-  ${p =>
-    (p.labelPosition === 'left' || p.labelPosition === 'right') &&
-    css`
-      margin-bottom: 0;
-      padding-right: ${p.labelPosition === 'left' ? p.theme.space[4] : '0'};
-      padding-left: ${p.labelPosition === 'right' ? p.theme.space[4] : '0'};
-    `}
-`;
-
-const Subtext = styled.div`
-  margin-top: ${p => p.theme.space[1]};
-  font-size: ${p => p.theme.fontSizes[2]};
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-
-  &:first-of-type {
-    ${p =>
-      !p.forceTopMargin &&
-      css`
-        margin-top: 0;
-      `}
-  }
-
-  ${p =>
-    !p.noTopMargin &&
-    css`
-      margin-top: ${p => p.theme.space[6]};
-    `}
-
-  ${p =>
-    p.disabled &&
-    css`
-      opacity: 0.3;
-      pointer-events: none;
-    `}
-
-  ${p =>
-    (p.labelPosition === 'left' || p.labelPosition === 'right') &&
-    css`
-      display: flex;
-      flex-direction: ${p.labelPosition === 'left' ? 'row' : 'row-reverse'};
-      justify-content: flex-end;
-      align-items: center;
-      margin-top: 0;
-    `}
-`;
+import Box from '../../../Box';
 
 const InputWrapper = ({
   children,
-  forceTopMargin,
+  disabled,
   htmlFor,
   input,
   label,
-  labelPosition,
+  labelSx,
   meta,
-  noTopMargin,
   subtext,
+  wrapperSx,
   ...rest
 }) => {
   const error = meta.error && meta.touched ? 1 : 0;
   let below = null;
-  if (error) below = <Error>{meta.error}</Error>;
-  else if (subtext) below = <Subtext>{subtext}</Subtext>;
+
+  if (error) {
+    below = (
+      <Box color="error" fontSize={2} mt={1}>
+        {meta.error}
+      </Box>
+    );
+  } else if (subtext) {
+    below = (
+      <Box fontSize={2} mt={1}>
+        {subtext}
+      </Box>
+    );
+  }
 
   return (
-    <Wrapper
-      disabled={rest.disabled}
-      forceTopMargin={forceTopMargin}
-      labelPosition={labelPosition}
-      noTopMargin={noTopMargin}
+    <Box
+      sx={{
+        '&:first-of-type': { mt: 0 },
+        flex: 1,
+        mt: 6,
+        opacity: disabled ? '0.3' : null,
+        pointerEvents: disabled ? 'none' : null,
+        position: 'relative',
+        ...wrapperSx,
+      }}
     >
       {label && (
-        <Label htmlFor={htmlFor || input.name} labelPosition={labelPosition}>
+        <Box
+          as="label"
+          htmlFor={htmlFor || input.name}
+          sx={{
+            color: 'text.subtle',
+            cursor: 'pointer',
+            display: 'block',
+            mb: 1,
+            ...labelSx,
+          }}
+        >
           {label}
-        </Label>
+        </Box>
       )}
-      {children({ error, ...rest })}
+      {children({ disabled, error, ...rest })}
       {below}
-    </Wrapper>
+    </Box>
   );
 };
 
 InputWrapper.propTypes = {
   children: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
-  forceTopMargin: PropTypes.bool,
   htmlFor: PropTypes.string,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
-  label: PropTypes.string,
-  labelPosition: PropTypes.oneOf(['left', 'right', 'top']),
+  label: PropTypes.node,
+  labelSx: PropTypes.shape({}),
   meta: PropTypes.shape({
     error: PropTypes.string,
     touched: PropTypes.bool.isRequired,
   }).isRequired,
-  noTopMargin: PropTypes.bool,
   subtext: PropTypes.node,
+  wrapperSx: PropTypes.shape({}),
 };
 
 InputWrapper.defaultProps = {
   disabled: false,
-  forceTopMargin: false,
   htmlFor: null,
   label: null,
-  labelPosition: 'top',
-  noTopMargin: false,
+  labelSx: {},
   subtext: null,
+  wrapperSx: {},
 };
 
 export default InputWrapper;
