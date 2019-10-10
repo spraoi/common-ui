@@ -27,6 +27,7 @@
     "react-modal": "^3.10.1",
     "react-select": "^3.0.4",
     "react-super-responsive-table": "^5.0.0",
+    "react-tooltip": "^3.10.0",
     "reflexbox": "^4.0.5"
   },
   "peerDependencies": {
@@ -38,6 +39,7 @@
     "query-string": "^6",
     "react": "^16",
     "react-apollo": "^2",
+    "react-dom": "^16",
     "react-final-form": "^6",
     "react-final-form-listeners": "^1",
     "react-spinners": "^0",
