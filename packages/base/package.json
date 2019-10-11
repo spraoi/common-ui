@@ -39,7 +39,6 @@
     "query-string": "^6",
     "react": "^16",
     "react-apollo": "^2",
-    "react-dom": "^16",
     "react-final-form": "^6",
     "react-final-form-listeners": "^1",
     "react-spinners": "^0",

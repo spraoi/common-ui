@@ -1,15 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { renderToStaticMarkup } from 'react-dom/server';
 import ReactTooltip from 'react-tooltip';
 import Box from '../Box';
 import ReactTooltipStyled from './ReactTooltipStyled';
-
-const getTags = string =>
-  renderToStaticMarkup(
-    string && string.split(',').map(item => <span className="tag">{item}</span>)
-  );
 
 class Tooltip extends React.Component {
   componentDidUpdate() {
@@ -26,7 +19,6 @@ class Tooltip extends React.Component {
       maxWidth,
       maxHeight,
       place,
-      tags,
       themeType,
       ...rest
     } = this.props;
@@ -42,7 +34,7 @@ class Tooltip extends React.Component {
             data-delay-hide={200}
             data-for={`tooltip_${randomId}`}
             data-html
-            data-tip={`<div>${tags ? getTags(content) : content}</div>`}
+            data-tip={`<div>${content}</div>`}
             data-tip-disable={disable}
             {...rest}
           >
@@ -72,7 +64,6 @@ Tooltip.propTypes = {
   maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
   place: PropTypes.string,
-  tags: PropTypes.bool,
   themeType: PropTypes.string,
 };
 
@@ -85,7 +76,6 @@ Tooltip.defaultProps = {
   maxHeight: '202px',
   maxWidth: '60ch',
   place: 'top',
-  tags: false,
   themeType: 'dark',
 };
 
