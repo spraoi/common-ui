@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import Box from '../Box';
-import ReactTooltipStyled from './ReactTooltipStyled';
 
 class Tooltip extends React.Component {
   componentDidUpdate() {
@@ -15,10 +14,12 @@ class Tooltip extends React.Component {
       content,
       id,
       disable,
-      isGraphTooltip,
+      showDataTip,
+      isMultiple,
       maxWidth,
       maxHeight,
       place,
+      sx,
       themeType,
       ...rest
     } = this.props;
@@ -29,24 +30,49 @@ class Tooltip extends React.Component {
 
     return (
       <>
-        {!isGraphTooltip && (
+        {showDataTip && (
           <Box
             data-delay-hide={200}
-            data-for={`tooltip_${randomId}`}
+            data-for={isMultiple ? id : `tooltip_${randomId}`}
             data-html
-            data-tip={`<div>${content}</div>`}
+            data-tip={`<div class="tooltipContentWrapper">${content}</div>`}
             data-tip-disable={disable}
             {...rest}
           >
             {children}
           </Box>
         )}
-        <ReactTooltipStyled
-          id={isGraphTooltip ? id : `tooltip_${randomId}`}
+        <Box
+          as={ReactTooltip}
+          id={isMultiple ? id : `tooltip_${randomId}`}
           maxHeight={maxHeight}
           maxWidth={maxWidth}
           place={place}
-          pointer={isGraphTooltip ? 'none' : 'auto'}
+          sx={{
+            '.tooltipContentWrapper': {
+              '&::-webkit-scrollbar': {
+                width: '4px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: p => p.colors.white,
+                borderRadius: p => p.radii[0],
+              },
+              '&::-webkit-scrollbar-track': {
+                boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.3)',
+              },
+              display: 'flex',
+              flexWrap: 'wrap',
+              fontWeight: p => p.fontWeights.light,
+              margin: '0 -10px',
+              maxHeight: '100%',
+              overflow: 'auto',
+              wordBreak: 'break-word',
+            },
+            display: 'flex',
+            flexDirection: 'column',
+            pointerEvents: isMultiple ? 'none' : 'auto',
+            ...sx,
+          }}
           type={themeType}
           {...rest}
         />
@@ -60,10 +86,12 @@ Tooltip.propTypes = {
   content: PropTypes.node,
   disable: PropTypes.bool,
   id: PropTypes.string,
-  isGraphTooltip: PropTypes.bool,
+  isMultiple: PropTypes.bool,
   maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
   place: PropTypes.string,
+  showDataTip: PropTypes.bool,
+  sx: PropTypes.shape({}),
   themeType: PropTypes.string,
 };
 
@@ -72,10 +100,12 @@ Tooltip.defaultProps = {
   content: '',
   disable: false,
   id: 'graph_tooltip',
-  isGraphTooltip: false,
+  isMultiple: false,
   maxHeight: '202px',
   maxWidth: '60ch',
   place: 'top',
+  showDataTip: true,
+  sx: {},
   themeType: 'dark',
 };
 
