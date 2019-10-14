@@ -27,6 +27,7 @@
     "react-modal": "^3.10.1",
     "react-select": "^3.0.4",
     "react-super-responsive-table": "^5.0.0",
+    "react-tooltip": "^3.10.0",
     "reflexbox": "^4.0.5"
   },
   "peerDependencies": {

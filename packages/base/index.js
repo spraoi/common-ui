@@ -17,6 +17,7 @@ import Spinner from './components/Spinner';
 import Table from './components/Table';
 import TableSortable from './components/Table/TableSortable';
 import TextArea from './components/Form/Input/TextArea';
+import Tooltip from './components/Tooltip';
 import WhenFieldChanges from './components/Form/WhenFieldChanges';
 
 export {
@@ -39,5 +40,6 @@ export {
   Table,
   TableSortable,
   TextArea,
+  Tooltip,
   WhenFieldChanges,
 };
