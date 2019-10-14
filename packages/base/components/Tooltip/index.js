@@ -9,16 +9,7 @@ class Tooltip extends React.Component {
   }
 
   render() {
-    const {
-      children,
-      content,
-      id,
-      disable,
-      maxWidth,
-      maxHeight,
-      sx,
-      ...rest
-    } = this.props;
+    const { children, content, id, sx, ...rest } = this.props;
 
     return (
       <>
@@ -28,7 +19,6 @@ class Tooltip extends React.Component {
             data-for={id}
             data-html
             data-tip={content}
-            data-tip-disable={disable}
             {...rest}
           >
             {children}
@@ -37,8 +27,6 @@ class Tooltip extends React.Component {
         <Box
           as={ReactTooltip}
           id={id}
-          maxHeight={maxHeight}
-          maxWidth={maxWidth}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -54,25 +42,18 @@ class Tooltip extends React.Component {
 Tooltip.propTypes = {
   children: PropTypes.node,
   content: PropTypes.node,
-  disable: PropTypes.bool,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
-  place: PropTypes.string,
   sx: PropTypes.shape({}),
-  type: PropTypes.string,
 };
 
 Tooltip.defaultProps = {
   children: null,
   content: '',
-  disable: false,
-  id: 'graph_tooltip',
   maxHeight: '202px',
   maxWidth: '60ch',
-  place: 'top',
   sx: {},
-  type: 'dark',
 };
 
 export default Tooltip;
