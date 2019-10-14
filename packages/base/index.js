@@ -15,7 +15,6 @@ import Modal from './components/Modal';
 import Redirect from './components/Redirect';
 import Spinner from './components/Spinner';
 import Table from './components/Table';
-import TableSortable from './components/Table/TableSortable';
 import TextArea from './components/Form/Input/TextArea';
 import Tooltip from './components/Tooltip';
 import WhenFieldChanges from './components/Form/WhenFieldChanges';
@@ -38,7 +37,6 @@ export {
   Redirect,
   Spinner,
   Table,
-  TableSortable,
   TextArea,
   Tooltip,
   WhenFieldChanges,

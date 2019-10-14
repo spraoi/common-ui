@@ -36,6 +36,43 @@ const StyledTh = styled(Th)`
   text-align: left;
 `;
 
+const SortableTitle = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    flex: none;
+    margin: -6px ${p => p.theme.space[3]} 0 ${p => p.theme.space[1]};
+    border: 5px solid;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    opacity: 0.4;
+  }
+
+  &:hover:after {
+    color: ${p => p.theme.colors.primary};
+  }
+
+  &.asc:after,
+  &.desc:after {
+    opacity: 1;
+    color: ${p => p.theme.colors.black};
+  }
+
+  &.asc:after {
+    margin-top: -6px;
+    border-top-color: transparent;
+  }
+
+  &.desc:after {
+    margin-top: 4px;
+    border-bottom-color: transparent;
+  }
+`;
+
 const StyledTr = styled(Tr)`
   /* !important to override react-super-responsive-table */
   border: solid 1px ${p => p.theme.colors.grays[1]} !important;
@@ -73,15 +110,36 @@ const Table = ({
   header,
   isLoading,
   keyPrefix,
+  onSortUpdate,
+  orderBy,
   renderEmpty,
   rows,
+  sortBy,
 }) => (
   <StyledTable>
     {!!rows.length && (
       <StyledThead>
         <StyledTr>
-          {header.map((title, headerIndex) => (
-            <StyledTh key={keyPrefix + headerIndex}>{title}</StyledTh>
+          {header.map((item, headerIndex) => (
+            <StyledTh key={keyPrefix + headerIndex}>
+              {typeof item === 'string' ? (
+                item
+              ) : (
+                <SortableTitle
+                  className={item.value === sortBy ? orderBy : ''}
+                  onClick={() =>
+                    onSortUpdate(
+                      item.value,
+                      item.value === sortBy && orderBy === 'asc'
+                        ? 'desc'
+                        : 'asc'
+                    )
+                  }
+                >
+                  {item.label}
+                </SortableTitle>
+              )}
+            </StyledTh>
           ))}
         </StyledTr>
       </StyledThead>
@@ -117,18 +175,26 @@ const Table = ({
 
 Table.propTypes = {
   expandLastColumn: PropTypes.bool,
-  header: PropTypes.arrayOf(PropTypes.node).isRequired,
+  header: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])
+  ).isRequired,
   isLoading: PropTypes.bool,
   keyPrefix: PropTypes.string,
+  onSortUpdate: PropTypes.func,
+  orderBy: PropTypes.oneOf(['asc', 'desc']),
   renderEmpty: PropTypes.node,
   rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)).isRequired,
+  sortBy: PropTypes.string,
 };
 
 Table.defaultProps = {
   expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
+  onSortUpdate: () => {},
+  orderBy: 'asc',
   renderEmpty: 'No results.',
+  sortBy: null,
 };
 
 export default Table;
