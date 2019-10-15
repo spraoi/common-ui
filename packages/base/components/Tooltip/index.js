@@ -13,25 +13,15 @@ class Tooltip extends React.Component {
 
     return (
       <>
-        {children && (
-          <Box
-            data-delay-hide={200}
-            data-for={id}
-            data-html
-            data-tip={content}
-            {...rest}
-          >
+        {children && content && (
+          <Box data-for={id} data-html data-tip={content} {...rest}>
             {children}
           </Box>
         )}
         <Box
           as={ReactTooltip}
           id={id}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            ...sx,
-          }}
+          sx={{ display: 'flex', flexDirection: 'column', ...sx }}
           {...rest}
         />
       </>
@@ -50,8 +40,8 @@ Tooltip.propTypes = {
 
 Tooltip.defaultProps = {
   children: null,
-  content: '',
-  maxHeight: '202px',
+  content: null,
+  maxHeight: '200px',
   maxWidth: '60ch',
   sx: {},
 };
