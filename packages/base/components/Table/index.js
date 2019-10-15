@@ -45,10 +45,8 @@ const SortableTitle = styled.div`
     content: '';
     flex: none;
     margin: -6px ${p => p.theme.space[3]} 0 ${p => p.theme.space[1]};
-    border: 5px solid;
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-left-color: transparent;
+    border: 5px solid transparent;
+    border-bottom-color: ${p => p.theme.colors.text.primary};
     opacity: 0.4;
   }
 
@@ -62,13 +60,9 @@ const SortableTitle = styled.div`
     color: ${p => p.theme.colors.black};
   }
 
-  &.asc:after {
-    margin-top: -6px;
-    border-top-color: transparent;
-  }
-
   &.desc:after {
     margin-top: 4px;
+    border-top-color: ${p => p.theme.colors.text.primary};
     border-bottom-color: transparent;
   }
 `;
