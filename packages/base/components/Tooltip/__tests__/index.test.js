@@ -6,7 +6,7 @@ import { render } from '../../../../../__utilities__/testing-library';
 describe('Modal component', () => {
   it('renders a tooltip with internal toggle', () => {
     const { getByText } = render(
-      <Tooltip content="foo" id="tooltip">
+      <Tooltip data-tip="foo" id="tooltip">
         toggle
       </Tooltip>
     );
@@ -16,13 +16,13 @@ describe('Modal component', () => {
 
   it('rebuilds the tooltip on update', () => {
     const { container } = render(
-      <Tooltip content="foo" id="tooltip">
+      <Tooltip data-tip="foo" id="tooltip">
         toggle
       </Tooltip>
     );
 
     render(
-      <Tooltip content="bar" id="tooltip">
+      <Tooltip data-tip="bar" id="tooltip">
         toggle
       </Tooltip>,
       { container }

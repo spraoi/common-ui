@@ -10,31 +10,9 @@ import {
   Thead,
   Tr,
 } from 'react-super-responsive-table';
+import Box from '../Box';
+import Button from '../Button';
 import Spinner from '../Spinner';
-
-const StyledTable = styled(ReactTable)`
-  font-size: ${p => p.theme.fontSizes[2]};
-  line-height: 1.4em;
-  border-bottom: solid 1px ${p => p.theme.colors.grays[1]};
-  border-collapse: collapse;
-
-  @media (min-width: 641px) {
-    border-bottom: solid 1px ${p => p.theme.colors.grays[1]};
-  }
-`;
-
-const StyledThead = styled(Thead)`
-  color: ${p => p.theme.colors.text.subtle};
-  text-transform: uppercase;
-  letter-spacing: ${p => p.theme.letterSpacings.md};
-`;
-
-const StyledTh = styled(Th)`
-  padding-bottom: ${p => p.theme.space[4]};
-  font-size: ${p => p.theme.fontSizes[1]};
-  font-weight: ${p => p.theme.fontWeights.normal};
-  text-align: left;
-`;
 
 const SortableTitle = styled.div`
   display: flex;
@@ -44,7 +22,7 @@ const SortableTitle = styled.div`
   &:after {
     content: '';
     flex: none;
-    margin: -6px ${p => p.theme.space[3]} 0 ${p => p.theme.space[1]};
+    margin: -4px ${p => p.theme.space[3]} 0;
     border: 5px solid transparent;
     border-bottom-color: ${p => p.theme.colors.text.primary};
     opacity: 0.4;
@@ -61,29 +39,9 @@ const SortableTitle = styled.div`
   }
 
   &.desc:after {
-    margin-top: 4px;
+    margin-top: 6px;
     border-top-color: ${p => p.theme.colors.text.primary};
     border-bottom-color: transparent;
-  }
-`;
-
-const StyledTr = styled(Tr)`
-  /* !important to override react-super-responsive-table */
-  border: solid 1px ${p => p.theme.colors.grays[1]} !important;
-  border-bottom-style: none !important;
-
-  @media (min-width: 641px) {
-    border: none !important;
-    border-bottom: solid 1px ${p => p.theme.colors.grays[1]} !important;
-  }
-`;
-
-const StyledTd = styled(Td)`
-  padding: ${p => p.theme.space[4]} ${p => p.theme.space[5]}
-    ${p => p.theme.space[4]} 0;
-
-  &:last-of-type {
-    padding-right: 0;
   }
 `;
 
@@ -99,6 +57,9 @@ const formatCell = cell => {
   return String(cell);
 };
 
+const tdSx = { color: 'text.subtle', px: 5, py: 4 };
+const trSx = { '&:nth-child(even)': { bg: 'grays.0' } };
+
 const Table = ({
   expandLastColumn,
   header,
@@ -110,17 +71,39 @@ const Table = ({
   rows,
   sortBy,
 }) => (
-  <StyledTable>
+  <Box
+    as={ReactTable}
+    sx={{
+      borderCollapse: 'collapse',
+      borderRadius: 2,
+      fontSize: 2,
+      lineHeight: '1.4em',
+      overflow: 'hidden',
+    }}
+  >
     {!!rows.length && (
-      <StyledThead>
-        <StyledTr>
+      <Thead>
+        <Box
+          as={Tr}
+          sx={{
+            borderBottomStyle: 'solid',
+            borderColor: 'grays.2',
+            borderWidth: '1px',
+          }}
+        >
           {header.map((item, headerIndex) => (
-            <StyledTh key={keyPrefix + headerIndex}>
-              {typeof item === 'string' ? (
-                item
-              ) : (
-                <SortableTitle
-                  className={item.value === sortBy ? orderBy : ''}
+            <Box
+              key={keyPrefix + headerIndex}
+              as={Th}
+              sx={{
+                fontSize: 2,
+                fontWeight: 'bold',
+                p: 5,
+                textAlign: 'left',
+              }}
+            >
+              {typeof item === 'object' && item.value ? (
+                <Button
                   onClick={() =>
                     onSortUpdate(
                       item.value,
@@ -129,42 +112,52 @@ const Table = ({
                         : 'asc'
                     )
                   }
+                  simple
+                  sx={{ color: 'text.primary' }}
                 >
-                  {item.label}
-                </SortableTitle>
+                  <SortableTitle
+                    className={item.value === sortBy ? orderBy : ''}
+                  >
+                    {item.label}
+                  </SortableTitle>
+                </Button>
+              ) : (
+                item
               )}
-            </StyledTh>
+            </Box>
           ))}
-        </StyledTr>
-      </StyledThead>
+        </Box>
+      </Thead>
     )}
     <Tbody>
       {rows.length ? (
         rows.map((row, rowIndex) => (
-          <StyledTr key={keyPrefix + rowIndex}>
+          <Box key={keyPrefix + rowIndex} as={Tr} sx={trSx}>
             {row.map((cell, cellIndex) => (
-              <StyledTd
+              <Box
                 key={keyPrefix + cellIndex}
+                as={Td}
                 colSpan={
                   expandLastColumn &&
                   cellIndex === row.length - 1 &&
                   header.length - row.length + 1
                 }
+                sx={tdSx}
               >
                 {formatCell(cell)}
-              </StyledTd>
+              </Box>
             ))}
-          </StyledTr>
+          </Box>
         ))
       ) : (
-        <StyledTr>
-          <StyledTd colSpan={header.length}>
+        <Box as={Tr} sx={trSx}>
+          <Box as={Td} colSpan={header.length} sx={tdSx}>
             {isLoading ? <Spinner /> : renderEmpty}
-          </StyledTd>
-        </StyledTr>
+          </Box>
+        </Box>
       )}
     </Tbody>
-  </StyledTable>
+  </Box>
 );
 
 Table.propTypes = {

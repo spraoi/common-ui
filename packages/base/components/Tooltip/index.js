@@ -9,20 +9,33 @@ class Tooltip extends React.Component {
   }
 
   render() {
-    const { children, content, id, sx, ...rest } = this.props;
+    const {
+      children,
+      id,
+      tooltipProps: { sx: tooltipSx, ...tooltipProps },
+      ...rest
+    } = this.props;
 
     return (
       <>
-        {children && content && (
-          <Box data-for={id} data-html data-tip={content} {...rest}>
+        {children && (
+          <Box data-for={id} data-html {...rest}>
             {children}
           </Box>
         )}
         <Box
           as={ReactTooltip}
           id={id}
-          sx={{ display: 'flex', flexDirection: 'column', ...sx }}
-          {...rest}
+          sx={{
+            bg: p => `${p.colors.primary}!important`,
+            borderRadius: p => `${p.radii[1]}!important`,
+            maxHeight: '10rem',
+            maxWidth: '50ch',
+            opacity: '1!important',
+            p: 4,
+            ...(tooltipSx || {}),
+          }}
+          {...tooltipProps}
         />
       </>
     );
@@ -31,19 +44,13 @@ class Tooltip extends React.Component {
 
 Tooltip.propTypes = {
   children: PropTypes.node,
-  content: PropTypes.node,
   id: PropTypes.string.isRequired,
-  maxHeight: PropTypes.string,
-  maxWidth: PropTypes.string,
-  sx: PropTypes.shape({}),
+  tooltipProps: PropTypes.shape({ sx: PropTypes.shape({}) }),
 };
 
 Tooltip.defaultProps = {
   children: null,
-  content: null,
-  maxHeight: '200px',
-  maxWidth: '60ch',
-  sx: {},
+  tooltipProps: {},
 };
 
 export default Tooltip;
