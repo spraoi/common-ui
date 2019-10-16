@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field } from 'react-final-form';
-import Box from '../../../Box';
+import Box from '../Box';
 import Radio from '../Checkbox';
 
 const CheckboxGroup = ({ inline, label, name, options, type, ...rest }) => (

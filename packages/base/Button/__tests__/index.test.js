@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '..';
-import theme from '../../../../../__stubs__/theme';
-import { render } from '../../../../../__utilities__/testing-library';
+import Button from '../index';
+import theme from '../../../../__stubs__/theme';
+import { render } from '../../../../__utilities__/testing-library';
 
 describe('Button component', () => {
   it('renders a link correctly', () => {

@@ -1,9 +1,6 @@
 import React from 'react';
-import Paginator from '..';
-import {
-  fireEvent,
-  render,
-} from '../../../../../__utilities__/testing-library';
+import Paginator from '../index';
+import { fireEvent, render } from '../../../../__utilities__/testing-library';
 
 describe('Paginator component', () => {
   it('renders 1-10 correctly', () => {

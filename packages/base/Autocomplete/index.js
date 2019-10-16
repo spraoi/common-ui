@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import ReactAutocomplete from 'react-autocomplete';
 import { ThemeContext } from 'styled-components';
 import { themeVariantToValue } from '@spraoi/helpers';
-import Box from '../../../Box';
+import Box from '../Box';
 import InputWrapper from '../InputWrapper';
 
 const Autocomplete = ({ input, items, ...rest }) => {

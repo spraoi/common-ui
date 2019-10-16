@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '..';
-import { render } from '../../../../../__utilities__/testing-library';
+import Modal from '../index';
+import { render } from '../../../../__utilities__/testing-library';
 
 describe('Modal component', () => {
   it('renders a modal with content', () => {

@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import TextareaAutosize from 'react-autosize-textarea';
-import Box from '../../../Box';
+import Box from '../Box';
 import InputWrapper from '../InputWrapper';
 
-const TextArea = ({ input, ...rest }) => (
+const Input = ({ input, ...rest }) => (
   <InputWrapper input={input} {...rest}>
     {({ error, ...inputRest }) => (
       <Box
-        as={TextareaAutosize}
-        async
+        as="input"
+        id={input.name}
         sx={{ borderColor: error ? 'error' : null }}
         variant="inputs.primary"
         width="100%"
@@ -20,8 +19,9 @@ const TextArea = ({ input, ...rest }) => (
   </InputWrapper>
 );
 
-TextArea.propTypes = {
-  input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+Input.propTypes = {
+  input: PropTypes.shape({ error: PropTypes.bool, name: PropTypes.string })
+    .isRequired,
 };
 
-export default TextArea;
+export default Input;

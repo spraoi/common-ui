@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import Tooltip from '..';
-import { render } from '../../../../../__utilities__/testing-library';
+import Tooltip from '../index';
+import { render } from '../../../../__utilities__/testing-library';
 
 describe('Modal component', () => {
   it('renders a tooltip with internal toggle', () => {

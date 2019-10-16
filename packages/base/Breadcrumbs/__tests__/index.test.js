@@ -1,6 +1,6 @@
 import React from 'react';
-import Breadcrumbs from '..';
-import { render } from '../../../../../__utilities__/testing-library';
+import Breadcrumbs from '../index';
+import { render } from '../../../../__utilities__/testing-library';
 
 describe('Breadcrumbs component', () => {
   it('renders breadcrumbs with correct names and paths', () => {

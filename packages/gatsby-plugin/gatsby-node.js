@@ -72,9 +72,9 @@ function createIconComponent() {
       `
         // NOTE: this file is generated automatically, any changes will be overwritten.
 
+        import Box from '@spraoi/base/Box';
         import PropTypes from 'prop-types';
         import React from 'react';
-        import { Box } from '@spraoi/base';
         ${files.reduce(
           (acc, file) =>
             `${acc}import ${file.componentName} from '../../images/icons/${file.file}';`,
