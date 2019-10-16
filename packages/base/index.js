@@ -1,4 +1,5 @@
 import App from './components/App';
+import AppBase from './components/AppBase';
 import AutoSave from './components/Form/AutoSave';
 import Autocomplete from './components/Form/Input/Autocomplete';
 import Box from './components/Box';
@@ -22,6 +23,7 @@ import WhenFieldChanges from './components/Form/WhenFieldChanges';
 
 export {
   App,
+  AppBase,
   AutoSave,
   Autocomplete,
   Box,
