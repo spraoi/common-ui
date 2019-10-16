@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { camelCase } from 'change-case';
 import { objectMapKeysDeep } from '@spraoi/helpers';
 import AuthContext from '../../utilities/context';
-import { AUTH_STATES } from './constants';
+import { AUTH_STATES } from './utilities/constants';
 
 class AuthProvider extends PureComponent {
   constructor(props) {

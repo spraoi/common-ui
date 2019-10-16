@@ -2,7 +2,7 @@ import React from 'react';
 import { Location } from '@reach/router';
 import AuthContext from '../../utilities/context';
 import PageHandler from './PageHandler';
-import { pageTypes } from './types';
+import { pageTypes } from './utilities/types';
 
 const Page = props => (
   <Location>

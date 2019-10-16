@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { navigate } from 'gatsby';
-import { pageHandlerTypes } from './types';
+import { pageHandlerTypes } from '../utilities/types';
 
 class PageHandler extends PureComponent {
   componentDidMount() {

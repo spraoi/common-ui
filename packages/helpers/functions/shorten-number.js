@@ -1,8 +1,3 @@
-/**
- * Shorten a number.
- * @param number
- * @returns {string}
- */
 const shortenNumber = number => {
   if (number < 0) return '<0';
   if (number === 0) return '0';

@@ -7,7 +7,3 @@
 ```bash
 yarn add @spraoi/helpers
 ```
-
-## Usage
-
-TODO

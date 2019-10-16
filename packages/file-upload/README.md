@@ -8,7 +8,3 @@
 ```bash
 yarn install @spraoi/file-upload
 ```
-
-## Usage
-
-TODO

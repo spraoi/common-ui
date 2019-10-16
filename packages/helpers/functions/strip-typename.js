@@ -1,3 +1,6 @@
+/**
+ * Removes __typename keys from an object.
+ */
 const stripTypename = data => {
   if (data === null) return data;
   if (Array.isArray(data)) return data.map(v => stripTypename(v));

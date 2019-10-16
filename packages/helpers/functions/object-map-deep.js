@@ -1,8 +1,5 @@
 /**
  * Deeply map values of an object.
- * @param {object} obj
- * @param {function} callback
- * @returns {object}
  */
 const objectMapDeep = (obj, callback) => {
   const out = {};

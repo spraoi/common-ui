@@ -1,8 +1,5 @@
 /**
  * Deeply map keys of an object.
- * @param {object} obj
- * @param {function} callback
- * @returns {object}
  */
 const objectMapKeysDeep = (obj, callback) => {
   const out = {};

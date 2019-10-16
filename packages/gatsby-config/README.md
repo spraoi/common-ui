@@ -22,7 +22,7 @@ const defaults = require('@spraoi/gatsby-config');
 module.exports = {
   ...defaults,
   siteMetadata: {
-    title: AppBase,
+    title: 'Project Name',
   },
 };
 ```
