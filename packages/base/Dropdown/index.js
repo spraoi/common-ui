@@ -73,7 +73,14 @@ const getOverrideStyles = ({ error, theme }) => {
       backgroundColor: getBorderColor(),
     }),
     placeholder: () => ({ color: placeholderColor }),
-    singleValue: () => ({}),
+    singleValue: () => ({
+        'text-overflow': 'ellipsis',
+        'overflow': 'hidden',
+        'white-space': 'nowrap',
+        '> span > * ': {
+          'display': 'none'
+        }
+    }),
     valueContainer: base => ({
       ...base,
       border: 0,
@@ -145,6 +152,17 @@ const Dropdown = ({ input, ...rest }) => {
                 );
               } else {
                 setAsyncOptions(options);
+              }
+
+              if(typeof inputRest.displaySubText !== 'undefined' && inputRest.displaySubText) {
+                options.map((item) => {
+                  item.label = (
+                    <span>
+                      {item.label} <br />
+                      <small style={{ opacity: '0.3' }}>{item.subText}</small>
+                    </span>
+                  );
+                });
               }
 
               return options;
