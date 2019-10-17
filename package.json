@@ -3,7 +3,7 @@
   "name": "common-ui",
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules reports coverage",
-    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,json,css,scss,md,yml}\"",
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,gql,json,css,scss,md,yml}\"",
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint --ignore-path .gitignore --ignore-pattern \"packages/legacy-*\" \"packages/**/*.js\"",
     "lint:styles": "stylelint --ignore-path .gitignore \"packages/**/*.js\"",

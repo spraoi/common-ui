@@ -13,6 +13,7 @@
     "js-yaml": "^3.13.1"
   },
   "peerDependencies": {
+    "graphql-tag": "^2",
     "prettier": "^1"
   },
   "publishConfig": {

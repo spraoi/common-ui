@@ -19,6 +19,12 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
     return newRule;
   });
 
+  config.module.rules.push({
+    exclude: /node_modules/,
+    loader: 'graphql-tag/loader',
+    test: /\.gql$/,
+  });
+
   actions.replaceWebpackConfig(config);
 };
 

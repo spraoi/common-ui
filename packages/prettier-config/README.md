@@ -24,7 +24,7 @@ module.exports = require('@spraoi/prettier-config');
 ```json
 {
   "scripts": {
-    "prettier": "prettier --write --ignore-path .gitignore \"**/*.{js,json,css,scss,md,yml}\""
+    "prettier": "prettier --write --ignore-path .gitignore \"**/*.{js,gql,json,md,yml}\""
   }
 }
 ```
