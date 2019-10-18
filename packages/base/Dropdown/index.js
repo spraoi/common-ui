@@ -154,7 +154,7 @@ const Dropdown = ({ input, ...rest }) => {
                 setAsyncOptions(options);
               }
 
-              if(typeof inputRest.displaySubText !== 'undefined' && inputRest.displaySubText) {
+              if(_.some(options,'subText')) {
                 options.map((item) => {
                   item.label = (
                     <span>
