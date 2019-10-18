@@ -74,12 +74,12 @@ const getOverrideStyles = ({ error, theme }) => {
     }),
     placeholder: () => ({ color: placeholderColor }),
     singleValue: () => ({
-        'text-overflow': 'ellipsis',
-        'overflow': 'hidden',
-        'white-space': 'nowrap',
-        '> span > * ': {
-          'display': 'none'
-        }
+      '> span > * ': {
+        display: 'none',
+      },
+      overflow: 'hidden',
+      'text-overflow': 'ellipsis',
+      'white-space': 'nowrap',
     }),
     valueContainer: base => ({
       ...base,
@@ -143,6 +143,7 @@ const Dropdown = ({ input, ...rest }) => {
             defaultOptions
             loadOptions={async query => {
               const options = await loadOptions(query);
+              let items = [];
 
               if (externalAsyncOptions) {
                 // after search add new options in state & remove duplicate
@@ -154,18 +155,26 @@ const Dropdown = ({ input, ...rest }) => {
                 setAsyncOptions(options);
               }
 
-              if(_.some(options,'subtext')) {
-                options.map((item) => {
-                  item.label = (
-                    <span>
-                      {item.label} <br />
-                      <small style={{ opacity: '0.3' }}>{item.subtext}</small>
-                    </span>
-                  );
+              // eslint-disable-next-line no-undef
+              if (_.some(options, 'subtext')) {
+                options.forEach(option => {
+                  items.push({
+                    label: (
+                      <span>
+                        {option.label} <br />
+                        <small style={{ opacity: '0.3' }}>
+                          {option.subtext}
+                        </small>
+                      </span>
+                    ),
+                    value: option.value,
+                  });
                 });
+              } else {
+                items = options;
               }
 
-              return options;
+              return items;
             }}
             onChange={onChange}
             placeholder={placeholder}
