@@ -154,12 +154,12 @@ const Dropdown = ({ input, ...rest }) => {
                 setAsyncOptions(options);
               }
 
-              if(_.some(options,'subText')) {
+              if(_.some(options,'subtext')) {
                 options.map((item) => {
                   item.label = (
                     <span>
                       {item.label} <br />
-                      <small style={{ opacity: '0.3' }}>{item.subText}</small>
+                      <small style={{ opacity: '0.3' }}>{item.subtext}</small>
                     </span>
                   );
                 });
