@@ -24,8 +24,8 @@ const StyledGlobal = createGlobalStyle`
     }
 
     .filepond--panel-root {
-      border: solid 1px ${p =>
-        p.error ? p.theme.colors.error : 'transparent'};
+      border: dashed 1px ${p =>
+        p.error ? p.theme.colors.error : p.theme.colors.grays[3]};
       border-radius: ${p => p.theme.radii[2]};
       background-color: ${p => p.theme.colors.grays[1]};
     }
