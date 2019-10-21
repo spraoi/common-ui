@@ -78,8 +78,8 @@ const getOverrideStyles = ({ error, theme }) => {
         display: 'none',
       },
       overflow: 'hidden',
-      'text-overflow': 'ellipsis',
-      'white-space': 'nowrap',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
     }),
     valueContainer: base => ({
       ...base,
@@ -142,8 +142,7 @@ const Dropdown = ({ input, ...rest }) => {
             backspaceRemoves={backspaceRemoves}
             defaultOptions
             loadOptions={async query => {
-              const options = await loadOptions(query);
-              let items = [];
+              let options = await loadOptions(query);
 
               if (externalAsyncOptions) {
                 // after search add new options in state & remove duplicate
@@ -155,26 +154,31 @@ const Dropdown = ({ input, ...rest }) => {
                 setAsyncOptions(options);
               }
 
-              // eslint-disable-next-line no-undef
-              if (_.some(options, 'subtext')) {
-                options.forEach(option => {
-                  items.push({
-                    label: (
-                      <span>
-                        {option.label} <br />
-                        <small style={{ opacity: '0.3' }}>
-                          {option.subtext}
-                        </small>
-                      </span>
-                    ),
+              // check for subtext and display if exists
+              const checkSubText = options.some(option => {
+                return 'subtext' in option;
+              });
+              if (checkSubText) {
+                options = options.map(option => {
+                  return {
+                    label:
+                      typeof option.subtext !== 'undefined' ? (
+                        <span>
+                          {option.label} <br />
+                          <small style={{ opacity: '0.3' }}>
+                            {option.subtext}
+                          </small>
+                        </span>
+                      ) : (
+                        option.label
+                      ),
+                    subtext: option.subtext,
                     value: option.value,
-                  });
+                  };
                 });
-              } else {
-                items = options;
               }
 
-              return items;
+              return options;
             }}
             onChange={onChange}
             placeholder={placeholder}
