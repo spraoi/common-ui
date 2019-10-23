@@ -395,19 +395,33 @@ export function signIn({ email, password, rememberMe = false, user }) {
         parseUserSession(session);
         resolve();
       },
-
       onFailure: err => reject(parseLambdaError(err)),
+      mfaRequired: codeDeliveryDetails =>
+        resolve({ codeDeliveryDetails, user, rememberMe }),
     };
 
     callbacks.newPasswordRequired = () =>
       resolve({ callbacks, user, rememberMe });
-
     const authenticationDetails = new AuthenticationDetails({
       Username: email.toLowerCase(),
       Password: password,
     });
 
     user.authenticateUser(authenticationDetails, callbacks);
+  });
+}
+
+export function sendMFACode({ user, verificationCode, rememberMe }) {
+  return new Promise((resolve, reject) => {
+    const callbacks = {
+      onSuccess: session => {
+        rememberSession(rememberMe);
+        parseUserSession(session);
+        resolve();
+      },
+      onFailure: err => reject(parseLambdaError(err)),
+    };
+    user.sendMFACode(verificationCode, callbacks);
   });
 }
 
