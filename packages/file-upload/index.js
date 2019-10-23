@@ -95,12 +95,12 @@ class FileUpload extends PureComponent {
       .catch(error);
   };
 
-  serverRemove = ({ file: { name } }) => {
+  serverRemove = (error, { file: { name } }) => {
     const { bucket, customPrefix, level, onRemoveComplete } = this.props;
 
-    Storage.remove(name, { bucket, customPrefix, level }).then(
-      onRemoveComplete
-    );
+    Storage.remove(name, { bucket, customPrefix, level })
+      .then(onRemoveComplete)
+      .catch(error);
   };
 
   render() {
