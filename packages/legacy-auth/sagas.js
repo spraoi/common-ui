@@ -10,6 +10,7 @@ const defaultState = {
   isAuthenticated: false,
   isInitializing: false,
   isLoading: false,
+  mfaRequired: false,
   resetPasswordCodeSent: false,
   resetPasswordSuccess: false,
   userAttributes: {},
@@ -127,10 +128,19 @@ function* signInSaga({ payload, meta }) {
     yield put(actions.setState({ isLoading: true }));
     payload.user = yield call(aws.getNewUser, payload.email);
     const res = yield call(aws.signIn, payload);
-
-    if (res && res.callbacks && res.user) {
+    if (res && res.codeDeliveryDetails === 'SMS_MFA' && res.user) {
+      cache.user = res.user;
+      cache.rememberMe = res.rememberMe;
+      yield put(
+        actions.setState({
+          ...defaultState,
+          mfaRequired: true,
+          userAttributes: aws.getUserAttributes(),
+        })
+      );
+      if (meta) meta.resolve({ completeSignUpRequired: false });
+    } else if (res && res.callbacks && res.user) {
       cache.signInResponse = res;
-
       yield put(
         actions.setState({
           ...defaultState,
@@ -157,7 +167,35 @@ function* signInSaga({ payload, meta }) {
         verificationRequired: e.code === 'UserNotConfirmedException',
       })
     );
+    if (
+      meta &&
+      meta.isRen &&
+      e.code === 'UserNotConfirmedException' &&
+      Object.keys(aws.getUserAttributes()).length <= 0
+    ) {
+      aws.setUserAttributes({ email: payload.email });
+    }
     if (meta) meta.reject();
+  }
+}
+
+function* sendMFACodeSaga({ payload }) {
+  try {
+    yield put(actions.setState({ isLoading: true }));
+    yield call(aws.sendMFACode, {
+      rememberMe: cache.rememberMe,
+      user: cache.user,
+      verificationCode: payload,
+    });
+    yield put(
+      actions.setState({
+        ...defaultState,
+        isAuthenticated: true,
+        userAttributes: aws.getUserAttributes(),
+      })
+    );
+  } catch (e) {
+    yield put(actions.setState({ error: e, isLoading: false }));
   }
 }
 
@@ -178,17 +216,26 @@ function* signOutSaga() {
   }
 }
 
-function* signUpSaga({ payload }) {
+function* signUpSaga({ payload, meta }) {
   try {
     const { email, password, rememberMe = false } = payload;
+    const userAttributes = {
+      email,
+      password,
+      rememberMe,
+    };
     yield put(actions.setState({ isLoading: true }));
     yield call(aws.signUp, payload);
-    aws.setUserAttributes({ email, password, rememberMe });
-
+    if (meta && meta.isRen) {
+      userAttributes.phone_number = payload.attributes.phone_number;
+    }
+    aws.setUserAttributes(userAttributes);
+    delete userAttributes.password;
+    delete userAttributes.rememberMe;
     yield put(
       actions.setState({
         ...defaultState,
-        userAttributes: { email },
+        userAttributes,
         verificationRequired: true,
       })
     );
@@ -197,14 +244,23 @@ function* signUpSaga({ payload }) {
   }
 }
 
-function* verifyEmailSaga({ payload }) {
+function* verifyEmailSaga({ payload, meta }) {
   try {
     const { email, password, rememberMe } = aws.getUserAttributes();
     yield put(actions.setState({ isLoading: true }));
     const user = yield call(aws.getNewUser, email);
     payload.user = user;
     yield call(aws.verifyEmail, payload);
-    yield put(actions.signIn({ email, password, rememberMe, user }));
+    if (meta && meta.isRen) {
+      yield put(
+        actions.setState({
+          isLoading: false,
+          verificationRequired: false,
+        })
+      );
+    } else {
+      yield put(actions.signIn({ email, password, rememberMe, user }));
+    }
   } catch (e) {
     yield put(actions.setState({ error: e, isLoading: false }));
   }
@@ -271,4 +327,5 @@ export default function* sagas() {
     constants.AUTH_UPDATE_USER_ATTRIBUTES,
     updateUserAttributesSaga
   );
+  yield takeLatest(constants.AUTH_SEND_MFA_CODE, sendMFACodeSaga);
 }
