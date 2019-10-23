@@ -169,7 +169,7 @@ function* signInSaga({ payload, meta }) {
     );
     if (
       meta &&
-      meta.isRen &&
+      meta.storeEmail &&
       e.code === 'UserNotConfirmedException' &&
       Object.keys(aws.getUserAttributes()).length <= 0
     ) {
@@ -226,7 +226,7 @@ function* signUpSaga({ payload, meta }) {
     };
     yield put(actions.setState({ isLoading: true }));
     yield call(aws.signUp, payload);
-    if (meta && meta.isRen) {
+    if (meta && meta.storePhoneNumber) {
       userAttributes.phone_number = payload.attributes.phone_number;
     }
     aws.setUserAttributes(userAttributes);
@@ -251,7 +251,7 @@ function* verifyEmailSaga({ payload, meta }) {
     const user = yield call(aws.getNewUser, email);
     payload.user = user;
     yield call(aws.verifyEmail, payload);
-    if (meta && meta.isRen) {
+    if (meta && meta.completeVerification) {
       yield put(
         actions.setState({
           isLoading: false,
