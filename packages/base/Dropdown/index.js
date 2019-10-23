@@ -6,6 +6,7 @@ import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
 import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
+import Box from '../Box';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -166,7 +167,7 @@ const Dropdown = ({ input, ...rest }) => {
                         <span>
                           {option.label} <br />
                           <small style={{ opacity: '0.3' }}>
-                            {option.subtext}
+                            <Box color="gray5">{option.subtext}</Box>
                           </small>
                         </span>
                       ) : (
