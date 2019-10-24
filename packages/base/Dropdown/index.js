@@ -166,7 +166,7 @@ const Dropdown = ({ input, ...rest }) => {
                       typeof option.subtext !== 'undefined' ? (
                         <span>
                           {option.label} <br />
-                          <Box color="gray5">{option.subtext}</Box>
+                          <Box color="grays.4">{option.subtext}</Box>
                         </span>
                       ) : (
                         option.label
