@@ -41,6 +41,7 @@ const StyledGlobal = createGlobalStyle`
 
   a {
     color: ${p => p.theme.colors.text.link};
+    text-decoration: none;
   }
 
   button,
