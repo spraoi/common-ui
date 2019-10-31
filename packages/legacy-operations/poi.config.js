@@ -13,6 +13,10 @@ const envVars = Object.assign(
   { STAGE: stage, VARIATION: variation }
 );
 
+const transpileCommonPkgs = envVars.TRANSPILE_COMMON_PKGS || [];
+const transpileVariationPkgs = envVars.TRANSPILE_VARIATION_PKGS || [];
+const transpilePkgs = [...transpileCommonPkgs, ...transpileVariationPkgs];
+
 module.exports = {
   configureWebpack(config) {
     config.output.globalObject = 'this';
@@ -44,6 +48,7 @@ module.exports = {
   babel: {
     jsx: 'react',
     include: [
+      ...transpilePkgs,
       '@spraoi/auth',
       '@spraoi/aws',
       '@spraoi/chatbot',
