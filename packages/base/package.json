@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.24",
+  "version": "0.23.25",
   "dependencies": {
     "@spraoi/file-upload": "^0.23.22",
     "@wojtekmaj/react-daterange-picker": "^2.4.0",
