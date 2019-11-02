@@ -138,9 +138,9 @@ const Table = ({
                 key={keyPrefix + cellIndex}
                 as={Td}
                 colSpan={
-                  expandLastColumn &&
-                  cellIndex === row.length - 1 &&
-                  header.length - row.length + 1
+                  expandLastColumn && cellIndex === row.length - 1
+                    ? header.length - row.length + 1
+                    : 1
                 }
                 sx={tdSx}
               >
