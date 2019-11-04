@@ -12,6 +12,8 @@ import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { setContext } from 'apollo-link-context';
 import AppBase from '../AppBase';
 
+const cache = new InMemoryCache();
+
 const App = ({ children, config, credentials, theme }) => (
   <AuthProvider amplifyConfig={config.amplify}>
     <AuthContext.Consumer>
@@ -19,7 +21,7 @@ const App = ({ children, config, credentials, theme }) => (
         <ApolloProvider
           client={
             new ApolloClient({
-              cache: new InMemoryCache(),
+              cache,
               link: ApolloLink.from([
                 createAuthLink({
                   ...config.apollo,
