@@ -28,6 +28,7 @@
     "reflexbox": "^4.0.5"
   },
   "peerDependencies": {
+    "@reach/router": "^1",
     "@spraoi/auth": "*",
     "@spraoi/helpers": "*",
     "apollo-cache": "^1",
