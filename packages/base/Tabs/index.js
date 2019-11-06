@@ -2,25 +2,44 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import get from 'lodash/get';
 import { Location } from '@reach/router';
-import { parse, stringify } from 'query-string';
+import { generateRedirectPath } from '@spraoi/helpers';
+import { parse } from 'query-string';
 import TabDropdown from './TabDropdown';
 import TabLinks from './TabLinks';
+import TabTable from './TabTable';
 
-const Tabs = ({ defaultTab, dropdown, label, name, sx, tabs }) => (
+const Tabs = ({
+  defaultTab,
+  header,
+  label,
+  name,
+  rows,
+  rowTabIndex,
+  sx,
+  tabs,
+  type,
+}) => (
   <Location>
     {({ location }) => {
       const queryParams = parse(location.search);
       const currentTab = get(queryParams, name, defaultTab);
 
       const generateLink = newTab =>
-        `${location.pathname}?${stringify({
-          ...queryParams,
-          [name]: newTab,
-        })}`;
+        generateRedirectPath({ ...location, queryParams: { [name]: newTab } });
+
+      const currentTabDetails = tabs.find(tab => tab.value === currentTab);
 
       return (
         <>
-          {dropdown ? (
+          {type === 'tabs' && (
+            <TabLinks
+              currentTab={currentTab}
+              generateLink={generateLink}
+              sx={sx}
+              tabs={tabs}
+            />
+          )}
+          {type === 'dropdown' && (
             <TabDropdown
               currentTab={currentTab}
               generateLink={generateLink}
@@ -29,15 +48,19 @@ const Tabs = ({ defaultTab, dropdown, label, name, sx, tabs }) => (
               sx={sx}
               tabs={tabs}
             />
-          ) : (
-            <TabLinks
+          )}
+          {type === 'table' && (
+            <TabTable
               currentTab={currentTab}
               generateLink={generateLink}
+              header={header}
+              rows={rows}
+              rowTabIndex={rowTabIndex}
               sx={sx}
               tabs={tabs}
             />
           )}
-          {tabs.find(tab => tab.value === currentTab).render()}
+          {currentTabDetails ? currentTabDetails.render() : null}
         </>
       );
     }}
@@ -45,10 +68,12 @@ const Tabs = ({ defaultTab, dropdown, label, name, sx, tabs }) => (
 );
 
 Tabs.propTypes = {
-  defaultTab: PropTypes.string.isRequired,
-  dropdown: PropTypes.bool,
+  defaultTab: PropTypes.string,
+  header: PropTypes.arrayOf(PropTypes.node),
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
+  rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)),
+  rowTabIndex: PropTypes.number,
   sx: PropTypes.shape({}),
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
@@ -56,12 +81,17 @@ Tabs.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  type: PropTypes.oneOf(['dropdown', 'table', 'tabs']),
 };
 
 Tabs.defaultProps = {
-  dropdown: false,
+  defaultTab: null,
+  header: [],
   label: null,
+  rows: [],
+  rowTabIndex: 0,
   sx: {},
+  type: 'tabs',
 };
 
 export default Tabs;

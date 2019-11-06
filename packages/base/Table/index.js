@@ -57,14 +57,15 @@ const formatCell = cell => {
   return String(cell);
 };
 
-const tdSx = { color: 'text.subtle', px: 5, py: 4 };
-const trSx = { '&:nth-child(even)': { bg: 'grays.0' } };
+const tdSx = { px: 5, py: 4 };
 
 const Table = ({
+  activeRowIndex,
   expandLastColumn,
   header,
   isLoading,
   keyPrefix,
+  onRowClick,
   onSortUpdate,
   orderBy,
   renderEmpty,
@@ -131,26 +132,53 @@ const Table = ({
     )}
     <Tbody>
       {rows.length ? (
-        rows.map((row, rowIndex) => (
-          <Box key={keyPrefix + rowIndex} as={Tr} sx={trSx}>
-            {row.map((cell, cellIndex) => (
-              <Box
-                key={keyPrefix + cellIndex}
-                as={Td}
-                colSpan={
-                  expandLastColumn && cellIndex === row.length - 1
-                    ? header.length - row.length + 1
-                    : 1
-                }
-                sx={tdSx}
-              >
-                {formatCell(cell)}
-              </Box>
-            ))}
-          </Box>
-        ))
+        rows.map((row, rowIndex) => {
+          const rowIsActive = rowIndex === activeRowIndex;
+
+          const trSx = {
+            '&:hover': {
+              bg: onRowClick && !rowIsActive ? 'accentLight' : null,
+              color: onRowClick && !rowIsActive ? 'white' : null,
+            },
+            bg: rowIsActive ? 'accent' : 'transparent',
+            color: rowIsActive ? 'white' : 'text.subtle',
+            cursor: onRowClick ? 'pointer' : 'default',
+            transition: 'background 0.1s, color 0.1s',
+          };
+
+          return (
+            <Box
+              key={keyPrefix + rowIndex}
+              as={Tr}
+              onClick={() => onRowClick && onRowClick(row, rowIndex)}
+              sx={{
+                '&:nth-child(even)': {
+                  '&:hover': trSx['&:hover'],
+                  bg: rowIsActive ? 'accent' : 'grays.0',
+                  color: trSx.color,
+                },
+                ...trSx,
+              }}
+            >
+              {row.map((cell, cellIndex) => (
+                <Box
+                  key={keyPrefix + cellIndex}
+                  as={Td}
+                  colSpan={
+                    expandLastColumn && cellIndex === row.length - 1
+                      ? header.length - row.length + 1
+                      : 1
+                  }
+                  sx={tdSx}
+                >
+                  {formatCell(cell)}
+                </Box>
+              ))}
+            </Box>
+          );
+        })
       ) : (
-        <Box as={Tr} sx={trSx}>
+        <Box as={Tr}>
           <Box as={Td} colSpan={header.length} sx={tdSx}>
             {isLoading ? <Spinner /> : renderEmpty}
           </Box>
@@ -161,12 +189,14 @@ const Table = ({
 );
 
 Table.propTypes = {
+  activeRowIndex: PropTypes.number,
   expandLastColumn: PropTypes.bool,
   header: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])
   ).isRequired,
   isLoading: PropTypes.bool,
   keyPrefix: PropTypes.string,
+  onRowClick: PropTypes.func,
   onSortUpdate: PropTypes.func,
   orderBy: PropTypes.oneOf(['asc', 'desc']),
   renderEmpty: PropTypes.node,
@@ -175,9 +205,11 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
+  activeRowIndex: null,
   expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
+  onRowClick: null,
   onSortUpdate: () => {},
   orderBy: 'asc',
   renderEmpty: 'No results.',

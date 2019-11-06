@@ -32,29 +32,4 @@ describe('Tabs component', () => {
     const defaultContent = getByText('default content');
     expect(defaultContent).toBeInTheDocument();
   });
-
-  it('renders tabs as a dropdown', () => {
-    const { getByText } = render(
-      <Tabs
-        defaultTab="foo"
-        dropdown
-        name="tab"
-        tabs={[
-          {
-            label: 'foo',
-            render: () => <p>default content</p>,
-            value: 'foo',
-          },
-          {
-            label: 'bar',
-            render: () => <p>bar content</p>,
-            value: 'bar',
-          },
-        ]}
-      />
-    );
-
-    const dropdown = getByText('foo');
-    expect(dropdown).toBeInTheDocument();
-  });
 });
