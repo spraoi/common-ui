@@ -12,11 +12,13 @@ export const email = value => {
 };
 
 export const floatValue = value => {
-  if (!/^[-+]?[0-9]+\.[0-9]+$/i.test(value)) return 'Invalid float number';
+  if (value && !/^[-+]?[0-9]+\.[0-9]+$/i.test(value)) {
+    return 'Invalid float number';
+  }
 };
 
 export const integerValue = value => {
-  if (value && Number.isInteger(value)) return 'Invalid number';
+  if (value && !/^[-+]?[0-9]+$/i.test(value)) return 'Invalid number';
 };
 
 export const json = value => {
