@@ -11,6 +11,14 @@ export const email = value => {
   if (value && !isEmail(value)) return 'Invalid email';
 };
 
+export const floatValue = value => {
+  if (!/^[-+]?[0-9]+\.[0-9]+$/i.test(value)) return 'Invalid float number';
+};
+
+export const integerValue = value => {
+  if (value && Number.isInteger(value)) return 'Invalid number';
+};
+
 export const json = value => {
   if (!value) return;
 
