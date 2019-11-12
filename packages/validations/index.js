@@ -1,4 +1,5 @@
 import isEmail from 'validator/lib/isEmail';
+import moment from 'moment';
 
 export const alpha = value => {
   if (!/^[a-z]*$/i.test(value)) return 'Must contain only letters';
@@ -7,8 +8,28 @@ export const alpha = value => {
 export const composeValidations = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
+export const date = format => {
+  return value => {
+    if (value && !moment(value, format, true).isValid()) return 'Invalid date';
+  };
+};
+
 export const email = value => {
   if (value && !isEmail(value)) return 'Invalid email';
+};
+
+export const float = precision => value => {
+  const maxPrecision = precision || 2;
+  if (
+    value &&
+    !new RegExp(`^[-+]?[0-9]+.[0-9]{1,${maxPrecision}}$`).test(value)
+  ) {
+    return 'Invalid float';
+  }
+};
+
+export const integer = value => {
+  if (value && !/^[-+]?[0-9]+$/.test(value)) return 'Invalid integer';
 };
 
 export const json = value => {
