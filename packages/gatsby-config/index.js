@@ -56,6 +56,7 @@ module.exports = {
         modules: [
           '@spraoi/auth',
           '@spraoi/base',
+          '@spraoi/charts',
           '@spraoi/file-upload',
           '@spraoi/helpers',
           '@spraoi/validations',
