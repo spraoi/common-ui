@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signInExternal } from '../actions';
 
-@connect(
-  null,
-  {
-    signInExternal,
-  }
-)
+@connect(null, {
+  signInExternal,
+})
 export default class ExternalSignInLink extends PureComponent {
   static propTypes = {
     provider: PropTypes.oneOf(['Facebook', 'Google']),

@@ -1,0 +1,39 @@
+{
+  "name": "@spraoi/charts",
+  "description": "Shared visualizations and charts.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/charts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@spraoi/base": "*",
+    "@spraoi/helpers": "*",
+    "@vx/axis": "^0",
+    "@vx/curve": "^0",
+    "@vx/event": "^0",
+    "@vx/gradient": "^0",
+    "@vx/grid": "^0",
+    "@vx/group": "^0",
+    "@vx/heatmap": "^0",
+    "@vx/hierarchy": "^0",
+    "@vx/legend": "^0",
+    "@vx/mock-data": "^0",
+    "@vx/responsive": "^0",
+    "@vx/scale": "^0",
+    "@vx/shape": "^0",
+    "@vx/text": "^0",
+    "d3-array": "^2",
+    "d3-format": "^1",
+    "d3-hierarchy": "^1",
+    "lodash": "^4",
+    "prop-types": "^15",
+    "react": "^16",
+    "styled-components": "^4"
+  }
+}
