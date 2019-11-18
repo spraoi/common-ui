@@ -7,9 +7,9 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.28",
+  "version": "0.23.31",
   "dependencies": {
-    "@spraoi/file-upload": "^0.23.22",
+    "@spraoi/file-upload": "^0.23.31",
     "@wojtekmaj/react-daterange-picker": "^2.4.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-link-context": "^1.0.19",
