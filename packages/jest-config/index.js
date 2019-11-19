@@ -13,7 +13,7 @@ module.exports = {
   rootDir: process.cwd(),
   setupFiles: [resolve(__dirname, 'jest.shim.js')],
   setupFilesAfterEnv: [resolve(__dirname, 'jest.setup.js')],
-  testPathIgnorePatterns: ['.cache/', 'node_modules/', 'public/'],
+  testPathIgnorePatterns: ['.cache/', 'cypress/', 'node_modules/', 'public/'],
   transform: { '^.+\\.jsx?$': resolve(__dirname, 'jest.transform.js') },
   transformIgnorePatterns: [
     'node_modules/(?!(gatsby|@spraoi/.*)/)',
