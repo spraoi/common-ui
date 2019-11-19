@@ -447,7 +447,7 @@ export default class ChatBot extends Component {
       this.state.dialogState === 'ConfirmIntent' &&
       this.state.intentName === 'QuoteDetailInformation' &&
       this.state.sessionAttributes.paymentReview !== true &&
-        this.state.sessionAttributes.paymentReview !== 'true'
+      this.state.sessionAttributes.paymentReview !== 'true'
     ) {
       reply = MESSAGES.productInfoInProgressMessage;
     } else if (

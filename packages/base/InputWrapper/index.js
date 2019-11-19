@@ -4,6 +4,7 @@ import Box from '../Box';
 
 const InputWrapper = ({
   children,
+  dataCy,
   disabled,
   htmlFor,
   input,
@@ -33,6 +34,7 @@ const InputWrapper = ({
 
   return (
     <Box
+      data-cy={dataCy}
       sx={{
         '&:first-of-type': { mt: 0 },
         flex: 1,
@@ -66,6 +68,7 @@ const InputWrapper = ({
 
 InputWrapper.propTypes = {
   children: PropTypes.func.isRequired,
+  dataCy: PropTypes.string,
   disabled: PropTypes.bool,
   htmlFor: PropTypes.string,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
@@ -80,6 +83,7 @@ InputWrapper.propTypes = {
 };
 
 InputWrapper.defaultProps = {
+  dataCy: null,
   disabled: false,
   htmlFor: null,
   label: null,

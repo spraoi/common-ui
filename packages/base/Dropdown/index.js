@@ -88,7 +88,7 @@ const Dropdown = ({ input, ...rest }) => {
   const [asyncOptions, setAsyncOptions] = useState([]);
 
   return (
-    <InputWrapper input={input} {...rest}>
+    <InputWrapper dataCy={rest['data-cy']} input={input} {...rest}>
       {({
         backspaceRemoves = false,
         error,
