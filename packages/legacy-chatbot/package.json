@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-chatbot",
   "description": "Amazon Lex chatbot prototype.",
-  "version": "0.23.31",
+  "version": "0.23.33",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-chatbot",
   "repository": {
