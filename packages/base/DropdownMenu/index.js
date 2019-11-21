@@ -75,6 +75,7 @@ const DropdownMenu = ({
   dividerPositions,
   itemActions,
   items,
+  menuZIndex,
   sx,
   ...rest
 }) => {
@@ -128,6 +129,7 @@ const DropdownMenu = ({
           </MenuList>
         </Box>
       }
+      menuZIndex={menuZIndex}
     >
       {button}
     </StyledMenuButton>
@@ -142,12 +144,14 @@ DropdownMenu.propTypes = {
     PropTypes.oneOfType([PropTypes.func, PropTypes.string])
   ).isRequired,
   items: PropTypes.arrayOf(PropTypes.node).isRequired,
+  menuZIndex: PropTypes.number,
   sx: PropTypes.shape({}),
 };
 
 DropdownMenu.defaultProps = {
   chevron: false,
   dividerPositions: [],
+  menuZIndex: null,
   sx: {},
 };
 
