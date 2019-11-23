@@ -11,12 +11,12 @@ import { hierarchy } from 'd3-hierarchy';
 import calculateHeight from './utilities/calculate-height';
 import findVertexMaxWidth from './utilities/find-vertex-max-width';
 import {
-  ROOT_VERTEX_BG_HEIGHT,
+  HIGHLIGHTED_VERTEX_BG_HEIGHT,
   VERTEX_BG_HEIGHT,
   VERTEX_BG_PX,
 } from './utilities/constants';
 
-const LineageChart = ({ data, onVertexClick }) => {
+const LineageChart = ({ data, highlightEdge, onVertexClick }) => {
   const theme = useContext(ThemeContext);
   const dataHierarchy = hierarchy(data);
   const vertexMaxWidth = findVertexMaxWidth(data);
@@ -25,7 +25,8 @@ const LineageChart = ({ data, onVertexClick }) => {
     <Box
       sx={{
         height: calculateHeight(data, VERTEX_BG_HEIGHT),
-        width: `${dataHierarchy.height * vertexMaxWidth + 300}px`,
+        width: `${dataHierarchy.height *
+          (vertexMaxWidth + VERTEX_BG_PX * 2 + 150)}px`,
       }}
     >
       <ParentSize>
@@ -33,7 +34,7 @@ const LineageChart = ({ data, onVertexClick }) => {
           <svg height={height} width={width}>
             <Tree
               root={dataHierarchy}
-              size={[height, width - VERTEX_BG_PX - vertexMaxWidth]}
+              size={[height, width - VERTEX_BG_PX * 2 - vertexMaxWidth]}
             >
               {tree => (
                 <Group left={VERTEX_BG_PX} top={0}>
@@ -47,31 +48,6 @@ const LineageChart = ({ data, onVertexClick }) => {
                     />
                   ))}
                   {tree.descendants().map((node, i) => {
-                    if (node.depth === 0) {
-                      return (
-                        <Group key={`tree-${i}`} left={node.y} top={node.x}>
-                          <rect
-                            fill={theme.colors.accent}
-                            height={ROOT_VERTEX_BG_HEIGHT}
-                            rx={theme.radii[0]}
-                            width={node.data.width + VERTEX_BG_PX * 2}
-                            x={-VERTEX_BG_PX}
-                            y={-ROOT_VERTEX_BG_HEIGHT / 2}
-                          />
-                          <Text
-                            cursor="pointer"
-                            fill={theme.colors.white}
-                            fontSize={theme.fontSizes[2]}
-                            onClick={() => onVertexClick(node.data)}
-                            scaleToFit
-                            verticalAnchor="middle"
-                          >
-                            {node.data.name}
-                          </Text>
-                        </Group>
-                      );
-                    }
-
                     if (node.data.isEdge) {
                       return (
                         <Group key={`tree-${i}`} left={node.y} top={node.x}>
@@ -86,6 +62,34 @@ const LineageChart = ({ data, onVertexClick }) => {
                           <Text
                             fill={theme.colors.text.subtle}
                             fontSize={theme.fontSizes[2]}
+                            verticalAnchor="middle"
+                          >
+                            {node.data.name}
+                          </Text>
+                        </Group>
+                      );
+                    }
+
+                    if (
+                      highlightEdge
+                        ? highlightEdge === node.data.id
+                        : node.depth === 0
+                    ) {
+                      return (
+                        <Group key={`tree-${i}`} left={node.y} top={node.x}>
+                          <rect
+                            fill={theme.colors.accent}
+                            height={HIGHLIGHTED_VERTEX_BG_HEIGHT}
+                            rx={theme.radii[0]}
+                            width={node.data.width + VERTEX_BG_PX * 2}
+                            x={-VERTEX_BG_PX}
+                            y={-HIGHLIGHTED_VERTEX_BG_HEIGHT / 2}
+                          />
+                          <Text
+                            cursor="pointer"
+                            fill={theme.colors.white}
+                            fontSize={theme.fontSizes[2]}
+                            onClick={() => onVertexClick(node.data)}
                             verticalAnchor="middle"
                           >
                             {node.data.name}
@@ -133,7 +137,12 @@ LineageChart.propTypes = {
     name: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
   }).isRequired,
+  highlightEdge: PropTypes.string,
   onVertexClick: PropTypes.func.isRequired,
+};
+
+LineageChart.defaultProps = {
+  highlightEdge: null,
 };
 
 export default LineageChart;
