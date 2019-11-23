@@ -33,7 +33,7 @@ const LineageChart = ({ data, onVertexClick }) => {
           <svg height={height} width={width}>
             <Tree
               root={dataHierarchy}
-              size={[height, width - VERTEX_BG_PX - vertexMaxWidth / 2]}
+              size={[height, width - VERTEX_BG_PX - vertexMaxWidth]}
             >
               {tree => (
                 <Group left={VERTEX_BG_PX} top={0}>
