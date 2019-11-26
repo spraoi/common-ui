@@ -7,7 +7,7 @@ import Radio from '../Checkbox';
 const CheckboxGroup = ({ inline, label, name, options, type, ...rest }) => (
   <>
     {label && (
-      <Box color="textSubtle" mr={5} mt={5}>
+      <Box color="text.subtle" mr={5} mt={5}>
         {label}
       </Box>
     )}
