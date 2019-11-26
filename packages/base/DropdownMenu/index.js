@@ -151,7 +151,7 @@ DropdownMenu.propTypes = {
 DropdownMenu.defaultProps = {
   chevron: false,
   dividerPositions: [],
-  menuZIndex: null,
+  menuZIndex: null, // Defaults to null, so css can't be applied
   sx: {},
 };
 
