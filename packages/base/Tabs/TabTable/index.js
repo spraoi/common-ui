@@ -1,6 +1,6 @@
-import { navigate } from '@reach/router';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { navigate } from '@reach/router';
 import Card from '../../Card';
 import Table from '../../Table';
 

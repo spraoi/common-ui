@@ -9,6 +9,7 @@
   },
   "version": "0.23.40",
   "dependencies": {
+    "@brainhubeu/react-carousel": "^1.10.30",
     "@spraoi/file-upload": "^0.23.40",
     "@wojtekmaj/react-daterange-picker": "^2.4.0",
     "apollo-cache-inmemory": "^1.6.3",
@@ -31,6 +32,7 @@
     "@reach/router": "^1",
     "@spraoi/auth": "*",
     "@spraoi/helpers": "*",
+    "@vx/responsive": "^0",
     "apollo-cache": "^1",
     "apollo-client": "^2",
     "apollo-link": "^1",

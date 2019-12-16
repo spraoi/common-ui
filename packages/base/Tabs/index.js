@@ -4,21 +4,12 @@ import get from 'lodash/get';
 import { Location } from '@reach/router';
 import { generateRedirectPath } from '@spraoi/helpers';
 import { parse } from 'query-string';
+import TabCarousel from './TabCarousel';
 import TabDropdown from './TabDropdown';
 import TabLinks from './TabLinks';
 import TabTable from './TabTable';
 
-const Tabs = ({
-  defaultTab,
-  header,
-  label,
-  name,
-  rows,
-  rowTabIndex,
-  sx,
-  tabs,
-  type,
-}) => (
+const Tabs = ({ defaultTab, name, tabs, type, ...rest }) => (
   <Location>
     {({ location }) => {
       const queryParams = parse(location.search);
@@ -31,33 +22,34 @@ const Tabs = ({
 
       return (
         <>
-          {type === 'tabs' && (
-            <TabLinks
+          {type === 'carousel' && (
+            <TabCarousel
               currentTab={currentTab}
               generateLink={generateLink}
-              sx={sx}
-              tabs={tabs}
+              {...rest}
             />
           )}
           {type === 'dropdown' && (
             <TabDropdown
               currentTab={currentTab}
               generateLink={generateLink}
-              label={label}
-              name={name}
-              sx={sx}
               tabs={tabs}
+              {...rest}
             />
           )}
           {type === 'table' && (
             <TabTable
               currentTab={currentTab}
               generateLink={generateLink}
-              header={header}
-              rows={rows}
-              rowTabIndex={rowTabIndex}
-              sx={sx}
+              {...rest}
+            />
+          )}
+          {type === 'tabs' && (
+            <TabLinks
+              currentTab={currentTab}
+              generateLink={generateLink}
               tabs={tabs}
+              {...rest}
             />
           )}
           {currentTabDetails ? currentTabDetails.render() : null}
@@ -69,28 +61,18 @@ const Tabs = ({
 
 Tabs.propTypes = {
   defaultTab: PropTypes.string,
-  header: PropTypes.arrayOf(PropTypes.node),
-  label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)),
-  rowTabIndex: PropTypes.number,
-  sx: PropTypes.shape({}),
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       render: PropTypes.func.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
-  type: PropTypes.oneOf(['dropdown', 'table', 'tabs']),
+  type: PropTypes.oneOf(['carousel', 'dropdown', 'table', 'tabs']),
 };
 
 Tabs.defaultProps = {
   defaultTab: null,
-  header: [],
-  label: null,
-  rows: [],
-  rowTabIndex: 0,
-  sx: {},
   type: 'tabs',
 };
 
