@@ -109,12 +109,6 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__calendar {
-      width: calc(100% + ${p => p.theme.space[5]}) !important;
-      top: unset !important;
-      right: unset !important;
-      bottom: calc(100% + 1px) !important;
-      left: 50% !important;
-      transform: translateX(-50%);
       box-shadow: ${p => p.theme.shadows[0]};
     }
 
