@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.44",
+  "version": "0.23.45",
   "bin": {
     "spraoi": "bin/spraoi.js"
   },
