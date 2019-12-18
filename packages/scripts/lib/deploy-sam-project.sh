@@ -46,19 +46,19 @@ API_VERSION="${API_VERSION:-v1}"
 
 # foo-bar-baz -> Foobarbaz
 cap() {
-  echo "$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}" | tr -d '-'
+  echo "$(tr '[:lower:]' '[:upper:]' <<< "${1:0:1}")${1:1}" | tr -d '-'
 }
 
 # foo-bar-baz -> FooBarBaz
 capAll() {
-  while read word; do
+  while read -r word; do
     res="${res}$(cap "$word")"
   done <<< "$(tr '-' '\n' <<< "$1")"
 
   echo "$res"
 }
 
-./scripts/deploy-stack.sh \
+"$(dirname "$0")"/deploy-sam-stack.sh \
   --bucket "$S3_BUCKET" \
   --name "$(cap "$TEMPLATE")$(capAll "$VARIATION")$(cap "$ENVIRONMENT")" \
   --params "AllowHeaders=$ALLOW_HEADERS ApiVersion=$API_VERSION Environment=$ENVIRONMENT Template=$TEMPLATE Variation=$VARIATION FullDomainName=$DOMAIN" \
