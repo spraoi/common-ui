@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const meow = require('meow');
-const path = require('path');
 const deploy = require('../lib/deploy-ui');
 const newComponent = require('../lib/new-component');
 const newPackage = require('../lib/new-package');
@@ -71,7 +70,7 @@ const cli = meow(helpText, {
 switch (cli.input[0]) {
   case 'deploy-sam-project': {
     tryShell(
-      `${path.resolve(__dirname, '/../lib/deploy-sam-project.sh')} \
+      `${__dirname}/../lib/deploy-sam-project.sh \
         -a ${cli.flags['api-version']} \
         -b ${cli.flags.bucket} \
         -d ${cli.flags.domain} \
@@ -85,7 +84,7 @@ switch (cli.input[0]) {
 
   case 'deploy-sam-stack': {
     tryShell(
-      `${path.resolve(__dirname, '/../lib/deploy-sam-stack.sh')} \
+      `${__dirname}/../lib/deploy-sam-stack.sh \
         -b ${cli.flags.bucket} \
         -d ${cli.flags.directory} \
         -e ${cli.flags.name} \

@@ -1,7 +1,9 @@
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
-const json = require('rollup-plugin-json');
-const resolve = require('rollup-plugin-node-resolve');
+// XXX: not sure why eslint doesn't like this module
+// eslint-disable-next-line import/no-unresolved
+const json = require('@rollup/plugin-json');
+const resolve = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
 module.exports = {
