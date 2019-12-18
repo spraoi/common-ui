@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/charts",
   "description": "Shared visualizations and charts.",
-  "version": "0.23.37",
+  "version": "0.23.43",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/charts",
   "repository": {
