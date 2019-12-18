@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CertificateArn:
+    Type: String
+    Default: arn:aws:acm:us-east-1:772499133347:certificate/f9e8907e-d095-4393-9ed2-4f52b7e9d711
+  HostedZoneName:
+    Type: String
+    Default: spraoi.ai.
+  HostedZoneId:
+    Type: String
+    Default: Z2FDTNDATAQYW2
+  From:
+    Type: String
+  To:
+    Type: String
+Outputs:
+  CloudFrontDomain:
+    Value: !GetAtt CloudFront.DomainName
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref From
+      WebsiteConfiguration:
+        RedirectAllRequestsTo:
+          HostName: !Ref To
+          Protocol: https
+  CloudFront:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref From
+        Enabled: True
+        Origins:
+          - DomainName: !Select [1, !Split ['//', !GetAtt Bucket.WebsiteURL]]
+            Id: origin
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+        DefaultCacheBehavior:
+          TargetOriginId: origin
+          DefaultTTL: 5
+          MaxTTL: 30
+          ForwardedValues:
+            QueryString: false
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+  Dns:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: !Ref HostedZoneName
+      RecordSets:
+        - Name: !Ref From
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt CloudFront.DomainName
+            HostedZoneId: !Ref HostedZoneId
+        - Name: !Ref From
+          Type: AAAA
+          AliasTarget:
+            DNSName: !GetAtt CloudFront.DomainName
+            HostedZoneId: !Ref HostedZoneId

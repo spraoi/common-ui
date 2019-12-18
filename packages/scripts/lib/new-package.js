@@ -9,7 +9,7 @@ const packageDir = 'packages';
 const testsDir = '__tests__';
 const templateDir = 'new-package-templates';
 
-async function askisComponent() {
+async function askIsComponent() {
   const answer = await ask('is this a react component? (y/n): ');
   return /^(y|yes)$/.test(answer);
 }
@@ -95,7 +95,7 @@ function createPackageJson(data) {
 }
 
 module.exports = async function newPackage() {
-  const isComponent = await askisComponent();
+  const isComponent = await askIsComponent();
   const componentName = isComponent ? await askComponentName() : null;
   const name = await askPackageName();
   const packageName = `@spraoi/${name}`;

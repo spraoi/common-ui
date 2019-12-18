@@ -1,0 +1,96 @@
+{
+  "Parameters": {
+    "LambdaTimeout": {
+      "Type": "Number",
+      "Default": 300
+    }
+  },
+  "Resources": {
+    "CustomResource": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": ["CustomResourceRole", "Arn"]
+        },
+        "Code": {
+          "ZipFile": "const AWS = require('aws-sdk'),\n\tjmespath = require('jmespath'),\n\tquerystring = require('querystring'),\n\tcrypto = require('crypto'),\n\thttps = require(\"https\"),\n\turl = require(\"url\");\n\nlet pid = 'PhysicalResourceId', rp = 'ResourceProperties';\nexports.handler = (ev, ctx, cb) => {\n\tconsole.log(JSON.stringify(Object.assign({}, ev, {\n\t\tResourceProperties: null,\n\t\tOldResourceProperties: null,\n\t})));\n\tlet rand = random();\n\tev[rp] = fixBooleans(ev[rp], ev.RequestType !== 'Create' ? ev[pid] : fixBooleans(ev[rp][pid], null, rand), rand);\n\tlet args = ev[rp][ev.RequestType];\n\tif (!args) args = ev.RequestType === 'Delete' ? {} : ev[rp]['Create'];\n\t['Attributes', pid, 'PhysicalResourceIdQuery', 'Parameters'].forEach(attr =>\n\t\targs[attr] = args[attr] || ev[rp][attr]\n\t);\n\tif (ev.RequestType === 'Delete') {\n\t\trequest(args, ev, ctx, () => response.send(ev, ctx, 'SUCCESS', {}, ev[pid]));\n\t} else if (ev.RequestType === 'Create' || ev.RequestType === 'Update') {\n\t\trequest(args, ev, ctx, function(data) {\n\t\t\tlet props = ev[rp][ev.RequestType] || ev[rp]['Create'];\n\t\t\tif (props.PhysicalResourceIdQuery) ev[pid] = jmespath.search(data, props.PhysicalResourceIdQuery);\n\t\t\tif (props[pid]) ev[pid] = props[pid];\n\t\t\tif (props.Attributes) data = jmespath.search(data, props.Attributes);\n\t\t\tresponse.send(ev, ctx, 'SUCCESS', data, ev[pid]);\n\t\t});\n\t}\n};\n\nfunction random() {\n\treturn crypto.randomBytes(6).toString('base64').replace(/[\\+=\\/]/g, '').toUpperCase();\n}\n\nfunction fixBooleans(obj, id, rand) {\n\tif (Array.isArray(obj)) return obj.map(item => fixBooleans(item, id, rand));\n\telse if (typeof obj === 'object') {\n\t\tfor (let key in obj) obj[key] = fixBooleans(obj[key], id, rand);\n\t\treturn obj;\n\t} else if (typeof obj === 'string') {\n\t\tobj = obj === 'true' ? true : obj === 'false' ? false : obj === 'null' ? null : obj.replace(/\\${Random}/, rand);\n\t\tif (typeof obj === 'string' && id) obj = obj.replace(/\\${Physical(Resource)?Id}/, id);\n\t\treturn obj;\n\t} else return obj;\n}\n\nfunction b64ify(obj) {\n\tif (Buffer.isBuffer(obj))\n\t\treturn obj.toString('base64');\n\telse if (Array.isArray(obj)) return obj.map(item => b64ify(item));\n\telse if (typeof obj === 'object') {\n\t\tfor (let key in obj) obj[key] = b64ify(obj[key]);\n\t\treturn obj;\n\t} else return obj;\n}\n\n\nfunction request(args, ev, ctx, cb) {\n\tif (ev.RequestType === 'Delete' && !args.Action) return cb();\n\tlet creds = AWS.config.credentials;\n\tcreds.getPromise().then(() => {\n\t\tif(ev[rp].RoleArn) creds = new AWS.TemporaryCredentials({\n\t\t\tRoleArn: ev[rp].RoleArn,\n\t\t});\n\t\tlet client = new AWS[ev[rp].Service]({\n\t\t\tcredentials: creds,\n\t\t\tregion: ev[rp].Region || AWS.config.region,\n\t\t});\n\t\tclient[args.Action](args.Parameters, (err, data) => {\n\t\t\tif (err && args.IgnoreErrors !== true) {\n\t\t\t\tresponse.send(ev, ctx, 'FAILED', err, ev[pid]);\n\t\t\t} else cb(data);\n\t\t});\n\t})\n}\n\nlet response = {\n\tbody: function(ev, ctx, responseStatus, resData, pId) {\n\t\tlet body = {\n\t\t\tStatus: responseStatus,\n\t\t\tReason: resData instanceof Error ? resData.toString() : '',\n\t\t\tPhysicalResourceId: pId || ev.RequestId,\n\t\t\tStackId: ev.StackId,\n\t\t\tRequestId: ev.RequestId,\n\t\t\tLogicalResourceId: ev.LogicalResourceId,\n\t\t\tData: responseStatus === 'FAILED' ? null : b64ify(resData),\n\t\t}\n\t\tif (JSON.stringify(body).length > 4096) {\n\t\t\tconsole.log('truncated responseData as it exceeded 4096 bytes');\n\t\t\treturn Object.assign(body, {\n\t\t\t\tData: null\n\t\t\t});\n\t\t} else { return body }\n\t},\n\tsend: function(ev, ctx) {\n\t\tlet responseBody = response.body.apply(this, arguments);\n\t\tconsole.log('Response', JSON.stringify(Object.assign({}, responseBody, {\n\t\t\tData: null\n\t\t})));\n\n\t\tvar parsed = url.parse(ev.ResponseURL);\n\t\thttps.request({\n\t\t\thostname: parsed.hostname,\n\t\t\tpath: parsed.path,\n\t\t\tmethod: 'PUT',\n\t\t}, res => () => ctx.done()).on(\"error\", function(error) {\n\t\t\tconsole.log(error);\n\t\t\tctx.done();\n\t\t}).end(JSON.stringify(responseBody));\n\t},\n};\n"
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": {
+          "Ref": "LambdaTimeout"
+        }
+      }
+    },
+    "CustomResourceLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "RetentionInDays": 7,
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${CustomResource}"
+        }
+      }
+    },
+    "CustomResourceRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "ServiceToken": {
+      "Value": {
+        "Fn::GetAtt": ["CustomResource", "Arn"]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}:ServiceToken"
+        }
+      }
+    },
+    "Role": {
+      "Value": {
+        "Ref": "CustomResourceRole"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}:Role"
+        }
+      }
+    },
+    "RoleArn": {
+      "Value": {
+        "Fn::GetAtt": ["CustomResourceRole", "Arn"]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}:RoleArn"
+        }
+      }
+    },
+    "TemplateName": {
+      "Value": "TEMPLATE_NAME_REPLACE"
+    },
+    "TemplateVersion": {
+      "Value": "TEMPLATE_GIT_VERSION_REPLACE"
+    },
+    "TemplateBuildDate": {
+      "Value": "TEMPLATE_BUILD_DATE_REPLACE"
+    }
+  }
+}

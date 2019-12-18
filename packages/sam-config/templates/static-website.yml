@@ -1,0 +1,96 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CertificateArn:
+    Type: String
+    Default: arn:aws:acm:us-east-1:772499133347:certificate/f9e8907e-d095-4393-9ed2-4f52b7e9d711
+  DomainName:
+    Type: String
+    Default: spraoi.ai
+  FullDomainName:
+    Type: String
+  HostedZoneId:
+    Type: String
+    Default: Z19KBYFZ06RQQ6
+  NotFoundCode:
+    Type: String
+    Default: 200
+  NotFoundPath:
+    Type: String
+    Default: /index.html
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: !Ref FullDomainName
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Bucket
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Principal: '*'
+            Resource: !Sub arn:aws:s3:::${Bucket}/*
+            Sid: PublicReadGetObject
+  Cloudfront:
+    Type: AWS::CloudFront::Distribution
+    DependsOn:
+      - Bucket
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref FullDomainName
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 404
+            ResponseCode: !Ref NotFoundCode
+            ResponsePagePath: !Ref NotFoundPath
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+          Compress: true
+          ForwardedValues:
+            QueryString: true
+            Cookies:
+              Forward: none
+          TargetOriginId: Origin
+          ViewerProtocolPolicy: redirect-to-https
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: http2
+        IPV6Enabled: true
+        Origins:
+          - DomainName: !Select [2, !Split ['/', !GetAtt Bucket.WebsiteURL]]
+            Id: Origin
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+  Dns:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: !Sub ${DomainName}.
+      RecordSets:
+        - Name: !Ref FullDomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt Cloudfront.DomainName
+            HostedZoneId: Z2FDTNDATAQYW2
+        - Name: !Ref FullDomainName
+          Type: AAAA
+          AliasTarget:
+            DNSName: !GetAtt Cloudfront.DomainName
+            HostedZoneId: Z2FDTNDATAQYW2
+Outputs:
+  BucketUrl:
+    Value: !Sub s3://${Bucket}
+  CloudFrontDistributionId:
+    Value: !Ref Cloudfront
