@@ -33,6 +33,7 @@ const Tabs = ({ defaultTab, name, tabs, type, ...rest }) => (
             <TabDropdown
               currentTab={currentTab}
               generateLink={generateLink}
+              name={name}
               tabs={tabs}
               {...rest}
             />

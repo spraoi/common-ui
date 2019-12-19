@@ -44,8 +44,7 @@ const Carousel = ({
       <GlobalStyle />
       <ParentSize>
         {({ width }) => {
-          const slideWidth = itemWidth + offset;
-          const slidesPerPage = Math.floor(width / slideWidth) - 1;
+          const slidesPerPage = Math.floor(width / itemWidth) - 1;
           const previousPage = Math.max(value - 1, 0);
           const overflow = slides.length / slidesPerPage;
           const availablePages = overflow === 1 ? 0 : Math.floor(overflow);
@@ -75,16 +74,6 @@ const Carousel = ({
                   display="flex"
                   width="100%"
                 >
-                  {i !== 0 && (
-                    <Box
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="center"
-                      width={offset}
-                    >
-                      {offsetContent || ' '}
-                    </Box>
-                  )}
                   <Box
                     onClick={() => onSlideClick(i)}
                     sx={{
@@ -110,6 +99,16 @@ const Carousel = ({
                   >
                     {slide}
                   </Box>
+                  <Box
+                    alignItems="center"
+                    display="flex"
+                    justifyContent="center"
+                    width={offset}
+                  >
+                    {offsetContent && i < slides.length - 1
+                      ? offsetContent
+                      : ' '}
+                  </Box>
                 </Box>
               ))}
             </Box>
@@ -124,7 +123,7 @@ Carousel.propTypes = {
   activeSlideIndex: PropTypes.number,
   itemWidth: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
-  offsetContent: null,
+  offsetContent: PropTypes.node,
   onSlideClick: PropTypes.func,
   renderArrowLeft: PropTypes.func.isRequired,
   renderArrowRight: PropTypes.func.isRequired,
