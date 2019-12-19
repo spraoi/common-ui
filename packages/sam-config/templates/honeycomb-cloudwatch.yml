@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+  FilterPattern:
+    Type: String
+    Default: ''
+  HoneycombAPIHost:
+    Type: String
+    Default: https://api.honeycomb.io
+  HoneycombSampleRate:
+    Type: Number
+    Default: 1
+  KMSKeyId:
+    Type: String
+    Default: ''
+  LogGroupName:
+    Type: String
+  TimeFieldFormat:
+    Type: String
+    Default: ''
+  TimeFieldName:
+    Type: String
+    Default: ''
+Mappings:
+  HoneycombDatasets:
+    Environment:
+      dbnqa: spraoi-dev
+      demo: spraoi-demo
+      dev2: spraoi-dev
+      dev: spraoi-dev
+      prod: spraoi-prod
+      qa: spraoi-qa
+      uat: spraoi-qa
+  HoneycombWriteKeys:
+    Environment:
+      dbnqa: d6faf0fee772f6ad84990a794bae60a3
+      demo: f78f58dd1732c15151ade7fe0c99ee4a
+      dev2: d6faf0fee772f6ad84990a794bae60a3
+      dev: d6faf0fee772f6ad84990a794bae60a3
+      prod: c721002ef873c78c9f6012986c7ae559
+      qa: f78f58dd1732c15151ade7fe0c99ee4a
+      uat: f78f58dd1732c15151ade7fe0c99ee4a
+Conditions:
+  EncryptionEnabled: !Not [!Equals [!Ref KMSKeyId, '']]
+Resources:
+  CloudwatchLambdaHandler:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: honeycomb-builds
+        S3Key: honeycombio/integrations-for-aws/LATEST/ingest-handlers.zip
+      Environment:
+        Variables:
+          API_HOST: !Ref HoneycombAPIHost
+          DATASET: !FindInMap [HoneycombDatasets, Environment, !Ref Environment]
+          ENVIRONMENT: !Ref Environment
+          HONEYCOMB_WRITE_KEY:
+            !FindInMap [HoneycombWriteKeys, Environment, !Ref Environment]
+          KMS_KEY_ID: !Ref KMSKeyId
+          PARSER_TYPE: json
+          SAMPLE_RATE: !Ref HoneycombSampleRate
+          TIME_FIELD_FORMAT: !Ref TimeFieldFormat
+          TIME_FIELD_NAME: !Ref TimeFieldName
+          thundra_lambda_warmup_warmupAware: off
+      Handler: cloudwatch-handler
+      MemorySize: 128
+      Role:
+        Fn::GetAtt:
+          - LambdaIAMRole
+          - Arn
+      Runtime: go1.x
+      Timeout: 10
+  CloudwatchLambdaHandlerLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: CloudwatchLambdaHandler
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${CloudwatchLambdaHandler}
+      RetentionInDays: 1
+  ExecutePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - CloudwatchLambdaHandler
+          - Arn
+      Principal: logs.amazonaws.com
+  CloudwatchSubscriptionFilter:
+    Type: AWS::Logs::SubscriptionFilter
+    Properties:
+      DestinationArn:
+        Fn::GetAtt:
+          - CloudwatchLambdaHandler
+          - Arn
+      LogGroupName: !Ref LogGroupName
+      FilterPattern: !Ref FilterPattern
+    DependsOn: ExecutePermission
+  LambdaIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+  LambdaLogPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: lambda-create-log
+      Roles:
+        - Ref: LambdaIAMRole
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+  LambdaKMSPolicy:
+    Type: AWS::IAM::Policy
+    Condition: EncryptionEnabled
+    Properties:
+      PolicyName: lambda-kms-decrypt
+      Roles:
+        - Ref: LambdaIAMRole
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - kms:Decrypt
+            Resource:
+              Fn::Join:
+                - ''
+                - - arn:aws:kms:*:*:key/
+                  - !Ref KMSKeyId
