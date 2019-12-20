@@ -2,22 +2,22 @@
 
 set -e
 
-REGION="us-east-1"
-S3_BUCKET="spraoi-cloudformation-templates"
-DIRECTORY="templates"
-
 while [[ $# -gt 0 ]]; do
   key="$1"
 
   case "$key" in
+    -b|--bucket) S3_BUCKET="$2" && shift && shift ;;
+    -d|--directory) DIRECTORY="$2" && shift && shift ;;
     -n|--name) NAME="$2" && shift && shift ;;
     -p|--params) PARAMS="$2" && shift && shift ;;
-    -b|--bucket) S3_BUCKET="$2" && shift && shift ;;
     -t|--template) TEMPLATE="$2" && shift && shift ;;
-    -d|--directory) DIRECTORY="$2" && shift && shift ;;
     *) shift ;;
   esac
 done
+
+DIRECTORY="${DIRECTORY:-templates}"
+REGION="us-east-1"
+S3_BUCKET="${S3_BUCKET:-spraoi-cloudformation-templates}"
 
 TEMPLATE_FILE="${DIRECTORY}/${TEMPLATE}.yml"
 TEMPLATE_PACKAGED_FILE="${DIRECTORY}/${TEMPLATE}-packaged.yml"

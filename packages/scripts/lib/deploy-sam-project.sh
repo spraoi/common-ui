@@ -2,9 +2,6 @@
 
 set -e
 
-ALLOW_HEADERS="'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-spr-user-id,x-spr-agent-id,x-spr-pool-id,x-spr-for-user-id,x-spr-survey-response-id,x-spr-business-id,x-spr-location-id,x-spr-client-id,x-spr-user-client-id,x-spr-group-id,x-spr-ge-group-id,x-spr-group-plan-id,x-customer-number'"
-S3_BUCKET="spraoi-cloudformation-templates"
-
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -18,6 +15,10 @@ while [[ $# -gt 0 ]]; do
     *) shift ;;
   esac
 done
+
+ALLOW_HEADERS="'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-spr-user-id,x-spr-agent-id,x-spr-pool-id,x-spr-for-user-id,x-spr-survey-response-id,x-spr-business-id,x-spr-location-id,x-spr-client-id,x-spr-user-client-id,x-spr-group-id,x-spr-ge-group-id,x-spr-group-plan-id,x-customer-number'"
+API_VERSION="${API_VERSION:-v1}"
+S3_BUCKET="${S3_BUCKET:-spraoi-cloudformation-templates}"
 
 if [[ -z "$ENVIRONMENT" ]]; then
   echo "ERROR: please specify an environment (-e|--environment)" 1>&2
@@ -41,8 +42,6 @@ if [[ -z "$DOMAIN" ]]; then
     DOMAIN="${TEMPLATE}-${VARIATION}.${ENVIRONMENT}.spraoi.ai"
   fi
 fi
-
-API_VERSION="${API_VERSION:-v1}"
 
 # foo-bar-baz -> Foobarbaz
 cap() {

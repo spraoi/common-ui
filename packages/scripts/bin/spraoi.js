@@ -71,12 +71,12 @@ switch (cli.input[0]) {
   case 'deploy-sam-project': {
     tryShell(
       `${__dirname}/../lib/deploy-sam-project.sh \
-        -a ${cli.flags['api-version']} \
-        -b ${cli.flags.bucket} \
-        -d ${cli.flags.domain} \
-        -e ${cli.flags.environment} \
-        -t ${cli.flags.template} \
-        -v ${cli.flags.variation}`
+        ${cli.flags['api-version'] ? `-a ${cli.flags['api-version']}` : ''} \
+        ${cli.flags.bucket ? `-b ${cli.flags.bucket}` : ''} \
+        ${cli.flags.domain ? `-d ${cli.flags.domain}` : ''} \
+        ${cli.flags.environment ? `-e ${cli.flags.environment}` : ''} \
+        ${cli.flags.template ? `-t ${cli.flags.template}` : ''} \
+        ${cli.flags.variation ? `-v ${cli.flags.variation}` : ''}`
     );
 
     break;
@@ -85,11 +85,11 @@ switch (cli.input[0]) {
   case 'deploy-sam-stack': {
     tryShell(
       `${__dirname}/../lib/deploy-sam-stack.sh \
-        -b ${cli.flags.bucket} \
-        -d ${cli.flags.directory} \
-        -e ${cli.flags.name} \
-        -t ${cli.flags.params} \
-        -v ${cli.flags.template}`
+        ${cli.flags.bucket ? `-b ${cli.flags.bucket}` : ''} \
+        ${cli.flags.directory ? `-d ${cli.flags.directory}` : ''} \
+        ${cli.flags.name ? `-n ${cli.flags.name}` : ''} \
+        ${cli.flags.params ? `-p ${cli.flags.params}` : ''} \
+        ${cli.flags.template ? `-t ${cli.flags.template}` : ''}`
     );
 
     break;
