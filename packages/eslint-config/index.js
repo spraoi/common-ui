@@ -6,6 +6,7 @@ module.exports = {
   rules: {
     'consistent-return': 'off',
     curly: ['error', 'multi-line'],
+    'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
     'no-use-before-define': 'off',
