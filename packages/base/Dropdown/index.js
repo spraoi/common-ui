@@ -6,6 +6,7 @@ import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
 import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
+import Box from '../Box';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -72,8 +73,29 @@ const getOverrideStyles = ({ error, theme }) => {
       ...base,
       backgroundColor: getBorderColor(),
     }),
-    placeholder: () => ({ color: placeholderColor }),
-    singleValue: () => ({}),
+    multiValue: base => ({
+      ...base,
+      '+ *[class*="-Input"]': {
+        position: 'static',
+      },
+    }),
+    placeholder: () => ({
+      '+ *[class*="-Input"]': {
+        position: 'absolute',
+      },
+      color: placeholderColor,
+    }),
+    singleValue: () => ({
+      '+ *[class*="-Input"]': {
+        position: 'absolute',
+      },
+      '> span > * ': {
+        display: 'none',
+      },
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    }),
     valueContainer: base => ({
       ...base,
       border: 0,
@@ -99,6 +121,15 @@ const Dropdown = ({ input, ...rest }) => {
         ...inputRest
       }) => {
         const overrideStyles = getOverrideStyles({ error, theme });
+
+        const getOptionLabel = option => (
+          <span>
+            {option.label} <br />
+            <Box color="grays.4" fontSize={2}>
+              {option.subtext}
+            </Box>
+          </span>
+        );
 
         const onChange = (value, meta) => {
           let parsedValue = '';
@@ -135,7 +166,7 @@ const Dropdown = ({ input, ...rest }) => {
             backspaceRemoves={backspaceRemoves}
             defaultOptions
             loadOptions={async query => {
-              const options = await loadOptions(query);
+              let options = await loadOptions(query);
 
               if (externalAsyncOptions) {
                 // after search add new options in state & remove duplicate
@@ -146,6 +177,18 @@ const Dropdown = ({ input, ...rest }) => {
               } else {
                 setAsyncOptions(options);
               }
+
+              // check for subtext and display if exists
+              options = options.map(option => {
+                return {
+                  label:
+                    typeof option.subtext !== 'undefined'
+                      ? getOptionLabel(option)
+                      : option.label,
+                  subtext: option.subtext,
+                  value: option.value,
+                };
+              });
 
               return options;
             }}
