@@ -9,7 +9,11 @@ const Input = ({ input, ...rest }) => (
       <Box
         as="input"
         id={input.name}
-        sx={{ borderColor: error ? 'error' : null }}
+        sx={{
+          borderColor: error ? 'error' : null,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
         variant="inputs.primary"
         width="100%"
         {...inputRest}
