@@ -61,7 +61,8 @@ const getOverrideStyles = ({ error, theme }) => {
       ...base,
       '&:hover': { border: getBorder({ isFocused }) },
       '> div': {
-        height: '100%',
+        height: 'calc(100% - 4px)',
+        margin: '2px 0',
         overflow: 'auto',
       },
       backgroundColor,
@@ -77,6 +78,9 @@ const getOverrideStyles = ({ error, theme }) => {
       ...base,
       backgroundColor: getBorderColor(),
     }),
+    input: () => ({
+      position: 'absolute',
+    }),
     multiValue: base => ({
       ...base,
       '+ *[class*="-Input"]': {
@@ -84,16 +88,10 @@ const getOverrideStyles = ({ error, theme }) => {
       },
     }),
     placeholder: () => ({
-      '+ *[class*="-Input"]': {
-        position: 'absolute',
-      },
       color: placeholderColor,
     }),
     singleValue: base => ({
       ...base,
-      '> span > *': {
-        display: 'none',
-      },
       maxWidth: 'calc(100% - 1.5rem)',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
