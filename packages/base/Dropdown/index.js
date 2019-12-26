@@ -7,6 +7,7 @@ import { ThemeContext } from 'styled-components';
 import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
 import Box from '../Box';
+import Tooltip from '../Tooltip';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -160,55 +161,73 @@ const Dropdown = ({ input, ...rest }) => {
           ? input.value.map(optionByValue)
           : optionByValue(input.value) || '';
 
-        return loadOptions ? (
-          <AsyncSelect
-            {...inputRest}
-            {...input}
-            backspaceRemoves={backspaceRemoves}
-            defaultOptions
-            loadOptions={async query => {
-              let options = await loadOptions(query);
+        const getTooltipValue = () => {
+          if (Array.isArray(input.value)) {
+            return input.value
+              .map(optionByValue)
+              .map(v => v.label)
+              .join(', ');
+          }
+          return value ? value.label : '';
+        };
 
-              if (externalAsyncOptions) {
-                // after search add new options in state & remove duplicate
-                // options from state.
-                setExternalAsyncOptions(prevOptions =>
-                  uniqBy([...prevOptions, ...options], 'value')
-                );
-              } else {
-                setAsyncOptions(options);
-              }
+        return (
+          <Tooltip
+            data-tip={`${getTooltipValue()}`}
+            data-tip-disable={!inputRest.tooltipEnabled}
+            id="dropDownTooltip"
+          >
+            {loadOptions ? (
+              <AsyncSelect
+                {...inputRest}
+                {...input}
+                backspaceRemoves={backspaceRemoves}
+                defaultOptions
+                loadOptions={async query => {
+                  let options = await loadOptions(query);
 
-              // check for subtext and display if exists
-              options = options.map(option => {
-                return {
-                  label:
-                    typeof option.subtext !== 'undefined'
-                      ? getOptionLabel(option)
-                      : option.label,
-                  subtext: option.subtext,
-                  value: option.value,
-                };
-              });
+                  if (externalAsyncOptions) {
+                    // after search add new options in state & remove duplicate
+                    // options from state.
+                    setExternalAsyncOptions(prevOptions =>
+                      uniqBy([...prevOptions, ...options], 'value')
+                    );
+                  } else {
+                    setAsyncOptions(options);
+                  }
 
-              return options;
-            }}
-            onChange={onChange}
-            placeholder={placeholder}
-            styles={overrideStyles}
-            value={value}
-          />
-        ) : (
-          <Select
-            {...inputRest}
-            {...input}
-            backspaceRemoves={backspaceRemoves}
-            defaultValue={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            styles={overrideStyles}
-            value={value}
-          />
+                  // check for subtext and display if exists
+                  options = options.map(option => {
+                    return {
+                      label:
+                        typeof option.subtext !== 'undefined'
+                          ? getOptionLabel(option)
+                          : option.label,
+                      subtext: option.subtext,
+                      value: option.value,
+                    };
+                  });
+
+                  return options;
+                }}
+                onChange={onChange}
+                placeholder={placeholder}
+                styles={overrideStyles}
+                value={value}
+              />
+            ) : (
+              <Select
+                {...inputRest}
+                {...input}
+                backspaceRemoves={backspaceRemoves}
+                defaultValue={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                styles={overrideStyles}
+                value={value}
+              />
+            )}
+          </Tooltip>
         );
       }}
     </InputWrapper>
