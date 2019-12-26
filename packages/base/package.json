@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.50",
+  "version": "0.23.51",
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.10.30",
     "@spraoi/file-upload": "^0.23.43",
