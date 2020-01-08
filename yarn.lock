@@ -7909,6 +7909,11 @@ filepond-plugin-file-rename@^1.1.1, filepond-plugin-file-rename@^1.1.4:
   resolved "https://registry.yarnpkg.com/filepond-plugin-file-rename/-/filepond-plugin-file-rename-1.1.4.tgz#6b4de094fd638cae1c62cf080ea7c695e22c1cbf"
   integrity sha512-2r1czhNLPXtJSHKZmYQTPFDwPpyrV+ClWnbmxCIthTVg6ocspalZMMxabfhc7fDz1nZMqPKByPsB+pobb4sPFA==
 
+filepond-plugin-file-validate-size@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-2.2.0.tgz#89e393e4c757c38467b8b2f7049760682d036716"
+  integrity sha512-Czlj4JLrxWRXBm50QO4rzvEVZVGfB4Gst0denBAGTKTZtuj566KB7vwDQy/daZoYtXOQdoVvfJgrJGifZ5n9KA==
+
 filepond-plugin-file-validate-type@^1.2.0, filepond-plugin-file-validate-type@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.2.4.tgz#ce7f5f469dbc7ce0da12fdef7b0f24e4c263c410"

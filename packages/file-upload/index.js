@@ -1,4 +1,5 @@
 import FilePondPluginFileRename from 'filepond-plugin-file-rename';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -42,6 +43,7 @@ class FileUpload extends PureComponent {
 
     if (typeof registerPlugin === 'function') {
       registerPlugin(FilePondPluginFileRename);
+      registerPlugin(FilePondPluginFileValidateSize);
       registerPlugin(FilePondPluginFileValidateType);
     }
   }
