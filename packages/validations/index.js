@@ -5,6 +5,13 @@ export const alpha = value => {
   if (!/^[a-z]*$/i.test(value)) return 'Must contain only letters';
 };
 
+const fileExtension = /(?:\.([^.]+))?$/;
+export const checkFileExtension = allowExtensions => value => {
+  if (!allowExtensions.includes(fileExtension.exec(value)[1])) {
+    return 'Invalid file';
+  }
+};
+
 export const composeValidations = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
