@@ -18,7 +18,6 @@ const InputWrapper = ({
 }) => {
   const error = meta.error && meta.touched ? 1 : 0;
   let below = null;
-  let validatorIcon = null;
   if (error) {
     below = (
       <Box color="error" fontSize={2} mt={1}>
@@ -29,26 +28,6 @@ const InputWrapper = ({
     below = (
       <Box fontSize={2} mt={1}>
         {subtext}
-      </Box>
-    );
-  }
-  if (indicatorIcon && meta.touched) {
-    validatorIcon = (
-      <Box
-        sx={{
-          alignItems: 'center',
-          bg: 'white',
-          color: `${error ? 'error' : 'success'}`,
-          display: 'flex',
-          height: 'calc(100% - 4px)',
-          m: '2px',
-          p: 4,
-          position: 'absolute',
-          right: '0',
-          top: '0',
-        }}
-      >
-        {indicatorIcon}
       </Box>
     );
   }
@@ -80,10 +59,27 @@ const InputWrapper = ({
           {label}
         </Box>
       )}
-      {validatorIcon ? (
+      {indicatorIcon && meta.touched ? (
         <Box sx={{ position: 'relative' }}>
           {children({ disabled, error, ...rest })}
-          {meta.touched ? validatorIcon : null}
+          {meta.touched ? (
+            <Box
+              sx={{
+                alignItems: 'center',
+                bg: 'white',
+                color: `${error ? 'error' : 'success'}`,
+                display: 'flex',
+                height: 'calc(100% - 4px)',
+                m: '2px',
+                p: 4,
+                position: 'absolute',
+                right: '0',
+                top: '0',
+              }}
+            >
+              {indicatorIcon}
+            </Box>
+          ) : null}
         </Box>
       ) : (
         children({ disabled, error, ...rest })
