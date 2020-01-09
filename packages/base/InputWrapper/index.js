@@ -6,7 +6,7 @@ const InputWrapper = ({
   children,
   dataCy,
   disabled,
-  indicatorIcon,
+  validationIcon,
   htmlFor,
   input,
   label,
@@ -59,7 +59,7 @@ const InputWrapper = ({
           {label}
         </Box>
       )}
-      {indicatorIcon && meta.touched ? (
+      {validationIcon && meta.touched ? (
         <Box sx={{ position: 'relative' }}>
           {children({ disabled, error, ...rest })}
           {meta.touched ? (
@@ -77,7 +77,7 @@ const InputWrapper = ({
                 top: '0',
               }}
             >
-              {indicatorIcon}
+              {validationIcon(error)}
             </Box>
           ) : null}
         </Box>
@@ -93,7 +93,6 @@ InputWrapper.propTypes = {
   dataCy: PropTypes.string,
   disabled: PropTypes.bool,
   htmlFor: PropTypes.string,
-  indicatorIcon: PropTypes.node,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   label: PropTypes.node,
   labelSx: PropTypes.shape({}),
@@ -102,6 +101,7 @@ InputWrapper.propTypes = {
     touched: PropTypes.bool.isRequired,
   }).isRequired,
   subtext: PropTypes.node,
+  validationIcon: PropTypes.func,
   wrapperSx: PropTypes.shape({}),
 };
 
@@ -109,10 +109,10 @@ InputWrapper.defaultProps = {
   dataCy: null,
   disabled: false,
   htmlFor: null,
-  indicatorIcon: null,
   label: null,
   labelSx: {},
   subtext: null,
+  validationIcon: () => null,
   wrapperSx: {},
 };
 
