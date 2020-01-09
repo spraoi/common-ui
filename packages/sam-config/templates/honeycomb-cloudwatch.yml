@@ -31,6 +31,7 @@ Mappings:
       dev2: spraoi-dev
       dev: spraoi-dev
       dexdev: spraoi-dexdev
+      dexqa: spraoi-dexqa
       prod: spraoi-prod
       qa: spraoi-qa
       uat: spraoi-qa
@@ -41,6 +42,7 @@ Mappings:
       dev2: d6faf0fee772f6ad84990a794bae60a3
       dev: d6faf0fee772f6ad84990a794bae60a3
       dexdev: d6faf0fee772f6ad84990a794bae60a3
+      dexqa: f78f58dd1732c15151ade7fe0c99ee4a
       prod: c721002ef873c78c9f6012986c7ae559
       qa: f78f58dd1732c15151ade7fe0c99ee4a
       uat: f78f58dd1732c15151ade7fe0c99ee4a
