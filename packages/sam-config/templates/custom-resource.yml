@@ -10,7 +10,35 @@ Resources:
       Handler: index.handler
       Role: !GetAtt CustomResourceRole.Arn
       Code:
-        ZipFile: const AWS=require("aws-sdk"),querystring=require("querystring"),crypto=require("crypto"),https=require("https"),url=require("url");let pid="PhysicalResourceId",rp="ResourceProperties";function get(e,r,t){return(Array.isArray(r)?r:r.split(".").filter(e=>e)).flatMap(e=>"string"==typeof e?e.split("."):e).reduce((e,r)=>e&&e[r],e)||t}function random(){return crypto.randomBytes(6).toString("base64").replace(/[\+=\/]/g,"").toUpperCase()}function fixBooleans(e,r,t){if(Array.isArray(e))return e.map(e=>fixBooleans(e,r,t));if("object"==typeof e){for(let s in e)e[s]=fixBooleans(e[s],r,t);return e}return"string"==typeof e?("string"==typeof(e="true"===e||"false"!==e&&("null"===e?null:e.replace(/\${Random}/,t)))&&r&&(e=e.replace(/\${Physical(Resource)?Id}/,r)),e):e}function b64ify(e){if(Buffer.isBuffer(e))return e.toString("base64");if(Array.isArray(e))return e.map(e=>b64ify(e));if("object"==typeof e){for(let r in e)e[r]=b64ify(e[r]);return e}return e}function request(e,r,t,s){if("Delete"===r.RequestType&&!e.Action)return s();let n=AWS.config.credentials;n.getPromise().then(()=>{r[rp].RoleArn&&(n=new AWS.TemporaryCredentials({RoleArn:r[rp].RoleArn})),new AWS[r[rp].Service]({credentials:n,region:r[rp].Region||AWS.config.region})[e.Action](e.Parameters,(n,o)=>{n&&!0!==e.IgnoreErrors?response.send(r,t,"FAILED",n,r[pid]):s(o)})})}exports.handler=((e,r,t)=>{console.log(JSON.stringify(Object.assign({},e,{ResourceProperties:null,OldResourceProperties:null})));let s=random();e[rp]=fixBooleans(e[rp],"Create"!==e.RequestType?e[pid]:fixBooleans(e[rp][pid],null,s),s);let n=e[rp][e.RequestType];n||(n="Delete"===e.RequestType?{}:e[rp].Create),["Attributes",pid,"PhysicalResourceIdQuery","Parameters"].forEach(r=>n[r]=n[r]||e[rp][r]),"Delete"===e.RequestType?request(n,e,r,()=>response.send(e,r,"SUCCESS",{},e[pid])):"Create"!==e.RequestType&&"Update"!==e.RequestType||request(n,e,r,function(t){let s=e[rp][e.RequestType]||e[rp].Create;s.PhysicalResourceIdQuery&&(e[pid]=get(t,s.PhysicalResourceIdQuery)),s[pid]&&(e[pid]=s[pid]),s.Attributes&&(t=get(t,s.Attributes)),response.send(e,r,"SUCCESS",t,e[pid])})});let response={body:function(e,r,t,s,n){let o={Status:t,Reason:s instanceof Error?s.toString():"",PhysicalResourceId:n||e.RequestId,StackId:e.StackId,RequestId:e.RequestId,LogicalResourceId:e.LogicalResourceId,Data:"FAILED"===t?null:b64ify(s)};return JSON.stringify(o).length>4096?(console.log("truncated responseData as it exceeded 4096 bytes"),Object.assign(o,{Data:null})):o},send:function(e,r){let t=response.body.apply(this,arguments);console.log("Response",JSON.stringify(Object.assign({},t,{Data:null})));var s=url.parse(e.ResponseURL);https.request({hostname:s.hostname,path:s.path,method:"PUT"},e=>()=>r.done()).on("error",function(e){console.log(e),r.done()}).end(JSON.stringify(t))}};
+        ZipFile:
+          const
+          AWS=require("aws-sdk"),querystring=require("querystring"),crypto=require("crypto"),https=require("https"),url=require("url");let
+          pid="PhysicalResourceId",rp="ResourceProperties";function
+          get(e,r,t){return(Array.isArray(r)?r:r.split(".").filter(e=>e)).flatMap(e=>"string"==typeof
+          e?e.split("."):e).reduce((e,r)=>e&&e[r],e)||t}function random(){return
+          crypto.randomBytes(6).toString("base64").replace(/[\+=\/]/g,"").toUpperCase()}function
+          fixBooleans(e,r,t){if(Array.isArray(e))return
+          e.map(e=>fixBooleans(e,r,t));if("object"==typeof e){for(let s in
+          e)e[s]=fixBooleans(e[s],r,t);return e}return"string"==typeof
+          e?("string"==typeof(e="true"===e||"false"!==e&&("null"===e?null:e.replace(/\${Random}/,t)))&&r&&(e=e.replace(/\${Physical(Resource)?Id}/,r)),e):e}function
+          b64ify(e){if(Buffer.isBuffer(e))return
+          e.toString("base64");if(Array.isArray(e))return
+          e.map(e=>b64ify(e));if("object"==typeof e){for(let r in
+          e)e[r]=b64ify(e[r]);return e}return e}function
+          request(e,r,t,s){if("Delete"===r.RequestType&&!e.Action)return s();let
+          n=AWS.config.credentials;n.getPromise().then(()=>{r[rp].RoleArn&&(n=new
+          AWS.TemporaryCredentials({RoleArn:r[rp].RoleArn})),new
+          AWS[r[rp].Service]({credentials:n,region:r[rp].Region||AWS.config.region})[e.Action](e.Parameters,(n,o)=>{n&&!0!==e.IgnoreErrors?response.send(r,t,"FAILED",n,r[pid]):s(o)})})}exports.handler=((e,r,t)=>{console.log(JSON.stringify(Object.assign({},e,{ResourceProperties:null,OldResourceProperties:null})));let
+          s=random();e[rp]=fixBooleans(e[rp],"Create"!==e.RequestType?e[pid]:fixBooleans(e[rp][pid],null,s),s);let
+          n=e[rp][e.RequestType];n||(n="Delete"===e.RequestType?{}:e[rp].Create),["Attributes",pid,"PhysicalResourceIdQuery","Parameters"].forEach(r=>n[r]=n[r]||e[rp][r]),"Delete"===e.RequestType?request(n,e,r,()=>response.send(e,r,"SUCCESS",{},e[pid])):"Create"!==e.RequestType&&"Update"!==e.RequestType||request(n,e,r,function(t){let
+          s=e[rp][e.RequestType]||e[rp].Create;s.PhysicalResourceIdQuery&&(e[pid]=get(t,s.PhysicalResourceIdQuery)),s[pid]&&(e[pid]=s[pid]),s.Attributes&&(t=get(t,s.Attributes)),response.send(e,r,"SUCCESS",t,e[pid])})});let
+          response={body:function(e,r,t,s,n){let o={Status:t,Reason:s instanceof
+          Error?s.toString():"",PhysicalResourceId:n||e.RequestId,StackId:e.StackId,RequestId:e.RequestId,LogicalResourceId:e.LogicalResourceId,Data:"FAILED"===t?null:b64ify(s)};return
+          JSON.stringify(o).length>4096?(console.log("truncated responseData as
+          it exceeded 4096
+          bytes"),Object.assign(o,{Data:null})):o},send:function(e,r){let
+          t=response.body.apply(this,arguments);console.log("Response",JSON.stringify(Object.assign({},t,{Data:null})));var
+          s=url.parse(e.ResponseURL);https.request({hostname:s.hostname,path:s.path,method:"PUT"},e=>()=>r.done()).on("error",function(e){console.log(e),r.done()}).end(JSON.stringify(t))}};
       Runtime: nodejs12.x
       Timeout: !Ref LambdaTimeout
   CustomResourceLogGroup:
