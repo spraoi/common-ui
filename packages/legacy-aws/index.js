@@ -69,6 +69,7 @@ export async function callApi({
   } else {
     const queryString = buildCanonicalQueryString(queryParams);
     endpoint = `${awsConfig.apiGateway.url}${path}?${queryString}`;
+    headers['content-type'] = headers['content-type'] || 'application/json'; // Add content type when the request is unsigned
   }
   let results = await fetch(endpoint, {
     method,
