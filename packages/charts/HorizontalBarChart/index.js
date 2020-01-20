@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import Tooltip from '@spraoi/base/Tooltip';
+import { TooltipBox } from '@spraoi/base/Tooltip';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { Bar } from '@vx/shape';
 import { GridColumns } from '@vx/grid';
@@ -84,7 +84,7 @@ const HorizontalBarChart = ({ data, margin, xAccessor, yAccessor }) => {
                 />
               </Group>
             </svg>
-            <Tooltip id="chart" />
+            <TooltipBox id="chart" />
           </>
         );
       }}
