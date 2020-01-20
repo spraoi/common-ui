@@ -93,14 +93,16 @@ const Modal = ({
           p: 5,
         }}
       >
-        <Button
-          disabled={submitting}
-          onClick={onClose}
-          variant="buttons.cancel"
-        >
-          {closeText}
-        </Button>
-        {onSubmit && (
+        {closeText && (
+          <Button
+            disabled={submitting}
+            onClick={onClose}
+            variant="buttons.cancel"
+          >
+            {closeText}
+          </Button>
+        )}
+        {onSubmit && submitText && (
           <Button ml={5} onClick={onSubmit} submitting={submitting}>
             {submitText}
           </Button>
@@ -125,10 +127,10 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  closeText: 'Cancel',
+  closeText: null,
   onSubmit: null,
   style: {},
-  submitText: 'Ok',
+  submitText: null,
   submitting: false,
   title: null,
 };

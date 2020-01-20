@@ -13,9 +13,9 @@ describe('Modal component', () => {
     expect(getByText('foo')).toBeInTheDocument();
   });
 
-  it('renders a submit button with default text', () => {
+  it('renders a submit button with defined text', () => {
     const { getByText } = render(
-      <Modal isOpen onClose={() => {}} onSubmit={() => {}}>
+      <Modal isOpen onClose={() => {}} onSubmit={() => {}} submitText="Ok">
         foo
       </Modal>
     );
@@ -25,36 +25,17 @@ describe('Modal component', () => {
 
   it('disables cancel button when submitting', () => {
     const { getByText } = render(
-      <Modal isOpen onClose={() => {}} onSubmit={() => {}} submitting>
-        foo
-      </Modal>
-    );
-
-    expect(getByText('Cancel')).toBeDisabled();
-  });
-
-  it('has customizable close text', () => {
-    const { getByText } = render(
-      <Modal closeText="fooClose" isOpen onClose={() => {}}>
-        foo
-      </Modal>
-    );
-
-    expect(getByText('fooClose')).toBeEnabled();
-  });
-
-  it('has customizable submit text', () => {
-    const { getByText } = render(
       <Modal
+        closeText="Cancel"
         isOpen
         onClose={() => {}}
         onSubmit={() => {}}
-        submitText="fooSubmit"
+        submitting
       >
         foo
       </Modal>
     );
 
-    expect(getByText('fooSubmit')).toBeEnabled();
+    expect(getByText('Cancel')).toBeDisabled();
   });
 });
