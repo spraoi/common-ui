@@ -34,6 +34,6 @@
     "lodash": "^4",
     "prop-types": "^15",
     "react": "^16",
-    "styled-components": "^4"
+    "styled-components": "^5"
   }
 }

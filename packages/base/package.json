@@ -46,7 +46,7 @@
     "react-final-form": "^6",
     "react-final-form-listeners": "^1",
     "react-spinners": "^0",
-    "styled-components": "^4"
+    "styled-components": "^5"
   },
   "publishConfig": {
     "access": "public"

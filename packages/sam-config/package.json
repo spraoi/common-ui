@@ -13,7 +13,7 @@
   },
   "peerDependencies": {
     "@rollup/plugin-json": "^4",
-    "@rollup/plugin-node-resolve": "^6",
+    "@rollup/plugin-node-resolve": "^7",
     "rollup": "^1",
     "rollup-plugin-babel": "^4",
     "rollup-plugin-commonjs": "^10",
