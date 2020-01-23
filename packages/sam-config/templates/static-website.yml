@@ -17,6 +17,11 @@ Parameters:
   NotFoundPath:
     Type: String
     Default: /index.html
+  EnableDnsRecords:
+    Type: String
+    Default: true
+Conditions:
+  DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
@@ -76,6 +81,7 @@ Resources:
           SslSupportMethod: sni-only
   Dns:
     Type: AWS::Route53::RecordSetGroup
+    Condition: DnsRecordsEnabled
     Properties:
       HostedZoneName: !Sub ${DomainName}.
       RecordSets:
