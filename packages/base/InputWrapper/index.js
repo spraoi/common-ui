@@ -16,8 +16,9 @@ const InputWrapper = ({
   wrapperSx,
   ...rest
 }) => {
-  const error = meta.error && meta.touched ? 1 : 0;
+  const error = meta.error && meta.touched;
   let below = null;
+
   if (error) {
     below = (
       <Box color="error" fontSize={2} mt={1}>
@@ -31,6 +32,7 @@ const InputWrapper = ({
       </Box>
     );
   }
+
   return (
     <Box
       data-cy={dataCy}
@@ -52,7 +54,11 @@ const InputWrapper = ({
             color: 'text.subtle',
             cursor: 'pointer',
             display: 'block',
+            fontSize: 2,
+            fontWeight: 'bold',
+            letterSpacing: 0,
             mb: 1,
+            textTransform: 'uppercase',
             ...labelSx,
           }}
         >
@@ -88,6 +94,7 @@ const InputWrapper = ({
     </Box>
   );
 };
+
 InputWrapper.propTypes = {
   children: PropTypes.func.isRequired,
   dataCy: PropTypes.string,
