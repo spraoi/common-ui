@@ -16,5 +16,8 @@
     "moment": "^2",
     "query-string": "^6",
     "react": "^16"
+  },
+  "dependencies": {
+    "humanize-duration": "^3.21.0"
   }
 }
