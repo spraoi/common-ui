@@ -77,7 +77,6 @@ const InputWrapper = ({
                 display: 'flex',
                 height: 'calc(100% - 4px)',
                 m: '2px',
-                p: 4,
                 position: 'absolute',
                 right: '0',
                 top: '0',
