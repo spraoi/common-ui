@@ -6,9 +6,11 @@ const InputWrapper = ({
   children,
   dataCy,
   disabled,
+  errorSx,
   validationIcon,
   htmlFor,
   input,
+  inputWrapperSx,
   label,
   labelSx,
   meta,
@@ -21,7 +23,14 @@ const InputWrapper = ({
 
   if (error) {
     below = (
-      <Box color="error" fontSize={2} mt={1}>
+      <Box
+        sx={{
+          color: 'error',
+          fontSize: 2,
+          mt: 1,
+          ...errorSx,
+        }}
+      >
         {meta.error}
       </Box>
     );
@@ -66,7 +75,7 @@ const InputWrapper = ({
         </Box>
       )}
       {validationIcon && meta.touched ? (
-        <Box sx={{ position: 'relative' }}>
+        <Box sx={{ position: 'relative', ...inputWrapperSx }}>
           {children({ disabled, error, ...rest })}
           {meta.touched ? (
             <Box
@@ -98,8 +107,10 @@ InputWrapper.propTypes = {
   children: PropTypes.func.isRequired,
   dataCy: PropTypes.string,
   disabled: PropTypes.bool,
+  errorSx: PropTypes.shape({}),
   htmlFor: PropTypes.string,
   input: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+  inputWrapperSx: PropTypes.shape({}),
   label: PropTypes.node,
   labelSx: PropTypes.shape({}),
   meta: PropTypes.shape({
@@ -114,7 +125,9 @@ InputWrapper.propTypes = {
 InputWrapper.defaultProps = {
   dataCy: null,
   disabled: false,
+  errorSx: {},
   htmlFor: null,
+  inputWrapperSx: {},
   label: null,
   labelSx: {},
   subtext: null,
