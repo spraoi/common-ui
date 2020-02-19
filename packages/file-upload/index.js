@@ -101,7 +101,7 @@ class FileUpload extends PureComponent {
     const { bucket, customPrefix, level, onRemoveComplete } = this.props;
 
     Storage.remove(name, { bucket, customPrefix, level })
-      .then(onRemoveComplete)
+      .then(onRemoveComplete({ name }))
       .catch(error);
   };
 
@@ -136,7 +136,7 @@ FileUpload.propTypes = {
     protected: PropTypes.string,
     public: PropTypes.string,
   }),
-  error: PropTypes.oneOf([0, 1]),
+  error: PropTypes.bool,
   existingFiles: PropTypes.arrayOf(PropTypes.string),
   identityId: PropTypes.string,
   level: PropTypes.string,
@@ -147,7 +147,7 @@ FileUpload.propTypes = {
 FileUpload.defaultProps = {
   bucket: null,
   customPrefix: { private: '', protected: '', public: '' },
-  error: 0,
+  error: false,
   existingFiles: [],
   identityId: null,
   level: 'public',
