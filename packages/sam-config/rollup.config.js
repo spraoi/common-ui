@@ -7,7 +7,6 @@ const { terser } = require('rollup-plugin-terser');
 module.exports = {
   external: [
     'assert',
-    'aws-sdk',
     'buffer',
     'child_process',
     'crypto',
@@ -33,7 +32,14 @@ module.exports = {
   onwarn: warning => {
     // silence circular dependency warnings in packages we don't control
     // https://github.com/rollup/rollup/issues/1089
-    if (warning.importer && !warning.importer.indexOf('node_modules/moment/')) {
+    if (
+      warning.importer &&
+      [
+        'node_modules/aws-sdk/',
+        'node_modules/moment/',
+        'node_modules/xmlbuilder/',
+      ].some(search => warning.importer.indexOf(search))
+    ) {
       return;
     }
 
@@ -46,7 +52,7 @@ module.exports = {
       babelrc: false,
       exclude: ['node_modules/**'],
       presets: [
-        ['@babel/preset-env', { modules: false, targets: { node: '8.10' } }],
+        ['@babel/preset-env', { modules: false, targets: { node: '12.16.1' } }],
       ],
     }),
     commonjs(),
