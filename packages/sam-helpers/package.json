@@ -14,11 +14,13 @@
   "peerDependencies": {
     "@spraoi/helpers": "*",
     "aws-sdk": "^2",
-    "follow-redirects": "^1",
-    "jsonwebtoken": "^8",
-    "lambda-warmer": "^1",
     "lodash": "^4",
-    "rasha": "^1",
     "uuid": "^7"
+  },
+  "dependencies": {
+    "follow-redirects": "^1.10.0",
+    "jsonwebtoken": "^8.5.1",
+    "lambda-warmer": "^1.2.1",
+    "rasha": "^1.2.5"
   }
 }
