@@ -12,11 +12,11 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@rollup/plugin-commonjs": "^11",
     "@rollup/plugin-json": "^4",
     "@rollup/plugin-node-resolve": "^7",
     "rollup": "^1",
     "rollup-plugin-babel": "^4",
-    "rollup-plugin-commonjs": "^10",
     "rollup-plugin-terser": "^5"
   }
 }
