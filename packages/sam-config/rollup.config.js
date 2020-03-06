@@ -7,6 +7,7 @@ const { terser } = require('rollup-plugin-terser');
 module.exports = {
   external: [
     'assert',
+    'aws-sdk',
     'buffer',
     'child_process',
     'crypto',
@@ -34,11 +35,7 @@ module.exports = {
     // https://github.com/rollup/rollup/issues/1089
     if (
       warning.importer &&
-      [
-        'node_modules/aws-sdk/',
-        'node_modules/moment/',
-        'node_modules/xmlbuilder/',
-      ].some(search => warning.importer.indexOf(search))
+      ['node_modules/moment/'].some(search => warning.importer.indexOf(search))
     ) {
       return;
     }
