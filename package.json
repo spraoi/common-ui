@@ -7,7 +7,7 @@
     "lint": "yarn lint:js && yarn lint:styles",
     "lint:js": "eslint --ignore-path .gitignore --ignore-pattern \"packages/legacy-*\" \"packages/**/*.js\"",
     "lint:styles": "stylelint --ignore-path .gitignore \"packages/**/*.js\"",
-    "release": "yarn lint && yarn test && lerna publish",
+    "release": "lerna publish",
     "test": "jest --ci --runInBand",
     "test:watch": "jest --watch"
   },
