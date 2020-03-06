@@ -4,7 +4,7 @@ import DateRange from '@wojtekmaj/react-daterange-picker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { themeVariantToValue } from '@spraoi/helpers';
+import themeVariantToValue from '@spraoi/helpers/theme-variant-to-value';
 import InputWrapper from '../InputWrapper';
 
 const DatePickerWrapper = styled(InputWrapper)`

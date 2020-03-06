@@ -1,8 +1,8 @@
 import Amplify, { Auth } from 'aws-amplify';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import objectMapKeysDeep from '@spraoi/helpers/object-map-deep';
 import { camelCase } from 'change-case';
-import { objectMapKeysDeep } from '@spraoi/helpers';
 import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './utilities/constants';
 

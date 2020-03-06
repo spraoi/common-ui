@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import generateRedirectPath from '@spraoi/helpers/generate-redirect-path';
 import get from 'lodash/get';
 import { Location } from '@reach/router';
-import { generateRedirectPath } from '@spraoi/helpers';
 import { parse } from 'query-string';
 import TabCarousel from './TabCarousel';
 import TabDropdown from './TabDropdown';

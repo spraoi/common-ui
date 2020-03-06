@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import ReactAutocomplete from 'react-autocomplete';
+import themeVariantToValue from '@spraoi/helpers/theme-variant-to-value';
 import { ThemeContext } from 'styled-components';
-import { themeVariantToValue } from '@spraoi/helpers';
 import Box from '../Box';
 import InputWrapper from '../InputWrapper';
 

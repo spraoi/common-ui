@@ -1,0 +1,24 @@
+{
+  "name": "@spraoi/sam-helpers",
+  "description": "Helper functions that can only run in a Node.js/SAM environment.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/sam-helpers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spraoi/common-ui.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@spraoi/helpers": "*",
+    "aws-sdk": "^2",
+    "follow-redirects": "^1",
+    "jsonwebtoken": "^8",
+    "lambda-warmer": "^1",
+    "lodash": "^4",
+    "rasha": "^1",
+    "uuid": "^7"
+  }
+}

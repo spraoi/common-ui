@@ -2,9 +2,9 @@ import AsyncSelect from 'react-select/async';
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import Select from 'react-select';
+import themeVariantToValue from '@spraoi/helpers/theme-variant-to-value';
 import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
-import { themeVariantToValue } from '@spraoi/helpers';
 import InputWrapper from '../InputWrapper';
 import Box from '../Box';
 
