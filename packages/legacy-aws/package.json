@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/legacy-aws",
   "description": "Adapter for commonly used AWS things.",
-  "version": "0.23.60",
+  "version": "0.24.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/legacy-aws",
   "repository": {

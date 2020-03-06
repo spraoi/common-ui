@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.55",
+  "version": "0.24.0",
   "dependencies": {
     "validator": "^11.1.0"
   },

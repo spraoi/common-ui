@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/babel-preset",
   "description": "A preconfigured, extensible babel preset.",
-  "version": "0.23.43",
+  "version": "0.24.0",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/babel-preset",
   "repository": {

@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.23.70",
+  "version": "0.24.0",
   "dependencies": {
     "filepond": "^4.7.0",
     "filepond-plugin-file-rename": "^1.1.4",
