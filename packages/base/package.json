@@ -9,7 +9,7 @@
   },
   "version": "0.24.6",
   "dependencies": {
-    "@brainhubeu/react-carousel": "^1.10.30",
+    "@brainhubeu/react-carousel": "1.12.9-alpha",
     "@spraoi/file-upload": "^0.24.0",
     "@wojtekmaj/react-daterange-picker": "^2.4.0",
     "apollo-cache-inmemory": "^1.6.3",

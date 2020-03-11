@@ -1144,10 +1144,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@brainhubeu/react-carousel@^1.10.30":
-  version "1.12.18"
-  resolved "https://registry.yarnpkg.com/@brainhubeu/react-carousel/-/react-carousel-1.12.18.tgz#bc0aaa42fd3c5a9be676423fdf7132544cbfff3c"
-  integrity sha512-itIAY59mIFgB2x8HpGYUcZnK3/eQVT1oRYhMngQKVBRqQESqZ6PE0ejBiAbju+1OQQCLj5IDbK1fcUXOHsMjSg==
+"@brainhubeu/react-carousel@1.12.9-alpha":
+  version "1.12.9-alpha"
+  resolved "https://registry.yarnpkg.com/@brainhubeu/react-carousel/-/react-carousel-1.12.9-alpha.tgz#94eefb14026ef91dcd062bdd133806a2b33274df"
+  integrity sha512-xAWQb6mvreqep2Prlfy/zxZaD3ZUispfMu2tnpWdJ0OYQ+vGYSIfGVgkvAMg8m2lEwfLidLMATzyYSPDJAyjvQ==
 
 "@braintree/asset-loader@0.3.1":
   version "0.3.1"
