@@ -31,6 +31,7 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
 module.exports.onPreInit = () => {
   createConfigJson();
   createIconComponent();
+  fixReactCarouselWindowUndefinedIssue();
 };
 
 function createConfigJson() {
@@ -114,4 +115,20 @@ function createIconComponent() {
 
     fs.writeFileSync(iconComponent, formatted);
   });
+}
+
+function fixReactCarouselWindowUndefinedIssue() {
+  // https://github.com/brainhubeu/react-carousel/issues/287
+
+  const carouselSrcFile =
+    'node_modules/@brainhubeu/react-carousel/lib/react-carousel.js';
+
+  if (!fs.existsSync(carouselSrcFile)) return;
+
+  fs.writeFileSync(
+    carouselSrcFile,
+    fs
+      .readFileSync(carouselSrcFile)
+      .replace('(window,', `(typeof window==='undefined'?{}:window,`)
+  );
 }
