@@ -128,7 +128,7 @@ function fixReactCarouselWindowUndefinedIssue() {
   fs.writeFileSync(
     carouselSrcFile,
     fs
-      .readFileSync(carouselSrcFile)
+      .readFileSync(carouselSrcFile, 'utf8')
       .replace('(window,', `(typeof window==='undefined'?{}:window,`)
   );
 }
