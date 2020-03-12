@@ -51,7 +51,7 @@ const formatCell = cell => {
 const Table = ({
   activeRowIndex,
   expandLastColumn,
-  fixedRightColumn,
+  stickyColumnPosition,
   header,
   isLoading,
   keyPrefix,
@@ -64,10 +64,12 @@ const Table = ({
   stickyColumn,
 }) => {
   const fixedSx = {
-    [fixedRightColumn ? 'right' : 'left']: 0,
+    [stickyColumnPosition]: 0,
     bg: 'inherit',
     boxShadow: p =>
-      `${fixedRightColumn ? '-1px' : '1px'} 0 0 ${p.colors.grays[2]}`,
+      `${stickyColumnPosition === 'left' ? '1px' : '-1px'} 0 0 ${
+        p.colors.grays[2]
+      }`,
     position: 'sticky',
     zIndex: 0,
   };
@@ -205,7 +207,7 @@ const Table = ({
 Table.propTypes = {
   activeRowIndex: PropTypes.number,
   expandLastColumn: PropTypes.bool,
-  fixedRightColumn: PropTypes.bool,
+  stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
   header: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])
   ).isRequired,
@@ -223,7 +225,7 @@ Table.propTypes = {
 Table.defaultProps = {
   activeRowIndex: null,
   expandLastColumn: false,
-  fixedRightColumn: false,
+  stickyColumnPosition: 'left',
   isLoading: false,
   keyPrefix: '',
   onRowClick: null,
