@@ -48,23 +48,10 @@ const formatCell = cell => {
   return String(cell);
 };
 
-const fixedSx = {
-  bg: 'inherit',
-  boxShadow: p => `1px 0 0 ${p.colors.grays[2]}`,
-  left: 0,
-  position: 'sticky',
-  zIndex: 0,
-};
-
-const tdSx = {
-  '&.fixed': fixedSx,
-  px: 5,
-  py: 4,
-};
-
 const Table = ({
   activeRowIndex,
   expandLastColumn,
+  stickyColumnPosition,
   header,
   isLoading,
   keyPrefix,
@@ -75,128 +62,147 @@ const Table = ({
   rows,
   sortBy,
   stickyColumn,
-}) => (
-  <Box sx={{ overflowX: 'auto', width: '100%' }}>
-    <Box
-      as="table"
-      sx={{
-        borderCollapse: 'collapse',
-        borderRadius: 2,
-        fontSize: 2,
-        lineHeight: '1.4em',
-        width: '100%',
-      }}
-    >
-      {!!rows.length && (
-        <thead>
-          <Box
-            as="tr"
-            sx={{
-              bg: 'white',
-              borderBottomStyle: 'solid',
-              borderColor: 'grays.2',
-              borderWidth: '1px',
-            }}
-          >
-            {header.map((item, headerIndex) => (
-              <Box
-                key={keyPrefix + headerIndex}
-                as="th"
-                className={stickyColumn === headerIndex ? 'fixed' : null}
-                sx={{
-                  '&.fixed': fixedSx,
-                  fontSize: 2,
-                  fontWeight: 'bold',
-                  p: 5,
-                  textAlign: 'left',
-                }}
-              >
-                {typeof item === 'object' && item.value ? (
-                  <Button
-                    onClick={() =>
-                      onSortUpdate(
-                        item.value,
-                        item.value === sortBy && orderBy === 'asc'
-                          ? 'desc'
-                          : 'asc'
-                      )
-                    }
-                    simple
-                    sx={{ color: 'text.primary' }}
-                  >
-                    <SortableTitle
-                      className={item.value === sortBy ? orderBy : ''}
+}) => {
+  const fixedSx = {
+    bg: 'inherit',
+    boxShadow: p =>
+      `${stickyColumnPosition === 'left' ? '1px' : '-1px'} 0 0 ${
+        p.colors.grays[2]
+      }`,
+    position: 'sticky',
+    [stickyColumnPosition]: 0,
+    zIndex: 0,
+  };
+
+  const tdSx = {
+    '&.fixed': fixedSx,
+    px: 5,
+    py: 4,
+  };
+
+  return (
+    <Box sx={{ overflowX: 'auto', width: '100%' }}>
+      <Box
+        as="table"
+        sx={{
+          borderCollapse: 'collapse',
+          borderRadius: 2,
+          fontSize: 2,
+          lineHeight: '1.4em',
+          width: '100%',
+        }}
+      >
+        {!!rows.length && (
+          <thead>
+            <Box
+              as="tr"
+              sx={{
+                bg: 'white',
+                borderBottomStyle: 'solid',
+                borderColor: 'grays.2',
+                borderWidth: '1px',
+              }}
+            >
+              {header.map((item, headerIndex) => (
+                <Box
+                  key={keyPrefix + headerIndex}
+                  as="th"
+                  className={stickyColumn === headerIndex ? 'fixed' : null}
+                  sx={{
+                    '&.fixed': fixedSx,
+                    fontSize: 2,
+                    fontWeight: 'bold',
+                    p: 5,
+                    textAlign: 'left',
+                  }}
+                >
+                  {typeof item === 'object' && item.value ? (
+                    <Button
+                      onClick={() =>
+                        onSortUpdate(
+                          item.value,
+                          item.value === sortBy && orderBy === 'asc'
+                            ? 'desc'
+                            : 'asc'
+                        )
+                      }
+                      simple
+                      sx={{ color: 'text.primary' }}
                     >
-                      {item.label}
-                    </SortableTitle>
-                  </Button>
-                ) : (
-                  item
-                )}
-              </Box>
-            ))}
-          </Box>
-        </thead>
-      )}
-      <tbody>
-        {rows.length ? (
-          rows.map((row, rowIndex) => {
-            const rowIsActive = rowIndex === activeRowIndex;
-
-            const trSx = {
-              '&:hover': {
-                bg: onRowClick && !rowIsActive ? 'accentLight' : null,
-                color: onRowClick && !rowIsActive ? 'white' : null,
-              },
-              bg: rowIsActive ? 'accent' : 'white',
-              color: rowIsActive ? 'white' : 'text.subtle',
-              cursor: onRowClick ? 'pointer' : 'default',
-              transition: 'background 0.1s, color 0.1s',
-            };
-
-            return (
-              <Box
-                key={keyPrefix + rowIndex}
-                as="tr"
-                onClick={() => onRowClick && onRowClick(row, rowIndex)}
-                sx={{
-                  '&:nth-child(even)': {
-                    '&:hover': trSx['&:hover'],
-                    bg: rowIsActive ? 'accent' : 'grays.0',
-                    color: trSx.color,
-                  },
-                  ...trSx,
-                }}
-              >
-                {row.map((cell, cellIndex) => (
-                  <Box
-                    key={keyPrefix + cellIndex}
-                    as="td"
-                    className={stickyColumn === cellIndex ? 'fixed' : null}
-                    colSpan={
-                      expandLastColumn && cellIndex === row.length - 1
-                        ? header.length - row.length + 1
-                        : 1
-                    }
-                    sx={tdSx}
-                  >
-                    {formatCell(cell)}
-                  </Box>
-                ))}
-              </Box>
-            );
-          })
-        ) : (
-          <Box as="tr">
-            <Box as="td" colSpan={header.length} sx={tdSx}>
-              {isLoading ? <Spinner /> : renderEmpty}
+                      <SortableTitle
+                        className={item.value === sortBy ? orderBy : ''}
+                      >
+                        {item.label}
+                      </SortableTitle>
+                    </Button>
+                  ) : (
+                    item
+                  )}
+                </Box>
+              ))}
             </Box>
-          </Box>
+          </thead>
         )}
-      </tbody>
+        <tbody>
+          {rows.length ? (
+            rows.map((row, rowIndex) => {
+              const rowIsActive = rowIndex === activeRowIndex;
+
+              const trSx = {
+                '&:hover': {
+                  bg: onRowClick && !rowIsActive ? 'accentLight' : null,
+                  color: onRowClick && !rowIsActive ? 'white' : null,
+                },
+                bg: rowIsActive ? 'accent' : 'white',
+                color: rowIsActive ? 'white' : 'text.subtle',
+                cursor: onRowClick ? 'pointer' : 'default',
+                transition: 'background 0.1s, color 0.1s',
+              };
+
+              return (
+                <Box
+                  key={keyPrefix + rowIndex}
+                  as="tr"
+                  onClick={() => onRowClick && onRowClick(row, rowIndex)}
+                  sx={{
+                    '&:nth-child(even)': {
+                      '&:hover': trSx['&:hover'],
+                      bg: rowIsActive ? 'accent' : 'grays.0',
+                      color: trSx.color,
+                    },
+                    ...trSx,
+                  }}
+                >
+                  {row.map((cell, cellIndex) => (
+                    <Box
+                      key={keyPrefix + cellIndex}
+                      as="td"
+                      className={stickyColumn === cellIndex ? 'fixed' : null}
+                      colSpan={
+                        expandLastColumn && cellIndex === row.length - 1
+                          ? header.length - row.length + 1
+                          : 1
+                      }
+                      sx={tdSx}
+                    >
+                      {formatCell(cell)}
+                    </Box>
+                  ))}
+                </Box>
+              );
+            })
+          ) : (
+            <Box as="tr">
+              <Box as="td" colSpan={header.length} sx={tdSx}>
+                {isLoading ? <Spinner /> : renderEmpty}
+              </Box>
+            </Box>
+          )}
+        </tbody>
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 Table.propTypes = {
   activeRowIndex: PropTypes.number,
@@ -213,6 +219,7 @@ Table.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)).isRequired,
   sortBy: PropTypes.string,
   stickyColumn: PropTypes.number,
+  stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
 };
 
 Table.defaultProps = {
@@ -226,6 +233,7 @@ Table.defaultProps = {
   renderEmpty: 'No results.',
   sortBy: null,
   stickyColumn: null,
+  stickyColumnPosition: 'left',
 };
 
 export default Table;
