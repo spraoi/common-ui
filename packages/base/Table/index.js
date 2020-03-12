@@ -64,13 +64,13 @@ const Table = ({
   stickyColumn,
 }) => {
   const fixedSx = {
-    [stickyColumnPosition]: 0,
     bg: 'inherit',
     boxShadow: p =>
       `${stickyColumnPosition === 'left' ? '1px' : '-1px'} 0 0 ${
         p.colors.grays[2]
       }`,
     position: 'sticky',
+    [stickyColumnPosition]: 0,
     zIndex: 0,
   };
 
@@ -207,7 +207,6 @@ const Table = ({
 Table.propTypes = {
   activeRowIndex: PropTypes.number,
   expandLastColumn: PropTypes.bool,
-  stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
   header: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])
   ).isRequired,
@@ -220,12 +219,12 @@ Table.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)).isRequired,
   sortBy: PropTypes.string,
   stickyColumn: PropTypes.number,
+  stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
 };
 
 Table.defaultProps = {
   activeRowIndex: null,
   expandLastColumn: false,
-  stickyColumnPosition: 'left',
   isLoading: false,
   keyPrefix: '',
   onRowClick: null,
@@ -234,6 +233,7 @@ Table.defaultProps = {
   renderEmpty: 'No results.',
   sortBy: null,
   stickyColumn: null,
+  stickyColumnPosition: 'left',
 };
 
 export default Table;
