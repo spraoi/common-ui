@@ -128,18 +128,7 @@ function* signInSaga({ payload, meta }) {
     yield put(actions.setState({ isLoading: true }));
     payload.user = yield call(aws.getNewUser, payload.email);
     const res = yield call(aws.signIn, payload);
-    if (res && res.codeDeliveryDetails === 'SMS_MFA' && res.user) {
-      cache.user = res.user;
-      cache.rememberMe = res.rememberMe;
-      yield put(
-        actions.setState({
-          ...defaultState,
-          mfaRequired: true,
-          userAttributes: aws.getUserAttributes(),
-        })
-      );
-      if (meta) meta.resolve({ completeSignUpRequired: false });
-    } else if (res && res.callbacks && res.user) {
+    if (res && res.callbacks && res.user) {
       cache.signInResponse = res;
       yield put(
         actions.setState({
@@ -169,33 +158,12 @@ function* signInSaga({ payload, meta }) {
     );
     if (
       meta &&
-      meta.storeEmail &&
       e.code === 'UserNotConfirmedException' &&
       Object.keys(aws.getUserAttributes()).length <= 0
     ) {
       aws.setUserAttributes({ email: payload.email });
     }
     if (meta) meta.reject();
-  }
-}
-
-function* sendMFACodeSaga({ payload }) {
-  try {
-    yield put(actions.setState({ isLoading: true }));
-    yield call(aws.sendMFACode, {
-      rememberMe: cache.rememberMe,
-      user: cache.user,
-      verificationCode: payload,
-    });
-    yield put(
-      actions.setState({
-        ...defaultState,
-        isAuthenticated: true,
-        userAttributes: aws.getUserAttributes(),
-      })
-    );
-  } catch (e) {
-    yield put(actions.setState({ error: e, isLoading: false }));
   }
 }
 
@@ -216,7 +184,7 @@ function* signOutSaga() {
   }
 }
 
-function* signUpSaga({ payload, meta }) {
+function* signUpSaga({ payload }) {
   try {
     const { email, password, rememberMe = false } = payload;
     const userAttributes = {
@@ -226,9 +194,6 @@ function* signUpSaga({ payload, meta }) {
     };
     yield put(actions.setState({ isLoading: true }));
     yield call(aws.signUp, payload);
-    if (meta && meta.storePhoneNumber) {
-      userAttributes.phone_number = payload.attributes.phone_number;
-    }
     aws.setUserAttributes(userAttributes);
     delete userAttributes.password;
     delete userAttributes.rememberMe;
@@ -327,5 +292,4 @@ export default function* sagas() {
     constants.AUTH_UPDATE_USER_ATTRIBUTES,
     updateUserAttributesSaga
   );
-  yield takeLatest(constants.AUTH_SEND_MFA_CODE, sendMFACodeSaga);
 }
