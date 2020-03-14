@@ -2654,6 +2654,56 @@
   dependencies:
     type-detect "4.0.8"
 
+"@spraoi/auth@^0.24.0":
+  version "0.24.7"
+  resolved "https://registry.yarnpkg.com/@spraoi/auth/-/auth-0.24.7.tgz#72297288402b33600b520dbb19b1726c4d14a4f8"
+  integrity sha512-pyG7LQm85pBgt0CIVWefSDOQcfOYm1rcPZ8o00cuSE8zFbXjZtyOGZPRe+0g8QOYe/lrnTv6rF/AH7bWb2nKUg==
+
+"@spraoi/babel-preset@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.24.0.tgz#0fc91910de0cf89f8037b41032e4a3e7f9de0d75"
+  integrity sha512-2qBtJjQJSuAOlSK9Esk3ZmTCUNhqfRTGDXAQKrbcYojklWMfaUrSiLmCZo+/ejAZ1bw0eBXP+oWk2LREeWAqhg==
+
+"@spraoi/eslint-config@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.24.0.tgz#9ff5084aa2ff50affb8b4a5f2599ce4a86f8b914"
+  integrity sha512-JF0W/cVBMp4zlc1HaOpl7bSlomnZWL+CU1EWZAJOCr3bc0wP5qsMOzKHKIREleyOqnGDThsYPpL6AcZ4jPVlig==
+  dependencies:
+    babel-eslint "^10.0.3"
+    eslint-config-airbnb "^18.0.1"
+    eslint-config-prettier "^6.3.0"
+    eslint-plugin-import "^2.18.2"
+    eslint-plugin-jest "^22.17.0"
+    eslint-plugin-jsx-a11y "^6.2.3"
+    eslint-plugin-prettier "^3.1.0"
+    eslint-plugin-react "^7.14.3"
+    eslint-plugin-react-hooks "^1.7.0"
+
+"@spraoi/helpers@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/helpers/-/helpers-0.24.0.tgz#309203146310442eef9f0e0738e5798845e3501f"
+  integrity sha512-VOPHdNrYYBKCTvE6FOiNLER+MEI+sjUF0SHLV8ztkJAYZwBpD0HAhYTU4HFlzBSF/i14wQXnsXXi3sIsU6WgSg==
+  dependencies:
+    humanize-duration "^3.21.0"
+
+"@spraoi/jest-config@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.24.0.tgz#2d16516ae3fee8680c22ef1448689e8ee1bbecd5"
+  integrity sha512-YnT63q/6ZORNjVVFgofUvnx4YUl+Pd6QW4SS5350uRv2PrQkgDLr2fhEzjSVMxgU5ZegTl240xQ4MEcmKHB8Fg==
+  dependencies:
+    babel-jest "^24.9.0"
+    identity-obj-proxy "^3.0.0"
+
+"@spraoi/stylelint-config@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.24.0.tgz#86357e9c0cbac4a77814eb4162847c55d4a7f73f"
+  integrity sha512-TgXkmjyvqS83BqPsx4y+vrdsv8ruQ644ZM8JIHkqYsv8XS9ORXXdmlUhBoppsbKsF+0Y4nzTXmjC+XRdQp1yCw==
+  dependencies:
+    stylelint-config-prettier "6.0.0"
+    stylelint-config-recommended "3.0.0"
+    stylelint-config-styled-components "0.1.1"
+    stylelint-processor-styled-components "1.8.0"
+
 "@styled-system/background@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@styled-system/background/-/background-5.1.2.tgz#75c63d06b497ab372b70186c0bf608d62847a2ba"
@@ -3610,9 +3660,9 @@ acorn-walk@^6.0.1:
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 acorn@^6.0.1, acorn@^6.2.1:
   version "6.4.0"
