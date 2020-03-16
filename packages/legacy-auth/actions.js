@@ -40,9 +40,8 @@ export const signOut = () => ({
   type: constants.AUTH_SIGN_OUT,
 });
 
-export const signUp = (payload, meta) => ({
+export const signUp = payload => ({
   type: constants.AUTH_SIGN_UP,
-  meta,
   payload,
 });
 
@@ -59,10 +58,5 @@ export const changePassword = payload => ({
 
 export const updateUserAttributes = payload => ({
   type: constants.AUTH_UPDATE_USER_ATTRIBUTES,
-  payload,
-});
-
-export const sendMFACode = payload => ({
-  type: constants.AUTH_SEND_MFA_CODE,
   payload,
 });
