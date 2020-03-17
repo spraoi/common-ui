@@ -13,7 +13,7 @@ const Crumb = styled(Button)`
   text-decoration: none;
 
   &::before {
-    content: '/';
+    content: ${p => (p.separator ? `'${p.separator}'` : '/')};
     margin-right: ${p => p.theme.space[4]};
     color: ${p => p.theme.colors.text.primary};
   }
@@ -26,7 +26,7 @@ const Crumb = styled(Button)`
 const Breadcrumbs = ({ crumbs, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
-      <Crumb key={i} link={crumb.path} simple>
+      <Crumb key={i} link={crumb.path} separator={rest.separator} simple>
         {crumb.name}
       </Crumb>
     ))}
