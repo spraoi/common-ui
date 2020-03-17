@@ -1,4 +1,5 @@
 export const COGNITO_USER_ATTRIBUTES = {
+  ACTIVE_GROUP: 'custom:active_group',
   EMAIL: 'email',
   EMAIL_ALIAS: 'cognito:email_alias',
   EMAIL_VERIFIED: 'email_verified',

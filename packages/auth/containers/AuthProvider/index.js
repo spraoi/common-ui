@@ -75,6 +75,13 @@ class AuthProvider extends PureComponent {
     return Auth.signIn(values.username, values.password);
   };
 
+  updateUserAttributes = async values => {
+    await Auth.updateUserAttributes(
+      await Auth.currentAuthenticatedUser(),
+      values
+    );
+  };
+
   render() {
     const { children, homePath, loginPath } = this.props;
     const { authState, authUser, jwt } = this.state;
@@ -89,6 +96,7 @@ class AuthProvider extends PureComponent {
           jwt,
           loginPath,
           newPasswordRequired: authState === AUTH_STATES.NEW_PASSWORD_REQUIRED,
+          updateUserAttributes: this.updateUserAttributes,
           signIn: this.signIn,
           signOut: this.signOut,
           signUp: this.signUp,
