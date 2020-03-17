@@ -13,7 +13,7 @@ const Crumb = styled(Button)`
   text-decoration: none;
 
   &::before {
-    content: ${p => (p.separator ? `'${p.separator}'` : '/')};
+    content: ${p => `'${p.separator}'`};
     margin-right: ${p => p.theme.space[4]};
     color: ${p => p.theme.colors.text.primary};
   }
@@ -23,10 +23,10 @@ const Crumb = styled(Button)`
   }
 `;
 
-const Breadcrumbs = ({ crumbs, ...rest }) => (
+const Breadcrumbs = ({ crumbs, separator, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
-      <Crumb key={i} link={crumb.path} separator={rest.separator} simple>
+      <Crumb key={i} link={crumb.path} separator={separator} simple>
         {crumb.name}
       </Crumb>
     ))}
@@ -42,6 +42,11 @@ Breadcrumbs.crumbsType = PropTypes.arrayOf(
 
 Breadcrumbs.propTypes = {
   crumbs: Breadcrumbs.crumbsType.isRequired,
+  separator: PropTypes.string,
+};
+
+Breadcrumbs.defaultProps = {
+  separator: '/',
 };
 
 export default Breadcrumbs;
