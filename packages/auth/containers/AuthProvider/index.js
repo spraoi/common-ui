@@ -96,10 +96,10 @@ class AuthProvider extends PureComponent {
           jwt,
           loginPath,
           newPasswordRequired: authState === AUTH_STATES.NEW_PASSWORD_REQUIRED,
-          updateUserAttributes: this.updateUserAttributes,
           signIn: this.signIn,
           signOut: this.signOut,
           signUp: this.signUp,
+          updateUserAttributes: this.updateUserAttributes,
           user: authUser,
         }}
       >
