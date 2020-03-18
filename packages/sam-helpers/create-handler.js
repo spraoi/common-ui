@@ -50,14 +50,16 @@ export default ({ errorHandler, handler }) => ({
 
       // cognito group-based client id
       if (!clientId && claims && CLIENT_IDS) {
-        const activeGroup = claims[COGNITO_USER_ATTRIBUTES.ACTIVE_GROUP];
+        const claimedActiveGroup = claims[COGNITO_USER_ATTRIBUTES.ACTIVE_GROUP];
         const userGroups = claims[COGNITO_USER_ATTRIBUTES.GROUPS] || [];
         const clientIds = JSON.parse(CLIENT_IDS);
         const clientIdGroups = Object.keys(clientIds);
 
-        const clientGroup = clientIdGroups.find(group =>
-          activeGroup ? group === activeGroup : userGroups.includes(group)
-        );
+        const clientGroup =
+          userGroups.includes(claimedActiveGroup) &&
+          clientIdGroups.includes(claimedActiveGroup)
+            ? claimedActiveGroup
+            : clientIdGroups.find(group => userGroups.includes(group));
 
         clientId = clientIds[clientGroup];
       }
