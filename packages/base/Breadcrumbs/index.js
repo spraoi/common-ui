@@ -1,34 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
 import Box from '../Box';
 import Button from '../Button';
 
-const Crumb = styled(Button)`
-  margin-right: ${p => p.theme.space[4]};
-  color: ${p => p.theme.colors.text.subtle};
-  font-size: ${p => p.theme.fontSizes[2]};
-  letter-spacing: ${p => p.theme.letterSpacings[0]};
-  text-transform: uppercase;
-  text-decoration: none;
-
-  &::before {
-    content: ${p => `'${p.separator}'`};
-    margin-right: ${p => p.theme.space[4]};
-    color: ${p => p.theme.colors.text.primary};
-  }
-
-  &:last-of-type {
-    color: ${p => p.theme.colors.accent};
-  }
-`;
-
-const Breadcrumbs = ({ crumbs, separator, ...rest }) => (
+const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
-      <Crumb key={i} link={crumb.path} separator={separator} simple>
+      <Button
+        key={i}
+        link={crumb.path}
+        separator={separator}
+        simple
+        sx={{
+          '&::before': {
+            color: 'text.primary',
+            content: `'${separator}'`,
+            mr: '4',
+          },
+          '&:last-of-type': {
+            color: 'accent',
+          },
+          color: 'text.subtle',
+          fontSize: '2',
+          letterSpacing: '0',
+          mr: '4',
+          textDecoration: 'none',
+          textTransform: 'uppercase',
+          ...crumbSx,
+        }}
+      >
         {crumb.name}
-      </Crumb>
+      </Button>
     ))}
   </Box>
 );
@@ -42,10 +44,12 @@ Breadcrumbs.crumbsType = PropTypes.arrayOf(
 
 Breadcrumbs.propTypes = {
   crumbs: Breadcrumbs.crumbsType.isRequired,
+  crumbSx: PropTypes.shape({}),
   separator: PropTypes.string,
 };
 
 Breadcrumbs.defaultProps = {
+  crumbSx: {},
   separator: '/',
 };
 
