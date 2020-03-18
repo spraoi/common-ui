@@ -23,13 +23,25 @@ class AuthProvider extends PureComponent {
     await this.setAuthenticatedUser();
   }
 
-  async setAuthenticatedUser() {
+  async setAuthenticatedUser({ bypassCache } = { bypassCache: false }) {
     try {
-      const session = await Auth.currentSession();
-      const { jwtToken: jwt, payload } = session.getIdToken();
-      const authUser = objectMapKeysDeep(payload, camelCase);
-      delete authUser.attributes;
-      const newState = { authState: AUTH_STATES.SIGNED_IN, authUser, jwt };
+      const session = await Auth.currentAuthenticatedUser({
+        bypassCache,
+      });
+
+      const payload = objectMapKeysDeep(
+        session.signInUserSession.accessToken.payload,
+        camelCase
+      );
+
+      const attributes = objectMapKeysDeep(session.attributes, camelCase);
+
+      const newState = {
+        authState: AUTH_STATES.SIGNED_IN,
+        authUser: { ...attributes, cognitoGroups: payload.cognitoGroups },
+        jwt: session.signInUserSession.accessToken.jwtToken,
+      };
+
       this.setState(newState);
       return newState;
     } catch (e) {
@@ -80,6 +92,8 @@ class AuthProvider extends PureComponent {
       await Auth.currentAuthenticatedUser(),
       values
     );
+
+    return this.setAuthenticatedUser({ bypassCache: true });
   };
 
   render() {
