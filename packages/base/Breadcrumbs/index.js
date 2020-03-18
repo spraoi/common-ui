@@ -13,17 +13,17 @@ const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
         simple
         sx={{
           '&::before': {
-            color: p => p.colors.text.primary,
+            color: 'text.primary',
             content: `'${separator}'`,
-            mr: p => p.space[4],
+            mr: '4',
           },
           '&:last-of-type': {
-            color: p => p.colors.accent,
+            color: 'accent',
           },
-          color: p => p.colors.text.subtle,
-          fontSize: p => p.fontSizes[2],
-          letterSpacing: p => p.letterSpacings[0],
-          mr: p => p.space[4],
+          color: 'text.subtle',
+          fontSize: '2',
+          letterSpacing: '0',
+          mr: '4',
           textDecoration: 'none',
           textTransform: 'uppercase',
           ...crumbSx,
