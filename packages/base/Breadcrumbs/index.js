@@ -1,40 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
 import Box from '../Box';
 import Button from '../Button';
 
-const Crumb = styled(Button)`
-  margin-right: ${p => p.theme.space[4]};
-  color: ${p => p.theme.colors.text.subtle};
-  font-size: ${p => p.theme.fontSizes[2]};
-  letter-spacing: ${p => p.theme.letterSpacings[0]};
-  text-transform: ${p => p.transformCase};
-  text-decoration: none;
-
-  &::before {
-    content: ${p => `'${p.separator}'`};
-    margin-right: ${p => p.theme.space[4]};
-    color: ${p => p.theme.colors.text.primary};
-  }
-
-  &:last-of-type {
-    color: ${p => p.theme.colors.accent};
-  }
-`;
-
-const Breadcrumbs = ({ crumbs, separator, transformCase, ...rest }) => (
+const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
-      <Crumb
+      <Button
         key={i}
         link={crumb.path}
         separator={separator}
         simple
-        transformCase={transformCase}
+        sx={{
+          '&::before': {
+            color: p => p.colors.text.primary,
+            content: `'${separator}'`,
+            mr: p => p.space[4],
+          },
+          '&:last-of-type': {
+            color: p => p.colors.accent,
+          },
+          color: p => p.colors.text.subtle,
+          fontSize: p => p.fontSizes[2],
+          letterSpacing: p => p.letterSpacings[0],
+          mr: p => p.space[4],
+          textDecoration: 'none',
+          textTransform: 'uppercase',
+          ...crumbSx,
+        }}
       >
         {crumb.name}
-      </Crumb>
+      </Button>
     ))}
   </Box>
 );
@@ -48,13 +44,13 @@ Breadcrumbs.crumbsType = PropTypes.arrayOf(
 
 Breadcrumbs.propTypes = {
   crumbs: Breadcrumbs.crumbsType.isRequired,
+  crumbSx: PropTypes.shape({}),
   separator: PropTypes.string,
-  transformCase: PropTypes.string,
 };
 
 Breadcrumbs.defaultProps = {
+  crumbSx: {},
   separator: '/',
-  transformCase: 'uppercase',
 };
 
 export default Breadcrumbs;
