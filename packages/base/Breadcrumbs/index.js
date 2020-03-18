@@ -9,7 +9,7 @@ const Crumb = styled(Button)`
   color: ${p => p.theme.colors.text.subtle};
   font-size: ${p => p.theme.fontSizes[2]};
   letter-spacing: ${p => p.theme.letterSpacings[0]};
-  text-transform: uppercase;
+  text-transform: ${p => p.transformCase};
   text-decoration: none;
 
   &::before {
@@ -23,10 +23,16 @@ const Crumb = styled(Button)`
   }
 `;
 
-const Breadcrumbs = ({ crumbs, separator, ...rest }) => (
+const Breadcrumbs = ({ crumbs, separator, transformCase, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
-      <Crumb key={i} link={crumb.path} separator={separator} simple>
+      <Crumb
+        key={i}
+        link={crumb.path}
+        separator={separator}
+        simple
+        transformCase={transformCase}
+      >
         {crumb.name}
       </Crumb>
     ))}
@@ -43,10 +49,12 @@ Breadcrumbs.crumbsType = PropTypes.arrayOf(
 Breadcrumbs.propTypes = {
   crumbs: Breadcrumbs.crumbsType.isRequired,
   separator: PropTypes.string,
+  transformCase: PropTypes.string,
 };
 
 Breadcrumbs.defaultProps = {
   separator: '/',
+  transformCase: 'uppercase',
 };
 
 export default Breadcrumbs;
