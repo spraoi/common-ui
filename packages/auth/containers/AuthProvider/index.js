@@ -93,7 +93,11 @@ class AuthProvider extends PureComponent {
       values
     );
 
-    return this.setAuthenticatedUser({ bypassCache: true });
+    return this.setAuthenticatedUser({
+      // required because Auth.updateUserAttributes doesn't update the cache...
+      // https://github.com/aws-amplify/amplify-js/issues/2534
+      bypassCache: true,
+    });
   };
 
   render() {
