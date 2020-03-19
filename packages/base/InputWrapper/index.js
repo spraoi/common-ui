@@ -74,30 +74,26 @@ const InputWrapper = ({
           {label}
         </Box>
       )}
-      {validationIcon && meta.touched ? (
-        <Box sx={{ position: 'relative', ...inputWrapperSx }}>
-          {children({ disabled, error, ...rest })}
-          {meta.touched ? (
-            <Box
-              sx={{
-                alignItems: 'center',
-                bg: 'white',
-                color: `${error ? 'error' : 'success'}`,
-                display: 'flex',
-                height: 'calc(100% - 4px)',
-                m: '2px',
-                position: 'absolute',
-                right: '0',
-                top: '0',
-              }}
-            >
-              {validationIcon(error)}
-            </Box>
-          ) : null}
-        </Box>
-      ) : (
-        children({ disabled, error, ...rest })
-      )}
+      <Box sx={{ position: 'relative', ...inputWrapperSx }}>
+        {children({ disabled, error, ...rest })}
+        {validationIcon && meta.touched && (
+          <Box
+            sx={{
+              alignItems: 'center',
+              bg: 'white',
+              color: `${error ? 'error' : 'success'}`,
+              display: 'flex',
+              height: 'calc(100% - 4px)',
+              m: '2px',
+              position: 'absolute',
+              right: '0',
+              top: '0',
+            }}
+          >
+            {validationIcon(error)}
+          </Box>
+        )}
+      </Box>
       {below}
     </Box>
   );
