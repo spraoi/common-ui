@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
+import get from 'lodash/get';
 import uuid from 'uuid/v4';
 import warmer from 'lambda-warmer';
 import { COGNITO_USER_ATTRIBUTES, HEADERS } from '@spraoi/helpers/constants';
@@ -43,14 +44,19 @@ export default ({ errorHandler, handler }) => ({
         ? event.identityId.replace(REGION, 'spr:user:')
         : null;
 
-      const claims = event.jwt ? await validateAndParseJwt(event.jwt) : null;
+      const jwt = event.jwt || get(event, `headers[${HEADERS.JWT}]`);
+      const claims = jwt ? await validateAndParseJwt(jwt) : null;
 
       // variation-based client id
       let clientId = CLIENT_ID;
 
       // cognito group-based client id
       if (!clientId && claims && CLIENT_IDS) {
-        const claimedActiveGroup = claims[COGNITO_USER_ATTRIBUTES.ACTIVE_GROUP];
+        const claimedActiveGroup = get(
+          event,
+          `headers[${HEADERS.ACTIVE_GROUP}]`
+        );
+
         const userGroups = claims[COGNITO_USER_ATTRIBUTES.GROUPS] || [];
         const clientIds = JSON.parse(CLIENT_IDS);
         const clientIdGroups = Object.keys(clientIds);

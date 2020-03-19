@@ -5,6 +5,7 @@ import React from 'react';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from 'react-apollo';
 import { AuthContext, AuthProvider } from '@spraoi/auth';
+import { HEADERS } from '@spraoi/helpers/constants';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from 'apollo-link-http';
@@ -17,7 +18,7 @@ const cache = new InMemoryCache();
 const App = ({ children, config, credentials, theme }) => (
   <AuthProvider amplifyConfig={config.amplify}>
     <AuthContext.Consumer>
-      {({ jwt }) => (
+      {({ jwt, user: { customActiveGroup } }) => (
         <ApolloProvider
           client={
             new ApolloClient({
@@ -31,7 +32,11 @@ const App = ({ children, config, credentials, theme }) => (
                   config.apollo.url,
                   ApolloLink.from([
                     setContext((request, previousContext) => ({
-                      headers: { ...previousContext.headers, jwt },
+                      headers: {
+                        ...previousContext.headers,
+                        [HEADERS.ACTIVE_GROUP]: customActiveGroup,
+                        [HEADERS.JWT]: jwt,
+                      },
                     })),
                     createHttpLink({ uri: config.apollo.url }),
                   ])

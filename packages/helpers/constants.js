@@ -13,9 +13,11 @@ export const COGNITO_USER_ATTRIBUTES = {
 };
 
 export const HEADERS = {
+  ACTIVE_GROUP: 'x-spr-active-group',
   CLIENT_ID: 'x-spr-client-id',
   CONTENT_LENGTH: 'Content-Length',
   HC_PARENT_ID: 'x-spr-hc-parent-id',
+  JWT: 'x-spr-jwt',
   TRACE_ID: 'x-spr-trace-id',
   USER_ID: 'x-spr-user-id',
 };
