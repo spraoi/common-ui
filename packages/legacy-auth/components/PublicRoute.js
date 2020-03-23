@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Route from './Route';
 
-@connect(state => ({
+@connect((state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 }))
 export default class PrivateRoute extends PureComponent {

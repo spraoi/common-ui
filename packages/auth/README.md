@@ -48,7 +48,7 @@ import { AuthContext } from '@spraoi/auth';
 
 const Component = (
   <AuthContext.Consumer>
-    {authContext => {
+    {(authContext) => {
       // use the context here...
     }}
   </AuthContext.Consumer>

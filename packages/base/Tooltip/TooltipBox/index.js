@@ -19,8 +19,8 @@ class TooltipBox extends React.Component {
         as={ReactTooltip}
         id={id}
         sx={{
-          bg: p => `${p.colors.primary}!important`,
-          borderRadius: p => `${p.radii[1]}!important`,
+          bg: (p) => `${p.colors.primary}!important`,
+          borderRadius: (p) => `${p.radii[1]}!important`,
           maxHeight: '10rem',
           maxWidth: '50ch',
           opacity: '1!important',

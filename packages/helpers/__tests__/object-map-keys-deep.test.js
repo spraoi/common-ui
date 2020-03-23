@@ -15,7 +15,7 @@ describe('objectMapKeysDeep', () => {
             bar: 1,
           },
         },
-        value => `${String(value)}_mapped`
+        (value) => `${String(value)}_mapped`
       )
     ).toMatchObject({
       bar_mapped: 1,

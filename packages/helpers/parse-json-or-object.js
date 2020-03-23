@@ -1,6 +1,6 @@
 import isJSON from './is-json';
 
-const parseJsonOrObject = payload => {
+const parseJsonOrObject = (payload) => {
   const payloadIsJson = isJSON(payload);
   const parsedPayload = payloadIsJson ? JSON.parse(payload) : payload;
 

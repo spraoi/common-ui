@@ -5,7 +5,7 @@ import Button from '../../Button';
 
 const TabLinks = ({ currentTab, generateLink, sx, tabs }) => (
   <Box as="nav" sx={{ display: 'flex', flexWrap: 'wrap', mt: 6, ...sx }}>
-    {tabs.map(tab => (
+    {tabs.map((tab) => (
       <Button
         key={tab.value}
         link={generateLink(tab.value)}

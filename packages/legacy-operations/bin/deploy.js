@@ -33,7 +33,7 @@ const config = Object.assign(
   (pkgDeploy[stage] || {})[variation] || {}
 );
 
-const tryShell = command => {
+const tryShell = (command) => {
   shell.exec(command);
   if (shell.error()) process.exit(1);
 };

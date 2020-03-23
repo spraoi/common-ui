@@ -11,7 +11,7 @@ const StyledMenuButton = styled(MenuButton).attrs({
   display: flex;
   align-items: center;
 
-  ${p =>
+  ${(p) =>
     p.chevron &&
     css`
       padding-right: 1em;
@@ -52,21 +52,21 @@ const StyledMenuItem = styled(MenuItem).attrs({
   }
 
   svg {
-    color: ${p => p.theme.colors.accent};
+    color: ${(p) => p.theme.colors.accent};
   }
 
   &.highlighted {
-    background: ${p => p.theme.colors.accent};
-    color: ${p => p.theme.colors.white};
+    background: ${(p) => p.theme.colors.accent};
+    color: ${(p) => p.theme.colors.white};
 
     svg {
-      color: ${p => p.theme.colors.white};
+      color: ${(p) => p.theme.colors.white};
     }
   }
 `;
 
 const StyledMenuItemChild = styled.div`
-  padding: ${p => p.theme.space[2]} ${p => p.theme.space[5]};
+  padding: ${(p) => p.theme.space[2]} ${(p) => p.theme.space[5]};
 `;
 
 const DropdownMenu = ({
@@ -101,7 +101,7 @@ const DropdownMenu = ({
                 <div key={i}>
                   {dividerPositions.includes(i) && <Box as="hr" my={4} />}
                   <StyledMenuItem
-                    onItemChosen={e => {
+                    onItemChosen={(e) => {
                       if (typeof itemActions[i] === 'string') {
                         return e.byKeyboard
                           ? linkRef.current.click()

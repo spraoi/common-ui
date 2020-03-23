@@ -4,7 +4,7 @@
 const objectMapDeep = (obj, callback) => {
   const out = {};
 
-  Object.keys(obj).forEach(k => {
+  Object.keys(obj).forEach((k) => {
     if (Array.isArray(obj[k])) {
       out[k] = obj[k];
       return;

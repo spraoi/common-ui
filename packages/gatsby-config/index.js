@@ -17,9 +17,9 @@ if (
 
   fs.readdirSync('configs')
     .filter(
-      file => !file.includes('default.') && /^([a-z-]+\.){2}yml/.test(file)
+      (file) => !file.includes('default.') && /^([a-z-]+\.){2}yml/.test(file)
     )
-    .forEach(file =>
+    .forEach((file) =>
       console.log(`   $ config=${file.replace('.yml', '')} yarn ${command}`)
     );
 
@@ -34,8 +34,8 @@ if (
     `src/routes/${variation}`,
     `src/routes/${variation}.${stage}`,
   ]
-    .filter(path => fs.existsSync(path))
-    .map(path => ({
+    .filter((path) => fs.existsSync(path))
+    .map((path) => ({
       options: { path: resolve(path) },
       resolve: 'gatsby-plugin-page-creator',
     }));

@@ -13,30 +13,30 @@ const SortableTitle = styled.div`
   &:after {
     content: '';
     flex: none;
-    margin: -4px ${p => p.theme.space[3]} 0;
+    margin: -4px ${(p) => p.theme.space[3]} 0;
     border: 5px solid transparent;
-    border-bottom-color: ${p => p.theme.colors.text.primary};
+    border-bottom-color: ${(p) => p.theme.colors.text.primary};
     opacity: 0.4;
   }
 
   &:hover:after {
-    color: ${p => p.theme.colors.primary};
+    color: ${(p) => p.theme.colors.primary};
   }
 
   &.asc:after,
   &.desc:after {
     opacity: 1;
-    color: ${p => p.theme.colors.black};
+    color: ${(p) => p.theme.colors.black};
   }
 
   &.desc:after {
     margin-top: 6px;
-    border-top-color: ${p => p.theme.colors.text.primary};
+    border-top-color: ${(p) => p.theme.colors.text.primary};
     border-bottom-color: transparent;
   }
 `;
 
-const formatCell = cell => {
+const formatCell = (cell) => {
   if (React.isValidElement(cell)) {
     return cell;
   }
@@ -65,7 +65,7 @@ const Table = ({
 }) => {
   const fixedSx = {
     bg: 'inherit',
-    boxShadow: p =>
+    boxShadow: (p) =>
       `${stickyColumnPosition === 'left' ? '1px' : '-1px'} 0 0 ${
         p.colors.grays[2]
       }`,

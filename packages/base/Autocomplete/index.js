@@ -12,9 +12,9 @@ const Autocomplete = ({ input, items, ...rest }) => {
 
   return (
     <InputWrapper input={input} {...rest}>
-      {props => (
+      {(props) => (
         <ReactAutocomplete
-          getItemValue={v => v}
+          getItemValue={(v) => v}
           id={input.name}
           items={items}
           menuStyle={{
@@ -47,7 +47,7 @@ const Autocomplete = ({ input, items, ...rest }) => {
           onMenuVisibilityChange={setIsOpen}
           onSelect={input.onChange}
           open={!!items.length && isOpen}
-          renderInput={inputProps => (
+          renderInput={(inputProps) => (
             <Box
               as="input"
               borderColor={input.error ? 'error' : null}

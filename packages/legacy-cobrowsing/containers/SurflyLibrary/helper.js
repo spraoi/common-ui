@@ -11,7 +11,7 @@ export const callApi = async (path, params) => {
   }
   await fetch(
     CONFIG.URL + path + '/?api_key=' + params.apiKey + queryParams
-  ).then(async res => {
+  ).then(async (res) => {
     data = await res.json();
   });
   return data;

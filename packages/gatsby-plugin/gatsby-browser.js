@@ -3,7 +3,7 @@ exports.shouldUpdateScroll = ({
   prevRouterProps: { location: prevLocation },
   routerProps: { location },
 }) => {
-  const stripPath = path => path.replace(/[^a-z0-9]/gi, '');
+  const stripPath = (path) => path.replace(/[^a-z0-9]/gi, '');
 
   // if the path changes, we let the browser do its thing
   if (stripPath(location.pathname) !== stripPath(prevLocation.pathname)) {

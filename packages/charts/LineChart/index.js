@@ -59,17 +59,17 @@ const LineChart = ({ data, margin, xAccessor, yAccessor }) => {
                 fill={theme.colors.accent}
                 stroke="transparent"
                 strokeWidth={2}
-                x={d => xScale(xAccessor(d))}
+                x={(d) => xScale(xAccessor(d))}
                 y0={() => yScale.range()[0]}
-                y1={d => yScale(yAccessor(d))}
+                y1={(d) => yScale(yAccessor(d))}
               />
               <LinePath
                 curve={curveBasis}
                 data={data}
                 stroke="url('#linear')"
                 strokeWidth={2}
-                x={d => xScale(xAccessor(d))}
-                y={d => yScale(yAccessor(d))}
+                x={(d) => xScale(xAccessor(d))}
+                y={(d) => yScale(yAccessor(d))}
               />
             </Group>
             <Group left={margin.left}>
@@ -110,7 +110,7 @@ const LineChart = ({ data, margin, xAccessor, yAccessor }) => {
                 scale={xScale}
                 top={height - margin.bottom}
               >
-                {axis => (
+                {(axis) => (
                   <g>
                     {axis.ticks.map((tick, i) => (
                       <Group key={`tick-${tick.value}-${i}`}>
@@ -123,9 +123,9 @@ const LineChart = ({ data, margin, xAccessor, yAccessor }) => {
                           fill={theme.colors.textSubtle}
                           fontSize={theme.fontSizes[1]}
                           textAnchor="middle"
-                          transform={`translate(${tick.to.x}, ${tick.to.y +
-                            10 +
-                            axis.tickLength}) rotate(45)`}
+                          transform={`translate(${tick.to.x}, ${
+                            tick.to.y + 10 + axis.tickLength
+                          }) rotate(45)`}
                         >
                           {tick.formattedValue}
                         </text>

@@ -7,12 +7,12 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.25.7",
+  "version": "0.26.0",
   "dependencies": {
     "@brainhubeu/react-carousel": "1.12.9-alpha",
-    "@spraoi/file-upload": "^0.25.0",
-    "@wojtekmaj/react-daterange-picker": "^2.4.0",
-    "apollo-cache-inmemory": "^1.6.3",
+    "@spraoi/file-upload": "^0.26.0",
+    "@wojtekmaj/react-daterange-picker": "^2.5.0",
+    "apollo-cache-inmemory": "^1.6.5",
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
     "aws-appsync-auth-link": "^1.0.1",
@@ -21,11 +21,11 @@
     "isomorphic-unfetch": "^3.0.0",
     "react-autocomplete": "^1.8.1",
     "react-autosize-textarea": "^7.0.0",
-    "react-menu-list": "^6.0.5",
-    "react-modal": "^3.10.1",
-    "react-select": "3.0.8",
-    "react-tooltip": "4.0.3",
-    "reflexbox": "^4.0.5"
+    "react-menu-list": "^6.1.0",
+    "react-modal": "^3.11.2",
+    "react-select": "^3.1.0",
+    "react-tooltip": "^4.1.2",
+    "reflexbox": "^4.0.6"
   },
   "peerDependencies": {
     "@reach/router": "^1",

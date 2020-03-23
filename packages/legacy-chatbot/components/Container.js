@@ -16,7 +16,7 @@ import { MESSAGES, ATTACHMENT_ICON_COLOR } from '../constants';
 let lexUserId = 'CommonUIChatbotUser' + Date.now();
 
 @connect(
-  state => ({
+  (state) => ({
     lexRunTimeData: state.lex.lexRunTimeData,
     brainTreeNonceVal: state.lex.brainTreeNonceVal,
     error: state.lex.error,
@@ -157,9 +157,9 @@ export default class ChatBot extends Component {
         data.slotToElicit === 'addressId' &&
         data.dialogState === 'ElicitSlot'
       ) {
-        responseCard.map(function(obj) {
+        responseCard.map(function (obj) {
           if (obj.buttons) {
-            obj.buttons.map(function(obj1) {
+            obj.buttons.map(function (obj1) {
               if (obj1.value === data.sessionAttributes.primaryLocationId)
                 obj1.selectedClass = 'selected-button disable-chatbot-button';
             });
@@ -239,7 +239,7 @@ export default class ChatBot extends Component {
       if (this.state.messageArray && this.state.messageArray.length > 0) {
         let len = this.state.messageArray.length - 1;
         let scroll = this;
-        setTimeout(function() {
+        setTimeout(function () {
           scroll.scrollDown('chatbot-reply-' + len);
         }, 50);
       }
@@ -338,7 +338,7 @@ export default class ChatBot extends Component {
 
       // scroll to the end of the conversation
       let scroll = this;
-      setTimeout(function() {
+      setTimeout(function () {
         if (array && array.length > 0) {
           let len = array.length - 1;
           scroll.scrollDown('chatbot-reply-' + len);
@@ -372,7 +372,7 @@ export default class ChatBot extends Component {
     clearInterval(this.interval);
   }
 
-  scrollDown = elementId => {
+  scrollDown = (elementId) => {
     let elementObject = document.getElementById(elementId);
     if (elementObject) elementObject.scrollIntoView();
   };
@@ -433,7 +433,7 @@ export default class ChatBot extends Component {
     }
   };
 
-  inProgressMessage = val => {
+  inProgressMessage = (val) => {
     let reply = MESSAGES.inProgressMessage;
     if (
       this.state.dialogState === 'ElicitSlot' &&
@@ -477,9 +477,9 @@ export default class ChatBot extends Component {
     if (isSelected) {
       // only if selected button is not clicked
       // highlight selected button
-      this.state.messageArray[i].responseCardAttachments.map(function(obj) {
+      this.state.messageArray[i].responseCardAttachments.map(function (obj) {
         if (obj.buttons) {
-          obj.buttons.map(function(obj1) {
+          obj.buttons.map(function (obj1) {
             obj1.selectedClass = '';
           });
         }
@@ -525,7 +525,7 @@ export default class ChatBot extends Component {
           });
           // scroll to the end of the conversation
           let scroll = this;
-          setTimeout(function() {
+          setTimeout(function () {
             if (array && array.length > 0) {
               let len = array.length - 1;
               scroll.scrollDown('chatbot-reply-' + len);
@@ -587,7 +587,7 @@ export default class ChatBot extends Component {
         });
         // scroll to the end of the conversation
         let scroll = this;
-        setTimeout(function() {
+        setTimeout(function () {
           if (array && array.length > 0) {
             let len = array.length - 1;
             scroll.scrollDown('chatbot-reply-' + len);
@@ -602,7 +602,7 @@ export default class ChatBot extends Component {
     // enable input text
     this.setState({ disableInput: false });
     let focus = this;
-    setTimeout(function() {
+    setTimeout(function () {
       focus.state.inputFocus.focus();
     }, 50);
   }
@@ -915,7 +915,7 @@ export default class ChatBot extends Component {
 
         // scroll to the end of the conversation
         let scroll = this;
-        setTimeout(function() {
+        setTimeout(function () {
           if (array && array.length > 0) {
             let len = array.length - 1;
             scroll.scrollDown('chatbot-message-' + len);
@@ -937,7 +937,7 @@ export default class ChatBot extends Component {
     }
   }
 
-  claimReport = event => {
+  claimReport = (event) => {
     // claim report functionality
     if (this.state.enableAttachmentIcon === true) {
       // if file attachment is enabled
@@ -961,7 +961,7 @@ export default class ChatBot extends Component {
     }
   };
 
-  uploadFile = file => {
+  uploadFile = (file) => {
     // upload file to s3 bucket
     return new Promise((resolve, reject) => {
       const bucketName = this.props.properties.bucketName
@@ -971,14 +971,14 @@ export default class ChatBot extends Component {
     });
   };
 
-  callLexPostAPI = payload => {
+  callLexPostAPI = (payload) => {
     // upload file to s3 bucket
     return new Promise((resolve, reject) => {
       this.props.postLexRunTime(payload, { resolve, reject });
     });
   };
 
-  callBasicLexData = payload => {
+  callBasicLexData = (payload) => {
     // upload file to s3 bucket
     return new Promise((resolve, reject) => {
       this.props.getBotData(payload, { resolve, reject });
@@ -1014,7 +1014,7 @@ export default class ChatBot extends Component {
 
     // scroll to the end of the conversation
     let scroll = this;
-    setTimeout(function() {
+    setTimeout(function () {
       if (array && array.length > 0) {
         let len = array.length - 1;
         let imgLen = imageArr.length - 1;
@@ -1089,15 +1089,15 @@ export default class ChatBot extends Component {
         />
         <div className={`chatbot-input-div ${this.state.errorClass}`}>
           <input
-            ref={input => {
+            ref={(input) => {
               this.state.inputFocus = input;
             }}
             disabled={this.state.disableInput}
             id="input"
             placeholder={this.state.placeholder}
             value={this.state.message}
-            onChange={e => this.onChangeMessage(e.target.value)}
-            onKeyDown={e => (window.onkeydown = this.sendMessage(e))}
+            onChange={(e) => this.onChangeMessage(e.target.value)}
+            onKeyDown={(e) => (window.onkeydown = this.sendMessage(e))}
           />
         </div>
       </div>

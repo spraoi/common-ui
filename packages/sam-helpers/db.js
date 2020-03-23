@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 import HC from './honeycomb';
 
-const db = options =>
+const db = (options) =>
   new Promise((resolve, reject) => {
     const timer = new Timer();
     let dynamo;

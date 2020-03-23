@@ -4,7 +4,7 @@ const resolve = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
 module.exports = {
-  external: dependency =>
+  external: (dependency) =>
     [
       /^assert$/,
       /^buffer$/,
@@ -29,7 +29,7 @@ module.exports = {
       /^vm$/,
       /^zlib$/,
       /aws-sdk/,
-    ].some(re => re.test(dependency)),
+    ].some((re) => re.test(dependency)),
   output: { format: 'cjs' },
   plugins: [
     commonjs(),

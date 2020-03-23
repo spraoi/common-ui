@@ -48,7 +48,7 @@ export default class ChatBot extends Component {
             <Container
               properties={this.props}
               messageArray={this.state.messageArray}
-              closeChatBox={messageArray => this.closeChatBox(messageArray)}
+              closeChatBox={(messageArray) => this.closeChatBox(messageArray)}
             />
           </Provider>
         )}

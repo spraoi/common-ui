@@ -6,7 +6,7 @@ import * as actions from './actions';
 import * as constants from './constants';
 
 function* postLexRunTime({ payload }) {
-  const postTestMessage = body => {
+  const postTestMessage = (body) => {
     return new Promise((resolve, reject) => {
       const lex = new LexRuntime({ apiVersion: '2016-11-28' });
       lex.postText(body, (err, data) => (err ? reject(err) : resolve(data)));
@@ -22,7 +22,7 @@ function* postLexRunTime({ payload }) {
 }
 
 function* GetLexData({ payload }) {
-  const getBotDetails = body => {
+  const getBotDetails = (body) => {
     return new Promise((resolve, reject) => {
       const modelBuilder = new LexModelBuildingService();
       modelBuilder.getBot(body, (err, data) =>
@@ -96,7 +96,7 @@ function* generateBraintreeClientSaga(token) {
 
 function* generateBraintreeNonceSaga(values, data) {
   const client = yield call(generateBraintreeClientSaga, values);
-  return yield new Promise(resolve => {
+  return yield new Promise((resolve) => {
     client.request(
       {
         data: {
@@ -119,7 +119,7 @@ function* uploadFileSaga({ payload: { file, bucketName } }) {
     const results = yield call(uploadFiles, {
       files: [file],
       bucket: bucketName,
-      onProgress: progress => console.log(progress),
+      onProgress: (progress) => console.log(progress),
     });
     yield put(actions.getUploadedFileInfo(results));
   } catch (e) {

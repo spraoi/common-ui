@@ -5,7 +5,7 @@ import http from './http';
 const { REGION, USER_POOL_ID } = process.env;
 const cachedKeys = {};
 
-const validateAndParseJwt = async token =>
+const validateAndParseJwt = async (token) =>
   new Promise((resolve, reject) => {
     jwt.verify(
       token,
@@ -23,7 +23,7 @@ const validateAndParseJwt = async token =>
         }
 
         const pem = await rasha.export({
-          jwk: keys.find(k => k.kid === header.kid),
+          jwk: keys.find((k) => k.kid === header.kid),
         });
 
         callback(null, pem);

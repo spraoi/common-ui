@@ -107,9 +107,7 @@ export function uploadFiles({
       const split = file.name.split('.');
       const extension = split.pop();
       const name = split.join('.');
-      const randomNumber = Math.random()
-        .toString(36)
-        .substring(2, 12);
+      const randomNumber = Math.random().toString(36).substring(2, 12);
       const fileName = `${path}${name}-${randomNumber}.${extension}`;
 
       const upload = s3.upload(
@@ -122,7 +120,7 @@ export function uploadFiles({
         }
       );
 
-      upload.on('httpUploadProgress', e => {
+      upload.on('httpUploadProgress', (e) => {
         uploadProgress[i] = parseInt((e.loaded * 100) / e.total);
         onProgress(uploadProgress);
       });
@@ -133,7 +131,7 @@ export function uploadFiles({
 export function deleteObjects({ bucket, path, files = [] }) {
   return new Promise((resolve, reject) => {
     const fileNames = [];
-    files.map(file => {
+    files.map((file) => {
       fileNames.push({ Key: path + file });
     });
     const params = {
@@ -245,13 +243,13 @@ export function completeSignUp({
 }) {
   return new Promise((resolve, reject) =>
     user.completeNewPasswordChallenge(newPassword, newAttributes, {
-      onSuccess: session => {
+      onSuccess: (session) => {
         rememberSession(rememberMe);
         parseUserSession(session);
         resolve();
       },
 
-      onFailure: err => reject(parseLambdaError(err)),
+      onFailure: (err) => reject(parseLambdaError(err)),
     })
   );
 }
@@ -325,8 +323,8 @@ export function rememberSession(rememberMe) {
 export function resetPassword({ user, verificationCode, newPassword }) {
   return new Promise((resolve, reject) =>
     user.confirmPassword(verificationCode, newPassword, {
-      onSuccess: data => resolve(data),
-      onFailure: err => reject(parseLambdaError(err)),
+      onSuccess: (data) => resolve(data),
+      onFailure: (err) => reject(parseLambdaError(err)),
     })
   );
 }
@@ -349,7 +347,7 @@ export function sendResetPasswordCode(email) {
   return new Promise((resolve, reject) =>
     user.forgotPassword({
       onSuccess: () => resolve(user),
-      onFailure: err => reject(err),
+      onFailure: (err) => reject(err),
     })
   );
 }
@@ -391,12 +389,12 @@ export function setUserAttributes(attributes) {
 export function signIn({ email, password, rememberMe = false, user }) {
   return new Promise((resolve, reject) => {
     const callbacks = {
-      onSuccess: session => {
+      onSuccess: (session) => {
         rememberSession(rememberMe);
         parseUserSession(session);
         resolve();
       },
-      onFailure: err => reject(parseLambdaError(err)),
+      onFailure: (err) => reject(parseLambdaError(err)),
     };
 
     callbacks.newPasswordRequired = () =>
@@ -428,7 +426,7 @@ export function signInExternalResponse() {
 
     const auth = getFederatedAuthenticationHandler({
       onSuccess,
-      onFailure: err => reject(parseLambdaError(err)),
+      onFailure: (err) => reject(parseLambdaError(err)),
     });
 
     auth.parseCognitoWebResponse(window.location.href);
