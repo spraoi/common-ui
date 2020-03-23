@@ -9,7 +9,7 @@ const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
       <Button
         key={i}
         link={crumb.link}
-        onClick={crumb.onClick ? () => crumb.onClick() : crumb.onClick}
+        onClick={crumb.onClick}
         separator={separator}
         simple
         sx={{
