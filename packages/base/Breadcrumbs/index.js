@@ -3,13 +3,13 @@ import React from 'react';
 import Box from '../Box';
 import Button from '../Button';
 
-const Breadcrumbs = ({ crumbs, crumbSx, navigate, separator, ...rest }) => (
+const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
   <Box display="flex" py="4" {...rest}>
     {crumbs.map((crumb, i) => (
       <Button
         key={i}
-        link={crumb.path}
-        onClick={navigate ? () => navigate(i) : navigate}
+        link={crumb.link}
+        onClick={crumb.onClick ? () => crumb.onClick(i) : crumb.onClick}
         separator={separator}
         simple
         sx={{
@@ -38,21 +38,20 @@ const Breadcrumbs = ({ crumbs, crumbSx, navigate, separator, ...rest }) => (
 
 Breadcrumbs.crumbsType = PropTypes.arrayOf(
   PropTypes.shape({
+    link: PropTypes.string,
     name: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
   })
 );
 
 Breadcrumbs.propTypes = {
   crumbs: Breadcrumbs.crumbsType.isRequired,
   crumbSx: PropTypes.shape({}),
-  navigate: PropTypes.func,
   separator: PropTypes.string,
 };
 
 Breadcrumbs.defaultProps = {
   crumbSx: {},
-  navigate: null,
   separator: '/',
 };
 
