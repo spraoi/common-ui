@@ -7,12 +7,12 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.25.0",
+  "version": "0.26.0",
   "dependencies": {
-    "filepond": "^4.7.0",
+    "filepond": "^4.13.0",
     "filepond-plugin-file-rename": "^1.1.4",
-    "filepond-plugin-file-validate-size": "^2.2.0",
-    "filepond-plugin-file-validate-type": "^1.2.4",
+    "filepond-plugin-file-validate-size": "^2.2.1",
+    "filepond-plugin-file-validate-type": "^1.2.5",
     "react-filepond": "^7.0.1"
   },
   "peerDependencies": {

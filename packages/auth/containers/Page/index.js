@@ -4,11 +4,11 @@ import AuthContext from '../../utilities/context';
 import PageHandler from './PageHandler';
 import { pageTypes } from './utilities/types';
 
-const Page = props => (
+const Page = (props) => (
   <Location>
-    {location => (
+    {(location) => (
       <AuthContext.Consumer>
-        {context => <PageHandler {...location} {...context} {...props} />}
+        {(context) => <PageHandler {...location} {...context} {...props} />}
       </AuthContext.Consumer>
     )}
   </Location>

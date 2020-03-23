@@ -7,12 +7,12 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.25.0",
+  "version": "0.26.0",
   "bin": {
     "spraoi": "bin/spraoi.js"
   },
   "dependencies": {
-    "deepmerge": "^4.0.0",
+    "deepmerge": "^4.2.2",
     "js-yaml": "^3.13.1",
     "meow": "^5.0.0",
     "shelljs": "^0.8.3"

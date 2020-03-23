@@ -15,10 +15,10 @@ const Tabs = ({ defaultTab, name, tabs, type, ...rest }) => (
       const queryParams = parse(location.search);
       const currentTab = get(queryParams, name, defaultTab);
 
-      const generateLink = newTab =>
+      const generateLink = (newTab) =>
         generateRedirectPath({ ...location, queryParams: { [name]: newTab } });
 
-      const currentTabDetails = tabs.find(tab => tab.value === currentTab);
+      const currentTabDetails = tabs.find((tab) => tab.value === currentTab);
 
       return (
         <>

@@ -42,7 +42,7 @@ export function buildCanonicalQueryString(queryParams) {
 }
 
 const requestSigner = {};
-requestSigner.newClient = function(config) {
+requestSigner.newClient = function (config) {
   const AWS_SHA_256 = 'AWS4-HMAC-SHA256';
   const AWS4_REQUEST = 'aws4_request';
   const AWS4 = 'AWS4';
@@ -192,7 +192,7 @@ requestSigner.newClient = function(config) {
   awsRequestSigner.endpoint = endpoint;
   awsRequestSigner.pathComponent = pathComponent;
 
-  awsRequestSigner.signRequest = function(request) {
+  awsRequestSigner.signRequest = function (request) {
     const verb = request.method.toUpperCase();
     const path = awsRequestSigner.pathComponent + request.path;
     const queryParams = { ...request.queryParams };

@@ -15,13 +15,13 @@ import ThresholdLegend from '../LinearLegend';
 const HeatmapChart = ({ colors, data }) => {
   const theme = useContext(ThemeContext);
 
-  const binsAccessor = d => d.bins;
-  const countAccessor = d => d.count;
-  const labelAccessor = d => d.label;
+  const binsAccessor = (d) => d.bins;
+  const countAccessor = (d) => d.count;
+  const labelAccessor = (d) => d.label;
 
-  const max = (data, value = d => d) => Math.max(...data.map(value));
-  const min = (data, value = d => d) => Math.min(...data.map(value));
-  const uniq = arr => Array.from([...new Set(arr)]);
+  const max = (data, value = (d) => d) => Math.max(...data.map(value));
+  const min = (data, value = (d) => d) => Math.min(...data.map(value));
+  const uniq = (arr) => Array.from([...new Set(arr)]);
 
   const reduceLabelWidth = (max, label) =>
     Math.max(
@@ -33,12 +33,12 @@ const HeatmapChart = ({ colors, data }) => {
       })
     );
 
-  const bucketSizeMax = max(data, d => binsAccessor(d).length);
+  const bucketSizeMax = max(data, (d) => binsAccessor(d).length);
 
   const color1 = get(colors, '[0]', theme.colors.visualizations[0]);
   const color2 = get(colors, '[1]', theme.colors.visualizations[1]);
-  const colorMax = max(data, d => max(binsAccessor(d), countAccessor));
-  const colorMin = min(data, d => min(binsAccessor(d), countAccessor));
+  const colorMax = max(data, (d) => max(binsAccessor(d), countAccessor));
+  const colorMin = min(data, (d) => min(binsAccessor(d), countAccessor));
 
   const labelMarginBuffer = 16;
   const legendMargin = 50;
@@ -90,9 +90,9 @@ const HeatmapChart = ({ colors, data }) => {
                     range: [gridSize, 0],
                   })}
                 >
-                  {map =>
-                    map.map(bins =>
-                      bins.map(bin => (
+                  {(map) =>
+                    map.map((bins) =>
+                      bins.map((bin) => (
                         <rect
                           key={`heatmap-rect-${bin.row}-${bin.column}`}
                           fill={bin.color}
@@ -129,7 +129,7 @@ const HeatmapChart = ({ colors, data }) => {
                   })}
                   top={gridSize}
                 >
-                  {axis => (
+                  {(axis) => (
                     <g>
                       {axis.ticks.map((tick, i) => (
                         <Group key={`tick-${tick.value}-${i}`}>
@@ -143,8 +143,9 @@ const HeatmapChart = ({ colors, data }) => {
                             fill={theme.colors.textSubtle}
                             fontSize={theme.fontSizes[1]}
                             textAnchor="end"
-                            transform={`translate(${tick.to.x}, ${tick.to.y +
-                              axis.tickLength}) rotate(-90)`}
+                            transform={`translate(${tick.to.x}, ${
+                              tick.to.y + axis.tickLength
+                            }) rotate(-90)`}
                           >
                             {tick.formattedValue}
                           </text>

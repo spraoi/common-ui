@@ -24,8 +24,8 @@ const BubbleChart = ({
         const yMax = height - margin.top - margin.bottom;
 
         const pack = {
-          children: [{ children: data.filter(d => d.value !== 0) }].concat(
-            data.filter(d => d.value === 0)
+          children: [{ children: data.filter((d) => d.value !== 0) }].concat(
+            data.filter((d) => d.value === 0)
           ),
         };
 
@@ -37,7 +37,7 @@ const BubbleChart = ({
           <>
             <svg height={height} width={width}>
               <Pack root={packData} size={[xMax, yMax]}>
-                {pack => (
+                {(pack) => (
                   <Group left={margin.left} top={margin.top}>
                     {pack
                       .descendants()

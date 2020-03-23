@@ -11,10 +11,10 @@ const OrdinalLegend = ({ colors, data, labelAccessor, size }) => {
   return (
     <LegendOrdinal
       scale={scaleOrdinal({
-        domain: [...data.map(d => labelAccessor(d))],
+        domain: [...data.map((d) => labelAccessor(d))],
       })}
     >
-      {label =>
+      {(label) =>
         label.map((d, i) => (
           <Box key={`ordinal-legend-${i}`} as={LegendItem} pr={5}>
             <svg height={size} width={size}>

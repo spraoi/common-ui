@@ -97,7 +97,7 @@ export default class CoBrowsingProvider extends Component {
     return result;
   };
 
-  getSessionList = async values => {
+  getSessionList = async (values) => {
     const sessions = await getAllSessions({
       isActive: true,
       apiKey: this.state.surflyApiKey,
@@ -105,7 +105,7 @@ export default class CoBrowsingProvider extends Component {
     this.setState({ sessions: sessions, sessionsLoading: false });
   };
 
-  getSessionDetails = async sessionId => {
+  getSessionDetails = async (sessionId) => {
     const session = await getSessionInformation({
       sessionId: sessionId,
       apiKey: this.state.surflyApiKey,

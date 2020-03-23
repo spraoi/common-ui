@@ -25,8 +25,9 @@ const LineageChart = ({ data, highlightEdge, onVertexClick }) => {
     <Box
       sx={{
         height: calculateHeight(data, VERTEX_BG_HEIGHT),
-        width: `${dataHierarchy.height *
-          (vertexMaxWidth + VERTEX_BG_PX * 2 + 150)}px`,
+        width: `${
+          dataHierarchy.height * (vertexMaxWidth + VERTEX_BG_PX * 2 + 150)
+        }px`,
       }}
     >
       <ParentSize>
@@ -36,7 +37,7 @@ const LineageChart = ({ data, highlightEdge, onVertexClick }) => {
               root={dataHierarchy}
               size={[height, width - VERTEX_BG_PX * 2 - vertexMaxWidth]}
             >
-              {tree => (
+              {(tree) => (
                 <Group left={VERTEX_BG_PX} top={0}>
                   {tree.links().map((link, i) => (
                     <LinkHorizontal

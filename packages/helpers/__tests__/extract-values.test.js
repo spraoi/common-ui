@@ -4,7 +4,7 @@ describe('extractValues function', () => {
   test('should work', () => {
     expect(
       extractValues({
-        keyFunction: key => key !== 'id',
+        keyFunction: (key) => key !== 'id',
         payload: [
           {
             1: 'foo',
@@ -29,7 +29,7 @@ describe('extractValues function', () => {
             id: 'id8',
           },
         ],
-        valueFunction: value => /^id[0-9]$/.test(value),
+        valueFunction: (value) => /^id[0-9]$/.test(value),
       })
     ).toEqual(['id4', 'id1', 'id2', 'id3']);
   });

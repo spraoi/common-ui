@@ -14,9 +14,9 @@ const TabTable = ({
 }) => (
   <Card sx={{ p: 0, ...sx }}>
     <Table
-      activeRowIndex={rows.findIndex(r => r[rowTabIndex] === currentTab)}
+      activeRowIndex={rows.findIndex((r) => r[rowTabIndex] === currentTab)}
       header={header}
-      onRowClick={row =>
+      onRowClick={(row) =>
         navigate(generateLink(row[rowTabIndex]), { replace: true })
       }
       rows={rows}

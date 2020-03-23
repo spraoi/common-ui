@@ -1,4 +1,4 @@
-const isJSON = payload => {
+const isJSON = (payload) => {
   if (!payload) return false;
 
   try {

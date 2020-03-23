@@ -17,6 +17,6 @@ export default class PrivateRoute extends PureComponent {
       ReactGA.pageview(window.location.pathname + window.location.search);
     }
 
-    return <Route render={props => <C {...props} />} {...rest} />;
+    return <Route render={(props) => <C {...props} />} {...rest} />;
   }
 }

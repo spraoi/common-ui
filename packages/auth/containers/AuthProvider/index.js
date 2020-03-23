@@ -82,12 +82,12 @@ class AuthProvider extends PureComponent {
     });
   };
 
-  signUp = async values => {
+  signUp = async (values) => {
     await Auth.signUp(values);
     return Auth.signIn(values.username, values.password);
   };
 
-  updateUserAttributes = async values => {
+  updateUserAttributes = async (values) => {
     await Auth.updateUserAttributes(
       await Auth.currentAuthenticatedUser(),
       values

@@ -12,12 +12,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .BrainhubCarousel__trackContainer {
-    border-radius: ${p => p.theme.radii[2]};
+    border-radius: ${(p) => p.theme.radii[2]};
   }
 
   .BrainhubCarousel__customArrows {
     position: absolute;
-    z-index: ${p => p.theme.zIndices[0]};
+    z-index: ${(p) => p.theme.zIndices[0]};
   }
 
   .BrainhubCarousel__custom-arrowRight {
@@ -78,14 +78,14 @@ const Carousel = ({
                     onClick={() => onSlideClick(i)}
                     sx={{
                       '&:hover': {
-                        boxShadow: theme =>
+                        boxShadow: (theme) =>
                           onSlideClick
                             ? `0 0 0 2px ${theme.colors.accent} inset`
                             : null,
                       },
                       bg: 'white',
                       borderRadius: 2,
-                      boxShadow: theme =>
+                      boxShadow: (theme) =>
                         activeSlideIndex === i
                           ? `0 0 0 2px ${theme.colors.accent} inset`
                           : null,

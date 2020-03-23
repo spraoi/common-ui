@@ -1,4 +1,4 @@
-const parseUuid = id => {
+const parseUuid = (id) => {
   const res = {};
   if (!id) return res;
   const splitId = id.split(':');

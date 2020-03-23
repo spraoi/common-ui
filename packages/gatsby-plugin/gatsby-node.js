@@ -6,12 +6,12 @@ const { safeLoad } = require('js-yaml');
 exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   const config = getConfig();
 
-  config.module.rules = config.module.rules.map(rule => {
+  config.module.rules = config.module.rules.map((rule) => {
     const newRule = { ...rule };
 
     if (String(rule.test) === String(/\.jsx?$/)) {
       // our common modules are never transpiled beforehand
-      newRule.exclude = modulePath =>
+      newRule.exclude = (modulePath) =>
         /node_modules/.test(modulePath) &&
         !/node_modules\/(@spraoi)/.test(modulePath);
     }
@@ -61,17 +61,17 @@ function createIconComponent() {
 
   const files = fs
     .readdirSync(iconDir)
-    .map(file => ({
+    .map((file) => ({
       componentName: file.split('.')[0].replace(/[^a-z]/gi, ''),
       file,
       name: file.split('.')[0],
       type: file.split('.').pop(),
     }))
-    .filter(file => file.type === 'svg');
+    .filter((file) => file.type === 'svg');
 
   if (!fs.existsSync(iconComponentDir)) fs.mkdirSync(iconComponentDir);
 
-  prettier.resolveConfig(iconComponent).then(options => {
+  prettier.resolveConfig(iconComponent).then((options) => {
     const allOpts = { ...options, parser: 'babel' };
 
     const formatted = prettier.format(
@@ -88,7 +88,7 @@ function createIconComponent() {
         )}
 
         const svgMap = {
-          ${files.map(file => `'${file.name}': ${file.componentName}`)}
+          ${files.map((file) => `'${file.name}': ${file.componentName}`)}
         };
 
         const Icon = ({ svg, ...rest }) => {
@@ -103,7 +103,7 @@ function createIconComponent() {
 
         Icon.propTypes = {
           svg: PropTypes.oneOf([
-            ${files.map(file => `'${file.name}'`)}
+            ${files.map((file) => `'${file.name}'`)}
           ]).isRequired,
         };
 

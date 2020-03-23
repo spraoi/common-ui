@@ -17,7 +17,7 @@ const LinearLegend = ({ domain, range, size, steps }) => {
       scale={scaleLinear({ domain, range })}
       steps={steps}
     >
-      {labels =>
+      {(labels) =>
         labels.map((label, i) => (
           <LegendItem key={`linear-legend-${i}`}>
             <svg height={size} width={size}>

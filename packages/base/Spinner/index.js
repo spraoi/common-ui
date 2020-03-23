@@ -3,7 +3,7 @@ import { BarLoader } from 'react-spinners';
 import { ThemeContext } from 'styled-components';
 import Box from '../Box';
 
-const Spinner = props => {
+const Spinner = (props) => {
   const theme = useContext(ThemeContext);
 
   return (

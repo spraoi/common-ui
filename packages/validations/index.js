@@ -1,30 +1,30 @@
 import isEmail from 'validator/lib/isEmail';
 import moment from 'moment';
 
-export const alpha = value => {
+export const alpha = (value) => {
   if (!/^[a-z]*$/i.test(value)) return 'Must contain only letters';
 };
 
-export const checkFileExtension = allowExtensions => value => {
+export const checkFileExtension = (allowExtensions) => (value) => {
   if (!allowExtensions.includes(/(?:\.([^.]+))?$/.exec(value)[1])) {
     return `Allowed extensions: ${allowExtensions.join(', ')}`;
   }
 };
 
-export const composeValidations = (...validators) => value =>
+export const composeValidations = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
-export const date = format => {
-  return value => {
+export const date = (format) => {
+  return (value) => {
     if (value && !moment(value, format, true).isValid()) return 'Invalid date';
   };
 };
 
-export const email = value => {
+export const email = (value) => {
   if (value && !isEmail(value)) return 'Invalid email';
 };
 
-export const float = precision => value => {
+export const float = (precision) => (value) => {
   const maxPrecision = precision || 2;
   if (
     value &&
@@ -34,11 +34,11 @@ export const float = precision => value => {
   }
 };
 
-export const integer = value => {
+export const integer = (value) => {
   if (value && !/^[-+]?[0-9]+$/.test(value)) return 'Invalid integer';
 };
 
-export const json = value => {
+export const json = (value) => {
   if (!value) return;
 
   try {
@@ -48,13 +48,13 @@ export const json = value => {
   }
 };
 
-export const minLength = length => value => {
+export const minLength = (length) => (value) => {
   if (value && value.length < length) {
     return `Must be at least ${length} characters`;
   }
 };
 
-export const required = value => {
+export const required = (value) => {
   if (
     value === undefined ||
     value === '' ||
@@ -64,7 +64,7 @@ export const required = value => {
   }
 };
 
-export const versionNumber = value => {
+export const versionNumber = (value) => {
   if (value && !/^[0-9]+(\.[0-9]+)?$/.test(value)) {
     return 'Invalid version number';
   }

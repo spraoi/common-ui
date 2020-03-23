@@ -65,7 +65,7 @@ export default ({ errorHandler, handler }) => ({
           userGroups.includes(claimedActiveGroup) &&
           clientIdGroups.includes(claimedActiveGroup)
             ? claimedActiveGroup
-            : clientIdGroups.find(group => userGroups.includes(group));
+            : clientIdGroups.find((group) => userGroups.includes(group));
 
         clientId = clientIds[clientGroup];
       }

@@ -71,7 +71,7 @@ export default class LegacyFileUpload extends PureComponent {
 
     Storage.get(uniqueFileId, { customPrefix, identityId, level })
       .then(fetch)
-      .then(r => r.blob())
+      .then((r) => r.blob())
       .then(load)
       .catch(error);
 
@@ -137,7 +137,7 @@ export default class LegacyFileUpload extends PureComponent {
           revert: this.serverRevert,
         }}
       >
-        {existingFiles.map(f => (
+        {existingFiles.map((f) => (
           <File key={f} origin="local" src={f} />
         ))}
       </FilePond>

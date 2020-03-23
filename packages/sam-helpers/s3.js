@@ -3,7 +3,7 @@ import Timer from '@spraoi/helpers/timer';
 import uuid from 'uuid/v4';
 import HC from './honeycomb';
 
-const s3 = options =>
+const s3 = (options) =>
   new Promise((resolve, reject) => {
     const timer = new Timer();
     const s3 = new AWS.S3();

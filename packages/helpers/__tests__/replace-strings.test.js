@@ -4,7 +4,7 @@ describe('replaceStrings function', () => {
   test('should work', () => {
     expect(
       replaceStrings({
-        keyFunction: key => key !== 'id',
+        keyFunction: (key) => key !== 'id',
         payload: [
           {
             1: 'foo',
@@ -25,7 +25,7 @@ describe('replaceStrings function', () => {
           },
         ],
         replaceFunction: ({ key, value }) => ({ [key]: `foo${value}` }),
-        valueFunction: value => /^id[0-9]{1}$/.test(value),
+        valueFunction: (value) => /^id[0-9]{1}$/.test(value),
       })
     ).toEqual([
       {
