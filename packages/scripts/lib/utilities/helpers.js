@@ -2,14 +2,14 @@ const fs = require('fs');
 const readline = require('readline');
 const sh = require('shelljs');
 
-module.exports.ask = question =>
-  new Promise(resolve => {
+module.exports.ask = (question) =>
+  new Promise((resolve) => {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
     });
 
-    rl.question(question, answer => {
+    rl.question(question, (answer) => {
       resolve(answer);
       rl.close();
     });
@@ -28,9 +28,9 @@ module.exports.parseTemplate = (template, data) => {
   );
 };
 
-module.exports.read = file => fs.readFileSync(file, { encoding: 'utf8' });
+module.exports.read = (file) => fs.readFileSync(file, { encoding: 'utf8' });
 
-module.exports.tryShell = command => {
+module.exports.tryShell = (command) => {
   sh.exec(command);
   if (sh.error()) process.exit(1);
 };

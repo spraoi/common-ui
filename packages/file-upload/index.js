@@ -13,26 +13,26 @@ const StyledGlobal = createGlobalStyle`
   .filepond--wrapper {
     .filepond--root {
       margin: 0;
-      font-family: ${p => p.theme.fonts.primary};
+      font-family: ${(p) => p.theme.fonts.primary};
     }
 
     .filepond--drop-label {
-      color: ${p => p.theme.colors.grays[4]};
+      color: ${(p) => p.theme.colors.grays[4]};
     }
 
     .filepond--label-action {
-      text-decoration-color: ${p => p.theme.colors.grays[4]};
+      text-decoration-color: ${(p) => p.theme.colors.grays[4]};
     }
 
     .filepond--panel-root {
-      border: dashed 1px ${p =>
+      border: dashed 1px ${(p) =>
         p.error ? p.theme.colors.error : p.theme.colors.grays[3]};
-      border-radius: ${p => p.theme.radii[2]};
-      background-color: ${p => p.theme.colors.grays[1]};
+      border-radius: ${(p) => p.theme.radii[2]};
+      background-color: ${(p) => p.theme.colors.grays[1]};
     }
 
     .filepond--item-panel {
-      border-radius: ${p => p.theme.radii[2]};
+      border-radius: ${(p) => p.theme.radii[2]};
     }
   }
 `;
@@ -57,7 +57,7 @@ class FileUpload extends PureComponent {
 
     Storage.get(uniqueFileId, { bucket, customPrefix, identityId, level })
       .then(fetch)
-      .then(r => r.blob())
+      .then((r) => r.blob())
       .then(load)
       .catch(error);
 
@@ -120,7 +120,7 @@ class FileUpload extends PureComponent {
             revert: this.serverRevert,
           }}
         >
-          {existingFiles.map(f => (
+          {existingFiles.map((f) => (
             <File key={f} origin="local" src={f} />
           ))}
         </FilePond>

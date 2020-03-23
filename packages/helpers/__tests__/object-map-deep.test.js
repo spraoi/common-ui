@@ -15,7 +15,7 @@ describe('objectMapDeep', () => {
             bar: 1,
           },
         },
-        value => `${String(value)} mapped!`
+        (value) => `${String(value)} mapped!`
       )
     ).toMatchObject({
       bar: '1 mapped!',

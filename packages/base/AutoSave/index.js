@@ -54,7 +54,7 @@ AutoSaveComponent.defaultProps = {
   debounce: 200,
 };
 
-const AutoSave = props => (
+const AutoSave = (props) => (
   <FormSpy
     component={AutoSaveComponent}
     subscription={{ values: true }}

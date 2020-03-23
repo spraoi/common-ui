@@ -2,7 +2,7 @@
  * input: { foo: 'bar', baz: ['foo', 'bar'], baz: 'foo,bar' }
  * output: '?foo=bar&baz=foo&baz=bar&baz=foo&baz=bar'
  */
-export default obj => {
+export default (obj) => {
   if (!obj) return '';
   let paramCount = 0;
 
@@ -30,8 +30,8 @@ export default obj => {
 
     if (value && value.constructor === Array) {
       value
-        .filter(arrVal => arrVal !== null)
-        .forEach(arrVal => {
+        .filter((arrVal) => arrVal !== null)
+        .forEach((arrVal) => {
           str = appendToString(str, key, arrVal);
         });
 

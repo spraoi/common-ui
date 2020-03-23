@@ -10,7 +10,7 @@ const Checkbox = ({ input, label, labelReverse, type, ...rest }) => (
     label={label}
     {...rest}
   >
-    {props => (
+    {(props) => (
       <Box
         as="input"
         id={`${input.name}${input.value}`}

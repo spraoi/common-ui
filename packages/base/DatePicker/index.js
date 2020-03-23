@@ -8,12 +8,14 @@ import themeVariantToValue from '@spraoi/helpers/theme-variant-to-value';
 import InputWrapper from '../InputWrapper';
 
 const DatePickerWrapper = styled(InputWrapper)`
-  border: ${p => p.theme.variants.inputs.primary.borderStyle}
-    ${p => themeVariantToValue(p.theme, 'sizes', 'inputs.primary.borderWidth')}
-    ${p => themeVariantToValue(p.theme, 'colors', 'inputs.primary.borderColor')};
+  border: ${(p) => p.theme.variants.inputs.primary.borderStyle}
+    ${(p) =>
+      themeVariantToValue(p.theme, 'sizes', 'inputs.primary.borderWidth')}
+    ${(p) =>
+      themeVariantToValue(p.theme, 'colors', 'inputs.primary.borderColor')};
 
   &:focus-within {
-    border-color: ${p =>
+    border-color: ${(p) =>
       themeVariantToValue(
         p.theme,
         'colors',
@@ -23,72 +25,72 @@ const DatePickerWrapper = styled(InputWrapper)`
 
   .react-calendar {
     font-family: inherit;
-    border-color: ${p =>
+    border-color: ${(p) =>
       themeVariantToValue(p.theme, 'colors', 'inputs.primary.borderColor')};
-    border-radius: ${p =>
+    border-radius: ${(p) =>
       themeVariantToValue(p.theme, 'radii', 'inputs.primary.borderRadius')};
 
     &__tile {
       &:disabled {
-        background-color: ${p => p.theme.colors.grays[0]};
+        background-color: ${(p) => p.theme.colors.grays[0]};
       }
 
       &:enabled {
         &:focus,
         &:hover {
-          background-color: ${p => p.theme.colors.grays[0]};
+          background-color: ${(p) => p.theme.colors.grays[0]};
         }
       }
 
       &--active {
-        background: ${p => p.theme.colors.accent};
+        background: ${(p) => p.theme.colors.accent};
 
         &:enabled {
           &:focus,
           &:hover {
-            background: ${p => p.theme.colors.primary};
+            background: ${(p) => p.theme.colors.primary};
           }
         }
       }
     }
 
     &--selectRange &__tile--hover {
-      background-color: ${p => p.theme.colors.grays[0]};
+      background-color: ${(p) => p.theme.colors.grays[0]};
     }
 
     &__navigation {
       button:enabled {
         &:hover,
         &:focus {
-          background-color: ${p => p.theme.colors.grays[0]};
+          background-color: ${(p) => p.theme.colors.grays[0]};
         }
       }
 
       button[disabled] {
-        background-color: ${p => p.theme.colors.grays[0]};
+        background-color: ${(p) => p.theme.colors.grays[0]};
       }
     }
 
     &__month-view__days__day {
       &--neighboringMonth {
-        color: ${p => p.theme.colors.grays[4]};
+        color: ${(p) => p.theme.colors.grays[4]};
       }
     }
   }
 
   &.react-daterange-picker {
     width: 100%;
-    height: ${p =>
+    height: ${(p) =>
       `calc(${themeVariantToValue(
         p.theme,
         'space',
         'inputs.primary.py'
       )} * 2 + ${p.theme.lineHeights[1]})`};
     padding: 0
-      ${p => themeVariantToValue(p.theme, 'space', 'inputs.primary.px')};
-    border-radius: ${p =>
+      ${(p) => themeVariantToValue(p.theme, 'space', 'inputs.primary.px')};
+    border-radius: ${(p) =>
       themeVariantToValue(p.theme, 'radii', 'inputs.primary.borderRadius')};
-    background-color: ${p =>
+    background-color: ${(p) =>
       themeVariantToValue(p.theme, 'colors', 'inputs.primary.bg')};
   }
 
@@ -109,11 +111,11 @@ const DatePickerWrapper = styled(InputWrapper)`
     }
 
     &__calendar {
-      box-shadow: ${p => p.theme.shadows[0]};
+      box-shadow: ${(p) => p.theme.shadows[0]};
     }
 
     &__button {
-      color: ${p => p.theme.colors.grays[1]};
+      color: ${(p) => p.theme.colors.grays[1]};
 
       &:enabled {
         &:focus,
@@ -136,7 +138,7 @@ const DatePicker = ({ input, ...rest }) => {
 
   return (
     <DatePickerWrapper input={input} {...rest}>
-      {props => (
+      {(props) => (
         <DateRange
           format="MM/dd/y"
           onChange={onChange}

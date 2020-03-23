@@ -6,7 +6,7 @@ import Carousel from '../../Carousel';
 const TabCarousel = ({ currentTab, generateLink, ...rest }) => (
   <Carousel
     activeSlideIndex={Number(currentTab)}
-    onSlideClick={index => navigate(generateLink(index), { replace: true })}
+    onSlideClick={(index) => navigate(generateLink(index), { replace: true })}
     {...rest}
   />
 );

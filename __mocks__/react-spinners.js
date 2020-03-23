@@ -2,4 +2,4 @@ import React from 'react';
 
 export const BarLoader = jest
   .fn()
-  .mockImplementation(props => <div {...props} />);
+  .mockImplementation((props) => <div {...props} />);

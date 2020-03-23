@@ -9,12 +9,12 @@
   },
   "version": "0.25.0",
   "dependencies": {
-    "deepmerge": "^4.0.0",
+    "deepmerge": "^4.2.2",
     "js-yaml": "^3.13.1"
   },
   "peerDependencies": {
     "graphql-tag": "^2",
-    "prettier": "^1"
+    "prettier": "^2"
   },
   "publishConfig": {
     "access": "public"

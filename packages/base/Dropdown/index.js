@@ -56,7 +56,7 @@ const getOverrideStyles = ({ error, theme }) => {
   const height = `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`;
 
   return {
-    container: base => ({ ...base, flex: 1 }),
+    container: (base) => ({ ...base, flex: 1 }),
     control: (base, { isFocused }) => ({
       ...base,
       '&:hover': { border: getBorder({ isFocused }) },
@@ -73,15 +73,15 @@ const getOverrideStyles = ({ error, theme }) => {
       minHeight: height,
       padding: 0,
     }),
-    dropdownIndicator: base => ({ ...base, padding: `0 ${paddingX}` }),
-    indicatorSeparator: base => ({
+    dropdownIndicator: (base) => ({ ...base, padding: `0 ${paddingX}` }),
+    indicatorSeparator: (base) => ({
       ...base,
       backgroundColor: getBorderColor(),
     }),
     input: () => ({
       position: 'absolute',
     }),
-    multiValue: base => ({
+    multiValue: (base) => ({
       ...base,
       '+ *[class*="-Input"]': {
         position: 'static',
@@ -90,14 +90,14 @@ const getOverrideStyles = ({ error, theme }) => {
     placeholder: () => ({
       color: placeholderColor,
     }),
-    singleValue: base => ({
+    singleValue: (base) => ({
       ...base,
       maxWidth: 'calc(100% - 1.5rem)',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
     }),
-    valueContainer: base => ({
+    valueContainer: (base) => ({
       ...base,
       border: 0,
       borderRadius,
@@ -123,7 +123,7 @@ const Dropdown = ({ input, ...rest }) => {
       }) => {
         const overrideStyles = getOverrideStyles({ error, theme });
 
-        const getOptionLabel = option => (
+        const getOptionLabel = (option) => (
           <span>
             {option.label} <br />
             <Box color="grays.4" fontSize={2}>
@@ -137,7 +137,7 @@ const Dropdown = ({ input, ...rest }) => {
 
           if (value) {
             if (Array.isArray(value)) {
-              parsedValue = value.length ? value.map(o => o.value) : '';
+              parsedValue = value.length ? value.map((o) => o.value) : '';
             } else {
               parsedValue = value.value;
             }
@@ -147,12 +147,12 @@ const Dropdown = ({ input, ...rest }) => {
           input.onChange(parsedValue, meta);
         };
 
-        const optionByValue = value => {
+        const optionByValue = (value) => {
           // after search add new options in state
           const newAsyncOptions = externalAsyncOptions || asyncOptions;
 
           return [...(inputRest.options || []), ...newAsyncOptions].find(
-            o => o.value === value
+            (o) => o.value === value
           );
         };
 
@@ -166,13 +166,13 @@ const Dropdown = ({ input, ...rest }) => {
             {...input}
             backspaceRemoves={backspaceRemoves}
             defaultOptions
-            loadOptions={async query => {
+            loadOptions={async (query) => {
               let options = await loadOptions(query);
 
               if (externalAsyncOptions) {
                 // after search add new options in state & remove duplicate
                 // options from state.
-                setExternalAsyncOptions(prevOptions =>
+                setExternalAsyncOptions((prevOptions) =>
                   uniqBy([...prevOptions, ...options], 'value')
                 );
               } else {
@@ -180,7 +180,7 @@ const Dropdown = ({ input, ...rest }) => {
               }
 
               // check for subtext and display if exists
-              options = options.map(option => {
+              options = options.map((option) => {
                 return {
                   label:
                     typeof option.subtext !== 'undefined'

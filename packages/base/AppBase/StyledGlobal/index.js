@@ -8,26 +8,26 @@ const StyledGlobal = createGlobalStyle`
   html {
     height: 100%;
     overflow-x: hidden;
-    background-color: ${p => p.theme.colors.body};
-    color: ${p => p.theme.colors.text.primary};
-    font-family: ${p => p.theme.fonts.primary};
-    font-size: ${p => p.theme.baseFontSizesForBreakpoint[0]};
-    font-weight: ${p => p.theme.fontWeights.normal};
+    background-color: ${(p) => p.theme.colors.body};
+    color: ${(p) => p.theme.colors.text.primary};
+    font-family: ${(p) => p.theme.fonts.primary};
+    font-size: ${(p) => p.theme.baseFontSizesForBreakpoint[0]};
+    font-weight: ${(p) => p.theme.fontWeights.normal};
 
-    @media (min-width: ${p => p.theme.breakpoints[0]}) {
-      font-size: ${p => p.theme.baseFontSizesForBreakpoint[1]};
+    @media (min-width: ${(p) => p.theme.breakpoints[0]}) {
+      font-size: ${(p) => p.theme.baseFontSizesForBreakpoint[1]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints[1]}) {
-      font-size: ${p => p.theme.baseFontSizesForBreakpoint[2]};
+    @media (min-width: ${(p) => p.theme.breakpoints[1]}) {
+      font-size: ${(p) => p.theme.baseFontSizesForBreakpoint[2]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints[2]}) {
-      font-size: ${p => p.theme.baseFontSizesForBreakpoint[3]};
+    @media (min-width: ${(p) => p.theme.breakpoints[2]}) {
+      font-size: ${(p) => p.theme.baseFontSizesForBreakpoint[3]};
     }
 
-    @media (min-width: ${p => p.theme.breakpoints[3]}) {
-      font-size: ${p => p.theme.baseFontSizesForBreakpoint[4]};
+    @media (min-width: ${(p) => p.theme.breakpoints[3]}) {
+      font-size: ${(p) => p.theme.baseFontSizesForBreakpoint[4]};
     }
   }
 
@@ -40,7 +40,7 @@ const StyledGlobal = createGlobalStyle`
   }
 
   a {
-    color: ${p => p.theme.colors.text.link};
+    color: ${(p) => p.theme.colors.text.link};
     text-decoration: none;
   }
 
@@ -96,25 +96,25 @@ const StyledGlobal = createGlobalStyle`
   h2,
   h3,
   h4 {
-    color: ${p => p.theme.colors.text.heading};
-    font-family: ${p => p.theme.fonts.secondary};
-    font-weight: ${p => p.theme.fontWeights.bold};
+    color: ${(p) => p.theme.colors.text.heading};
+    font-family: ${(p) => p.theme.fonts.secondary};
+    font-weight: ${(p) => p.theme.fontWeights.bold};
   }
 
   h1 {
-    font-size: ${p => p.theme.fontSizes[6]};
+    font-size: ${(p) => p.theme.fontSizes[6]};
   }
 
   h2 {
-    font-size: ${p => p.theme.fontSizes[5]};
+    font-size: ${(p) => p.theme.fontSizes[5]};
   }
 
   h3 {
-    font-size: ${p => p.theme.fontSizes[4]};
+    font-size: ${(p) => p.theme.fontSizes[4]};
   }
 
   h4 {
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${(p) => p.theme.fontSizes[3]};
   }
 
   ul {
@@ -124,7 +124,7 @@ const StyledGlobal = createGlobalStyle`
   hr {
     height: 1px;
     border: 0;
-    background-color: ${p => p.theme.colors.border};
+    background-color: ${(p) => p.theme.colors.border};
   }
 `;
 

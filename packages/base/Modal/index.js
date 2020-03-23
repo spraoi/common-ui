@@ -9,7 +9,7 @@ const StyledGlobal = createGlobalStyle`
   .ReactModal__Overlay {
     opacity: 0;
     transition: opacity 200ms ease-in-out;
-    z-index: ${p => p.theme.zIndices[4]};
+    z-index: ${(p) => p.theme.zIndices[4]};
   }
 
   .ReactModal__Overlay--after-open{

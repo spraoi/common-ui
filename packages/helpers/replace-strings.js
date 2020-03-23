@@ -16,7 +16,7 @@ const replaceStrings = ({
   if (!parsed.isObject) return payload;
 
   const replaced = Array.isArray(parsed.payload)
-    ? parsed.payload.map(value =>
+    ? parsed.payload.map((value) =>
         replaceStrings({
           currentPath,
           ignorePaths,

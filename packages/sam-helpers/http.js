@@ -8,7 +8,7 @@ import HC from './honeycomb';
 
 request.maxBodyLength = 100 * 1024 * 1024; // 100 MB
 
-const http = originalOptions => {
+const http = (originalOptions) => {
   const options = originalOptions;
   const timer = new Timer();
 
@@ -36,8 +36,8 @@ const http = originalOptions => {
   let responseBody = '';
 
   return new Promise((resolve, reject) => {
-    const req = handler.request(options, stream => {
-      stream.on('data', chunk => {
+    const req = handler.request(options, (stream) => {
+      stream.on('data', (chunk) => {
         responseBody += chunk;
       });
 

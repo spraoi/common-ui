@@ -12,7 +12,7 @@ const TabDropdown = ({ currentTab, generateLink, label, name, sx, tabs }) => (
         component={Dropdown}
         label={label}
         name={name}
-        onChange={tab => navigate(generateLink(tab), { replace: true })}
+        onChange={(tab) => navigate(generateLink(tab), { replace: true })}
         options={tabs}
         wrapperSx={{ maxWidth: ['100%', null, null, '300px'], mb: 6, ...sx }}
       />

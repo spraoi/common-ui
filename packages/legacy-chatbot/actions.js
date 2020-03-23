@@ -10,24 +10,27 @@ export const getBotData = (payload, meta) => ({
   meta,
   payload,
 });
-export const botData = data => ({ type: constants.GET_LEX_BOT_SUCCESS, data });
-export const getLexRunTimeInfo = data => ({
+export const botData = (data) => ({
+  type: constants.GET_LEX_BOT_SUCCESS,
+  data,
+});
+export const getLexRunTimeInfo = (data) => ({
   type: constants.POST_LEX_RUN_TIME_SUCCESS,
   data,
 });
-export const foundLexRunTimeError = error => ({
+export const foundLexRunTimeError = (error) => ({
   type: constants.FOUND_LEX_RUN_TIME_ERROR,
   error,
 });
-export const clearLexRunTimeError = error => ({
+export const clearLexRunTimeError = (error) => ({
   type: constants.CLEAR_LEX_RUN_TIME_ERROR,
   error,
 });
-export const getBrainTreeNonce = payload => ({
+export const getBrainTreeNonce = (payload) => ({
   type: constants.GET_BRAINTREE_NONCE_REQUEST,
   payload,
 });
-export const brainTreeNonce = nonce => ({
+export const brainTreeNonce = (nonce) => ({
   type: constants.BRAINTREE_NONCE_VALUE,
   nonce,
 });
@@ -39,15 +42,15 @@ export const uploadFileRequest = (payload, meta) => ({
   meta,
   payload,
 });
-export const getUploadedFileInfo = data => ({
+export const getUploadedFileInfo = (data) => ({
   type: constants.UPLOAD_FILE_SUCCESS,
   data,
 });
-export const clearFileData = error => ({
+export const clearFileData = (error) => ({
   type: constants.CLEAR_FILE_DATA,
   error,
 });
-export const clearLexBotData = error => ({
+export const clearLexBotData = (error) => ({
   type: constants.CLEAR_LEX_BOT_DATA,
   error,
 });

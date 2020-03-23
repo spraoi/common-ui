@@ -11,16 +11,16 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "@spraoi/helpers": "*",
-    "aws-sdk": "^2",
-    "lodash": "^4",
-    "uuid": "^7"
-  },
   "dependencies": {
     "follow-redirects": "^1.10.0",
     "jsonwebtoken": "^8.5.1",
     "lambda-warmer": "^1.2.1",
     "rasha": "^1.2.5"
+  },
+  "peerDependencies": {
+    "@spraoi/helpers": "*",
+    "aws-sdk": "^2",
+    "lodash": "^4",
+    "uuid": "^7"
   }
 }
