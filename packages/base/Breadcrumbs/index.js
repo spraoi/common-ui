@@ -8,7 +8,8 @@ const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
     {crumbs.map((crumb, i) => (
       <Button
         key={i}
-        link={crumb.path}
+        link={crumb.link}
+        onClick={crumb.onClick}
         separator={separator}
         simple
         sx={{
@@ -37,8 +38,9 @@ const Breadcrumbs = ({ crumbs, crumbSx, separator, ...rest }) => (
 
 Breadcrumbs.crumbsType = PropTypes.arrayOf(
   PropTypes.shape({
+    link: PropTypes.string,
     name: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
   })
 );
 
