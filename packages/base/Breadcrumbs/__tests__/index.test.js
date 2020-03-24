@@ -4,8 +4,8 @@ import { render } from '../../../../__utilities__/testing-library';
 
 describe('Breadcrumbs component', () => {
   it('renders breadcrumbs with correct names and paths', () => {
-    const breadcrumbFoo = { link: '/foo', name: 'foo' };
-    const breadcrumbBar = { link: '/bar', name: 'bar' };
+    const breadcrumbFoo = { link: '/foo', name: 'Foo' };
+    const breadcrumbBar = { link: '/bar', name: 'Bar' };
 
     const { getByText } = render(
       <Breadcrumbs crumbs={[breadcrumbFoo, breadcrumbBar]} />
