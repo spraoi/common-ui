@@ -62,6 +62,7 @@ const Table = ({
   rows,
   sortBy,
   stickyColumn,
+  tableSx,
 }) => {
   const fixedSx = {
     bg: 'inherit',
@@ -90,6 +91,7 @@ const Table = ({
           fontSize: 2,
           lineHeight: '1.4em',
           width: '100%',
+          ...tableSx,
         }}
       >
         {!!rows.length && (
@@ -220,6 +222,7 @@ Table.propTypes = {
   sortBy: PropTypes.string,
   stickyColumn: PropTypes.number,
   stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
+  tableSx: PropTypes.shape({}),
 };
 
 Table.defaultProps = {
@@ -234,6 +237,7 @@ Table.defaultProps = {
   sortBy: null,
   stickyColumn: null,
   stickyColumnPosition: 'left',
+  tableSx: {},
 };
 
 export default Table;
