@@ -124,9 +124,41 @@ const Dropdown = ({ input, ...rest }) => {
         const overrideStyles = getOverrideStyles({ error, theme });
 
         const getOptionLabel = (option) => (
-          <span>
-            {option.label} <br />
-            <Box color="grays.4" fontSize={2}>
+          <span title={option.subtext}>
+            <Box
+              sx={{
+                alignItems: 'flex-start',
+                display: 'flex',
+                justifyContent: 'space-between',
+                mb: 1,
+              }}
+            >
+              <Box sx={{ flex: 'auto', mr: 2, wordBreak: 'break-all' }}>
+                {option.label}
+              </Box>
+              {option.pill && (
+                <Box
+                  sx={{
+                    bg: 'orange',
+                    borderRadius: 1,
+                    color: 'white',
+                    flex: 'none',
+                    fontSize: 1,
+                    p: 1,
+                  }}
+                >
+                  Recommended
+                </Box>
+              )}
+            </Box>
+            <Box
+              sx={{
+                color: 'grays.4',
+                fontSize: 2,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
               {option.subtext}
             </Box>
           </span>
