@@ -1,62 +1,66 @@
 import * as constants from './constants';
 
 export const completeSignUp = (payload, meta) => ({
-  type: constants.AUTH_COMPLETE_SIGN_UP,
   meta,
   payload,
+  type: constants.AUTH_COMPLETE_SIGN_UP,
 });
 
 export const init = () => ({
   type: constants.AUTH_INIT,
 });
 
-export const resetPassword = (payload) => ({
+export const resetPassword = payload => ({
+  payload,
   type: constants.AUTH_RESET_PASSWORD,
-  payload,
 });
 
-export const sendResetPasswordCode = (payload) => ({
+export const sendResetPasswordCode = payload => ({
+  payload,
   type: constants.AUTH_SEND_RESET_PASSWORD_CODE,
-  payload,
 });
 
-export const setState = (payload) => ({
-  type: constants.AUTH_SET_STATE,
+export const setState = payload => ({
   payload,
+  type: constants.AUTH_SET_STATE,
 });
 
 export const signIn = (payload, meta) => ({
-  type: constants.AUTH_SIGN_IN,
   meta,
   payload,
+  type: constants.AUTH_SIGN_IN,
 });
 
-export const signInExternal = (payload) => ({
-  type: constants.AUTH_SIGN_IN_EXTERNAL,
+export const signInExternal = payload => ({
   payload,
+  type: constants.AUTH_SIGN_IN_EXTERNAL,
 });
 
 export const signOut = () => ({
   type: constants.AUTH_SIGN_OUT,
 });
 
-export const signUp = (payload) => ({
+export const signUp = payload => ({
+  payload,
   type: constants.AUTH_SIGN_UP,
-  payload,
 });
 
-export const verifyEmail = (payload, meta) => ({
-  type: constants.AUTH_VERIFY_EMAIL,
-  meta,
+export const userNameSignUp = payload => ({
   payload,
+  type: constants.AUTH_USERNAME_SIGN_UP,
 });
 
-export const changePassword = (payload) => ({
+export const verifyUserName = payload => ({
+  payload,
+  type: constants.AUTH_VERIFY_USERNAME,
+});
+
+export const changePassword = payload => ({
+  payload,
   type: constants.AUTH_CHANGE_PASSWORD,
-  payload,
 });
 
-export const updateUserAttributes = (payload) => ({
-  type: constants.AUTH_UPDATE_USER_ATTRIBUTES,
+export const updateUserAttributes = payload => ({
   payload,
+  type: constants.AUTH_UPDATE_USER_ATTRIBUTES,
 });

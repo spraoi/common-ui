@@ -184,6 +184,36 @@ function* signOutSaga() {
   }
 }
 
+function* userNameSignUpSaga({ payload }) {
+  try {
+    const { username, password, attributes, rememberMe = false } = payload;
+    const userAttributes = {
+      email: attributes.email,
+      password,
+      rememberMe,
+      username,
+    };
+    yield put(actions.setState({ isLoading: true }));
+    const signUpPayload = {
+      ...payload,
+      email: username,
+    };
+    yield call(aws.signUp, signUpPayload);
+    aws.setUserAttributes(userAttributes);
+    delete userAttributes.password;
+    delete userAttributes.rememberMe;
+    yield put(
+      actions.setState({
+        ...defaultState,
+        userAttributes,
+        verificationRequired: true,
+      })
+    );
+  } catch (e) {
+    yield put(actions.setState({ error: e, isLoading: false }));
+  }
+}
+
 function* signUpSaga({ payload }) {
   try {
     const { email, password, rememberMe = false } = payload;
@@ -209,23 +239,22 @@ function* signUpSaga({ payload }) {
   }
 }
 
-function* verifyEmailSaga({ payload, meta }) {
+function* verifyUserNameSaga({ payload }) {
   try {
-    const { email, password, rememberMe } = aws.getUserAttributes();
+    const { username } = aws.getUserAttributes();
     yield put(actions.setState({ isLoading: true }));
-    const user = yield call(aws.getNewUser, email);
-    payload.user = user;
-    yield call(aws.verifyEmail, payload);
-    if (meta && meta.completeVerification) {
-      yield put(
-        actions.setState({
-          isLoading: false,
-          verificationRequired: false,
-        })
-      );
-    } else {
-      yield put(actions.signIn({ email, password, rememberMe, user }));
-    }
+    const user = yield call(aws.getNewUser, username);
+    const verifyEmailPayload = {
+      ...payload,
+      user,
+    };
+    yield call(aws.verifyEmail, verifyEmailPayload);
+    yield put(
+      actions.setState({
+        isLoading: false,
+        verificationRequired: false,
+      })
+    );
   } catch (e) {
     yield put(actions.setState({ error: e, isLoading: false }));
   }
@@ -286,7 +315,8 @@ export default function* sagas() {
   yield takeLatest(constants.AUTH_SIGN_IN_EXTERNAL, signInExternalSaga);
   yield takeLatest(constants.AUTH_SIGN_OUT, signOutSaga);
   yield takeLatest(constants.AUTH_SIGN_UP, signUpSaga);
-  yield takeLatest(constants.AUTH_VERIFY_EMAIL, verifyEmailSaga);
+  yield takeLatest(constants.AUTH_USERNAME_SIGN_UP, userNameSignUpSaga);
+  yield takeLatest(constants.AUTH_VERIFY_USERNAME, verifyUserNameSaga);
   yield takeLatest(constants.AUTH_CHANGE_PASSWORD, changePasswordSaga);
   yield takeLatest(
     constants.AUTH_UPDATE_USER_ATTRIBUTES,
