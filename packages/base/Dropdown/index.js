@@ -136,11 +136,10 @@ const Dropdown = ({ input, ...rest }) => {
               <Box sx={{ flex: 'auto', mr: 2, wordBreak: 'break-all' }}>
                 {option.label}
               </Box>
-              {option.isRecommended && (
+              {option.pill && (
                 <Box
                   sx={{
                     bg: 'orange',
-
                     borderRadius: 1,
                     color: 'white',
                     flex: 'none',
