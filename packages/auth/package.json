@@ -14,7 +14,7 @@
   "peerDependencies": {
     "@reach/router": "^1",
     "@spraoi/helpers": "*",
-    "aws-amplify": "^2",
+    "aws-amplify": "^3",
     "change-case": "^4",
     "gatsby": "^2",
     "prop-types": "^15",
