@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/auth",
   "description": "Container components for making authentication a breeze.",
-  "version": "0.26.7",
+  "version": "0.26.9",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/auth",
   "repository": {
@@ -14,7 +14,7 @@
   "peerDependencies": {
     "@reach/router": "^1",
     "@spraoi/helpers": "*",
-    "aws-amplify": "^3",
+    "aws-amplify": "^2",
     "change-case": "^4",
     "gatsby": "^2",
     "prop-types": "^15",
