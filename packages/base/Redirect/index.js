@@ -12,7 +12,8 @@ class Redirect extends React.Component {
     Redirect.handleRedirect(to, state, when);
   }
 
-  componentDidUpdate({ state, to, when }) {
+  componentDidUpdate() {
+    const { state, to, when } = this.props;
     Redirect.handleRedirect(to, state, when);
   }
 
