@@ -9,9 +9,13 @@ Parameters:
   HoneycombAPIHost:
     Type: String
     Default: https://api.honeycomb.io
+  HoneycombDataset:
+    Type: String
   HoneycombSampleRate:
     Type: Number
     Default: 1
+  HoneycombWriteKey:
+    Type: String
   KMSKeyId:
     Type: String
     Default: ''
@@ -23,29 +27,6 @@ Parameters:
   TimeFieldName:
     Type: String
     Default: ''
-Mappings:
-  HoneycombDatasets:
-    Environment:
-      dbnqa: spraoi-dev
-      demo: spraoi-demo
-      dev2: spraoi-dev
-      dev: spraoi-dev
-      dexdev: spraoi-dexdev
-      dexqa: spraoi-dexqa
-      prod: spraoi-prod
-      qa: spraoi-qa
-      uat: spraoi-qa
-  HoneycombWriteKeys:
-    Environment:
-      dbnqa: d6faf0fee772f6ad84990a794bae60a3
-      demo: f78f58dd1732c15151ade7fe0c99ee4a
-      dev2: d6faf0fee772f6ad84990a794bae60a3
-      dev: d6faf0fee772f6ad84990a794bae60a3
-      dexdev: d6faf0fee772f6ad84990a794bae60a3
-      dexqa: f78f58dd1732c15151ade7fe0c99ee4a
-      prod: c721002ef873c78c9f6012986c7ae559
-      qa: f78f58dd1732c15151ade7fe0c99ee4a
-      uat: f78f58dd1732c15151ade7fe0c99ee4a
 Conditions:
   EncryptionEnabled: !Not [!Equals [!Ref KMSKeyId, '']]
 Resources:
@@ -58,10 +39,9 @@ Resources:
       Environment:
         Variables:
           API_HOST: !Ref HoneycombAPIHost
-          DATASET: !FindInMap [HoneycombDatasets, Environment, !Ref Environment]
+          DATASET: !Ref HoneycombDataset
           ENVIRONMENT: !Ref Environment
-          HONEYCOMB_WRITE_KEY:
-            !FindInMap [HoneycombWriteKeys, Environment, !Ref Environment]
+          HONEYCOMB_WRITE_KEY: !Ref HoneycombWriteKey
           KMS_KEY_ID: !Ref KMSKeyId
           PARSER_TYPE: json
           SAMPLE_RATE: !Ref HoneycombSampleRate
