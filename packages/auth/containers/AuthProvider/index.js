@@ -64,12 +64,8 @@ class AuthProvider extends PureComponent {
 
   signIn = async ({ password, username }) => {
     const authUser = await Auth.signIn(username, password);
-
-    if (authUser.challengeName === AUTH_STATES.NEW_PASSWORD_REQUIRED) {
-      this.setState({ authState: AUTH_STATES.NEW_PASSWORD_REQUIRED, authUser });
-    } else {
-      return this.setAuthenticatedUser();
-    }
+    if (!authUser.challengeName) return this.setAuthenticatedUser();
+    this.setState({ authState: authUser.challengeName, authUser });
   };
 
   signOut = async () => {
