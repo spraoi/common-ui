@@ -48,6 +48,10 @@ export const json = (value) => {
   }
 };
 
+export const match = (name, match) => (value) => {
+  if (value !== match) return `${name} must match`;
+};
+
 export const minLength = (length) => (value) => {
   if (value && value.length < length) {
     return `Must be at least ${length} characters`;
