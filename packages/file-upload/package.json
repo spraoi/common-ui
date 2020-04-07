@@ -16,7 +16,7 @@
     "react-filepond": "^7.0.1"
   },
   "peerDependencies": {
-    "aws-amplify": "^2",
+    "aws-amplify": "^3",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
