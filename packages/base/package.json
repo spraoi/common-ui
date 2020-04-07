@@ -7,10 +7,10 @@
     "type": "git",
     "url": "https://github.com/spraoi/common-ui.git"
   },
-  "version": "0.26.7",
+  "version": "0.26.10",
   "dependencies": {
     "@brainhubeu/react-carousel": "1.12.9-alpha",
-    "@spraoi/file-upload": "^0.26.7",
+    "@spraoi/file-upload": "^0.26.10",
     "@wojtekmaj/react-daterange-picker": "^2.5.0",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-link-context": "^1.0.19",
