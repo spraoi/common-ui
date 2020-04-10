@@ -2,6 +2,7 @@
 
 const meow = require('meow');
 const deploy = require('../lib/deploy-ui');
+const extractUiVariation = require('../lib/extract-ui-variation');
 const newComponent = require('../lib/new-component');
 const newPackage = require('../lib/new-package');
 const newUi = require('../lib/new-ui');
@@ -36,6 +37,8 @@ COMMANDS
   new-ui                    Start new project wizard.
   new-variation             Start new variation wizard (for ui).
 
+  extract-ui-variation      Start ui variation extraction wizard.
+
   version                   Print current version.
 
 EXAMPLES
@@ -59,6 +62,7 @@ const cli = meow(helpText, {
     'deploy-sam-project',
     'deploy-sam-stack',
     'deploy-ui',
+    'extract-ui-variation',
     'new-component',
     'new-package',
     'new-ui',
@@ -98,6 +102,11 @@ switch (cli.input[0]) {
   case 'deploy-ui': {
     if (!cli.flags.config) cli.showHelp(1);
     deploy(cli.flags.config);
+    break;
+  }
+
+  case 'extract-ui-variation': {
+    extractUiVariation();
     break;
   }
 
