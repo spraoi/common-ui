@@ -5,7 +5,7 @@ const { readFileSync } = require('fs');
 const { safeLoad } = require('js-yaml');
 const { tryShell } = require('./utilities/helpers');
 
-module.exports = function deploy(configString) {
+module.exports = function deployUi(configString) {
   const [variation, stage] = configString.split('.');
 
   const {

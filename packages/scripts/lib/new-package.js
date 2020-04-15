@@ -7,7 +7,7 @@ const { ask, parseTemplate, read, write } = require('./utilities/helpers');
 
 const packageDir = 'packages';
 const testsDir = '__tests__';
-const templateDir = 'new-package-templates';
+const templateDir = 'templates/new-common-ui-package';
 
 async function askIsComponent() {
   const answer = await ask('is this a react component? (y/n): ');

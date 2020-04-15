@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const readline = require('readline');
 const sh = require('shelljs');
 
@@ -35,4 +36,7 @@ module.exports.tryShell = (command) => {
   if (sh.error()) process.exit(1);
 };
 
-module.exports.write = (file, data) => fs.writeFileSync(file, data);
+module.exports.write = (file, data) => {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, data);
+};
