@@ -7,6 +7,7 @@ import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
 import InputWrapper from '../InputWrapper';
 import Box from '../Box';
+import ValueContainer from './ValueContainer';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -51,11 +52,60 @@ const getOverrideStyles = ({ error, theme }) => {
     'inputs.primary.&::placeholder.color'
   );
 
+  const errorColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.clear'
+  );
+
   const paddingX = themeVariantToValue(theme, 'space', 'inputs.primary.px');
   const paddingY = themeVariantToValue(theme, 'space', 'inputs.primary.py');
+  const indpx = themeVariantToValue(
+    theme,
+    'space',
+    'inputs.primary.indicator.px'
+  );
   const height = `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`;
 
+  const opBg = themeVariantToValue(theme, 'colors', 'inputs.primary.option.bg');
+  const opColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.option.color'
+  );
+
+  const opSelBg = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.option.selected.bg'
+  );
+  const opSelColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.option.selected.color'
+  );
+
+  const opHovBg = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.option.hover.bg'
+  );
+  const opHovColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.option.hover.color'
+  );
+
   return {
+    clearIndicator: (base) => {
+      return {
+        ...base,
+        '&:hover': { color: errorColor, transform: 'scale(1)' },
+        padding: `0 ${indpx}`,
+        transform: 'scale(0.85)',
+        transition: 'color 0.5s, transform 0.5s',
+      };
+    },
     container: (base) => ({ ...base, flex: 1 }),
     control: (base, { isFocused }) => ({
       ...base,
@@ -73,7 +123,25 @@ const getOverrideStyles = ({ error, theme }) => {
       minHeight: height,
       padding: 0,
     }),
-    dropdownIndicator: (base) => ({ ...base, padding: `0 ${paddingX}` }),
+    dropdownIndicator: (base, state) => {
+      const { selectProps } = state;
+      const { menuIsOpen } = selectProps;
+      if (menuIsOpen) {
+        return {
+          ...base,
+          color: 'accent',
+          padding: `0 ${indpx}`,
+          transform: 'rotate(-180deg)',
+          transition: 'transform 0.4s ease-in-out',
+        };
+      }
+      return {
+        ...base,
+        padding: `0 ${indpx}`,
+        transform: 'rotate(0deg)',
+        transition: 'transform 0.4s ease-in-out',
+      };
+    },
     indicatorSeparator: (base) => ({
       ...base,
       backgroundColor: getBorderColor(),
@@ -87,6 +155,28 @@ const getOverrideStyles = ({ error, theme }) => {
         position: 'static',
       },
     }),
+    option: (base, state) => {
+      const { isSelected } = state;
+      if (isSelected) {
+        return {
+          ...base,
+          backgroundColor: opSelBg,
+          color: opSelColor,
+          transition: 'backgroundColor 1s, color 1s',
+        };
+      }
+      return {
+        ...base,
+        '&:hover': {
+          backgroundColor: opHovBg,
+          color: opHovColor,
+          transition: 'backgroundColor 1s, color 1s',
+        },
+        backgroundColor: opBg,
+        color: opColor,
+        transition: 'backgroundColor 1s, color 1s',
+      };
+    },
     placeholder: () => ({
       color: placeholderColor,
     }),
@@ -116,6 +206,7 @@ const Dropdown = ({ input, ...rest }) => {
         backspaceRemoves = false,
         error,
         externalAsyncOptions = null,
+        isMulti,
         loadOptions,
         placeholder = '',
         setExternalAsyncOptions,
@@ -197,7 +288,11 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            closeMenuOnSelect={!isMulti}
+            components={isMulti ? { ValueContainer } : {}}
             defaultOptions
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             loadOptions={async (query) => {
               let options = await loadOptions(query);
 
@@ -235,7 +330,10 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            components={isMulti ? { ValueContainer } : {}}
             defaultValue={value}
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
