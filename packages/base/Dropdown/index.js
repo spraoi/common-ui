@@ -330,6 +330,7 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            closeMenuOnSelect={!isMulti}
             components={isMulti ? { ValueContainer } : {}}
             defaultValue={value}
             hideSelectedOptions={false}
