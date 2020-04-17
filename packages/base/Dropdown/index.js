@@ -87,6 +87,10 @@ const getOverrideStyles = ({ error, theme }) => {
         position: 'static',
       },
     }),
+    option: (base) => ({
+      ...base,
+      wordBreak: 'break-word',
+    }),
     placeholder: () => ({
       color: placeholderColor,
     }),
@@ -147,7 +151,7 @@ const Dropdown = ({ input, ...rest }) => {
                     p: 1,
                   }}
                 >
-                  Recommended
+                  {option.pill}
                 </Box>
               )}
             </Box>
