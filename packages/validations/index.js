@@ -60,6 +60,7 @@ export const minLength = (length) => (value) => {
 
 export const required = (value) => {
   if (
+    value === null ||
     value === undefined ||
     value === '' ||
     (Array.isArray(value) && !value.length)
