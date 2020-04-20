@@ -73,12 +73,12 @@ describe('minLength validation', () => {
 });
 
 describe('required validation', () => {
-  ['', undefined, []].forEach((v) =>
+  ['', undefined, null, []].forEach((v) =>
     it(`"${v}" should return an error`, () =>
       expect(required(v)).toEqual('Required'))
   );
 
-  ['foo', 0, {}, null, [1]].forEach((v) =>
+  ['foo', 0, {}, [1]].forEach((v) =>
     it(`"${v}" should return undefined`, () =>
       expect(required(v)).toBeUndefined())
   );
