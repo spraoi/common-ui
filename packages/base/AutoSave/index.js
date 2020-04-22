@@ -26,10 +26,10 @@ class AutoSaveComponent extends React.Component {
   }
 
   save = async (all, added, deleted, updated) => {
-    const { save } = this.props;
+    const { save, values } = this.props;
     if (this.promise) await this.promise;
     this.setState({ saving: true });
-    this.promise = save(all, added, deleted, updated);
+    this.promise = save(all, added, deleted, updated, values);
     await this.promise;
     delete this.promise;
     this.setState({ saving: false });
