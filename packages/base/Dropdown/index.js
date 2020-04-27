@@ -47,20 +47,10 @@ const getOverrideStyles = ({ error, theme }) => {
     'inputs.primary.bg'
   );
 
-  const clearColor = theme.colors.error;
-
   const placeholderColor = themeVariantToValue(
     theme,
     'colors',
     'inputs.primary.&::placeholder.color'
-  );
-
-  const selectedColor = theme.colors.accent;
-
-  const textColor = themeVariantToValue(
-    theme,
-    'colors',
-    'inputs.primary.color'
   );
 
   const paddingX = themeVariantToValue(theme, 'space', 'inputs.primary.px');
@@ -71,7 +61,7 @@ const getOverrideStyles = ({ error, theme }) => {
     clearIndicator: (base) => {
       return {
         ...base,
-        '&:hover': { color: clearColor, transform: 'scale(1)' },
+        '&:hover': { color: theme.colors.error, transform: 'scale(1)' },
         transform: 'scale(0.8)',
         transition: 'color 0.5s, transform 0.5s',
       };
@@ -131,11 +121,11 @@ const getOverrideStyles = ({ error, theme }) => {
         return {
           ...base,
           '&:hover': {
-            backgroundColor: 'white',
-            color: isSelected ? selectedColor : textColor,
+            backgroundColor: theme.colors.grays[2],
+            color: theme.colors.grays[4],
           },
           backgroundColor: 'white',
-          color: isSelected ? selectedColor : textColor,
+          color: isSelected ? theme.colors.accent : theme.colors.grays[5],
           wordBreak: 'break-word',
         };
       }
