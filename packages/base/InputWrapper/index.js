@@ -36,7 +36,7 @@ const InputWrapper = ({
     );
   } else if (subtext) {
     below = (
-      <Box color="grays.2" fontSize={2} mt={1}>
+      <Box fontSize={2} mt={1}>
         {subtext}
       </Box>
     );
