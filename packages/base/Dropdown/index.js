@@ -7,6 +7,8 @@ import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
 import InputWrapper from '../InputWrapper';
 import Box from '../Box';
+import Option from './Option';
+import ValueContainer from './ValueContainer';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -45,10 +47,20 @@ const getOverrideStyles = ({ error, theme }) => {
     'inputs.primary.bg'
   );
 
+  const clearColor = theme.colors.error;
+
   const placeholderColor = themeVariantToValue(
     theme,
     'colors',
     'inputs.primary.&::placeholder.color'
+  );
+
+  const selectedColor = theme.colors.accent;
+
+  const textColor = themeVariantToValue(
+    theme,
+    'colors',
+    'inputs.primary.color'
   );
 
   const paddingX = themeVariantToValue(theme, 'space', 'inputs.primary.px');
@@ -56,6 +68,14 @@ const getOverrideStyles = ({ error, theme }) => {
   const height = `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`;
 
   return {
+    clearIndicator: (base) => {
+      return {
+        ...base,
+        '&:hover': { color: clearColor, transform: 'scale(1)' },
+        transform: 'scale(0.8)',
+        transition: 'color 0.5s, transform 0.5s',
+      };
+    },
     container: (base) => ({ ...base, flex: 1 }),
     control: (base, { isFocused }) => ({
       ...base,
@@ -73,7 +93,25 @@ const getOverrideStyles = ({ error, theme }) => {
       minHeight: height,
       padding: 0,
     }),
-    dropdownIndicator: (base) => ({ ...base, padding: `0 ${paddingX}` }),
+    dropdownIndicator: (base, state) => {
+      const { selectProps } = state;
+      const { menuIsOpen } = selectProps;
+      if (menuIsOpen) {
+        return {
+          ...base,
+          color: 'accent',
+          padding: `0 ${paddingX}`,
+          transform: 'rotate(-180deg)',
+          transition: 'transform 0.4s ease-in-out',
+        };
+      }
+      return {
+        ...base,
+        padding: `0 ${paddingX}`,
+        transform: 'rotate(0deg)',
+        transition: 'transform 0.4s ease-in-out',
+      };
+    },
     indicatorSeparator: (base) => ({
       ...base,
       backgroundColor: getBorderColor(),
@@ -87,10 +125,25 @@ const getOverrideStyles = ({ error, theme }) => {
         position: 'static',
       },
     }),
-    option: (base) => ({
-      ...base,
-      wordBreak: 'break-word',
-    }),
+    option: (base, state) => {
+      const { isMulti, isSelected } = state;
+      if (isMulti) {
+        return {
+          ...base,
+          '&:hover': {
+            backgroundColor: 'white',
+            color: isSelected ? selectedColor : textColor,
+          },
+          backgroundColor: 'white',
+          color: isSelected ? selectedColor : textColor,
+          wordBreak: 'break-word',
+        };
+      }
+      return {
+        ...base,
+        wordBreak: 'break-word',
+      };
+    },
     placeholder: () => ({
       color: placeholderColor,
     }),
@@ -120,6 +173,7 @@ const Dropdown = ({ input, ...rest }) => {
         backspaceRemoves = false,
         error,
         externalAsyncOptions = null,
+        isMulti,
         loadOptions,
         placeholder = '',
         setExternalAsyncOptions,
@@ -201,7 +255,11 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            closeMenuOnSelect={!isMulti}
+            components={isMulti ? { Option, ValueContainer } : {}}
             defaultOptions
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             loadOptions={async (query) => {
               let options = await loadOptions(query);
 
@@ -239,7 +297,11 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            closeMenuOnSelect={!isMulti}
+            components={isMulti ? { Option, ValueContainer } : {}}
             defaultValue={value}
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
