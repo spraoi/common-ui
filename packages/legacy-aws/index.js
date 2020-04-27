@@ -1,4 +1,5 @@
 import { CognitoAuth } from 'amazon-cognito-auth-js';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   AuthenticationDetails,
@@ -37,6 +38,7 @@ export async function callApi({
 }) {
   let endpoint = '';
   const newBody = body ? trimObject(body) : body;
+  headers[spraoiConfig.headers.traceId] = uuidv4();
   headers[spraoiConfig.headers.userPoolId] = awsConfig.cognito.userPoolId;
 
   if (await isAuthenticated()) {

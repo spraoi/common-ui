@@ -16,6 +16,7 @@
     "amazon-cognito-identity-js": "^3",
     "aws-sdk": "2",
     "crypto-js": "^3",
-    "js-cookie": "^2"
+    "js-cookie": "^2",
+    "uuid": "^7.0.3"
   }
 }

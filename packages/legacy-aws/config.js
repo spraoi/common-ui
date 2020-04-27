@@ -7,6 +7,7 @@ export const spraoiConfig = {
   headers: {
     agentId: 'x-spr-agent-id',
     groupId: 'x-spr-group-id',
+    traceId: 'x-spr-trace-id',
     userId: 'x-spr-user-id',
     userPoolId: 'x-spr-pool-id',
   },

@@ -11,6 +11,7 @@ import { createAuthLink } from 'aws-appsync-auth-link';
 import { createHttpLink } from 'apollo-link-http';
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { setContext } from 'apollo-link-context';
+import { v4 as uuidv4 } from 'uuid';
 import AppBase from '../AppBase';
 
 const cache = new InMemoryCache();
@@ -36,6 +37,7 @@ const App = ({ children, config, credentials, theme }) => (
                         ...previousContext.headers,
                         [HEADERS.ACTIVE_GROUP]: customActiveGroup,
                         [HEADERS.JWT]: jwt,
+                        [HEADERS.TRACE_ID]: uuidv4(),
                       },
                     })),
                     createHttpLink({ uri: config.apollo.url }),

@@ -1,9 +1,9 @@
 import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
 import get from 'lodash/get';
-import uuid from 'uuid/v4';
 import warmer from 'lambda-warmer';
 import { COGNITO_USER_ATTRIBUTES, HEADERS } from '@spraoi/helpers/constants';
+import { v4 as uuidv4 } from 'uuid';
 import HC from './honeycomb';
 import validateAndParseJwt from './validate-and-parse-jwt';
 
@@ -31,12 +31,13 @@ export default ({ errorHandler, handler }) => ({
     if (await warmer(event)) return 'warmed';
 
     const time = new Timer();
-    const eventId = uuid();
+    const traceId = get(event, `headers[${HEADERS.TRACE_ID}]`, uuidv4());
+    const eventId = uuidv4();
 
     HC.init({
       parentId: eventId,
       serviceName: `${TEMPLATE}-${VARIATION}-graphql-resolver`,
-      traceId: context.awsRequestId,
+      traceId,
     });
 
     try {
@@ -44,7 +45,7 @@ export default ({ errorHandler, handler }) => ({
         ? event.identityId.replace(REGION, 'spr:user:')
         : null;
 
-      const jwt = event.jwt || get(event, `headers[${HEADERS.JWT}]`);
+      const jwt = get(event, `headers[${HEADERS.JWT}]`, event.jwt);
       const claims = jwt ? await validateAndParseJwt(jwt) : null;
 
       // variation-based client id
@@ -73,7 +74,7 @@ export default ({ errorHandler, handler }) => ({
       const headers = {
         'Content-Type': 'application/json',
         [HEADERS.CLIENT_ID]: clientId,
-        [HEADERS.TRACE_ID]: context.awsRequestId,
+        [HEADERS.TRACE_ID]: traceId,
         [HEADERS.USER_ID]: userId,
       };
 
@@ -101,7 +102,7 @@ export default ({ errorHandler, handler }) => ({
       stack,
       statusCode = 500,
     }) {
-      let responseMessage = `${message} (${HC.getTraceId()})`;
+      let responseMessage = `${message} (${traceId})`;
 
       if (typeof errorHandler === 'function') {
         responseMessage = await errorHandler({ response, responseMessage });
@@ -112,7 +113,7 @@ export default ({ errorHandler, handler }) => ({
         response,
         stack,
         statusCode,
-        traceId: context.awsRequestId,
+        traceId,
       });
 
       HC.logEvent({
