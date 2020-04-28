@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  ApiGateway:
+    Type: String
+  ApiVersion:
+    Type: String
+    Default: v1
+  QuotaLimit:
+    Type: Number
+    Default: 30000
+  QuotaPeriod:
+    Type: String
+    Default: DAY
+  ThrottleBurstLimit:
+    Type: Number
+    Default: 200
+  ThrottleRateLimit:
+    Type: Number
+    Default: 100
+Resources:
+  ApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Enabled: true
+      Name: !Ref AWS::StackName
+      StageKeys:
+        - RestApiId: !Ref ApiGateway
+          StageName: !Ref ApiVersion
+  UsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    Properties:
+      ApiStages:
+        - ApiId: !Ref ApiGateway
+          Stage: !Ref ApiVersion
+      Quota:
+        Limit: !Ref QuotaLimit
+        Period: !Ref QuotaPeriod
+      Throttle:
+        BurstLimit: !Ref ThrottleBurstLimit
+        RateLimit: !Ref ThrottleRateLimit
+      UsagePlanName: !Ref AWS::StackName
+  UsagePlanApiKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    Properties:
+      KeyId: !Ref ApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref UsagePlan
