@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { TooltipBox } from '@spraoi/base/Tooltip';
+import Spinner from '@spraoi/base/Spinner';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { Bar, Line } from '@vx/shape';
 import { Grid } from '@vx/grid';
@@ -12,6 +13,7 @@ import { BAR_PADDING } from './utilities/constants';
 
 const BarChart = ({
   data,
+  loading,
   margin,
   xAccessor,
   xAxisProps,
@@ -37,7 +39,9 @@ const BarChart = ({
           rangeRound: [0, xMax],
         });
 
-        return (
+        return loading ? (
+          <Spinner />
+        ) : (
           <>
             <svg height={height} width={width}>
               <Grid
@@ -131,7 +135,6 @@ const BarChart = ({
                 </AxisLeft>
                 <AxisBottom
                   label={xAxisProps.label}
-                  left={0}
                   scale={xScale}
                   stroke={theme.colors.grays[1]}
                   top={yMax}
@@ -207,6 +210,7 @@ const BarChart = ({
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  loading: PropTypes.bool.isRequired,
   margin: PropTypes.shape({
     bottom: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,

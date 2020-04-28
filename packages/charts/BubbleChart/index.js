@@ -1,4 +1,5 @@
 import Box from '@spraoi/base/Box';
+import Spinner from '@spraoi/base/Spinner';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Group } from '@vx/group';
@@ -11,6 +12,7 @@ import OrdinalLegend from '../OrdinalLegend';
 const BubbleChart = ({
   colors,
   data,
+  loading,
   labelAccessor,
   margin,
   valueAccessor,
@@ -33,7 +35,9 @@ const BubbleChart = ({
           .sum(valueAccessor)
           .sort((a, b) => -(a.value - b.value));
 
-        return (
+        return loading ? (
+          <Spinner />
+        ) : (
           <>
             <svg height={height} width={width}>
               <Pack root={packData} size={[xMax, yMax]}>
@@ -87,6 +91,7 @@ BubbleChart.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   labelAccessor: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
   margin: PropTypes.shape({
     bottom: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
