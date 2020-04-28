@@ -4,7 +4,7 @@ import { TooltipBox } from '@spraoi/base/Tooltip';
 import Spinner from '@spraoi/base/Spinner';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { Bar, Line } from '@vx/shape';
-import { Grid } from '@vx/grid';
+import { GridColumns, GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { ThemeContext } from 'styled-components';
@@ -44,16 +44,24 @@ const BarChart = ({
         ) : (
           <>
             <svg height={height} width={width}>
-              <Grid
+              <GridColumns
                 height={yMax}
                 left={margin.left}
+                offset={xScale.bandwidth() / 2}
+                scale={xScale}
                 stroke={theme.colors.grays[1]}
                 strokeOpacity={0.1}
                 top={margin.top}
                 width={xMax}
-                xOffset={xScale.bandwidth() / 2}
-                xScale={xScale}
-                yScale={yScale}
+              />
+              <GridRows
+                height={yMax}
+                left={margin.left}
+                scale={yScale}
+                stroke={theme.colors.grays[1]}
+                strokeOpacity={0.1}
+                top={margin.top}
+                width={xMax}
               />
               <Group left={margin.left} top={margin.top}>
                 {data.map((d, i) => {

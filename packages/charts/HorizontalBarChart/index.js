@@ -4,12 +4,11 @@ import { TooltipBox } from '@spraoi/base/Tooltip';
 import Spinner from '@spraoi/base/Spinner';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { Bar, Line } from '@vx/shape';
-import { GridColumns } from '@vx/grid';
+import { GridColumns, GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { ThemeContext } from 'styled-components';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import numTicksForWidth from './utilities/num-ticks-for-width';
 import { BAR_PADDING } from './utilities/constants';
 
 const HorizontalBarChart = ({
@@ -48,9 +47,19 @@ const HorizontalBarChart = ({
               <GridColumns
                 height={yMax}
                 left={margin.left}
-                numTicks={numTicksForWidth(width)}
                 scale={xScale}
                 stroke={theme.colors.grays[1]}
+                strokeOpacity={0.1}
+                top={margin.top}
+                width={xMax}
+              />
+              <GridRows
+                height={yMax}
+                left={margin.left}
+                offset={yScale.bandwidth() / 2}
+                scale={yScale}
+                stroke={theme.colors.grays[1]}
+                strokeOpacity={0.1}
                 top={margin.top}
                 width={xMax}
               />
