@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '../Box';
@@ -28,29 +28,22 @@ const Paginator = ({
   total,
   ...rest
 }) => {
-  const [currPage, setCurrPage] = useState(1);
+  const currentPage = Math.floor(offset / pageSize) + 1;
   const pagiBtns = [];
 
-  useEffect(() => {
-    setCurrPage(parseInt(offset / pageSize, 10) + 1);
-  }, [offset]);
-
   if (fullPagintation) {
-    const reminder = parseInt(total / pageSize, 10);
-    const noOfPages =
-      parseInt(total % pageSize, 10) === 0 ? reminder : reminder + 1;
+    const totalPages = Math.ceil(total / pageSize);
 
-    for (let i = 1; i <= noOfPages; i += 1) {
+    for (let i = 1; i <= totalPages; i += 1) {
       pagiBtns.push(
         <Button
           key={i}
           onClick={() => {
-            setCurrPage(i);
             onPageClick(i - 1);
           }}
           sx={{
             ...paginationButtonSx,
-            bg: currPage === i ? 'grays.5' : 'grays.4',
+            bg: currentPage === i ? 'grays.5' : 'grays.4',
           }}
         >
           {i}
@@ -77,7 +70,6 @@ const Paginator = ({
       <Button
         disabled={offset === 0}
         onClick={() => {
-          setCurrPage(currPage - 1);
           onPreviousClick();
         }}
         sx={paginationButtonSx}
@@ -92,7 +84,6 @@ const Paginator = ({
             : pageTotal === 0 || pageTotal % pageSize !== 0
         }
         onClick={() => {
-          setCurrPage(currPage + 1);
           onNextClick();
         }}
         sx={paginationButtonSx}
