@@ -2,30 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { components } from 'react-select';
 import Box from '../../Box';
-import Icon from '../../Icon';
 
 const Option = (mainProps) => {
-  const { isSelected, label } = mainProps;
+  const { isSelected, label, selectProps } = mainProps;
+  const { checkIcon, uncheckIcon } = selectProps;
   if (isSelected) {
     return (
       <components.Option {...mainProps}>
         <Box
           sx={{
             display: 'flex',
+            flexDirection: 'row',
             verticalAlign: 'middle',
           }}
         >
-          <Icon
-            height="1rem"
-            mr={2}
-            svg="check"
-            sx={{
-              '&:hover': { fill: 'accent' },
-              fill: 'accent',
-              transition: 'fill 0.2s',
-            }}
-            width="1rem"
-          />
+          <Box mr={2}>{checkIcon}</Box>
           <Box>{label}</Box>
         </Box>
       </components.Option>
@@ -36,20 +27,11 @@ const Option = (mainProps) => {
       <Box
         sx={{
           display: 'flex',
+          flexDirection: 'row',
           verticalAlign: 'middle',
         }}
       >
-        <Icon
-          height="1rem"
-          mr={2}
-          svg="outline"
-          sx={{
-            '&:hover': { fill: 'accentDark' },
-            fill: 'accent',
-            transition: 'fill 0.2s',
-          }}
-          width="1rem"
-        />
+        <Box mr={2}>{uncheckIcon}</Box>
         <Box>{label}</Box>
       </Box>
     </components.Option>

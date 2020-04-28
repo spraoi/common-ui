@@ -161,12 +161,14 @@ const Dropdown = ({ input, ...rest }) => {
     <InputWrapper dataCy={rest['data-cy']} input={input} {...rest}>
       {({
         backspaceRemoves = false,
+        checkIcon,
         error,
         externalAsyncOptions = null,
         isMulti,
         loadOptions,
         placeholder = '',
         setExternalAsyncOptions,
+        uncheckIcon,
         ...inputRest
       }) => {
         const overrideStyles = getOverrideStyles({ error, theme });
@@ -240,13 +242,16 @@ const Dropdown = ({ input, ...rest }) => {
           ? input.value.map(optionByValue)
           : optionByValue(input.value) || '';
 
+        const components = isMulti ? { Option, ValueContainer } : {};
+
         return loadOptions ? (
           <AsyncSelect
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            checkIcon={checkIcon}
             closeMenuOnSelect={!isMulti}
-            components={isMulti ? { Option, ValueContainer } : {}}
+            components={components}
             defaultOptions
             hideSelectedOptions={false}
             isMulti={isMulti}
@@ -280,6 +285,7 @@ const Dropdown = ({ input, ...rest }) => {
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
+            uncheckIcon={uncheckIcon}
             value={value}
           />
         ) : (
@@ -287,14 +293,16 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            checkIcon={checkIcon}
             closeMenuOnSelect={!isMulti}
-            components={isMulti ? { Option, ValueContainer } : {}}
+            components={components}
             defaultValue={value}
             hideSelectedOptions={false}
             isMulti={isMulti}
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
+            uncheckIcon={uncheckIcon}
             value={value}
           />
         );
