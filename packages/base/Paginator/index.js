@@ -26,6 +26,7 @@ const Paginator = ({
   pageTotal,
   rightButtonContent,
   total,
+  totalJumpToPages,
   ...rest
 }) => {
   const currentPage = Math.floor(offset / pageSize) + 1;
@@ -33,8 +34,18 @@ const Paginator = ({
 
   if (fullPagintation) {
     const totalPages = Math.ceil(total / pageSize);
+    const MID = Math.floor(totalJumpToPages / 2);
 
-    for (let i = 1; i <= totalPages; i += 1) {
+    let start = 1;
+    let end = Math.min(totalJumpToPages, totalPages);
+
+    if (currentPage > MID + 1) {
+      end = Math.min(currentPage + MID - 1, totalPages);
+      start = currentPage - MID;
+      start = Math.min(start, end - totalJumpToPages + 1);
+    }
+
+    for (let i = start; i <= end; i += 1) {
       pagiBtns.push(
         <Button
           key={i}
@@ -105,6 +116,7 @@ Paginator.propTypes = {
   pageTotal: PropTypes.number.isRequired,
   rightButtonContent: PropTypes.node.isRequired,
   total: PropTypes.number,
+  totalJumpToPages: PropTypes.number,
 };
 
 Paginator.defaultProps = {
@@ -113,6 +125,7 @@ Paginator.defaultProps = {
   onPageClick: () => {},
   pageSize: 10,
   total: null,
+  totalJumpToPages: 10,
 };
 
 export default Paginator;
