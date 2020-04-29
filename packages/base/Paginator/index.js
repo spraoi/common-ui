@@ -16,7 +16,7 @@ const paginationButtonSx = {
 };
 
 const Paginator = ({
-  fullPagintation,
+  enableJumpToPage,
   leftButtonContent,
   offset,
   onPageClick,
@@ -32,7 +32,7 @@ const Paginator = ({
   const currentPage = Math.floor(offset / pageSize) + 1;
   const pagiBtns = [];
 
-  if (fullPagintation) {
+  if (enableJumpToPage) {
     const totalPages = Math.ceil(total / pageSize);
     const MID = Math.floor(totalJumpToPages / 2);
 
@@ -87,7 +87,7 @@ const Paginator = ({
       >
         {leftButtonContent}
       </Button>
-      {fullPagintation && pageTotal > 0 && pagiBtns}
+      {enableJumpToPage && pageTotal > 0 && pagiBtns}
       <Button
         disabled={
           total
@@ -106,7 +106,7 @@ const Paginator = ({
 };
 
 Paginator.propTypes = {
-  fullPagintation: PropTypes.bool,
+  enableJumpToPage: PropTypes.bool,
   leftButtonContent: PropTypes.node.isRequired,
   offset: PropTypes.number,
   onNextClick: PropTypes.func.isRequired,
@@ -120,7 +120,7 @@ Paginator.propTypes = {
 };
 
 Paginator.defaultProps = {
-  fullPagintation: false,
+  enableJumpToPage: false,
   offset: 0,
   onPageClick: () => {},
   pageSize: 10,
