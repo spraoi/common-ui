@@ -7,6 +7,8 @@ import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
 import InputWrapper from '../InputWrapper';
 import Box from '../Box';
+import Option from './Option';
+import ValueContainer from './ValueContainer';
 
 const getOverrideStyles = ({ error, theme }) => {
   const getBorderColor = ({ isFocused } = {}) => {
@@ -56,6 +58,14 @@ const getOverrideStyles = ({ error, theme }) => {
   const height = `calc(${paddingY} * 2 + ${theme.lineHeights[1]})`;
 
   return {
+    clearIndicator: (base) => {
+      return {
+        ...base,
+        '&:hover': { color: theme.colors.error, transform: 'scale(1)' },
+        transform: 'scale(0.8)',
+        transition: 'color 0.5s, transform 0.5s',
+      };
+    },
     container: (base) => ({ ...base, flex: 1 }),
     control: (base, { isFocused }) => ({
       ...base,
@@ -73,7 +83,25 @@ const getOverrideStyles = ({ error, theme }) => {
       minHeight: height,
       padding: 0,
     }),
-    dropdownIndicator: (base) => ({ ...base, padding: `0 ${paddingX}` }),
+    dropdownIndicator: (base, state) => {
+      const { selectProps } = state;
+      const { menuIsOpen } = selectProps;
+      if (menuIsOpen) {
+        return {
+          ...base,
+          color: 'accent',
+          padding: `0 ${paddingX}`,
+          transform: 'rotate(-180deg)',
+          transition: 'transform 0.4s ease-in-out',
+        };
+      }
+      return {
+        ...base,
+        padding: `0 ${paddingX}`,
+        transform: 'rotate(0deg)',
+        transition: 'transform 0.4s ease-in-out',
+      };
+    },
     indicatorSeparator: (base) => ({
       ...base,
       backgroundColor: getBorderColor(),
@@ -87,10 +115,25 @@ const getOverrideStyles = ({ error, theme }) => {
         position: 'static',
       },
     }),
-    option: (base) => ({
-      ...base,
-      wordBreak: 'break-word',
-    }),
+    option: (base, state) => {
+      const { isMulti, isSelected } = state;
+      if (isMulti) {
+        return {
+          ...base,
+          '&:hover': {
+            backgroundColor: theme.colors.grays[2],
+            color: theme.colors.grays[4],
+          },
+          backgroundColor: 'white',
+          color: isSelected ? theme.colors.accent : theme.colors.grays[5],
+          wordBreak: 'break-word',
+        };
+      }
+      return {
+        ...base,
+        wordBreak: 'break-word',
+      };
+    },
     placeholder: () => ({
       color: placeholderColor,
     }),
@@ -118,11 +161,14 @@ const Dropdown = ({ input, ...rest }) => {
     <InputWrapper dataCy={rest['data-cy']} input={input} {...rest}>
       {({
         backspaceRemoves = false,
+        checkIcon,
         error,
         externalAsyncOptions = null,
+        isMulti,
         loadOptions,
         placeholder = '',
         setExternalAsyncOptions,
+        uncheckIcon,
         ...inputRest
       }) => {
         const overrideStyles = getOverrideStyles({ error, theme });
@@ -196,12 +242,19 @@ const Dropdown = ({ input, ...rest }) => {
           ? input.value.map(optionByValue)
           : optionByValue(input.value) || '';
 
+        const components = isMulti ? { Option, ValueContainer } : {};
+
         return loadOptions ? (
           <AsyncSelect
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            checkIcon={checkIcon}
+            closeMenuOnSelect={!isMulti}
+            components={components}
             defaultOptions
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             loadOptions={async (query) => {
               let options = await loadOptions(query);
 
@@ -232,6 +285,7 @@ const Dropdown = ({ input, ...rest }) => {
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
+            uncheckIcon={uncheckIcon}
             value={value}
           />
         ) : (
@@ -239,10 +293,16 @@ const Dropdown = ({ input, ...rest }) => {
             {...inputRest}
             {...input}
             backspaceRemoves={backspaceRemoves}
+            checkIcon={checkIcon}
+            closeMenuOnSelect={!isMulti}
+            components={components}
             defaultValue={value}
+            hideSelectedOptions={false}
+            isMulti={isMulti}
             onChange={onChange}
             placeholder={placeholder}
             styles={overrideStyles}
+            uncheckIcon={uncheckIcon}
             value={value}
           />
         );
