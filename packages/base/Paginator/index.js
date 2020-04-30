@@ -52,9 +52,11 @@ const Paginator = ({
           onClick={() => {
             onPageClick(i - 1);
           }}
+          px={2}
+          simple
           sx={{
-            ...paginationButtonSx,
-            bg: currentPage === i ? 'grays.5' : 'grays.4',
+            '&:hover': { color: 'grays.5', textDecoration: 'underline' },
+            color: currentPage === i ? 'grays.5' : 'grays.4',
           }}
         >
           {i}
