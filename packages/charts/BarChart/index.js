@@ -30,11 +30,13 @@ const BarChart = ({
 
         const yScale = scaleLinear({
           domain: [0, Math.max(...data.map(yAccessor))],
+          nice: true,
           rangeRound: [yMax, 0],
         });
 
         const xScale = scaleBand({
           domain: data.map(xAccessor),
+          nice: true,
           padding: BAR_PADDING,
           rangeRound: [0, xMax],
         });

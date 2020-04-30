@@ -30,11 +30,13 @@ const HorizontalBarChart = ({
 
         const xScale = scaleLinear({
           domain: [0, Math.max(...data.map(xAccessor))],
+          nice: true,
           rangeRound: [0, xMax],
         });
 
         const yScale = scaleBand({
           domain: data.map(yAccessor),
+          nice: true,
           padding: BAR_PADDING,
           rangeRound: [0, yMax],
         });
