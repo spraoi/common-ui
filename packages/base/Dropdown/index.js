@@ -83,25 +83,7 @@ const getOverrideStyles = ({ error, theme }) => {
       minHeight: height,
       padding: 0,
     }),
-    dropdownIndicator: (base, state) => {
-      const { selectProps } = state;
-      const { menuIsOpen } = selectProps;
-      if (menuIsOpen) {
-        return {
-          ...base,
-          color: 'accent',
-          padding: `0 ${paddingX}`,
-          transform: 'rotate(-180deg)',
-          transition: 'transform 0.4s ease-in-out',
-        };
-      }
-      return {
-        ...base,
-        padding: `0 ${paddingX}`,
-        transform: 'rotate(0deg)',
-        transition: 'transform 0.4s ease-in-out',
-      };
-    },
+    dropdownIndicator: (base) => ({ ...base, padding: `0 ${paddingX}` }),
     indicatorSeparator: (base) => ({
       ...base,
       backgroundColor: getBorderColor(),
