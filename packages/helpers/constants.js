@@ -23,6 +23,7 @@ export const HEADERS = {
 };
 
 export const REGEXES = {
+  ANY_STRING: '[a-zA-Z0-9-]+',
   UUID: '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}',
   VERSION_NUMBER: '[0-9.]+',
 };
