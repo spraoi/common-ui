@@ -27,9 +27,9 @@ const BarChart = ({
       {({ height, width }) => {
         const xMax = width - margin.left - margin.right;
         const yMax = height - margin.top - margin.bottom;
-
+        const maxDataValue = Math.max(...data.map(yAccessor));
         const yScale = scaleLinear({
-          domain: [0, Math.max(...data.map(yAccessor))],
+          domain: [0, maxDataValue || 1],
           nice: true,
           rangeRound: [yMax, 0],
         });
@@ -117,14 +117,16 @@ const BarChart = ({
                                   to={tick.to}
                                 />
                               )}
-                              <text
-                                fill={theme.colors.textSubtle}
-                                fontSize={theme.fontSizes[1]}
-                                textAnchor={yAxisProps.anchorPosition}
-                                transform={`translate(${tickX}, ${tickY}) rotate(${yAxisProps.rotateAnchorDegree})`}
-                              >
-                                {tick.formattedValue}
-                              </text>
+                              {(maxDataValue || !i) && (
+                                <text
+                                  fill={theme.colors.textSubtle}
+                                  fontSize={theme.fontSizes[1]}
+                                  textAnchor={yAxisProps.anchorPosition}
+                                  transform={`translate(${tickX}, ${tickY}) rotate(${yAxisProps.rotateAnchorDegree})`}
+                                >
+                                  {tick.formattedValue}
+                                </text>
+                              )}
                             </Group>
                           );
                         })}
