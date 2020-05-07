@@ -27,9 +27,9 @@ const HorizontalBarChart = ({
       {({ height, width }) => {
         const xMax = width - margin.left - margin.right;
         const yMax = height - margin.top - margin.bottom;
-
+        const maxDataValue = Math.max(...data.map(xAccessor));
         const xScale = scaleLinear({
-          domain: [0, Math.max(...data.map(xAccessor))],
+          domain: [0, maxDataValue || 1],
           nice: true,
           rangeRound: [0, xMax],
         });
@@ -178,14 +178,16 @@ const HorizontalBarChart = ({
                                   to={tick.to}
                                 />
                               )}
-                              <text
-                                fill={theme.colors.textSubtle}
-                                fontSize={theme.fontSizes[1]}
-                                textAnchor={xAxisProps.anchorPosition}
-                                transform={`translate(${tickX}, ${tickY}) rotate(${xAxisProps.rotateAnchorDegree})`}
-                              >
-                                {tick.formattedValue}
-                              </text>
+                              {(maxDataValue || !i) && (
+                                <text
+                                  fill={theme.colors.textSubtle}
+                                  fontSize={theme.fontSizes[1]}
+                                  textAnchor={xAxisProps.anchorPosition}
+                                  transform={`translate(${tickX}, ${tickY}) rotate(${xAxisProps.rotateAnchorDegree})`}
+                                >
+                                  {tick.formattedValue}
+                                </text>
+                              )}
                             </Group>
                           );
                         })}
