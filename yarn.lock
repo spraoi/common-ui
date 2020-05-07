@@ -4037,6 +4037,56 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
+"@spraoi/auth@^0.26.6":
+  version "0.26.12"
+  resolved "https://registry.yarnpkg.com/@spraoi/auth/-/auth-0.26.12.tgz#47f796ed394796147ba2b57497854b49c5d33208"
+  integrity sha512-VqL8HRZ41sfX5jVm3EeRA9fZZ9orcnnFdfMzjBIFYJ6RB2s8HQqtA1j4P7lrWamFqZemPzQsOU4enc6lS5Sjqg==
+
+"@spraoi/babel-preset@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/babel-preset/-/babel-preset-0.26.0.tgz#229288261fbf000457c4b1f0406f4d30292198c1"
+  integrity sha512-63JJwaDxbKVGEll1iRDra9GzRLhTCddysdFzHFfaVpCeVhFsDnO2zC/sBkUiAUvJcDzOgZC5axDFXvUOhYtfaw==
+
+"@spraoi/eslint-config@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/eslint-config/-/eslint-config-0.26.0.tgz#7ffc1dcc5752e626cbb9320db2ef77c6ddc89456"
+  integrity sha512-tN8eCbqeRuonqGbS7bnNj3zNyjC2Zx88PhJNiUWeoaqMtl/7LOtv4OrLCPgqUCD03Ad+EhF7jmWzgfMzIF4oLg==
+  dependencies:
+    babel-eslint "^10.1.0"
+    eslint-config-airbnb "^18.1.0"
+    eslint-config-prettier "^6.10.1"
+    eslint-plugin-import "^2.20.1"
+    eslint-plugin-jest "^22.21.0"
+    eslint-plugin-jsx-a11y "^6.2.3"
+    eslint-plugin-prettier "^3.1.2"
+    eslint-plugin-react "^7.19.0"
+    eslint-plugin-react-hooks "^1.7.0"
+
+"@spraoi/helpers@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/helpers/-/helpers-0.26.0.tgz#96e6f5af7dfbb829ce52e50b45a5025d5caee88c"
+  integrity sha512-C6UzjS/k0zifOw2lOy/0qsW2mZvTiiIxMloWspFFUqfiBatVFgwv8uSob67Otxa0Xz2KTdeVjSH5f0v0lSasfw==
+  dependencies:
+    humanize-duration "^3.21.0"
+
+"@spraoi/jest-config@^0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@spraoi/jest-config/-/jest-config-0.26.0.tgz#4dcc18df16f23f18c027da8eb1b736039052bda9"
+  integrity sha512-lT3DDkcvUBUlHBNaVx7PrO1Va/aLrLunpZAg9/aYYrhnQglbQwmEBZXOS1yWaarhNItXPhWQqVQs0wBc9PXqBw==
+  dependencies:
+    babel-jest "^25.1.0"
+    identity-obj-proxy "^3.0.0"
+
+"@spraoi/stylelint-config@^0.26.0":
+  version "0.26.10"
+  resolved "https://registry.yarnpkg.com/@spraoi/stylelint-config/-/stylelint-config-0.26.10.tgz#805a891e28eec86e53a9e22f0207078b6cc17a51"
+  integrity sha512-PZjGDacrMGULW0MpHBF7KjU0IFDjKMPQqC+Yd8FVEbPqYDzPjz2tw/nHhJlUdmnDmaLubA8GO+L0Bm9hbygo0w==
+  dependencies:
+    stylelint-config-prettier "6.0.0"
+    stylelint-config-recommended "3.0.0"
+    stylelint-config-styled-components "0.1.1"
+    stylelint-processor-styled-components "1.10.0"
+
 "@styled-system/background@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@styled-system/background/-/background-5.1.2.tgz#75c63d06b497ab372b70186c0bf608d62847a2ba"
