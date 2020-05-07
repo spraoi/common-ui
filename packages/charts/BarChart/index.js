@@ -28,6 +28,7 @@ const BarChart = ({
         const xMax = width - margin.left - margin.right;
         const yMax = height - margin.top - margin.bottom;
         const maxDataValue = Math.max(...data.map(yAccessor));
+
         const yScale = scaleLinear({
           domain: [0, maxDataValue || 1],
           nice: true,
