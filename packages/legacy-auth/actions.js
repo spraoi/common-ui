@@ -15,7 +15,8 @@ export const resetPassword = (payload) => ({
   type: constants.AUTH_RESET_PASSWORD,
 });
 
-export const sendResetPasswordCode = (payload) => ({
+export const sendResetPasswordCode = (payload, meta) => ({
+  meta,
   payload,
   type: constants.AUTH_SEND_RESET_PASSWORD_CODE,
 });

@@ -105,7 +105,7 @@ function* resetPasswordSaga({ payload }) {
   }
 }
 
-function* sendResetPasswordCodeSaga({ payload }) {
+function* sendResetPasswordCodeSaga({ payload, meta: { resolve, reject } }) {
   try {
     const { email } = payload;
     yield put(actions.setState({ isLoading: true }));
@@ -118,8 +118,10 @@ function* sendResetPasswordCodeSaga({ payload }) {
         userAttributes: { email },
       })
     );
+    if (resolve) yield call(resolve);
   } catch (e) {
     yield put(actions.setState({ error: e, isLoading: false }));
+    if (reject) yield call(reject);
   }
 }
 
@@ -241,9 +243,9 @@ function* signUpSaga({ payload }) {
 
 function* verifyUserNameSaga({ payload }) {
   try {
-    const { username } = aws.getUserAttributes();
+    const { username, email } = aws.getUserAttributes();
     yield put(actions.setState({ isLoading: true }));
-    const user = yield call(aws.getNewUser, username);
+    const user = yield call(aws.getNewUser, username || email);
     const verifyEmailPayload = {
       ...payload,
       user,
