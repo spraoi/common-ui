@@ -105,7 +105,7 @@ function* resetPasswordSaga({ payload }) {
   }
 }
 
-function* sendResetPasswordCodeSaga({ payload, meta : {resolve, reject} }) {
+function* sendResetPasswordCodeSaga({ payload, meta: { resolve, reject } }) {
   try {
     const { email } = payload;
     yield put(actions.setState({ isLoading: true }));
@@ -118,9 +118,10 @@ function* sendResetPasswordCodeSaga({ payload, meta : {resolve, reject} }) {
         userAttributes: { email },
       })
     );
-    if(resolve) yield call(resolve);
+    if (resolve) yield call(resolve);
   } catch (e) {
     yield put(actions.setState({ error: e, isLoading: false }));
+    if (reject) yield call(reject);
   }
 }
 
