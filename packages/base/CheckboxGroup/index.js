@@ -10,7 +10,6 @@ const CheckboxGroup = ({
   inputWrapperSx,
   label,
   labelSx,
-  labelReverse,
   name,
   options,
   type,
@@ -55,18 +54,9 @@ const CheckboxGroup = ({
             <Field
               component={Radio}
               errorSx={{ width: '100%' }}
-              inputWrapperSx={{
-                order: labelReverse ? '' : '-1',
-                ...inputWrapperSx,
-              }}
+              inputWrapperSx={inputWrapperSx}
               label={label}
-              labelReverse={labelReverse}
-              labelSx={{
-                ml: !labelReverse ? 3 : '',
-                mr: labelReverse ? 3 : '',
-                mt: 2,
-                ...labelSx,
-              }}
+              labelSx={{ mt: 2, ...labelSx }}
               name={name}
               type={type}
               value={value}
@@ -89,7 +79,6 @@ CheckboxGroup.propTypes = {
   inputLabelSx: PropTypes.shape({}),
   inputWrapperSx: PropTypes.shape({}),
   label: PropTypes.string,
-  labelReverse: PropTypes.bool,
   labelSx: PropTypes.shape({}),
   name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
@@ -98,7 +87,6 @@ CheckboxGroup.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
-
   type: PropTypes.oneOf(['checkbox', 'radio']),
   wrapperSx: PropTypes.shape({}),
 };
@@ -108,9 +96,7 @@ CheckboxGroup.defaultProps = {
   inputLabelSx: {},
   inputWrapperSx: {},
   label: null,
-  labelReverse: false,
   labelSx: {},
-
   type: 'radio',
   wrapperSx: {},
 };

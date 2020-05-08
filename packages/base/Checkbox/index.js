@@ -3,7 +3,7 @@ import React from 'react';
 import Box from '../Box';
 import InputWrapper from '../InputWrapper';
 
-const Checkbox = ({ input, label, labelReverse, type, ...rest }) => (
+const Checkbox = ({ input, label, type, ...rest }) => (
   <InputWrapper
     htmlFor={`${input.name}${input.value}`}
     input={input}
@@ -17,9 +17,6 @@ const Checkbox = ({ input, label, labelReverse, type, ...rest }) => (
         type={type}
         {...props}
         {...input}
-        sx={{
-          order: labelReverse ? '' : '-1',
-        }}
       />
     )}
   </InputWrapper>
@@ -27,16 +24,14 @@ const Checkbox = ({ input, label, labelReverse, type, ...rest }) => (
 
 Checkbox.propTypes = {
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    value: PropTypes.string,
   }).isRequired,
   label: PropTypes.string.isRequired,
-  labelReverse: PropTypes.bool,
   type: PropTypes.oneOf(['checkbox', 'radio']),
 };
 
 Checkbox.defaultProps = {
-  labelReverse: false,
   type: 'checkbox',
 };
 
