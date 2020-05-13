@@ -30,6 +30,9 @@ const db = (options) =>
         );
 
         res = marshalledDataIsArray ? unmarshalledData : unmarshalledData[0];
+      } else if (options.operation === 'scan') {
+        const marshalledData = get(data, 'Items', []);
+        res = marshalledData.map(AWS.DynamoDB.Converter.unmarshall);
       }
 
       HC.logEvent({
