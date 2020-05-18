@@ -2,7 +2,11 @@ import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
 import get from 'lodash/get';
 import warmer from 'lambda-warmer';
-import { COGNITO_USER_ATTRIBUTES, HEADERS } from '@spraoi/helpers/constants';
+import {
+  COGNITO_USER_ATTRIBUTES,
+  HEADERS,
+  UUID_PREFIXES,
+} from '@spraoi/helpers/constants';
 import { v4 as uuidv4 } from 'uuid';
 import HC from './honeycomb';
 import validateAndParseJwt from './validate-and-parse-jwt';
@@ -41,12 +45,12 @@ export default ({ errorHandler, handler }) => ({
     });
 
     try {
-      const userId = event.identityId
-        ? event.identityId.replace(REGION, 'spr:user:')
-        : null;
-
       const jwt = get(event, `headers[${HEADERS.JWT}]`, event.jwt);
       const claims = jwt ? await validateAndParseJwt(jwt) : null;
+
+      const userId = claims[COGNITO_USER_ATTRIBUTES.SUB]
+        ? UUID_PREFIXES.USER + claims[COGNITO_USER_ATTRIBUTES.SUB]
+        : null;
 
       // variation-based client id
       let clientId = CLIENT_ID;
