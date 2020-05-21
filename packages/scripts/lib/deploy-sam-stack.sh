@@ -7,7 +7,7 @@ while [[ $# -gt 0 ]]; do
 
   case "$key" in
     -b|--bucket) S3_BUCKET="$2" && shift && shift ;;
-    -d|--directory) DIRECTORY="$2" && shift && shift ;;
+    -f|--folder) DIRECTORY="$2" && shift && shift ;;
     -n|--name) NAME="$2" && shift && shift ;;
     -p|--params) PARAMS="$2" && shift && shift ;;
     -t|--template) TEMPLATE="$2" && shift && shift ;;

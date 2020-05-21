@@ -19,7 +19,7 @@
     "meow": "^5.0.0",
     "merge-graphql-schemas": "^1.7.7",
     "recursive-readdir": "^2.2.2",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "yaml-cfn": "^0.2.3"
   },
   "publishConfig": {
