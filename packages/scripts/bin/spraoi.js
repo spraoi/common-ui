@@ -24,9 +24,9 @@ COMMANDS
 
   deploy-sam-stack          Deploy a SAM stack
     --bucket, -b
-    --directory, -d
+    --folder, -f
     --name, -n
-    --params, -p
+    --params, -r
     --template, -t
     
   deploy-ui                 Deploy the contents of ./public to the configured
@@ -54,11 +54,11 @@ const cli = meow(helpText, {
   flags: {
     bucket: { alias: 'b', default: null, type: 'string' },
     config: { alias: 'c', default: null, type: 'string' },
-    directory: { alias: 'd', default: null, type: 'string' },
     domain: { alias: 'd', default: null, type: 'string' },
     environment: { alias: 'e', default: null, type: 'string' },
+    folder: { alias: 'f', default: null, type: 'string' },
     name: { alias: 'n', default: null, type: 'string' },
-    params: { alias: 'p', default: null, type: 'string' },
+    params: { alias: 'r', default: null, type: 'string' },
     project: { alias: 'p', default: null, type: 'string' },
     template: { alias: 't', default: null, type: 'string' },
     variation: { alias: 'v', default: null, type: 'string' },
@@ -88,10 +88,10 @@ switch (cli.input[0]) {
   case 'deploy-sam-project': {
     tryShell(
       `${__dirname}/../lib/deploy-sam-project.sh \
-        ${cli.flags.domain ? `-d ${cli.flags.domain}` : ''} \
-        ${cli.flags.environment ? `-e ${cli.flags.environment}` : ''} \
-        ${cli.flags.project ? `-p ${cli.flags.project}` : ''} \
-        ${cli.flags.variation ? `-v ${cli.flags.variation}` : ''}`
+        ${cli.flags.domain ? `-d '${cli.flags.domain}'` : ''} \
+        ${cli.flags.environment ? `-e '${cli.flags.environment}'` : ''} \
+        ${cli.flags.project ? `-p '${cli.flags.project}'` : ''} \
+        ${cli.flags.variation ? `-v '${cli.flags.variation}'` : ''}`
     );
 
     break;
@@ -100,11 +100,11 @@ switch (cli.input[0]) {
   case 'deploy-sam-stack': {
     tryShell(
       `${__dirname}/../lib/deploy-sam-stack.sh \
-        ${cli.flags.bucket ? `-b ${cli.flags.bucket}` : ''} \
-        ${cli.flags.directory ? `-d ${cli.flags.directory}` : ''} \
-        ${cli.flags.name ? `-n ${cli.flags.name}` : ''} \
-        ${cli.flags.params ? `-p ${cli.flags.params}` : ''} \
-        ${cli.flags.template ? `-t ${cli.flags.template}` : ''}`
+        ${cli.flags.bucket ? `-b '${cli.flags.bucket}'` : ''} \
+        ${cli.flags.folder ? `-d '${cli.flags.folder}'` : ''} \
+        ${cli.flags.name ? `-n '${cli.flags.name}'` : ''} \
+        ${cli.flags.params ? `-p '${cli.flags.params}'` : ''} \
+        ${cli.flags.template ? `-t '${cli.flags.template}'` : ''}`
     );
 
     break;
