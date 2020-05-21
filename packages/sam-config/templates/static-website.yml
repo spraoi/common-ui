@@ -20,8 +20,13 @@ Parameters:
   EnableDnsRecords:
     Type: String
     Default: true
+  WhitelistIps:
+    Type: CommaDelimitedList
+    Default: false
 Conditions:
   DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
+  WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
+  WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
@@ -39,9 +44,15 @@ Resources:
         Statement:
           - Action: s3:GetObject
             Effect: Allow
-            Principal: '*'
+            Principal:
+              CanonicalUser: !GetAtt CloudfrontOriginAccessIdentity.S3CanonicalUserId
             Resource: !Sub arn:aws:s3:::${Bucket}/*
-            Sid: PublicReadGetObject
+            Sid: 1
+  CloudfrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Ref AWS::StackName
   Cloudfront:
     Type: AWS::CloudFront::Distribution
     DependsOn:
@@ -71,14 +82,20 @@ Resources:
         HttpVersion: http2
         IPV6Enabled: true
         Origins:
-          - DomainName: !Select [2, !Split ['/', !GetAtt Bucket.WebsiteURL]]
+          - DomainName: !GetAtt Bucket.DomainName
             Id: Origin
-            CustomOriginConfig:
-              OriginProtocolPolicy: http-only
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${CloudfrontOriginAccessIdentity}
         PriceClass: PriceClass_100
         ViewerCertificate:
           AcmCertificateArn: !Ref CertificateArn
           SslSupportMethod: sni-only
+        WebACLId:
+          !If [
+            WhitelistIpsAclEnabled,
+            !GetAtt WhitelistIpsAcl.Arn,
+            !Ref AWS::NoValue,
+          ]
   Dns:
     Type: AWS::Route53::RecordSetGroup
     Condition: DnsRecordsEnabled
@@ -95,6 +112,35 @@ Resources:
           AliasTarget:
             DNSName: !GetAtt Cloudfront.DomainName
             HostedZoneId: Z2FDTNDATAQYW2
+  WhitelistIpsIpSet:
+    Type: AWS::WAFv2::IPSet
+    Condition: WhitelistIpsAclEnabled
+    Properties:
+      Addresses: !Ref WhitelistIps
+      IPAddressVersion: IPV4
+      Scope: CLOUDFRONT
+  WhitelistIpsAcl:
+    Type: AWS::WAFv2::WebACL
+    Condition: WhitelistIpsAclEnabled
+    Properties:
+      DefaultAction:
+        Block: {}
+      Rules:
+        - Action:
+            Allow: {}
+          Name: !Sub ${AWS::StackName}WhitelistIpsAclRule
+          Priority: 0
+          Statement:
+            IPSetReferenceStatement: !GetAtt WhitelistIpsIpSet.Arn
+          VisibilityConfig:
+            CloudWatchMetricsEnabled: false
+            MetricName: !Sub ${AWS::StackName}WhitelistIpsAclRuleMetrics
+            SampledRequestsEnabled: false
+      Scope: CLOUDFRONT
+      VisibilityConfig:
+        CloudWatchMetricsEnabled: false
+        MetricName: !Sub ${AWS::StackName}WhitelistIpsAclMetrics
+        SampledRequestsEnabled: false
 Outputs:
   BucketUrl:
     Value: !Sub s3://${Bucket}
