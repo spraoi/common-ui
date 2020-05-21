@@ -1,8 +1,9 @@
-import Amplify, { Auth } from 'aws-amplify';
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import objectMapKeysDeep from '@spraoi/helpers/object-map-keys-deep';
+import PropTypes from 'prop-types';
+import Amplify, { Auth, Hub } from 'aws-amplify';
 import { camelCase } from 'change-case';
+
+import objectMapKeysDeep from '@spraoi/helpers/object-map-keys-deep';
 import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './utilities/constants';
 
@@ -13,6 +14,7 @@ class AuthProvider extends PureComponent {
     this.state = {
       authState: AUTH_STATES.LOADING,
       authUser: {},
+      isFederatedSignIn: false,
       jwt: null,
     };
   }
@@ -20,7 +22,29 @@ class AuthProvider extends PureComponent {
   async componentDidMount() {
     const { amplifyConfig } = this.props;
     Amplify.configure(amplifyConfig);
-    await this.setAuthenticatedUser();
+
+    const { isFederatedSignIn } = this.state;
+    if (!isFederatedSignIn) {
+      await this.setAuthenticatedUser();
+    }
+
+    Hub.listen('auth', ({ payload: { event } }) => {
+      switch (event) {
+        case 'signIn':
+          this.setAuthenticatedUser({ bypassCache: true });
+          break;
+        case 'signOut':
+          this.setState({
+            authState: AUTH_STATES.SIGNED_OUT,
+            authUser: {},
+            isFederatedSignIn: false,
+            jwt: null,
+          });
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   async setAuthenticatedUser({ bypassCache } = { bypassCache: false }) {
@@ -68,14 +92,13 @@ class AuthProvider extends PureComponent {
     this.setState({ authState: authUser.challengeName, authUser });
   };
 
+  setFederatedSignIn = async (cognitoProvider) => {
+    await Auth.federatedSignIn(cognitoProvider);
+    this.setState({ isFederatedSignIn: true });
+  };
+
   signOut = async () => {
     await Auth.signOut();
-
-    this.setState({
-      authState: AUTH_STATES.SIGNED_OUT,
-      authUser: {},
-      jwt: null,
-    });
   };
 
   signUp = async (values) => {
@@ -104,6 +127,7 @@ class AuthProvider extends PureComponent {
       <AuthContext.Provider
         value={{
           completeNewPasswordChallenge: this.completeNewPasswordChallenge,
+          federatedSignIn: this.setFederatedSignIn,
           homePath,
           isAuthenticated: authState === AUTH_STATES.SIGNED_IN,
           isLoading: authState === AUTH_STATES.LOADING,
