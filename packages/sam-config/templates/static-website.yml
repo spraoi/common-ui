@@ -94,7 +94,7 @@ Resources:
           !If [
             WhitelistIpsAclEnabled,
             !GetAtt WhitelistIpsAcl.Arn,
-            !Ref AWS::NoValue,
+            !Ref 'AWS::NoValue',
           ]
   Dns:
     Type: AWS::Route53::RecordSetGroup
