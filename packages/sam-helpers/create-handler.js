@@ -48,7 +48,7 @@ export default ({ errorHandler, handler }) => ({
       const jwt = get(event, `headers[${HEADERS.JWT}]`, event.jwt);
       const claims = jwt ? await validateAndParseJwt(jwt) : null;
 
-      const userId = claims[COGNITO_USER_ATTRIBUTES.SUB]
+      const userId = claims && claims[COGNITO_USER_ATTRIBUTES.SUB]
         ? UUID_PREFIXES.USER + claims[COGNITO_USER_ATTRIBUTES.SUB]
         : null;
 
