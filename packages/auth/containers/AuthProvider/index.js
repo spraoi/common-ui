@@ -28,6 +28,7 @@ class AuthProvider extends PureComponent {
       await this.setAuthenticatedUser();
     }
 
+    // Listen for all auth events.
     Hub.listen('auth', ({ payload: { event } }) => {
       switch (event) {
         case 'signIn':
