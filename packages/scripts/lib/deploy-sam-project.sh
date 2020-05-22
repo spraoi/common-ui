@@ -15,6 +15,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 S3_BUCKET="spr-${PROJECT}-${VARIATION}-${ENVIRONMENT}-cloudformation-templates"
+S3_BUCKET_SHORT="spr-${PROJECT}-${VARIATION}-${ENVIRONMENT}-cf-templates"
+[[ ${#S3_BUCKET} -gt 63 ]] && S3_BUCKET="$S3_BUCKET_SHORT"
 
 if [[ -z "$ENVIRONMENT" ]]; then
   echo "ERROR: please specify an environment (-e|--environment)" 1>&2
