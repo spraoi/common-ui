@@ -6,7 +6,8 @@ export const completeSignUp = (payload, meta) => ({
   type: constants.AUTH_COMPLETE_SIGN_UP,
 });
 
-export const init = () => ({
+export const init = (meta) => ({
+  meta,
   type: constants.AUTH_INIT,
 });
 
@@ -59,6 +60,11 @@ export const verifyUserName = (payload) => ({
 export const changePassword = (payload) => ({
   payload,
   type: constants.AUTH_CHANGE_PASSWORD,
+});
+
+export const updateDeviceStatus = (payload) => ({
+  payload,
+  type: constants.AUTH_UPDATE_DEVICE_STATUS,
 });
 
 export const updateUserAttributes = (payload) => ({

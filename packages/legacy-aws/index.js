@@ -388,15 +388,54 @@ export function setUserAttributes(attributes) {
   );
 }
 
-export function signIn({ email, password, rememberMe = false, user }) {
+export function signIn({
+  email,
+  password,
+  rememberMe = false,
+  user,
+  registerDevice,
+  shouldRegister,
+}) {
   return new Promise((resolve, reject) => {
     const callbacks = {
+      onFailure: (err) => reject(parseLambdaError(err)),
       onSuccess: (session) => {
         rememberSession(rememberMe);
         parseUserSession(session);
-        resolve();
+        if (!shouldRegister) {
+          resolve();
+        } else {
+          user.listDevices(null, null, {
+            onFailure: (err) => {
+              reject(parseLambdaError(err));
+            },
+            onSuccess: (data) => {
+              Cookie.set(
+                spraoiConfig.storageKeys.deviceAlreadyRegistered,
+                data.Devices.some(
+                  (device) => user.deviceKey === device.DeviceKey
+                )
+              );
+              if (registerDevice) {
+                user.setDeviceStatusRemembered({
+                  onFailure: (err) => {
+                    reject(parseLambdaError(err));
+                  },
+                  onSuccess: () => null,
+                });
+              } else {
+                user.setDeviceStatusNotRemembered({
+                  onFailure: (err) => {
+                    reject(parseLambdaError(err));
+                  },
+                  onSuccess: () => null,
+                });
+              }
+              resolve();
+            },
+          });
+        }
       },
-      onFailure: (err) => reject(parseLambdaError(err)),
     };
 
     callbacks.newPasswordRequired = () =>
@@ -443,6 +482,7 @@ export function signOut() {
   // clear cached user attributes
   delete window[spraoiConfig.storageKeys.userAttributes];
   localStorage.removeItem(spraoiConfig.storageKeys.userAttributes);
+  Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, false);
 }
 
 export function signUp({ email, password, attributes = {} }) {

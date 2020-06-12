@@ -1,6 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import ReactGA from 'react-ga';
 import * as aws from '@spraoi/legacy-aws';
+import { spraoiConfig } from '@spraoi/legacy-aws/config';
+import Cookie from 'js-cookie';
 import * as actions from './actions';
 import * as constants from './constants';
 
@@ -50,7 +52,7 @@ function* completeSignUp({ payload, meta }) {
   }
 }
 
-function* initSaga() {
+function* initSaga({ meta }) {
   try {
     if (SPRAOI_ENV.GOOGLE_ANALYTICS) {
       ReactGA.initialize(SPRAOI_ENV.GOOGLE_ANALYTICS);
@@ -59,13 +61,29 @@ function* initSaga() {
     yield call(aws.signInExternalResponse);
     const isAuthenticated = yield call(aws.isAuthenticated);
 
-    yield put(
-      actions.setState({
-        ...defaultState,
-        isAuthenticated,
-        userAttributes: aws.getUserAttributes(),
-      })
-    );
+    const stateValues = {
+      isAuthenticated,
+      userAttributes: aws.getUserAttributes(),
+    };
+    let shouldChangeState = true;
+    if (meta.shouldCheckDeviceStatus && isAuthenticated) {
+      const isRegistered =
+        Cookie.get(spraoiConfig.storageKeys.deviceAlreadyRegistered) === 'true';
+      const shouldSignIn = isRegistered && isAuthenticated;
+      if (!shouldSignIn) {
+        Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, false);
+        yield call(signOutSaga);
+        shouldChangeState = false;
+      }
+    }
+    if (shouldChangeState) {
+      yield put(
+        actions.setState({
+          ...defaultState,
+          ...stateValues,
+        })
+      );
+    }
   } catch (e) {
     yield put(actions.setState({ ...defaultState, error: e }));
   }
@@ -305,6 +323,21 @@ function* updateUserAttributesSaga({ payload }) {
   }
 }
 
+function* updateDeviceStatus({ payload }) {
+  try {
+    const { onSuccess, status } = payload;
+    Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, true);
+    yield put(
+      actions.setState({
+        deviceAlreadyRegistered: status,
+      })
+    );
+    if (onSuccess) onSuccess();
+  } catch (e) {
+    yield put(actions.setState({ error: e, isLoading: false }));
+  }
+}
+
 export default function* sagas() {
   yield takeLatest(constants.AUTH_COMPLETE_SIGN_UP, completeSignUp);
   yield takeLatest(constants.AUTH_INIT, initSaga);
@@ -324,4 +357,5 @@ export default function* sagas() {
     constants.AUTH_UPDATE_USER_ATTRIBUTES,
     updateUserAttributesSaga
   );
+  yield takeLatest(constants.AUTH_UPDATE_DEVICE_STATUS, updateDeviceStatus);
 }

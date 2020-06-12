@@ -13,6 +13,7 @@ export const spraoiConfig = {
   },
   rememberMeDays: 30,
   storageKeys: {
+    deviceAlreadyRegistered: 'spr-device-already-registered',
     rememberMe: 'spr-remember-me',
     sessionExists: 'spr-session-exists',
     userAttributes: 'spr-user-attributes',
