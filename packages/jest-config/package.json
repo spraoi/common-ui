@@ -20,7 +20,7 @@
     "@testing-library/jest-dom": "^5",
     "@testing-library/react": "^10",
     "babel-core": "^7.0.0-bridge",
-    "jest": "^25",
+    "jest": "^26",
     "jest-junit": "^10"
   },
   "publishConfig": {
