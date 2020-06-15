@@ -16,7 +16,7 @@ describe('Paginator component', () => {
       />
     );
 
-    const previousButton = getByText('<');
+    const previousButton = getByText('<').closest('button');
     const nextButton = getByText('>');
     expect(getByText('1–10')).toBeInTheDocument();
     expect(previousButton).toBeDisabled();
@@ -64,7 +64,7 @@ describe('Paginator component', () => {
     );
 
     const previousButton = getByText('<');
-    const nextButton = getByText('>');
+    const nextButton = getByText('>').closest('button');
     expect(getByText('11–19')).toBeInTheDocument();
     fireEvent.click(previousButton);
     expect(onPreviousClick).toHaveBeenCalled();
@@ -99,6 +99,6 @@ describe('Paginator component', () => {
     );
 
     expect(getByText('1–10 of 10')).toBeInTheDocument();
-    expect(getByText('>')).toBeDisabled();
+    expect(getByText('>').closest('button')).toBeDisabled();
   });
 });

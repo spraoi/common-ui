@@ -10,7 +10,7 @@
   "version": "0.28.0",
   "dependencies": {
     "deepmerge": "^4.2.2",
-    "js-yaml": "^3.13.1"
+    "js-yaml": "^3.14.0"
   },
   "peerDependencies": {
     "graphql-tag": "^2",

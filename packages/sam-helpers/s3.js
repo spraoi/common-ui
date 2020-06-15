@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import HC from './honeycomb';
 
 const s3 = (options) =>
@@ -14,7 +14,7 @@ const s3 = (options) =>
 
       HC.logEvent({
         durationMs: timer.getDuration(),
-        id: uuid(),
+        id: uuidv4(),
         name: 's3BucketRequest',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(data),
