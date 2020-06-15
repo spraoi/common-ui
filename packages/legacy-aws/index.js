@@ -388,13 +388,36 @@ export function setUserAttributes(attributes) {
   );
 }
 
-export function signIn({ email, password, rememberMe = false, user }) {
+export function signIn({
+  email,
+  password,
+  rememberMe = false,
+  user,
+  shouldRegister,
+}) {
   return new Promise((resolve, reject) => {
     const callbacks = {
       onSuccess: (session) => {
         rememberSession(rememberMe);
         parseUserSession(session);
-        resolve();
+        if (shouldRegister) {
+          user.listDevices(null, null, {
+            onSuccess: (data) => {
+              localStorage.setItem(
+                spraoiConfig.storageKeys.deviceAlreadyRegistered,
+                data.Devices.some(
+                  (device) => user.deviceKey === device.DeviceKey
+                )
+              );
+              resolve();
+            },
+            onFailure: (err) => {
+              reject(parseLambdaError(err));
+            },
+          });
+        } else {
+          resolve();
+        }
       },
       onFailure: (err) => reject(parseLambdaError(err)),
     };
@@ -443,6 +466,7 @@ export function signOut() {
   // clear cached user attributes
   delete window[spraoiConfig.storageKeys.userAttributes];
   localStorage.removeItem(spraoiConfig.storageKeys.userAttributes);
+  localStorage.removeItem(spraoiConfig.storageKeys.deviceAlreadyRegistered);
 }
 
 export function signUp({ email, password, attributes = {} }) {
@@ -469,6 +493,33 @@ export function verifyEmail({ user, verificationCode }) {
       err ? reject(err) : resolve(result)
     )
   );
+}
+
+export async function updateDeviceStatus() {
+  const currentUser = getNewUserPool().getCurrentUser();
+  if (currentUser !== null) {
+    parseUserSession(await getUserSession(currentUser));
+    return new Promise((resolve, reject) => {
+      currentUser.getCachedDeviceKeyAndPassword();
+      if (
+        localStorage.getItem(spraoiConfig.storageKeys.rememberDevice) === 'true'
+      ) {
+        currentUser.setDeviceStatusRemembered({
+          onSuccess: () => resolve(),
+          onFailure: (err) => {
+            reject(parseLambdaError(err));
+          },
+        });
+      } else {
+        currentUser.setDeviceStatusNotRemembered({
+          onSuccess: () => resolve(),
+          onFailure: (err) => {
+            reject(parseLambdaError(err));
+          },
+        });
+      }
+    });
+  }
 }
 
 /**
