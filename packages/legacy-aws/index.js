@@ -393,49 +393,33 @@ export function signIn({
   password,
   rememberMe = false,
   user,
-  registerDevice,
   shouldRegister,
 }) {
   return new Promise((resolve, reject) => {
     const callbacks = {
-      onFailure: (err) => reject(parseLambdaError(err)),
       onSuccess: (session) => {
         rememberSession(rememberMe);
         parseUserSession(session);
-        if (!shouldRegister) {
-          resolve();
-        } else {
+        if (shouldRegister) {
           user.listDevices(null, null, {
-            onFailure: (err) => {
-              reject(parseLambdaError(err));
-            },
             onSuccess: (data) => {
-              Cookie.set(
+              localStorage.setItem(
                 spraoiConfig.storageKeys.deviceAlreadyRegistered,
                 data.Devices.some(
                   (device) => user.deviceKey === device.DeviceKey
                 )
               );
-              if (registerDevice) {
-                user.setDeviceStatusRemembered({
-                  onFailure: (err) => {
-                    reject(parseLambdaError(err));
-                  },
-                  onSuccess: () => null,
-                });
-              } else {
-                user.setDeviceStatusNotRemembered({
-                  onFailure: (err) => {
-                    reject(parseLambdaError(err));
-                  },
-                  onSuccess: () => null,
-                });
-              }
               resolve();
             },
+            onFailure: (err) => {
+              reject(parseLambdaError(err));
+            },
           });
+        } else {
+          resolve();
         }
       },
+      onFailure: (err) => reject(parseLambdaError(err)),
     };
 
     callbacks.newPasswordRequired = () =>
@@ -482,7 +466,7 @@ export function signOut() {
   // clear cached user attributes
   delete window[spraoiConfig.storageKeys.userAttributes];
   localStorage.removeItem(spraoiConfig.storageKeys.userAttributes);
-  Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, false);
+  localStorage.removeItem(spraoiConfig.storageKeys.deviceAlreadyRegistered);
 }
 
 export function signUp({ email, password, attributes = {} }) {
@@ -509,6 +493,33 @@ export function verifyEmail({ user, verificationCode }) {
       err ? reject(err) : resolve(result)
     )
   );
+}
+
+export async function updateDeviceStatus() {
+  const currentUser = getNewUserPool().getCurrentUser();
+  if (currentUser !== null) {
+    parseUserSession(await getUserSession(currentUser));
+    return new Promise((resolve, reject) => {
+      currentUser.getCachedDeviceKeyAndPassword();
+      if (
+        localStorage.getItem(spraoiConfig.storageKeys.rememberDevice) === 'true'
+      ) {
+        currentUser.setDeviceStatusRemembered({
+          onSuccess: () => resolve(),
+          onFailure: (err) => {
+            reject(parseLambdaError(err));
+          },
+        });
+      } else {
+        currentUser.setDeviceStatusNotRemembered({
+          onSuccess: () => resolve(),
+          onFailure: (err) => {
+            reject(parseLambdaError(err));
+          },
+        });
+      }
+    });
+  }
 }
 
 /**

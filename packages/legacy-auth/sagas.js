@@ -2,7 +2,6 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import ReactGA from 'react-ga';
 import * as aws from '@spraoi/legacy-aws';
 import { spraoiConfig } from '@spraoi/legacy-aws/config';
-import Cookie from 'js-cookie';
 import * as actions from './actions';
 import * as constants from './constants';
 
@@ -68,10 +67,15 @@ function* initSaga({ meta }) {
     let shouldChangeState = true;
     if (meta.shouldCheckDeviceStatus && isAuthenticated) {
       const isRegistered =
-        Cookie.get(spraoiConfig.storageKeys.deviceAlreadyRegistered) === 'true';
+        localStorage.getItem(
+          spraoiConfig.storageKeys.deviceAlreadyRegistered
+        ) === 'true';
       const shouldSignIn = isRegistered && isAuthenticated;
       if (!shouldSignIn) {
-        Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, false);
+        localStorage.setItem(
+          spraoiConfig.storageKeys.deviceAlreadyRegistered,
+          false
+        );
         yield call(signOutSaga);
         shouldChangeState = false;
       }
@@ -323,18 +327,24 @@ function* updateUserAttributesSaga({ payload }) {
   }
 }
 
-function* updateDeviceStatus({ payload }) {
+function* updateDeviceRegistrationStatusSaga({ payload }) {
   try {
     const { onSuccess, status } = payload;
-    Cookie.set(spraoiConfig.storageKeys.deviceAlreadyRegistered, true);
-    yield put(
-      actions.setState({
-        deviceAlreadyRegistered: status,
-      })
+    localStorage.setItem(
+      spraoiConfig.storageKeys.deviceAlreadyRegistered,
+      status
     );
     if (onSuccess) onSuccess();
   } catch (e) {
-    yield put(actions.setState({ error: e, isLoading: false }));
+    yield put(actions.setState({ error: e }));
+  }
+}
+
+function* updateDeviceStatusSaga() {
+  try {
+    yield call(aws.updateDeviceStatus);
+  } catch (e) {
+    yield put(actions.setState({ error: e }));
   }
 }
 
@@ -357,5 +367,9 @@ export default function* sagas() {
     constants.AUTH_UPDATE_USER_ATTRIBUTES,
     updateUserAttributesSaga
   );
-  yield takeLatest(constants.AUTH_UPDATE_DEVICE_STATUS, updateDeviceStatus);
+  yield takeLatest(
+    constants.AUTH_UPDATE_DEVICE_REGISTRATION_STATUS,
+    updateDeviceRegistrationStatusSaga
+  );
+  yield takeLatest(constants.AUTH_UPDATE_DEVICE_STATUS, updateDeviceStatusSaga);
 }

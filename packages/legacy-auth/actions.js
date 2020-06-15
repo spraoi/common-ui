@@ -62,8 +62,12 @@ export const changePassword = (payload) => ({
   type: constants.AUTH_CHANGE_PASSWORD,
 });
 
-export const updateDeviceStatus = (payload) => ({
+export const updateDeviceRegistrationStatus = (payload) => ({
   payload,
+  type: constants.AUTH_UPDATE_DEVICE_REGISTRATION_STATUS,
+});
+
+export const updateDeviceStatus = () => ({
   type: constants.AUTH_UPDATE_DEVICE_STATUS,
 });
 
