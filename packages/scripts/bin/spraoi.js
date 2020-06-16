@@ -52,16 +52,16 @@ EXAMPLES
 
 const cli = meow(helpText, {
   flags: {
-    bucket: { alias: 'b', default: null, type: 'string' },
-    config: { alias: 'c', default: null, type: 'string' },
-    domain: { alias: 'd', default: null, type: 'string' },
-    environment: { alias: 'e', default: null, type: 'string' },
-    folder: { alias: 'f', default: null, type: 'string' },
-    name: { alias: 'n', default: null, type: 'string' },
-    params: { alias: 'r', default: null, type: 'string' },
-    project: { alias: 'p', default: null, type: 'string' },
-    template: { alias: 't', default: null, type: 'string' },
-    variation: { alias: 'v', default: null, type: 'string' },
+    bucket: { alias: 'b', default: '', type: 'string' },
+    config: { alias: 'c', default: '', type: 'string' },
+    domain: { alias: 'd', default: '', type: 'string' },
+    environment: { alias: 'e', default: '', type: 'string' },
+    folder: { alias: 'f', default: '', type: 'string' },
+    name: { alias: 'n', default: '', type: 'string' },
+    params: { alias: 'r', default: '', type: 'string' },
+    project: { alias: 'p', default: '', type: 'string' },
+    template: { alias: 't', default: '', type: 'string' },
+    variation: { alias: 'v', default: '', type: 'string' },
   },
   input: [
     'build-sam-cf-template',
