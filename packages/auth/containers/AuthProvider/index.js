@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Amplify, { Auth, Hub } from 'aws-amplify';
-import { camelCase } from 'change-case';
-
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import isJSON from '@spraoi/helpers/is-json';
 import objectMapKeysDeep from '@spraoi/helpers/object-map-keys-deep';
+import { camelCase } from 'change-case';
 import AuthContext from '../../utilities/context';
 import { AUTH_STATES } from './utilities/constants';
 
@@ -54,16 +54,20 @@ class AuthProvider extends PureComponent {
         bypassCache,
       });
 
-      const payload = objectMapKeysDeep(
-        session.signInUserSession.accessToken.payload,
-        camelCase
-      );
-
-      const attributes = objectMapKeysDeep(session.attributes, camelCase);
-
       const newState = {
         authState: AUTH_STATES.SIGNED_IN,
-        authUser: { ...attributes, cognitoGroups: payload.cognitoGroups },
+        authUser: Object.entries(
+          objectMapKeysDeep(
+            session.signInUserSession.idToken.payload,
+            camelCase
+          )
+        ).reduce(
+          (attributes, [key, value]) => ({
+            ...attributes,
+            [key]: isJSON(value) ? JSON.parse(value) : value,
+          }),
+          {}
+        ),
         jwt: session.signInUserSession.accessToken.jwtToken,
       };
 
