@@ -14,7 +14,6 @@ class AuthProvider extends PureComponent {
     this.state = {
       authState: AUTH_STATES.LOADING,
       authUser: {},
-      isFederatedSignIn: false,
       jwt: null,
     };
   }
@@ -23,10 +22,7 @@ class AuthProvider extends PureComponent {
     const { amplifyConfig } = this.props;
     Amplify.configure(amplifyConfig);
 
-    const { isFederatedSignIn } = this.state;
-    if (!isFederatedSignIn) {
-      await this.setAuthenticatedUser();
-    }
+    await this.setAuthenticatedUser();
 
     // Listen for all auth events.
     Hub.listen('auth', ({ payload: { event } }) => {
@@ -38,7 +34,6 @@ class AuthProvider extends PureComponent {
           this.setState({
             authState: AUTH_STATES.SIGNED_OUT,
             authUser: {},
-            isFederatedSignIn: false,
             jwt: null,
           });
           break;
@@ -99,7 +94,6 @@ class AuthProvider extends PureComponent {
 
   setFederatedSignIn = async (cognitoProvider) => {
     await Auth.federatedSignIn(cognitoProvider);
-    this.setState({ isFederatedSignIn: true });
   };
 
   signOut = async () => {
