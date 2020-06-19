@@ -41,7 +41,7 @@ const Paginator = ({
     if (currentPage > MID + 1) {
       end = Math.min(currentPage + MID - 1, totalPages);
       start = currentPage - MID;
-      start = Math.min(start, end - totalJumpToPages + 1);
+      start = Math.max(1, Math.min(start, end - totalJumpToPages + 1));
     }
 
     for (let i = start; i <= end; i += 1) {
