@@ -266,6 +266,7 @@ function* signUpSaga({ payload }) {
 function* verifyUserNameSaga({ payload }) {
   try {
     const { username, email } = aws.getUserAttributes();
+    const { onSuccess } = payload;
     yield put(actions.setState({ isLoading: true }));
     const user = yield call(aws.getNewUser, username || email);
     const verifyEmailPayload = {
@@ -279,6 +280,7 @@ function* verifyUserNameSaga({ payload }) {
         verificationRequired: false,
       })
     );
+    if (onSuccess) onSuccess();
   } catch (e) {
     yield put(actions.setState({ error: e, isLoading: false }));
   }
