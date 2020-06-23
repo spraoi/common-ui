@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
 import get from 'lodash/get';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import HC from './honeycomb';
 
 const db = (options) =>
@@ -34,7 +34,7 @@ const db = (options) =>
 
       HC.logEvent({
         durationMs: timer.getDuration(),
-        id: uuid(),
+        id: uuidv4(),
         name: 'dynamoDbQuery',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(res),

@@ -36,6 +36,6 @@ describe('Modal component', () => {
       </Modal>
     );
 
-    expect(getByText('Cancel')).toBeDisabled();
+    expect(getByText('Cancel').closest('button')).toBeDisabled();
   });
 });

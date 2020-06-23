@@ -31,7 +31,6 @@ Resources:
   Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      AccessControl: PublicRead
       BucketName: !Ref FullDomainName
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -47,7 +46,11 @@ Resources:
             Principal:
               CanonicalUser: !GetAtt CloudfrontOriginAccessIdentity.S3CanonicalUserId
             Resource: !Sub arn:aws:s3:::${Bucket}/*
-            Sid: 1
+          - Action: s3:ListBucket
+            Effect: Allow
+            Principal:
+              CanonicalUser: !GetAtt CloudfrontOriginAccessIdentity.S3CanonicalUserId
+            Resource: !Sub arn:aws:s3:::${Bucket}
   CloudfrontOriginAccessIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:

@@ -1,6 +1,6 @@
 const commonjs = require('@rollup/plugin-commonjs');
 const json = require('@rollup/plugin-json');
-const resolve = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require('rollup-plugin-terser');
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     commonjs(),
     json(),
-    resolve(),
+    nodeResolve(),
     terser({ output: { comments: false } }),
   ],
 };

@@ -2,8 +2,8 @@ import Timer from '@spraoi/helpers/timer';
 import isJSON from '@spraoi/helpers/is-json';
 import objectToQueryString from '@spraoi/helpers/object-to-query-string';
 import request from 'follow-redirects';
-import uuid from 'uuid/v4';
 import { HEADERS } from '@spraoi/helpers/constants';
+import { v4 as uuidv4 } from 'uuid';
 import HC from './honeycomb';
 
 request.maxBodyLength = 100 * 1024 * 1024; // 100 MB
@@ -18,7 +18,7 @@ const http = (originalOptions) => {
 
   options.headers = options.headers || {};
   options.headers.Host = options.host;
-  options.headers[HEADERS.HC_PARENT_ID] = uuid();
+  options.headers[HEADERS.HC_PARENT_ID] = uuidv4();
 
   const query = objectToQueryString(options.queryParams);
   options.path = `/${prePath}/${options.path}${query}`.replace(/\/+/g, '/');
