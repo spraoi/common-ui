@@ -9,6 +9,7 @@ while [[ $# -gt 0 ]]; do
     -d|--domain) DOMAIN="$2" && shift && shift ;;
     -e|--environment) ENVIRONMENT="$2" && shift && shift ;;
     -p|--project) PROJECT="$2" && shift && shift ;;
+    -r|--region) REGION="$2" && shift && shift ;;
     -v|--variation) VARIATION="$2" && shift && shift ;;
     *) shift ;;
   esac
@@ -65,4 +66,5 @@ capAll() {
   --bucket "$S3_BUCKET" \
   --name "$(cap "$PROJECT")$(capAll "$VARIATION")$(cap "$ENVIRONMENT")" \
   --params "Environment=$ENVIRONMENT Template=$PROJECT Variation=$VARIATION FullDomainName=$DOMAIN" \
+  --region "$REGION" \
   --template "$TEMPLATE"
