@@ -20,6 +20,7 @@ COMMANDS
     --domain, -d
     --environment, -e
     --project, -p
+    --region, -l
     --variation, -v
 
   deploy-sam-stack          Deploy a SAM stack
@@ -27,6 +28,7 @@ COMMANDS
     --folder, -f
     --name, -n
     --params, -r
+    --region, -l
     --template, -t
     
   deploy-ui                 Deploy the contents of ./public to the configured
@@ -60,6 +62,7 @@ const cli = meow(helpText, {
     name: { alias: 'n', default: '', type: 'string' },
     params: { alias: 'r', default: '', type: 'string' },
     project: { alias: 'p', default: '', type: 'string' },
+    region: { alias: 'l', default: '', type: 'string' },
     template: { alias: 't', default: '', type: 'string' },
     variation: { alias: 'v', default: '', type: 'string' },
   },
@@ -91,6 +94,7 @@ switch (cli.input[0]) {
         ${cli.flags.domain ? `-d '${cli.flags.domain}'` : ''} \
         ${cli.flags.environment ? `-e '${cli.flags.environment}'` : ''} \
         ${cli.flags.project ? `-p '${cli.flags.project}'` : ''} \
+        ${cli.flags.region ? `-r '${cli.flags.region}'` : ''} \
         ${cli.flags.variation ? `-v '${cli.flags.variation}'` : ''}`
     );
 
@@ -104,6 +108,7 @@ switch (cli.input[0]) {
         ${cli.flags.folder ? `-d '${cli.flags.folder}'` : ''} \
         ${cli.flags.name ? `-n '${cli.flags.name}'` : ''} \
         ${cli.flags.params ? `-p '${cli.flags.params}'` : ''} \
+        ${cli.flags.region ? `-r '${cli.flags.region}'` : ''} \
         ${cli.flags.template ? `-t '${cli.flags.template}'` : ''}`
     );
 

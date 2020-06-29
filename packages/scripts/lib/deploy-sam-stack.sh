@@ -10,13 +10,14 @@ while [[ $# -gt 0 ]]; do
     -d|--directory) DIRECTORY="$2" && shift && shift ;;
     -n|--name) NAME="$2" && shift && shift ;;
     -p|--params) PARAMS="$2" && shift && shift ;;
+    -r|--region) REGION="$2" && shift && shift ;;
     -t|--template) TEMPLATE="$2" && shift && shift ;;
     *) shift ;;
   esac
 done
 
 DIRECTORY="${DIRECTORY:-templates}"
-REGION="us-east-1"
+REGION="${REGION:-us-east-1}"
 S3_BUCKET="${S3_BUCKET:-spraoi-cloudformation-templates}"
 
 TEMPLATE_FILE="${DIRECTORY}/${TEMPLATE}.yml"
