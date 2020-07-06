@@ -1,8 +1,13 @@
 exports.shouldUpdateScroll = ({
   getSavedScrollPosition,
-  prevRouterProps: { location: prevLocation },
-  routerProps: { location },
+  prevRouterProps: prevLocationObj = {},
+  routerProps: locationObj = {},
 }) => {
+  const { prevLocation } = prevLocationObj;
+  const { location } = locationObj;
+
+  if (!(prevLocation && location)) return false;
+
   const stripPath = (path) => path.replace(/[^a-z0-9]/gi, '');
 
   // if the path changes, we let the browser do its thing
