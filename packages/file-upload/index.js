@@ -65,15 +65,22 @@ class FileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { bucket, customPrefix, level, onUploadComplete } = this.props;
+    const {
+      bucket,
+      bucketFolderPath,
+      customPrefix,
+      level,
+      onUploadComplete,
+    } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
 
     const progressCallback = ({ lengthComputable, loaded, total }) =>
       progress(lengthComputable, loaded, total);
+    const key = bucketFolderPath ? `${bucketFolderPath}/${fileName}` : fileName;
 
-    Storage.put(fileName, file, {
+    Storage.put(key, file, {
       bucket,
       contentType,
       customPrefix,
@@ -106,13 +113,14 @@ class FileUpload extends PureComponent {
   };
 
   render() {
-    const { error, existingFiles } = this.props;
+    const { error, existingFiles, forwardRef, ref } = this.props;
 
     return (
       <>
         <StyledGlobal error={error} />
         <FilePond
           {...this.props}
+          ref={forwardRef || ref}
           onremovefile={this.serverRemove}
           server={{
             load: this.serverLoad,
@@ -131,6 +139,7 @@ class FileUpload extends PureComponent {
 
 FileUpload.propTypes = {
   bucket: PropTypes.string,
+  bucketFolderPath: PropTypes.string,
   customPrefix: PropTypes.shape({
     private: PropTypes.string,
     protected: PropTypes.string,
@@ -138,21 +147,30 @@ FileUpload.propTypes = {
   }),
   error: PropTypes.bool,
   existingFiles: PropTypes.arrayOf(PropTypes.string),
+  forwardRef: PropTypes.shape({
+    current: PropTypes.object,
+  }),
   identityId: PropTypes.string,
   level: PropTypes.string,
   onRemoveComplete: PropTypes.func,
   onUploadComplete: PropTypes.func,
+  ref: PropTypes.shape({
+    current: PropTypes.object,
+  }),
 };
 
 FileUpload.defaultProps = {
   bucket: null,
+  bucketFolderPath: null,
   customPrefix: { private: '', protected: '', public: '' },
   error: false,
   existingFiles: [],
+  forwardRef: null,
   identityId: null,
   level: 'public',
   onRemoveComplete: () => {},
   onUploadComplete: () => {},
+  ref: null,
 };
 
 export default FileUpload;
