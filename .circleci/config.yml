@@ -1,22 +1,44 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  install:
     docker:
-      - image: circleci/node:12.5.0
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - cache-{{ checksum "yarn.lock" }}
       - run: yarn
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn lint
-      - run: yarn test
+            - ~/.cache
+          key: cache-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+    working_directory: ~/project
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          command: |
+            yarn lint
+            yarn test
       - store_test_results:
           path: reports
       - store_artifacts:
           path: coverage
+    working_directory: ~/project
+workflows:
+  version: 2.1
+  install-test:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install

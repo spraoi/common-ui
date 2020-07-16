@@ -21,7 +21,7 @@
     "@testing-library/react": "^10",
     "babel-core": "^7.0.0-bridge",
     "jest": "^26",
-    "jest-junit": "^10"
+    "jest-junit": "^11"
   },
   "publishConfig": {
     "access": "public"

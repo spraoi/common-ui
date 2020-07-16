@@ -140,14 +140,14 @@ FileUpload.propTypes = {
   error: PropTypes.bool,
   existingFiles: PropTypes.arrayOf(PropTypes.string),
   forwardRef: PropTypes.shape({
-    current: PropTypes.object,
+    current: PropTypes.shape({}),
   }),
   identityId: PropTypes.string,
   level: PropTypes.string,
   onRemoveComplete: PropTypes.func,
   onUploadComplete: PropTypes.func,
   ref: PropTypes.shape({
-    current: PropTypes.object,
+    current: PropTypes.shape({}),
   }),
 };
 
