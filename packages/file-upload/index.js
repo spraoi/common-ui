@@ -106,13 +106,14 @@ class FileUpload extends PureComponent {
   };
 
   render() {
-    const { error, existingFiles } = this.props;
+    const { error, existingFiles, forwardRef, ref } = this.props;
 
     return (
       <>
         <StyledGlobal error={error} />
         <FilePond
           {...this.props}
+          ref={forwardRef || ref}
           onremovefile={this.serverRemove}
           server={{
             load: this.serverLoad,
@@ -138,10 +139,16 @@ FileUpload.propTypes = {
   }),
   error: PropTypes.bool,
   existingFiles: PropTypes.arrayOf(PropTypes.string),
+  forwardRef: PropTypes.shape({
+    current: PropTypes.object,
+  }),
   identityId: PropTypes.string,
   level: PropTypes.string,
   onRemoveComplete: PropTypes.func,
   onUploadComplete: PropTypes.func,
+  ref: PropTypes.shape({
+    current: PropTypes.object,
+  }),
 };
 
 FileUpload.defaultProps = {
@@ -149,10 +156,12 @@ FileUpload.defaultProps = {
   customPrefix: { private: '', protected: '', public: '' },
   error: false,
   existingFiles: [],
+  forwardRef: null,
   identityId: null,
   level: 'public',
   onRemoveComplete: () => {},
   onUploadComplete: () => {},
+  ref: null,
 };
 
 export default FileUpload;
