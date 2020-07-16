@@ -1,5 +1,5 @@
 import isJSON from './is-json';
-import parseJsonOrObject from './parse-json-or-object';
+import parseEntity from './parse-entity';
 
 /**
  * Extracts the values of key/value pairs when keyFunction & valueFunction
@@ -12,8 +12,8 @@ const extractValues = ({
   payload,
   valueFunction,
 }) => {
-  const parsed = parseJsonOrObject(payload);
-  if (!parsed.isObject) return [];
+  const parsed = parseEntity(payload);
+  if (!parsed.isObject && !parsed.isArray) return [];
 
   const extracted = Object.entries(parsed.payload).reduce(
     (strings, [key, value]) => {

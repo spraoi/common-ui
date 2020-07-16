@@ -1,4 +1,4 @@
-import parseJsonOrObject from './parse-json-or-object';
+import parseEntity from './parse-entity';
 
 /**
  * Executes replaceFunction against key/value pairs when keyFunction &
@@ -10,44 +10,55 @@ const replaceStrings = ({
   keyFunction,
   payload,
   replaceFunction,
+  skip = false,
   valueFunction,
 }) => {
-  const parsed = parseJsonOrObject(payload);
-  if (!parsed.isObject) return payload;
+  const parsed = parseEntity(payload);
+  let replaced = parsed.payload;
 
-  const replaced = Array.isArray(parsed.payload)
-    ? parsed.payload.map((value) =>
-        replaceStrings({
-          currentPath,
+  if (!skip && valueFunction(parsed.payload)) {
+    replaced = replaceFunction({ value: parsed.payload });
+  } else if (parsed.isArray) {
+    replaced = parsed.payload.map((value) =>
+      replaceStrings({
+        currentPath,
+        ignorePaths,
+        keyFunction,
+        payload: value,
+        replaceFunction,
+        valueFunction,
+      })
+    );
+  } else if (parsed.isObject) {
+    replaced = Object.entries(parsed.payload).reduce((acc, [key, value]) => {
+      const newPath = `${currentPath ? `${currentPath}.` : ''}${key}`;
+      const skip = !keyFunction(key);
+
+      if (ignorePaths.includes(newPath)) {
+        return { ...acc, [key]: value };
+      }
+
+      if (!skip && valueFunction(value)) {
+        return { ...acc, ...replaceFunction({ key, value }) };
+      }
+
+      return {
+        ...acc,
+        [key]: replaceStrings({
+          currentPath: newPath,
           ignorePaths,
           keyFunction,
           payload: value,
           replaceFunction,
+          skip,
           valueFunction,
-        })
-      )
-    : Object.entries(parsed.payload).reduce((acc, [key, value]) => {
-        const newPath = `${currentPath ? `${currentPath}.` : ''}${key}`;
-        if (ignorePaths.includes(newPath)) return { ...acc, [key]: value };
+        }),
+      };
+    }, {});
+  }
 
-        if (keyFunction(key) && valueFunction(value)) {
-          return { ...acc, ...replaceFunction({ key, value }) };
-        }
-
-        return {
-          ...acc,
-          [key]: replaceStrings({
-            currentPath: newPath,
-            ignorePaths,
-            keyFunction,
-            payload: value,
-            replaceFunction,
-            valueFunction,
-          }),
-        };
-      }, {});
-
-  return parsed.isJson ? JSON.stringify(replaced) : replaced;
+  if (parsed.isJson) return JSON.stringify(replaced);
+  return replaced;
 };
 
 export default replaceStrings;

@@ -18,14 +18,17 @@ describe('replaceStrings function', () => {
               2: null,
               3: false,
               4: {},
-              5: [],
+              5: ['id5', 'id6'],
               6: 'id2',
               7: { 1: 'foo', 6: '{ "id": "id3" }' },
+              8: ['id7'],
             },
           },
         ],
-        replaceFunction: ({ key, value }) => ({ [key]: `foo${value}` }),
-        valueFunction: (value) => /^id[0-9]{1}$/.test(value),
+        replaceFunction: ({ key, value }) =>
+          key ? { [key]: `foo${value}` } : `foo${value}`,
+        valueFunction: (value) =>
+          typeof value === 'string' && /^id[0-9]$/.test(value),
       })
     ).toEqual([
       {
@@ -40,9 +43,10 @@ describe('replaceStrings function', () => {
           2: null,
           3: false,
           4: {},
-          5: [],
+          5: ['fooid5', 'fooid6'],
           6: 'fooid2',
           7: { 1: 'foo', 6: '{"id":"id3"}' },
+          8: ['fooid7'],
         },
       },
     ]);
