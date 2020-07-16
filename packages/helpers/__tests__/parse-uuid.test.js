@@ -10,4 +10,8 @@ describe('parseUuid function', () => {
       version: 10,
     });
   });
+
+  test('should return an empty object when id is not a string', () => {
+    expect(parseUuid([])).toEqual({});
+  });
 });
