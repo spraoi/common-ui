@@ -24,13 +24,16 @@ describe('extractValues function', () => {
                 1: 'foo',
                 6: '{ "1": "id3" }',
               },
+              8: ['id7'],
+              9: ['id5', 'id6'],
               19: 'id1',
             },
             id: 'id8',
           },
         ],
-        valueFunction: (value) => /^id[0-9]$/.test(value),
+        valueFunction: (value) =>
+          typeof value === 'string' && /^id[0-9]$/.test(value),
       })
-    ).toEqual(['id4', 'id1', 'id2', 'id3']);
+    ).toEqual(['id4', 'id1', 'id2', 'id3', 'id7', 'id5', 'id6']);
   });
 });

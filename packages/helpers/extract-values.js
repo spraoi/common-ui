@@ -21,7 +21,9 @@ const extractValues = ({
         ? `${currentPath ? `${currentPath}.` : ''}${key}`
         : currentPath;
 
-      if (ignorePaths.includes(newPath)) return strings;
+      if (ignorePaths.includes(newPath)) {
+        return strings;
+      }
 
       if (typeof value === 'string' && !isJSON(value)) {
         return keyFunction(key) && valueFunction(value)
