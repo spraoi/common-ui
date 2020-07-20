@@ -65,7 +65,7 @@ class FileUpload extends PureComponent {
   };
 
   serverProcess = (fieldName, file, metadata, load, error, progress, abort) => {
-    const { bucket, customPrefix, level, onUploadComplete } = this.props;
+    const { acl, bucket, customPrefix, level, onUploadComplete } = this.props;
 
     const fileName = file.name;
     const contentType = file.type;
@@ -73,13 +73,16 @@ class FileUpload extends PureComponent {
     const progressCallback = ({ lengthComputable, loaded, total }) =>
       progress(lengthComputable, loaded, total);
 
-    Storage.put(fileName, file, {
+    const params = {
       bucket,
       contentType,
       customPrefix,
       level,
+      metadata,
       progressCallback,
-    })
+    };
+
+    Storage.put(fileName, file, acl ? { ...params, acl } : params)
       .then(() => {
         load(fileName);
         onUploadComplete({ contentType, fileName });
@@ -131,6 +134,7 @@ class FileUpload extends PureComponent {
 }
 
 FileUpload.propTypes = {
+  acl: PropTypes.string,
   bucket: PropTypes.string,
   customPrefix: PropTypes.shape({
     private: PropTypes.string,
@@ -152,6 +156,7 @@ FileUpload.propTypes = {
 };
 
 FileUpload.defaultProps = {
+  acl: null,
   bucket: null,
   customPrefix: { private: '', protected: '', public: '' },
   error: false,
