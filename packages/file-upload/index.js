@@ -81,7 +81,6 @@ class FileUpload extends PureComponent {
       metadata,
       progressCallback,
     };
-
     Storage.put(fileName, file, acl ? { ...params, acl } : params)
       .then(() => {
         load(fileName);
