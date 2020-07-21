@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { TooltipBox } from '@spraoi/base/Tooltip';
 import Spinner from '@spraoi/base/Spinner';
 import { AxisBottom, AxisLeft } from '@vx/axis';
-import { Bar, Line } from '@vx/shape';
+import { Bar, BarStackHorizontal, Line } from '@vx/shape';
 import { GridColumns, GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { ThemeContext } from 'styled-components';
-import { scaleBand, scaleLinear } from '@vx/scale';
+import { TooltipBox } from '@spraoi/base/Tooltip';
+import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
 import { BAR_PADDING } from './utilities/constants';
 
 const HorizontalBarChart = ({
   data,
   loading,
   margin,
+  name,
+  stackKeys,
   xAccessor,
   xAxisProps,
   yAccessor,
@@ -27,9 +29,10 @@ const HorizontalBarChart = ({
       {({ height, width }) => {
         const xMax = width - margin.left - margin.right;
         const yMax = height - margin.top - margin.bottom;
-        const maxDataValue = Math.max(...data.map(xAccessor));
+        const maxXValue = Math.max(...data.map(xAccessor));
+
         const xScale = scaleLinear({
-          domain: [0, maxDataValue || 1],
+          domain: [0, maxXValue],
           nice: true,
           rangeRound: [0, xMax],
         });
@@ -41,9 +44,9 @@ const HorizontalBarChart = ({
           rangeRound: [0, yMax],
         });
 
-        return loading ? (
-          <Spinner />
-        ) : (
+        if (loading) return <Spinner />;
+
+        return (
           <>
             <svg height={height} width={width}>
               <GridColumns
@@ -66,19 +69,51 @@ const HorizontalBarChart = ({
                 width={xMax}
               />
               <Group left={margin.left} top={margin.top}>
-                {data.map((d, i) => (
-                  <Bar
-                    key={`bar-${i}`}
-                    data-for="chart"
-                    data-tip={d.value}
-                    fill={theme.colors.visualizations[0]}
-                    height={yScale.bandwidth()}
-                    rx={theme.radii[0]}
-                    width={Math.max(0, xScale(xAccessor(d)))}
-                    x={0}
-                    y={yScale(yAccessor(d))}
-                  />
-                ))}
+                {stackKeys ? (
+                  <BarStackHorizontal
+                    color={scaleOrdinal({
+                      domain: stackKeys,
+                      range: theme.colors.visualizations,
+                    })}
+                    data={data}
+                    height={yMax}
+                    keys={stackKeys}
+                    xScale={xScale}
+                    y={yAccessor}
+                    yScale={yScale}
+                  >
+                    {(stacks) =>
+                      stacks.map((stack) =>
+                        stack.bars.map((bar) => (
+                          <rect
+                            key={`stacked-bar-${stack.index}-${bar.index}`}
+                            data-for={name}
+                            data-tip={`${bar.key} - ${bar.bar.data[bar.key]}`}
+                            fill={bar.color}
+                            height={bar.height}
+                            width={bar.width}
+                            x={bar.x}
+                            y={bar.y}
+                          />
+                        ))
+                      )
+                    }
+                  </BarStackHorizontal>
+                ) : (
+                  data.map((d, i) => (
+                    <Bar
+                      key={`bar-${i}`}
+                      data-for={name}
+                      data-tip={d.value}
+                      fill={theme.colors.visualizations[0]}
+                      height={yScale.bandwidth()}
+                      rx={theme.radii[0]}
+                      width={Math.max(0, xScale(xAccessor(d)))}
+                      x={0}
+                      y={yScale(yAccessor(d))}
+                    />
+                  ))
+                )}
                 <AxisLeft
                   label={yAxisProps.label}
                   scale={yScale}
@@ -87,8 +122,9 @@ const HorizontalBarChart = ({
                   {(axis) => {
                     const axisCenter =
                       (axis.axisToPoint.y - axis.axisFromPoint.y) / 2;
+
                     return (
-                      <g className="my-custom-bottom-axis">
+                      <g>
                         {!yAxisProps.hideAxisLine && (
                           <Line
                             from={axis.axisFromPoint}
@@ -103,9 +139,11 @@ const HorizontalBarChart = ({
                             tick.to.x -
                             axis.tickLength -
                             yAxisProps.anchorMargin;
+
                           const tickY = tick.to.y;
+
                           return (
-                            <Group key={`vx-tick-${tick.value}-${i}`}>
+                            <Group key={`tick-${tick.value}-${i}`}>
                               {!yAxisProps.hideTicks && (
                                 <Line
                                   from={tick.from}
@@ -150,8 +188,9 @@ const HorizontalBarChart = ({
                   {(axis) => {
                     const axisCenter =
                       (axis.axisToPoint.x - axis.axisFromPoint.x) / 2;
+
                     return (
-                      <g className="my-custom-bottom-axis">
+                      <g>
                         {!xAxisProps.hideAxisLine && (
                           <Line
                             from={axis.axisFromPoint}
@@ -163,12 +202,14 @@ const HorizontalBarChart = ({
                         )}
                         {axis.ticks.map((tick, i) => {
                           const tickX = tick.to.x;
+
                           const tickY =
                             tick.to.y +
                             axis.tickLength +
                             xAxisProps.anchorMargin;
+
                           return (
-                            <Group key={`vx-tick-${tick.value}-${i}`}>
+                            <Group key={`tick-${tick.value}-${i}`}>
                               {!xAxisProps.hideTicks && (
                                 <Line
                                   from={tick.from}
@@ -178,7 +219,7 @@ const HorizontalBarChart = ({
                                   to={tick.to}
                                 />
                               )}
-                              {(maxDataValue || !i) && (
+                              {(maxXValue || !i) && (
                                 <text
                                   fill={theme.colors.textSubtle}
                                   fontSize={theme.fontSizes[1]}
@@ -204,7 +245,7 @@ const HorizontalBarChart = ({
                 </AxisBottom>
               </Group>
             </svg>
-            <TooltipBox id="chart" />
+            <TooltipBox id={name} />
           </>
         );
       }}
@@ -214,13 +255,15 @@ const HorizontalBarChart = ({
 
 HorizontalBarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   margin: PropTypes.shape({
     bottom: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
     right: PropTypes.number.isRequired,
     top: PropTypes.number.isRequired,
   }).isRequired,
+  name: PropTypes.string,
+  stackKeys: PropTypes.arrayOf(PropTypes.string),
   xAccessor: PropTypes.func.isRequired,
   xAxisProps: PropTypes.shape({
     anchorMargin: PropTypes.number,
@@ -246,6 +289,9 @@ HorizontalBarChart.propTypes = {
 };
 
 HorizontalBarChart.defaultProps = {
+  loading: false,
+  name: 'StackedHorizontalBarChart',
+  stackKeys: null,
   xAxisProps: {
     anchorMargin: 5,
     anchorPosition: 'middle',
