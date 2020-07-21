@@ -71,7 +71,7 @@ class FileUpload extends PureComponent {
     const contentType = file.type;
 
     const progressCallback = ({ lengthComputable, loaded, total }) =>
-      progress(lengthComputable, loaded, total);
+      progress(lengthComputable || true, loaded, total);
 
     const params = {
       bucket,
