@@ -12,6 +12,7 @@ import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
 import { BAR_PADDING } from './utilities/constants';
 
 const HorizontalBarChart = ({
+  colors,
   data,
   loading,
   margin,
@@ -73,7 +74,7 @@ const HorizontalBarChart = ({
                   <BarStackHorizontal
                     color={scaleOrdinal({
                       domain: stackKeys,
-                      range: theme.colors.visualizations,
+                      range: colors || theme.colors.visualizations,
                     })}
                     data={data}
                     height={yMax}
@@ -105,7 +106,7 @@ const HorizontalBarChart = ({
                       key={`bar-${i}`}
                       data-for={name}
                       data-tip={d.value}
-                      fill={theme.colors.visualizations[0]}
+                      fill={colors || theme.colors.visualizations[0]}
                       height={yScale.bandwidth()}
                       rx={theme.radii[0]}
                       width={Math.max(0, xScale(xAccessor(d)))}
@@ -140,7 +141,7 @@ const HorizontalBarChart = ({
                             axis.tickLength -
                             yAxisProps.anchorMargin;
 
-                          const tickY = tick.to.y;
+                          const tickY = tick.to.y + 2;
 
                           return (
                             <Group key={`tick-${tick.value}-${i}`}>
@@ -254,6 +255,7 @@ const HorizontalBarChart = ({
 };
 
 HorizontalBarChart.propTypes = {
+  colors: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   loading: PropTypes.bool,
   margin: PropTypes.shape({
@@ -289,6 +291,7 @@ HorizontalBarChart.propTypes = {
 };
 
 HorizontalBarChart.defaultProps = {
+  colors: null,
   loading: false,
   name: 'StackedHorizontalBarChart',
   stackKeys: null,
