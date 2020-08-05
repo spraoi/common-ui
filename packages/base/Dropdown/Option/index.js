@@ -11,6 +11,7 @@ const Option = (mainProps) => {
       <components.Option {...mainProps}>
         <Box
           sx={{
+            alignItems: 'center',
             display: 'flex',
             flexDirection: 'row',
             verticalAlign: 'middle',
@@ -26,6 +27,7 @@ const Option = (mainProps) => {
     <components.Option {...mainProps}>
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
           verticalAlign: 'middle',
