@@ -9,6 +9,7 @@ const SortableTitle = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  text-align: left;
 
   &:after {
     content: '';
@@ -50,6 +51,7 @@ const formatCell = (cell) => {
 
 const Table = ({
   activeRowIndex,
+  cellSx,
   expandLastColumn,
   stickyColumnPosition,
   header,
@@ -79,6 +81,7 @@ const Table = ({
     '&.fixed': fixedSx,
     px: 5,
     py: 4,
+    ...cellSx,
   };
 
   return (
@@ -208,6 +211,7 @@ const Table = ({
 
 Table.propTypes = {
   activeRowIndex: PropTypes.number,
+  cellSx: PropTypes.shape({}),
   expandLastColumn: PropTypes.bool,
   header: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])
@@ -227,6 +231,7 @@ Table.propTypes = {
 
 Table.defaultProps = {
   activeRowIndex: null,
+  cellSx: {},
   expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
