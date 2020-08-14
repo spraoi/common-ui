@@ -2,6 +2,19 @@
 
 set -e
 
+create_bucket() {
+  if [[ "${REGION}" == "us-east-1" ]]; then
+    aws s3api create-bucket \
+      --bucket "$S3_BUCKET" \
+      --region "$REGION"
+  else
+    aws s3api create-bucket \
+      --bucket "$S3_BUCKET" \
+      --region "$REGION" \
+      --create-bucket-configuration LocationConstraint="$REGION"
+  fi
+}
+
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -35,9 +48,7 @@ fi
 
 aws s3api head-bucket \
   --bucket "$S3_BUCKET" || \
-    aws s3api create-bucket \
-      --bucket "$S3_BUCKET" \
-      --region "$REGION"
+    create_bucket
 
 aws cloudformation package \
   --output-template-file "$TEMPLATE_PACKAGED_FILE"  \
