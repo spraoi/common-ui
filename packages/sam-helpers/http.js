@@ -12,6 +12,8 @@ const http = (originalOptions) => {
   const options = originalOptions;
   const timer = new Timer();
 
+  if (/^https:\/\//.test(options.host)) options.https = true;
+  options.host = options.host.replace(/^https?:\/\//, '');
   const splitHost = options.host.split('/');
   options.host = splitHost.shift();
   const prePath = splitHost.join('/');
