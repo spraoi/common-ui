@@ -80,7 +80,7 @@ Resources:
               Forward: none
           LambdaFunctionAssociations:
             - EventType: origin-request
-              LambdaFunctionARN: !Ref RedirectHandlerLambdaVersion
+              LambdaFunctionARN: !Ref OriginRequestLambdaVersion
           TargetOriginId: Origin
           ViewerProtocolPolicy: redirect-to-https
         DefaultRootObject: index.html
@@ -118,27 +118,42 @@ Resources:
           AliasTarget:
             DNSName: !GetAtt Cloudfront.DomainName
             HostedZoneId: Z2FDTNDATAQYW2
-  RedirectHandlerLambda:
+  OriginRequestLambda:
     Type: AWS::Lambda::Function
     Properties:
       Handler: index.handler
-      Role: !GetAtt RedirectHandlerLambdaRole.Arn
+      Role: !GetAtt OriginLambdaRole.Arn
       Runtime: nodejs12.x
       Timeout: 5
       Code:
         ZipFile: >
           exports.handler = (event, context, callback) => {
             const request = event.Records[0].cf.request;
-            const olduri = request.uri;
-            const newuri = olduri.replace(/\/$/, '\/index.html');
-            request.uri = newuri;
+            if (!/\/[^/]+\.[^/]+$/.test(request.uri) && !request.uri.endsWith('/')) {
+              return callback(null, {
+                body: '',
+                headers: {
+                  location: [
+                    {
+                      key: 'Location',
+                      value: request.querystring
+                        ? `${request.uri}/?${request.querystring}`
+                        : `${request.uri}/`,
+                    },
+                  ],
+                },
+                status: 301,
+                statusDescription: 'Moved Permanently',
+              });
+            }
+            request.uri = request.uri.replace(/\/$/, '/index.html');
             return callback(null, request);
           };
-  RedirectHandlerLambdaVersion:
+  OriginRequestLambdaVersion:
     Type: AWS::Lambda::Version
     Properties:
-      FunctionName: !GetAtt RedirectHandlerLambda.Arn
-  RedirectHandlerLambdaRole:
+      FunctionName: !GetAtt OriginRequestLambda.Arn
+  OriginLambdaRole:
     Type: AWS::IAM::Role
     Properties:
       Path: /
