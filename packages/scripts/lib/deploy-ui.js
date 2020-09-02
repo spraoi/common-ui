@@ -89,7 +89,7 @@ module.exports = function deployUi(configString) {
       --recursive ${bucketUrl} ${bucketUrl}
   `);
 
-  if (cloudFrontDistributionId)
+  if (cloudFrontDistributionId) {
     // invalidate cloudfront cache
     tryShell(`
       aws configure set preview.cloudfront true \
@@ -97,4 +97,5 @@ module.exports = function deployUi(configString) {
           --distribution-id ${cloudFrontDistributionId} \
           --paths '/*'
     `);
+  }
 };
