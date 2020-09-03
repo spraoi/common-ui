@@ -189,7 +189,8 @@ Resources:
           Name: !Sub ${AWS::StackName}WhitelistIpsAclRule
           Priority: 0
           Statement:
-            IPSetReferenceStatement: !GetAtt WhitelistIpsIpSet.Arn
+            IPSetReferenceStatement:
+              Arn: !GetAtt WhitelistIpsIpSet.Arn
           VisibilityConfig:
             CloudWatchMetricsEnabled: false
             MetricName: !Sub ${AWS::StackName}WhitelistIpsAclRuleMetrics
