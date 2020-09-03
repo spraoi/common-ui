@@ -89,11 +89,13 @@ module.exports = function deployUi(configString) {
       --recursive ${bucketUrl} ${bucketUrl}
   `);
 
-  // invalidate cloudfront cache
-  tryShell(`
-    aws configure set preview.cloudfront true \
-      && aws cloudfront create-invalidation \
-        --distribution-id ${cloudFrontDistributionId} \
-        --paths '/*'
-  `);
+  if (cloudFrontDistributionId) {
+    // invalidate cloudfront cache
+    tryShell(`
+      aws configure set preview.cloudfront true \
+        && aws cloudfront create-invalidation \
+          --distribution-id ${cloudFrontDistributionId} \
+          --paths '/*'
+    `);
+  }
 };
