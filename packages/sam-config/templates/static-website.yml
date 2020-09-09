@@ -26,11 +26,19 @@ Parameters:
   EnableBucketEncryption:
     Type: String
     Default: false
+  CloudFrontLoggingBucket:
+    Type: String
+    Default: false
+  CloudFrontLoggingPrefix:
+    Type: String
+    Default: cloudfront/
 Conditions:
   DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
   WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
   WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
   BucketEncryptionEnabled: !Equals [!Ref EnableBucketEncryption, true]
+  CloudFrontLoggingDisabled: !Equals [!Ref CloudFrontLoggingBucket, false]
+  CloudFrontLoggingEnabled: !Not [Condition: CloudFrontLoggingDisabled]
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
@@ -39,14 +47,12 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: 404.html
-      BucketEncryption:
-        !If
-          - BucketEncryptionEnabled
-          -
-            ServerSideEncryptionConfiguration:
-              - ServerSideEncryptionByDefault:
-                  SSEAlgorithm: AES256
-          - !Ref "AWS::NoValue"
+      BucketEncryption: !If
+        - BucketEncryptionEnabled
+        - ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        - !Ref 'AWS::NoValue'
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -99,6 +105,11 @@ Resources:
         Enabled: true
         HttpVersion: http2
         IPV6Enabled: true
+        Logging: !If
+          - CloudFrontLoggingEnabled
+          - Bucket: !Ref CloudFrontLoggingBucket
+            Prefix: !Ref CloudFrontLoggingPrefix
+          - !Ref 'AWS::NoValue'
         Origins:
           - DomainName: !GetAtt Bucket.DomainName
             Id: Origin
@@ -141,7 +152,8 @@ Resources:
         ZipFile: >
           exports.handler = (event, context, callback) => {
             const request = event.Records[0].cf.request;
-            if (!/\/[^/]+\.[^/]+$/.test(request.uri) && !request.uri.endsWith('/')) {
+            if (!/\/[^/]+\.[^/]+$/.test(request.uri) &&
+          !request.uri.endsWith('/')) {
               return callback(null, {
                 body: '',
                 headers: {
