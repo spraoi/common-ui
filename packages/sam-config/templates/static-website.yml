@@ -33,12 +33,13 @@ Parameters:
     Type: String
     Default: cloudfront/
 Conditions:
-  DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
-  WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
-  WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
   BucketEncryptionEnabled: !Equals [!Ref EnableBucketEncryption, true]
   CloudFrontLoggingDisabled: !Equals [!Ref CloudFrontLoggingBucket, false]
   CloudFrontLoggingEnabled: !Not [Condition: CloudFrontLoggingDisabled]
+  DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
+  IsUsEastOneRegion: !Equals [!Ref AWS::Region, us-east-1']
+  WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
+  WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
@@ -52,7 +53,7 @@ Resources:
         - ServerSideEncryptionConfiguration:
             - ServerSideEncryptionByDefault:
                 SSEAlgorithm: AES256
-        - !Ref 'AWS::NoValue'
+        - !Ref AWS::NoValue
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -96,9 +97,11 @@ Resources:
             QueryString: true
             Cookies:
               Forward: none
-          LambdaFunctionAssociations:
-            - EventType: origin-request
-              LambdaFunctionARN: !Ref OriginRequestLambdaVersion
+          LambdaFunctionAssociations: !If
+            - IsUsEastOneRegion
+            - - EventType: origin-request
+                LambdaFunctionARN: !Ref OriginRequestLambdaVersion
+            - !Ref AWS::NoValue
           TargetOriginId: Origin
           ViewerProtocolPolicy: redirect-to-https
         DefaultRootObject: index.html
@@ -109,7 +112,7 @@ Resources:
           - CloudFrontLoggingEnabled
           - Bucket: !Ref CloudFrontLoggingBucket
             Prefix: !Ref CloudFrontLoggingPrefix
-          - !Ref 'AWS::NoValue'
+          - !Ref AWS::NoValue
         Origins:
           - DomainName: !GetAtt Bucket.DomainName
             Id: Origin
@@ -119,12 +122,10 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: !Ref CertificateArn
           SslSupportMethod: sni-only
-        WebACLId:
-          !If [
-            WhitelistIpsAclEnabled,
-            !GetAtt WhitelistIpsAcl.Arn,
-            !Ref 'AWS::NoValue',
-          ]
+        WebACLId: !If
+          - WhitelistIpsAclEnabled
+          - !GetAtt WhitelistIpsAcl.Arn
+          - !Ref AWS::NoValue
   Dns:
     Type: AWS::Route53::RecordSetGroup
     Condition: DnsRecordsEnabled
@@ -143,6 +144,7 @@ Resources:
             HostedZoneId: Z2FDTNDATAQYW2
   OriginRequestLambda:
     Type: AWS::Lambda::Function
+    Condition: IsUsEastOneRegion
     Properties:
       Handler: index.handler
       Role: !GetAtt OriginLambdaRole.Arn
@@ -152,8 +154,9 @@ Resources:
         ZipFile: >
           exports.handler = (event, context, callback) => {
             const request = event.Records[0].cf.request;
-            if (!/\/[^/]+\.[^/]+$/.test(request.uri) &&
-          !request.uri.endsWith('/')) {
+            const isNotFile = !/\/[^/]+\.[^/]+$/.test(request.uri);
+            const doesNotEndWithSlash = !request.uri.endsWith('/');
+            if (isNotFile && doesNotEndWithSlash) {
               return callback(null, {
                 body: '',
                 headers: {
@@ -175,10 +178,12 @@ Resources:
           };
   OriginRequestLambdaVersion:
     Type: AWS::Lambda::Version
+    Condition: IsUsEastOneRegion
     Properties:
       FunctionName: !GetAtt OriginRequestLambda.Arn
   OriginLambdaRole:
     Type: AWS::IAM::Role
+    Condition: IsUsEastOneRegion
     Properties:
       Path: /
       ManagedPolicyArns:
