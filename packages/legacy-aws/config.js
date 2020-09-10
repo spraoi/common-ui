@@ -18,6 +18,7 @@ export const spraoiConfig = {
     rememberMe: 'spr-remember-me',
     sessionExists: 'spr-session-exists',
     userAttributes: 'spr-user-attributes',
+    userRole: 'spr-user-role',
   },
   userIdPrefix: 'spr:user::',
 };

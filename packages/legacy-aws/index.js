@@ -461,8 +461,14 @@ export function signInExternalResponse() {
 export function signOut() {
   const currentUser = getNewUserPool().getCurrentUser();
   if (currentUser !== null) currentUser.signOut();
+  const userAttributes = window[spraoiConfig.storageKeys.userAttributes];
   if (awsSdkConfig.credentials) awsSdkConfig.credentials.clearCachedId();
-
+  if (userAttributes && userAttributes['custom:ext_customer_number']) {
+    localStorage.setItem(
+      spraoiConfig.storageKeys.userRole,
+      userAttributes['custom:user_role']
+    );
+  }
   // clear cached user attributes
   delete window[spraoiConfig.storageKeys.userAttributes];
   localStorage.removeItem(spraoiConfig.storageKeys.userAttributes);
