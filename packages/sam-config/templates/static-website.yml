@@ -37,7 +37,7 @@ Conditions:
   CloudFrontLoggingDisabled: !Equals [!Ref CloudFrontLoggingBucket, false]
   CloudFrontLoggingEnabled: !Not [Condition: CloudFrontLoggingDisabled]
   DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
-  IsUsEastOneRegion: !Equals [!Ref AWS::Region, us-east-1']
+  IsUsEastOneRegion: !Equals [!Ref AWS::Region, us-east-1]
   WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
   WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
 Resources:
