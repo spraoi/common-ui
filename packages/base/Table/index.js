@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Box from '../Box';
 import Button from '../Button';
@@ -37,13 +37,38 @@ const SortableTitle = styled.div`
   }
 `;
 
-const formatCell = (cell) => {
+const formatCell = (cell, cellKey, fullyVisibleCells, setFullyVisibleCells) => {
   if (React.isValidElement(cell)) {
     return cell;
   }
 
   if (Array.isArray(cell) || (typeof cell === 'object' && cell !== null)) {
-    return <pre>{JSON.stringify(cell, null, 2)}</pre>;
+    const json = JSON.stringify(cell, null, 2);
+    const isFullyVisible = fullyVisibleCells.includes(cellKey);
+    const cellSplit = json.split('\n');
+    const visibleSplit = cellSplit.slice(0, isFullyVisible ? Infinity : 10);
+    const visible = visibleSplit.join('\n');
+
+    return (
+      <>
+        {(cellSplit.length > visibleSplit.length || isFullyVisible) && (
+          <Button
+            onClick={() =>
+              setFullyVisibleCells(
+                isFullyVisible
+                  ? fullyVisibleCells.filter((c) => c !== cellKey)
+                  : [...fullyVisibleCells, cellKey]
+              )
+            }
+            simple
+            sx={{ '&:hover': { textDecoration: 'underline' }, mb: 4 }}
+          >
+            {isFullyVisible ? 'Show less' : 'Show all'}
+          </Button>
+        )}
+        <pre>{visible}</pre>
+      </>
+    );
   }
 
   return String(cell);
@@ -66,6 +91,8 @@ const Table = ({
   stickyColumn,
   tableSx,
 }) => {
+  const [fullyVisibleCells, setFullyVisibleCells] = useState([]);
+
   const fixedSx = {
     bg: 'inherit',
     boxShadow: (p) =>
@@ -190,7 +217,12 @@ const Table = ({
                       }
                       sx={tdSx}
                     >
-                      {formatCell(cell)}
+                      {formatCell(
+                        cell,
+                        keyPrefix + cellIndex,
+                        fullyVisibleCells,
+                        setFullyVisibleCells
+                      )}
                     </Box>
                   ))}
                 </Box>
