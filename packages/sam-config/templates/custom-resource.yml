@@ -3,6 +3,12 @@ Parameters:
   LambdaTimeout:
     Type: Number
     Default: 300
+  PermissionsBoundaryPolicyArn:
+    Type: String
+    Default: false
+Conditions:
+  PermissionsBoundaryDisabled:
+    !Equals [!Ref PermissionsBoundaryPolicyArn, false]
 Resources:
   CustomResource:
     Type: AWS::Lambda::Function
@@ -58,6 +64,10 @@ Resources:
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      PermissionsBoundary: !If
+        - PermissionsBoundaryDisabled
+        - !Ref AWS::NoValue
+        - !Ref PermissionsBoundaryPolicyArn
 Outputs:
   ServiceToken:
     Value: !GetAtt CustomResource.Arn

@@ -21,6 +21,9 @@ Parameters:
     Default: ''
   LogGroupName:
     Type: String
+  PermissionsBoundaryPolicyArn:
+    Type: String
+    Default: false
   TimeFieldFormat:
     Type: String
     Default: ''
@@ -29,6 +32,8 @@ Parameters:
     Default: ''
 Conditions:
   EncryptionEnabled: !Not [!Equals [!Ref KMSKeyId, '']]
+  PermissionsBoundaryDisabled:
+    !Equals [ !Ref PermissionsBoundaryPolicyArn, false ]
 Resources:
   CloudwatchLambdaHandler:
     Type: AWS::Lambda::Function
@@ -93,6 +98,10 @@ Resources:
                 - lambda.amazonaws.com
             Action:
               - sts:AssumeRole
+      PermissionsBoundary: !If
+        - PermissionsBoundaryDisabled
+        - !Ref AWS::NoValue
+        - !Ref PermissionsBoundaryPolicyArn
   LambdaLogPolicy:
     Type: AWS::IAM::Policy
     Properties:
