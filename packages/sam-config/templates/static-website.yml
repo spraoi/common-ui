@@ -32,12 +32,17 @@ Parameters:
   CloudFrontLoggingPrefix:
     Type: String
     Default: cloudfront/
+  PermissionsBoundaryPolicyArn:
+    Type: String
+    Default: false
 Conditions:
   BucketEncryptionEnabled: !Equals [!Ref EnableBucketEncryption, true]
   CloudFrontLoggingDisabled: !Equals [!Ref CloudFrontLoggingBucket, false]
   CloudFrontLoggingEnabled: !Not [Condition: CloudFrontLoggingDisabled]
   DnsRecordsEnabled: !Equals [!Ref EnableDnsRecords, true]
   IsUsEastOneRegion: !Equals [!Ref AWS::Region, us-east-1]
+  PermissionsBoundaryDisabled:
+    !Equals [!Ref PermissionsBoundaryPolicyArn, false]
   WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
   WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
 Resources:
@@ -199,6 +204,10 @@ Resources:
               Service:
                 - lambda.amazonaws.com
                 - edgelambda.amazonaws.com
+      PermissionsBoundary: !If
+        - PermissionsBoundaryDisabled
+        - !Ref AWS::NoValue
+        - !Ref PermissionsBoundaryPolicyArn
   WhitelistIpsIpSet:
     Type: AWS::WAFv2::IPSet
     Condition: WhitelistIpsAclEnabled
