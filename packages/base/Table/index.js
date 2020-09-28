@@ -82,6 +82,7 @@ const Table = ({
   header,
   isLoading,
   keyPrefix,
+  limit,
   onRowClick,
   onSortUpdate,
   orderBy,
@@ -92,6 +93,7 @@ const Table = ({
   tableSx,
 }) => {
   const [fullyVisibleCells, setFullyVisibleCells] = useState([]);
+  const [rowsFullyVisible, setRowsFullyVisible] = useState(false);
 
   const fixedSx = {
     bg: 'inherit',
@@ -113,6 +115,15 @@ const Table = ({
 
   return (
     <Box sx={{ overflowX: 'auto', width: '100%' }}>
+      {limit !== Infinity && (
+        <Button
+          onClick={() => setRowsFullyVisible(!rowsFullyVisible)}
+          simple
+          sx={{ '&:hover': { textDecoration: 'underline' }, mb: 4 }}
+        >
+          {rowsFullyVisible ? 'Show less' : 'Show all'}
+        </Button>
+      )}
       <Box
         as="table"
         sx={{
@@ -177,57 +188,59 @@ const Table = ({
         )}
         <tbody>
           {rows.length ? (
-            rows.map((row, rowIndex) => {
-              const rowIsActive = rowIndex === activeRowIndex;
+            rows
+              .slice(0, rowsFullyVisible ? Infinity : limit)
+              .map((row, rowIndex) => {
+                const rowIsActive = rowIndex === activeRowIndex;
 
-              const trSx = {
-                '&:hover': {
-                  bg: onRowClick && !rowIsActive ? 'accentLight' : null,
-                  color: onRowClick && !rowIsActive ? 'white' : null,
-                },
-                bg: rowIsActive ? 'accent' : 'white',
-                color: rowIsActive ? 'white' : 'text.subtle',
-                cursor: onRowClick ? 'pointer' : 'default',
-                transition: 'background 0.1s, color 0.1s',
-              };
+                const trSx = {
+                  '&:hover': {
+                    bg: onRowClick && !rowIsActive ? 'accentLight' : null,
+                    color: onRowClick && !rowIsActive ? 'white' : null,
+                  },
+                  bg: rowIsActive ? 'accent' : 'white',
+                  color: rowIsActive ? 'white' : 'text.subtle',
+                  cursor: onRowClick ? 'pointer' : 'default',
+                  transition: 'background 0.1s, color 0.1s',
+                };
 
-              return (
-                <Box
-                  key={keyPrefix + rowIndex}
-                  as="tr"
-                  onClick={() => onRowClick && onRowClick(row, rowIndex)}
-                  sx={{
-                    '&:nth-child(even)': {
-                      '&:hover': trSx['&:hover'],
-                      bg: rowIsActive ? 'accent' : 'grays.0',
-                      color: trSx.color,
-                    },
-                    ...trSx,
-                  }}
-                >
-                  {row.map((cell, cellIndex) => (
-                    <Box
-                      key={keyPrefix + cellIndex}
-                      as="td"
-                      className={stickyColumn === cellIndex ? 'fixed' : null}
-                      colSpan={
-                        expandLastColumn && cellIndex === row.length - 1
-                          ? header.length - row.length + 1
-                          : 1
-                      }
-                      sx={tdSx}
-                    >
-                      {formatCell(
-                        cell,
-                        keyPrefix + cellIndex,
-                        fullyVisibleCells,
-                        setFullyVisibleCells
-                      )}
-                    </Box>
-                  ))}
-                </Box>
-              );
-            })
+                return (
+                  <Box
+                    key={keyPrefix + rowIndex}
+                    as="tr"
+                    onClick={() => onRowClick && onRowClick(row, rowIndex)}
+                    sx={{
+                      '&:nth-child(even)': {
+                        '&:hover': trSx['&:hover'],
+                        bg: rowIsActive ? 'accent' : 'grays.0',
+                        color: trSx.color,
+                      },
+                      ...trSx,
+                    }}
+                  >
+                    {row.map((cell, cellIndex) => (
+                      <Box
+                        key={keyPrefix + cellIndex}
+                        as="td"
+                        className={stickyColumn === cellIndex ? 'fixed' : null}
+                        colSpan={
+                          expandLastColumn && cellIndex === row.length - 1
+                            ? header.length - row.length + 1
+                            : 1
+                        }
+                        sx={tdSx}
+                      >
+                        {formatCell(
+                          cell,
+                          keyPrefix + cellIndex,
+                          fullyVisibleCells,
+                          setFullyVisibleCells
+                        )}
+                      </Box>
+                    ))}
+                  </Box>
+                );
+              })
           ) : (
             <Box as="tr">
               <Box as="td" colSpan={header.length} sx={tdSx}>
@@ -250,6 +263,7 @@ Table.propTypes = {
   ).isRequired,
   isLoading: PropTypes.bool,
   keyPrefix: PropTypes.string,
+  limit: PropTypes.number,
   onRowClick: PropTypes.func,
   onSortUpdate: PropTypes.func,
   orderBy: PropTypes.oneOf(['asc', 'desc']),
@@ -267,6 +281,7 @@ Table.defaultProps = {
   expandLastColumn: false,
   isLoading: false,
   keyPrefix: '',
+  limit: Infinity,
   onRowClick: null,
   onSortUpdate: () => {},
   orderBy: 'asc',
