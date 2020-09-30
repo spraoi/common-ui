@@ -67,6 +67,7 @@ const StyledMenuItem = styled(MenuItem).attrs({
 
 const StyledMenuItemChild = styled.div`
   padding: ${(p) => p.theme.space[2]} ${(p) => p.theme.space[5]};
+  width: 100%;
 `;
 
 const DropdownMenu = ({
