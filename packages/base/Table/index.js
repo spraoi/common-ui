@@ -90,6 +90,7 @@ const Table = ({
   rows,
   sortBy,
   stickyColumn,
+  tableProps,
   tableSx,
 }) => {
   const [fullyVisibleCells, setFullyVisibleCells] = useState([]);
@@ -134,6 +135,7 @@ const Table = ({
           width: '100%',
           ...tableSx,
         }}
+        {...tableProps}
       >
         {!!rows.length && (
           <thead>
@@ -272,6 +274,7 @@ Table.propTypes = {
   sortBy: PropTypes.string,
   stickyColumn: PropTypes.number,
   stickyColumnPosition: PropTypes.oneOf(['left', 'right']),
+  tableProps: PropTypes.shape({}),
   tableSx: PropTypes.shape({}),
 };
 
@@ -289,6 +292,7 @@ Table.defaultProps = {
   sortBy: null,
   stickyColumn: null,
   stickyColumnPosition: 'left',
+  tableProps: {},
   tableSx: {},
 };
 
