@@ -64,8 +64,11 @@ function* initSaga({ meta }) {
       isAuthenticated,
       userAttributes: aws.getUserAttributes(),
     };
+    const isAdmin =
+      stateValues.userAttributes['cognito:groups'] &&
+      stateValues.userAttributes['cognito:groups'].includes('admin');
     let shouldChangeState = true;
-    if (meta.shouldCheckDeviceStatus && isAuthenticated) {
+    if (!isAdmin && meta.shouldCheckDeviceStatus && isAuthenticated) {
       const isRegistered =
         localStorage.getItem(
           spraoiConfig.storageKeys.deviceAlreadyRegistered
@@ -162,6 +165,9 @@ function* signInSaga({ payload, meta }) {
       );
       if (meta) meta.resolve({ completeSignUpRequired: true });
     } else {
+      if (payload.attributeList) {
+        yield call(aws.updateUserAttributes, payload.attributeList);
+      }
       yield put(
         actions.setState({
           ...defaultState,
