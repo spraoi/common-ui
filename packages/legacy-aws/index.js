@@ -206,9 +206,21 @@ function getNewUserPool() {
 
 function getUserSession(currentUser) {
   return new Promise((resolve, reject) =>
-    currentUser.getSession((err, session) =>
-      err ? reject(err) : resolve(session)
-    )
+    currentUser.getSession((err, session) => {
+      if (err) reject(err);
+      const refreshToken = session.getRefreshToken();
+      if (refreshToken) {
+        currentUser.refreshSession(refreshToken, (err, updatedSession) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(updatedSession);
+          }
+        });
+      } else {
+        resolve(session);
+      }
+    })
   );
 }
 
@@ -464,10 +476,17 @@ export function signOut() {
   const userAttributes = window[spraoiConfig.storageKeys.userAttributes];
   if (awsSdkConfig.credentials) awsSdkConfig.credentials.clearCachedId();
   if (userAttributes && userAttributes['custom:ext_customer_number']) {
-    localStorage.setItem(
-      spraoiConfig.storageKeys.userRole,
-      userAttributes['custom:user_role']
-    );
+    if (
+      userAttributes['cognito:groups'] &&
+      userAttributes['cognito:groups'].includes('admin')
+    ) {
+      localStorage.setItem(spraoiConfig.storageKeys.userRole, 'ADMIN');
+    } else {
+      localStorage.setItem(
+        spraoiConfig.storageKeys.userRole,
+        userAttributes['custom:user_role']
+      );
+    }
   }
   // clear cached user attributes
   delete window[spraoiConfig.storageKeys.userAttributes];
