@@ -58,8 +58,8 @@ function* initSaga({ meta }) {
     }
 
     yield call(aws.signInExternalResponse);
-    const isAuthenticated = yield call(aws.isAuthenticated);
 
+    const isAuthenticated = yield call(aws.isAuthenticated, true);
     const stateValues = {
       isAuthenticated,
       userAttributes: aws.getUserAttributes(),
