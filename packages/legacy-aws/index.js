@@ -204,19 +204,21 @@ function getNewUserPool() {
   });
 }
 
-function getUserSession(currentUser) {
+function getUserSession(currentUser, shouldRefresh) {
   return new Promise((resolve, reject) =>
     currentUser.getSession((err, session) => {
       if (err) reject(err);
-      const refreshToken = session.getRefreshToken();
-      if (refreshToken) {
-        currentUser.refreshSession(refreshToken, (err, updatedSession) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(updatedSession);
-          }
-        });
+      if (shouldRefresh) {
+        const refreshToken = session.getRefreshToken();
+        if (refreshToken) {
+          currentUser.refreshSession(refreshToken, (err, updatedSession) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(updatedSession);
+            }
+          });
+        }
       } else {
         resolve(session);
       }
@@ -305,12 +307,12 @@ export function getSecretKeyValues(secretName) {
   });
 }
 
-export async function isAuthenticated() {
+export async function isAuthenticated(shouldRefresh) {
   const currentUser = getNewUserPool().getCurrentUser();
 
   if (currentUser && isRemembered()) {
     try {
-      parseUserSession(await getUserSession(currentUser));
+      parseUserSession(await getUserSession(currentUser, shouldRefresh));
       await awsSdkConfig.credentials.getPromise();
       return true;
     } catch (e) {}
