@@ -36,6 +36,7 @@
     "apollo-client": "^2",
     "apollo-link": "^1",
     "apollo-utilities": "^1",
+    "core-js": "^3.6.5",
     "gatsby": "^2",
     "lodash": "^4",
     "prop-types": "^15",

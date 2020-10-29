@@ -1,3 +1,4 @@
+import 'core-js/stable';
 import 'isomorphic-unfetch';
 import ApolloClient from 'apollo-client';
 import PropTypes from 'prop-types';
