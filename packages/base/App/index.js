@@ -1,3 +1,6 @@
+// NOTE: if we are no longer using @brainhubeu/react-carousel, remove this
+import '@brainhubeu/react-carousel/lib/style.css';
+
 import 'core-js/stable';
 import 'isomorphic-unfetch';
 import ApolloClient from 'apollo-client';

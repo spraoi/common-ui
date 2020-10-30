@@ -1,7 +1,10 @@
-import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+// NOTE: if this component no longer uses this library:
+// be sure to remove the stylesheet import in base/App
 import ReactCarousel from '@brainhubeu/react-carousel';
+
 import { ParentSize } from '@vx/responsive';
 import { createGlobalStyle } from 'styled-components';
 import Box from '../Box';
