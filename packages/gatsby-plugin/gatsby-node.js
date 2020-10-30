@@ -3,7 +3,7 @@ const merge = require('deepmerge');
 const prettier = require('prettier');
 const { safeLoad } = require('js-yaml');
 
-exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig, loaders, stage }) => {
   const config = getConfig();
 
   config.module.rules = config.module.rules.map((rule) => {
@@ -24,6 +24,14 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
     loader: 'graphql-tag/loader',
     test: /\.gql$/,
   });
+
+  if (stage === 'build-html') {
+    // aws-amplify has been the culprit of gatsby build failures
+    // since it's not needed for static builds, we will ignore it
+    // possible to remove this with a future version of amplify
+    // latest failed aws-amplify version: ^3.3.5
+    config.module.rules.push({ test: /aws-amplify/, use: loaders.null() });
+  }
 
   actions.replaceWebpackConfig(config);
 };
