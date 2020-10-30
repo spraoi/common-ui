@@ -1,6 +1,3 @@
-// NOTE: if we are no longer using @brainhubeu/react-carousel, remove this
-import '@brainhubeu/react-carousel/lib/style.css';
-
 import 'core-js/stable';
 import 'isomorphic-unfetch';
 import ApolloClient from 'apollo-client';
@@ -17,6 +14,12 @@ import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link';
 import { setContext } from 'apollo-link-context';
 import { v4 as uuidv4 } from 'uuid';
 import AppBase from '../AppBase';
+
+// does your component require a css import? put it here...
+// https://github.com/webpack-contrib/mini-css-extract-plugin/issues/382
+import '@brainhubeu/react-carousel/lib/style.css';
+import 'filepond/dist/filepond.min.css';
+import '@wojtekmaj/react-daterange-picker';
 
 const cache = new InMemoryCache();
 

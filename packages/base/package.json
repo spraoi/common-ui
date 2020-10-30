@@ -37,6 +37,7 @@
     "apollo-link": "^1",
     "apollo-utilities": "^1",
     "core-js": "^3.6.5",
+    "filepond": "^4",
     "gatsby": "^2",
     "lodash": "^4",
     "prop-types": "^15",

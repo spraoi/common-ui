@@ -6,7 +6,6 @@ import React, { PureComponent } from 'react';
 import { File, FilePond, registerPlugin } from 'react-filepond';
 import { Storage } from 'aws-amplify';
 import { createGlobalStyle } from 'styled-components';
-import 'filepond/dist/filepond.min.css';
 
 // https://pqina.nl/filepond/docs/patterns/api/style/
 const StyledGlobal = createGlobalStyle`
