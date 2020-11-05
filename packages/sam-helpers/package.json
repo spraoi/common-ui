@@ -12,6 +12,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.9.1",
     "follow-redirects": "^1.11.0",
     "jsonwebtoken": "^8.5.1",
     "lambda-warmer": "^1.2.1",
