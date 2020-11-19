@@ -18,7 +18,7 @@ export const HEADERS = {
   CONTENT_LENGTH: 'Content-Length',
   HC_PARENT_ID: 'x-spr-hc-parent-id',
   JWT: 'x-spr-jwt',
-  TRACE_ID: 'x-spr-trace-id',
+  TRACE_ID: 'x-spr-hc-trace-id',
   USER_ID: 'x-spr-user-id',
 };
 
