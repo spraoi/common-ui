@@ -33,7 +33,7 @@ Parameters:
 Conditions:
   EncryptionEnabled: !Not [!Equals [!Ref KMSKeyId, '']]
   PermissionsBoundaryDisabled:
-    !Equals [ !Ref PermissionsBoundaryPolicyArn, false ]
+    !Equals [!Ref PermissionsBoundaryPolicyArn, false]
 Resources:
   CloudwatchLambdaHandler:
     Type: AWS::Lambda::Function

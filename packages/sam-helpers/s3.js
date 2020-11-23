@@ -11,13 +11,17 @@ const s3 = (options) =>
     s3[options.operation](options.options, (err, data) => {
       // eslint-disable-next-line prefer-promise-reject-errors
       if (err) reject({ message: err.message, response: err });
-
+      const eventId = uuidv4();
       HC.logEvent({
         durationMs: timer.getDuration(),
-        id: uuidv4(),
+        id: eventId,
         name: 's3BucketRequest',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(data),
+        trace: {
+          ...HC.getTraceData(),
+          span_id: eventId,
+        },
       });
 
       resolve(data);

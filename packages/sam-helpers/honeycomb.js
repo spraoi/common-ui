@@ -3,6 +3,10 @@ export default class HC {
     return this.defaultAttributes.traceId;
   }
 
+  static getTraceData() {
+    return this.defaultAttributes.trace || {};
+  }
+
   static init(attributes) {
     this.defaultAttributes = attributes;
   }

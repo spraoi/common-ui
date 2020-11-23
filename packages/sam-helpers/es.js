@@ -23,23 +23,32 @@ const client = new Client({
 
 const es = async ({ operation, options }) => {
   const timer = new Timer();
+  const eventId = uuidv4();
   try {
     const res = await client[operation](options.options);
     HC.logEvent({
       durationMs: timer.getDuration(),
-      id: uuidv4(),
+      id: eventId,
       name: 'elasticSearch',
       requestData: JSON.stringify(options),
       responseData: JSON.stringify(res),
+      trace: {
+        ...HC.getTraceData(),
+        span_id: eventId,
+      },
     });
     return res;
   } catch (e) {
     HC.logEvent({
       durationMs: timer.getDuration(),
       errorData: JSON.stringify(e),
-      id: uuidv4(),
+      id: eventId,
       name: 'elasticSearch',
       requestData: JSON.stringify(options),
+      trace: {
+        ...HC.getTraceData(),
+        span_id: eventId,
+      },
     });
     return new Error(JSON.stringify(e));
   }
