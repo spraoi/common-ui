@@ -38,10 +38,7 @@ const db = (options) =>
         name: 'dynamoDbQuery',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(res),
-        trace: {
-          ...HC.getTraceData(),
-          span_id: eventId,
-        },
+        'trace.span_id': eventId,
       });
 
       resolve(res);

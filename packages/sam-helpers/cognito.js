@@ -15,10 +15,7 @@ const cognito = (options) =>
         name: 'cognitoQuery',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(data),
-        trace: {
-          ...HC.getTraceData(),
-          span_id: eventId,
-        },
+        'trace.span_id': eventId,
       });
 
       // eslint-disable-next-line prefer-promise-reject-errors

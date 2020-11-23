@@ -18,10 +18,7 @@ const s3 = (options) =>
         name: 's3BucketRequest',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(data),
-        trace: {
-          ...HC.getTraceData(),
-          span_id: eventId,
-        },
+        'trace.span_id': eventId,
       });
 
       resolve(data);

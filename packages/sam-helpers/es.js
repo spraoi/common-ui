@@ -32,10 +32,7 @@ const es = async ({ operation, options }) => {
       name: 'elasticSearch',
       requestData: JSON.stringify(options),
       responseData: JSON.stringify(res),
-      trace: {
-        ...HC.getTraceData(),
-        span_id: eventId,
-      },
+      'trace.span_id': eventId,
     });
     return res;
   } catch (e) {
@@ -45,10 +42,7 @@ const es = async ({ operation, options }) => {
       id: eventId,
       name: 'elasticSearch',
       requestData: JSON.stringify(options),
-      trace: {
-        ...HC.getTraceData(),
-        span_id: eventId,
-      },
+      'trace.span_id': eventId,
     });
     return new Error(JSON.stringify(e));
   }
