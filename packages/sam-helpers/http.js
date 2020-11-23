@@ -50,6 +50,10 @@ const http = (originalOptions) => {
           name: 'httpRequest',
           requestData: JSON.stringify(options),
           responseData: responseBody,
+          trace: {
+            ...HC.getTraceData(),
+            span_id: options.headers[HEADERS.HC_PARENT_ID],
+          },
         });
 
         if (!isJSON(responseBody)) {

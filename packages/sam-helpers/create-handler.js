@@ -41,6 +41,10 @@ export default ({ errorHandler, handler }) => ({
     HC.init({
       parentId: eventId,
       serviceName: `${TEMPLATE}-${VARIATION}-graphql-resolver`,
+      trace: {
+        parent_id: eventId,
+        trace_id: traceId,
+      },
       traceId,
     });
 
@@ -98,6 +102,10 @@ export default ({ errorHandler, handler }) => ({
         parentId: null,
         requestData: JSON.stringify(event),
         responseData: JSON.stringify(res),
+        trace: {
+          ...HC.getTraceData(),
+          span_id: eventId,
+        },
       });
 
       return res;
@@ -128,6 +136,10 @@ export default ({ errorHandler, handler }) => ({
         name: event.field,
         parentId: null,
         requestData: JSON.stringify(event),
+        trace: {
+          ...HC.getTraceData(),
+          span_id: eventId,
+        },
       });
 
       throw responseMessage;

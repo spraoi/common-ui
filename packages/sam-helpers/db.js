@@ -31,13 +31,17 @@ const db = (options) =>
 
         res = marshalledDataIsArray ? unmarshalledData : unmarshalledData[0];
       }
-
+      const eventId = uuidv4();
       HC.logEvent({
         durationMs: timer.getDuration(),
-        id: uuidv4(),
+        id: eventId,
         name: 'dynamoDbQuery',
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(res),
+        trace: {
+          ...HC.getTraceData(),
+          span_id: eventId,
+        },
       });
 
       resolve(res);
