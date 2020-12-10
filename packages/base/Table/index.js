@@ -234,7 +234,7 @@ const Table = ({
                       >
                         {formatCell(
                           cell,
-                          keyPrefix + cellIndex,
+                          keyPrefix + rowIndex + cellIndex,
                           fullyVisibleCells,
                           setFullyVisibleCells
                         )}

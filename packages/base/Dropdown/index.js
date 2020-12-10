@@ -5,8 +5,8 @@ import Select from 'react-select';
 import themeVariantToValue from '@spraoi/helpers/theme-variant-to-value';
 import uniqBy from 'lodash/uniqBy';
 import { ThemeContext } from 'styled-components';
-import InputWrapper from '../InputWrapper';
 import Box from '../Box';
+import InputWrapper from '../InputWrapper';
 import Option from './Option';
 import ValueContainer from './ValueContainer';
 
@@ -135,6 +135,28 @@ const getOverrideStyles = ({ error, theme }) => {
   };
 };
 
+const formatGroupLabel = (data) => (
+  <Box
+    sx={{
+      bg: 'grays.0',
+      color: 'text.subtle',
+      fontSize: 1,
+      fontWeight: 'bold',
+      left: '-1rem',
+      letterSpacing: 1,
+      mb: '0.32rem',
+      mr: '-2rem',
+      mt: '-0.75rem',
+      position: 'relative',
+      px: '1rem',
+      py: 3,
+      textAlign: 'center',
+    }}
+  >
+    {data.label}
+  </Box>
+);
+
 const Dropdown = ({ input, ...rest }) => {
   const theme = useContext(ThemeContext);
   const [asyncOptions, setAsyncOptions] = useState([]);
@@ -215,9 +237,9 @@ const Dropdown = ({ input, ...rest }) => {
           // after search add new options in state
           const newAsyncOptions = externalAsyncOptions || asyncOptions;
 
-          return [...(inputRest.options || []), ...newAsyncOptions].find(
-            (o) => o.value === value
-          );
+          return [...(inputRest.options || []), ...newAsyncOptions]
+            .reduce((acc, o) => [...acc, ...(o.options || [o])], [])
+            .find((o) => o.value === value);
         };
 
         const value = Array.isArray(input.value)
@@ -235,6 +257,7 @@ const Dropdown = ({ input, ...rest }) => {
             closeMenuOnSelect={!isMulti}
             components={components}
             defaultOptions
+            formatGroupLabel={formatGroupLabel}
             hideSelectedOptions={false}
             isMulti={isMulti}
             loadOptions={async (query) => {
@@ -279,6 +302,7 @@ const Dropdown = ({ input, ...rest }) => {
             closeMenuOnSelect={!isMulti}
             components={components}
             defaultValue={value}
+            formatGroupLabel={formatGroupLabel}
             hideSelectedOptions={false}
             isMulti={isMulti}
             onChange={onChange}

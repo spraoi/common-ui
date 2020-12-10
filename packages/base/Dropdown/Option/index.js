@@ -3,28 +3,12 @@ import PropTypes from 'prop-types';
 import { components } from 'react-select';
 import Box from '../../Box';
 
-const Option = (mainProps) => {
-  const { isSelected, label, selectProps } = mainProps;
+const Option = (props) => {
+  const { isSelected, label, selectProps } = props;
   const { checkIcon, uncheckIcon } = selectProps;
-  if (isSelected) {
-    return (
-      <components.Option {...mainProps}>
-        <Box
-          sx={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'row',
-            verticalAlign: 'middle',
-          }}
-        >
-          <Box mr={2}>{checkIcon}</Box>
-          <Box>{label}</Box>
-        </Box>
-      </components.Option>
-    );
-  }
+
   return (
-    <components.Option {...mainProps}>
+    <components.Option {...props}>
       <Box
         sx={{
           alignItems: 'center',
@@ -33,7 +17,9 @@ const Option = (mainProps) => {
           verticalAlign: 'middle',
         }}
       >
-        <Box mr={2}>{uncheckIcon}</Box>
+        {checkIcon && uncheckIcon && (
+          <Box mr={2}>{isSelected ? checkIcon : uncheckIcon}</Box>
+        )}
         <Box>{label}</Box>
       </Box>
     </components.Option>
@@ -41,7 +27,12 @@ const Option = (mainProps) => {
 };
 
 Option.propTypes = {
-  mainProps: PropTypes.shape({}).isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  label: PropTypes.node.isRequired,
+  selectProps: PropTypes.shape({
+    checkIcon: PropTypes.node.isRequired,
+    uncheckIcon: PropTypes.node.isRequired,
+  }).isRequired,
 };
 
 export default Option;

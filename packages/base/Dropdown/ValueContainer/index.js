@@ -6,9 +6,11 @@ const getLabel = (actual, total, label) => {
   if (actual !== 0 && actual === total) {
     return 'All selected';
   }
+
   if (actual === 1) {
     return '1 selected';
   }
+
   if (actual > 0) {
     return `${actual} selected`;
   }
@@ -16,15 +18,16 @@ const getLabel = (actual, total, label) => {
   return label;
 };
 
-const ValueContainer = ({ children, ...mainProps }) => {
-  const { getValue, options, selectProps } = mainProps;
+const ValueContainer = ({ children, ...rest }) => {
+  const { getValue, options, selectProps } = rest;
   const { inputValue, placeholder } = selectProps;
   const label = getLabel(getValue().length, options.length, placeholder);
+
   return (
-    <components.ValueContainer {...mainProps}>
+    <components.ValueContainer {...rest}>
       {children[1]}
       {inputValue === '' && (
-        <components.Placeholder {...mainProps}>{label}</components.Placeholder>
+        <components.Placeholder {...rest}>{label}</components.Placeholder>
       )}
     </components.ValueContainer>
   );
@@ -32,6 +35,12 @@ const ValueContainer = ({ children, ...mainProps }) => {
 
 ValueContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  getValue: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectProps: PropTypes.shape({
+    inputValue: PropTypes.string,
+    placeholder: PropTypes.string,
+  }).isRequired,
 };
 
 export default ValueContainer;
