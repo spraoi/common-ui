@@ -21,7 +21,12 @@ const getLabel = (actual, total, label) => {
 const ValueContainer = ({ children, ...rest }) => {
   const { getValue, options, selectProps } = rest;
   const { inputValue, placeholder } = selectProps;
-  const label = getLabel(getValue().length, options.length, placeholder);
+
+  const label = getLabel(
+    getValue().length,
+    options.reduce((acc, o) => [...acc, ...(o.options || [o])], []).length,
+    placeholder
+  );
 
   return (
     <components.ValueContainer {...rest}>
