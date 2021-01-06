@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/sam-config",
   "description": "A place for shared SAM configuration.",
-  "version": "0.29.44",
+  "version": "0.29.48",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/sam-config",
   "repository": {
