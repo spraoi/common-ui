@@ -40,13 +40,13 @@ Resources:
     Properties:
       Code:
         S3Bucket:
-          "Fn::Join":
-          - '-'
-          -
-            - honeycomb-integrations
-            - !Ref "AWS::Region"
+          'Fn::Join':
+            - '-'
+            - - honeycomb-integrations
+              - !Ref 'AWS::Region'
         S3Key: agentless-integrations-for-aws/LATEST/ingest-handlers.zip
-      Description: Lambda function for publishing asynchronous events from Lambda
+      Description:
+        Lambda function for publishing asynchronous events from Lambda
       Environment:
         Variables:
           API_HOST: !Ref HoneycombAPIHost
