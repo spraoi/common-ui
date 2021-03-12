@@ -35,6 +35,22 @@ Parameters:
   PermissionsBoundaryPolicyArn:
     Type: String
     Default: false
+  GeoRestrictionType:
+    Type: String
+    Default: whitelist
+    AllowedValues:
+      - none
+      - whitelist
+      - blacklist
+    Description:
+      The method that you want to use to restrict distribution of your content
+      by country.
+  GeoRestrictionLocations:
+    Type: CommaDelimitedList
+    Default: false
+    Description:
+      Comma delimited list of two-letter, uppercase country codes for countries
+      that you want to include in your blacklist or whitelist.
 Conditions:
   BucketEncryptionEnabled: !Equals [!Ref EnableBucketEncryption, true]
   CloudFrontLoggingDisabled: !Equals [!Ref CloudFrontLoggingBucket, false]
@@ -45,6 +61,8 @@ Conditions:
     !Equals [!Ref PermissionsBoundaryPolicyArn, false]
   WhitelistIpsAclDisabled: !Equals [!Select [0, !Ref WhitelistIps], false]
   WhitelistIpsAclEnabled: !Not [Condition: WhitelistIpsAclDisabled]
+  GeoRestrictionDisabled:
+    !Equals [!Select [0, !Ref GeoRestrictionLocations], false]
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
@@ -131,6 +149,16 @@ Resources:
           - WhitelistIpsAclEnabled
           - !GetAtt WhitelistIpsAcl.Arn
           - !Ref AWS::NoValue
+        Restrictions:
+          - GeoRestriction:
+              Locations: !If
+                - GeoRestrictionDisabled
+                - !Ref AWS::NoValue
+                - !Ref GeoRestrictionLocations
+              RestrictionType: !If
+                - GeoRestrictionDisabled
+                - none
+                - !Ref GeoRestrictionType
   Dns:
     Type: AWS::Route53::RecordSetGroup
     Condition: DnsRecordsEnabled
