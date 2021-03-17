@@ -1,12 +1,13 @@
 import AWS from 'aws-sdk';
 import Timer from '@spraoi/helpers/timer';
 import { v4 as uuidv4 } from 'uuid';
+import get from 'lodash/get';
 import HC from './honeycomb';
 
 const s3 = (options) =>
   new Promise((resolve, reject) => {
     const timer = new Timer();
-    const s3 = new AWS.S3();
+    const s3 = new AWS.S3(get(options, 'clientOptions', {}));
 
     s3[options.operation](options.options, (err, data) => {
       // eslint-disable-next-line prefer-promise-reject-errors
