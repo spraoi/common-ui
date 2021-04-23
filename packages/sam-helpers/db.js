@@ -38,6 +38,7 @@ const db = (options) =>
         name: `dynamoDb${options.documentClient ? '.documentClient' : ''}.${options.operation}`,
         requestData: JSON.stringify(options),
         responseData: JSON.stringify(res),
+        'trace.span_id': eventId,
       });
 
       resolve(res);
