@@ -1,7 +1,7 @@
 {
   "name": "@spraoi/sam-helpers",
   "description": "Helper functions that can only run in a Node.js/SAM environment.",
-  "version": "0.29.51",
+  "version": "0.29.52",
   "license": "MIT",
   "homepage": "https://github.com/spraoi/common-ui/tree/master/packages/sam-helpers",
   "repository": {
