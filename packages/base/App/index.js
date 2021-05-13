@@ -67,13 +67,13 @@ App.propTypes = {
     amplify: PropTypes.shape({
       Auth: PropTypes.shape({
         identityPoolId: PropTypes.string,
-        region: PropTypes.oneOf(['us-east-1']),
+        region: PropTypes.oneOf(['us-east-1', 'us-east-2']),
         userPoolId: PropTypes.string,
         userPoolWebClientId: PropTypes.string,
       }),
       Storage: PropTypes.shape({
         bucket: PropTypes.string,
-        region: PropTypes.oneOf(['us-east-1']),
+        region: PropTypes.oneOf(['us-east-1', 'us-east-2']),
       }),
     }),
     apollo: PropTypes.shape({
