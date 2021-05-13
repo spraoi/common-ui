@@ -80,7 +80,7 @@ App.propTypes = {
       auth: PropTypes.shape({
         type: PropTypes.oneOf(['AWS_IAM']),
       }),
-      region: PropTypes.oneOf(['us-east-1']),
+      region: PropTypes.oneOf(['us-east-1', 'us-east-2']),
       url: PropTypes.string,
     }),
   }).isRequired,
