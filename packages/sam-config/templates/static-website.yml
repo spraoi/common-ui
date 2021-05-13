@@ -149,16 +149,12 @@ Resources:
           - WhitelistIpsAclEnabled
           - !GetAtt WhitelistIpsAcl.Arn
           - !Ref AWS::NoValue
-        Restrictions:
-          GeoRestriction:
-            Locations: !If
-              - GeoRestrictionDisabled
-              - !Ref AWS::NoValue
-              - !Ref GeoRestrictionLocations
-            RestrictionType: !If
-              - GeoRestrictionDisabled
-              - none
-              - !Ref GeoRestrictionType
+        Restrictions: !If
+          - GeoRestrictionDisabled
+          - !Ref AWS::NoValue
+          - GeoRestriction:
+              Locations: !Ref GeoRestrictionLocations
+              RestrictionType: !Ref GeoRestrictionType
   Dns:
     Type: AWS::Route53::RecordSetGroup
     Condition: DnsRecordsEnabled
