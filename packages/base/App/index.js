@@ -36,9 +36,8 @@ const App = ({ children, config, credentials, theme }) => (
                   ...config.apollo,
                   auth: { ...config.apollo.auth, credentials },
                 }),
-                createSubscriptionHandshakeLink(
-                  config.apollo.url,
-                  ApolloLink.from([
+                createSubscriptionHandshakeLink({
+                  resultsFetcherLink: ApolloLink.from([
                     setContext((request, previousContext) => ({
                       headers: {
                         ...previousContext.headers,
@@ -48,8 +47,9 @@ const App = ({ children, config, credentials, theme }) => (
                       },
                     })),
                     createHttpLink({ uri: config.apollo.url }),
-                  ])
-                ),
+                  ]),
+                  url: config.apollo.url,
+                }),
               ]),
             })
           }
