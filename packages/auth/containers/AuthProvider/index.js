@@ -125,6 +125,7 @@ class AuthProvider extends PureComponent {
     return (
       <AuthContext.Provider
         value={{
+          authState,
           completeNewPasswordChallenge: this.completeNewPasswordChallenge,
           federatedSignIn: this.setFederatedSignIn,
           homePath,
