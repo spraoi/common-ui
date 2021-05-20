@@ -43,6 +43,7 @@ const Modal = ({
   submitText,
   submitting,
   title,
+  toolbarContent,
   ...rest
 }) => {
   const theme = useContext(ThemeContext);
@@ -93,19 +94,23 @@ const Modal = ({
           p: 5,
         }}
       >
-        {closeText && (
-          <Button
-            disabled={submitting}
-            onClick={onClose}
-            variant="buttons.cancel"
-          >
-            {closeText}
-          </Button>
-        )}
-        {onSubmit && submitText && (
-          <Button ml={5} onClick={onSubmit} submitting={submitting}>
-            {submitText}
-          </Button>
+        {toolbarContent || (
+          <>
+            {closeText && (
+              <Button
+                disabled={submitting}
+                onClick={onClose}
+                variant="buttons.cancel"
+              >
+                {closeText}
+              </Button>
+            )}
+            {onSubmit && submitText && (
+              <Button ml={5} onClick={onSubmit} submitting={submitting}>
+                {submitText}
+              </Button>
+            )}
+          </>
         )}
       </Box>
     </ReactModal>
@@ -124,6 +129,7 @@ Modal.propTypes = {
   submitText: PropTypes.string,
   submitting: PropTypes.bool,
   title: PropTypes.string,
+  toolbarContent: PropTypes.node,
 };
 
 Modal.defaultProps = {
@@ -133,6 +139,7 @@ Modal.defaultProps = {
   submitText: null,
   submitting: false,
   title: null,
+  toolbarContent: null,
 };
 
 export default Modal;
