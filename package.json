@@ -95,7 +95,7 @@
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "rollup": "^2.21.0",
-    "rollup-plugin-terser": "^6.1.0",
+    "rollup-plugin-terser": "^7.0.2",
     "styled-components": "^5.1.1",
     "stylelint": "^13.6.1",
     "svgo": "^1.3.2",
